@@ -1,0 +1,499 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WP Sellsy Prospection\n"
+"POT-Creation-Date: 2013-03-20 17:01+0100\n"
+"PO-Revision-Date: 2014-06-25 14:58+0100\n"
+"Last-Translator: Synaptech <contact@synaptech.fr>\n"
+"Language-Team: Sellsy <amevellec@sellsy.com>\n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.7\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop;__;_e\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: c:\\wp_sellsy\n"
+
+#: c:\wp_sellsy/wp_sellsy-settings.class.php:17
+msgid "Connexion à votre compte Sellsy"
+msgstr ""
+
+#: c:\wp_sellsy/wp_sellsy-settings.class.php:18
+msgid "Options du plugin"
+msgstr ""
+
+#: c:\wp_sellsy/wp_sellsy-settings.class.php:19
+msgid "Charger le framework jQuery du plugin ("
+msgstr ""
+
+#: c:\wp_sellsy/wp_sellsy-settings.class.php:20
+msgid "Validation Javascript (requiert jQuery)"
+msgstr ""
+
+#: c:\wp_sellsy/wp_sellsy-settings.class.php:21
+msgid "Afficher / Masquer les champs"
+msgstr ""
+
+#: c:\wp_sellsy/wp_sellsy-settings.class.php:129
+msgid "Consumer Token"
+msgstr ""
+
+#: c:\wp_sellsy/wp_sellsy-settings.class.php:137
+msgid "Consumer Secret"
+msgstr ""
+
+#: c:\wp_sellsy/wp_sellsy-settings.class.php:145
+msgid "Utilisateur Token"
+msgstr ""
+
+#: c:\wp_sellsy/wp_sellsy-settings.class.php:153
+msgid "Utilisateur Secret"
+msgstr ""
+
+#: c:\wp_sellsy/wp_sellsy-settings.class.php:163
+msgid "Créer"
+msgstr ""
+
+#: c:\wp_sellsy/wp_sellsy-settings.class.php:175
+msgid "Envoyer une copie à"
+msgstr ""
+
+#: c:\wp_sellsy/wp_sellsy-settings.class.php:183
+msgid "Nom de la source pour les opportunités"
+msgstr ""
+
+#: c:\wp_sellsy/wp_sellsy-settings.class.php:184
+msgid ""
+"Vous devez renseigner ce champ si vous souhaitez créer une opportunité en "
+"plus d'un prospect. La source doit exister sur votre compte <a href="
+"\"https://www.sellsy.com/?_f=prospection_prefs&action=sources\" target="
+"\"_blank\">Sellsy.com</a>."
+msgstr ""
+
+#: c:\wp_sellsy/wp_sellsy-settings.class.php:191
+msgid "Nom du formulaire"
+msgstr ""
+
+#: c:\wp_sellsy/wp_sellsy-settings.class.php:199
+msgid "Afficher le nom du formulaire"
+msgstr ""
+
+#: c:\wp_sellsy/wp_sellsy-settings.class.php:200
+msgid ""
+"Vous permet d'afficher ou de masquer le nom du formulaire inclus dans vos "
+"pages et/ou articles via le shortcode."
+msgstr ""
+
+#: c:\wp_sellsy/wp_sellsy-settings.class.php:205
+#: c:\wp_sellsy/wp_sellsy-settings.class.php:219
+#: c:\wp_sellsy/wp_sellsy-settings.class.php:233
+msgid "Oui"
+msgstr ""
+
+#: c:\wp_sellsy/wp_sellsy-settings.class.php:206
+#: c:\wp_sellsy/wp_sellsy-settings.class.php:220
+#: c:\wp_sellsy/wp_sellsy-settings.class.php:234
+msgid "Non"
+msgstr ""
+
+#: c:\wp_sellsy/wp_sellsy-settings.class.php:213
+#: c:\wp_sellsy/wp_sellsy-settings.class.php:227
+msgid "Activer"
+msgstr ""
+
+#: c:\wp_sellsy/wp_sellsy-settings.class.php:214
+msgid ""
+"Désactive la version de jQuery incluse dans votre thème (si il y en a une) "
+"et intègre la version 1.9.1 du CDN Google."
+msgstr ""
+
+#: c:\wp_sellsy/wp_sellsy-settings.class.php:228
+msgid ""
+"La validation Javascript permet de vérifier les informations saisies avant "
+"que le formulaire soit soumis au serveur (sans rafraîchissement de la page)."
+msgstr ""
+
+#: c:\wp_sellsy/wp_sellsy-settings.class.php:242
+#: c:\wp_sellsy/inc/wp_sellsy-pub-page.php:301
+msgid "Raison sociale"
+msgstr ""
+
+#: c:\wp_sellsy/wp_sellsy-settings.class.php:243
+msgid "Zone de saisie de la raison sociale du prospect"
+msgstr ""
+
+#: c:\wp_sellsy/wp_sellsy-settings.class.php:247
+#: c:\wp_sellsy/wp_sellsy-settings.class.php:260
+#: c:\wp_sellsy/wp_sellsy-settings.class.php:273
+#: c:\wp_sellsy/wp_sellsy-settings.class.php:286
+#: c:\wp_sellsy/wp_sellsy-settings.class.php:299
+#: c:\wp_sellsy/wp_sellsy-settings.class.php:312
+#: c:\wp_sellsy/wp_sellsy-settings.class.php:325
+#: c:\wp_sellsy/wp_sellsy-settings.class.php:338
+#: c:\wp_sellsy/wp_sellsy-settings.class.php:350
+#: c:\wp_sellsy/wp_sellsy-settings.class.php:363
+msgid "Ne pas afficher"
+msgstr ""
+
+#: c:\wp_sellsy/wp_sellsy-settings.class.php:248
+#: c:\wp_sellsy/wp_sellsy-settings.class.php:261
+#: c:\wp_sellsy/wp_sellsy-settings.class.php:274
+#: c:\wp_sellsy/wp_sellsy-settings.class.php:287
+#: c:\wp_sellsy/wp_sellsy-settings.class.php:300
+#: c:\wp_sellsy/wp_sellsy-settings.class.php:313
+#: c:\wp_sellsy/wp_sellsy-settings.class.php:326
+#: c:\wp_sellsy/wp_sellsy-settings.class.php:351
+#: c:\wp_sellsy/wp_sellsy-settings.class.php:364
+msgid "Afficher seulement"
+msgstr ""
+
+#: c:\wp_sellsy/wp_sellsy-settings.class.php:249
+#: c:\wp_sellsy/wp_sellsy-settings.class.php:262
+#: c:\wp_sellsy/wp_sellsy-settings.class.php:275
+#: c:\wp_sellsy/wp_sellsy-settings.class.php:288
+#: c:\wp_sellsy/wp_sellsy-settings.class.php:301
+#: c:\wp_sellsy/wp_sellsy-settings.class.php:314
+#: c:\wp_sellsy/wp_sellsy-settings.class.php:327
+#: c:\wp_sellsy/wp_sellsy-settings.class.php:339
+#: c:\wp_sellsy/wp_sellsy-settings.class.php:352
+#: c:\wp_sellsy/wp_sellsy-settings.class.php:365
+msgid "Afficher et forcer la saisie"
+msgstr ""
+
+#: c:\wp_sellsy/wp_sellsy-settings.class.php:255
+msgid "Site internet"
+msgstr ""
+
+#: c:\wp_sellsy/wp_sellsy-settings.class.php:256
+msgid "Zone de saisie du site internet du prospect"
+msgstr ""
+
+#: c:\wp_sellsy/wp_sellsy-settings.class.php:268
+#: c:\wp_sellsy/inc/wp_sellsy-pub-page.php:313
+msgid "Nom du contact"
+msgstr ""
+
+#: c:\wp_sellsy/wp_sellsy-settings.class.php:269
+msgid "Zone de saisie du nom de la personne à contacter"
+msgstr ""
+
+#: c:\wp_sellsy/wp_sellsy-settings.class.php:281
+#: c:\wp_sellsy/inc/wp_sellsy-pub-page.php:309
+msgid "Prénom du contact"
+msgstr ""
+
+#: c:\wp_sellsy/wp_sellsy-settings.class.php:282
+msgid "Zone de saisie du prénom de la personne à contacter"
+msgstr ""
+
+#: c:\wp_sellsy/wp_sellsy-settings.class.php:294
+#: c:\wp_sellsy/inc/wp_sellsy-pub-page.php:317
+msgid "Fonction du contact"
+msgstr ""
+
+#: c:\wp_sellsy/wp_sellsy-settings.class.php:295
+msgid "Zone de saisie de la fonction de la personne à contacter"
+msgstr ""
+
+#: c:\wp_sellsy/wp_sellsy-settings.class.php:307
+msgid "Téléphone du prospect"
+msgstr ""
+
+#: c:\wp_sellsy/wp_sellsy-settings.class.php:308
+msgid "Zone de saisie du numéro de téléphone fixe du prospect"
+msgstr ""
+
+#: c:\wp_sellsy/wp_sellsy-settings.class.php:320
+msgid "Portable du prospect"
+msgstr ""
+
+#: c:\wp_sellsy/wp_sellsy-settings.class.php:321
+msgid "Zone de saisie du numéro de téléphone portable du prospect"
+msgstr ""
+
+#: c:\wp_sellsy/wp_sellsy-settings.class.php:333
+msgid "Email du prospect"
+msgstr ""
+
+#: c:\wp_sellsy/wp_sellsy-settings.class.php:334
+msgid ""
+"Zone de saisie de l'adresse email du prospect (saisie obligatoire si affiché)"
+msgstr ""
+
+#: c:\wp_sellsy/wp_sellsy-settings.class.php:345
+msgid "Fax du prospect"
+msgstr ""
+
+#: c:\wp_sellsy/wp_sellsy-settings.class.php:346
+msgid "Zone de saisie du numéro de fax du prospect"
+msgstr ""
+
+#: c:\wp_sellsy/wp_sellsy-settings.class.php:358
+#: c:\wp_sellsy/inc/wp_sellsy-pub-page.php:337
+msgid "Brief / Note"
+msgstr ""
+
+#: c:\wp_sellsy/wp_sellsy-settings.class.php:359
+msgid "Zone de saisie du la note ou du brief"
+msgstr ""
+
+#: c:\wp_sellsy/wp_sellsy-settings.class.php:421
+msgid "Le Consumer Token est manquant ou incorrect, vérifiez votre saisie."
+msgstr ""
+
+#: c:\wp_sellsy/wp_sellsy-settings.class.php:428
+msgid "Le Consumer Secret est manquant ou incorrect, vérifiez votre saisie."
+msgstr ""
+
+#: c:\wp_sellsy/wp_sellsy-settings.class.php:435
+msgid "L'Utilisateur Token est manquant ou incorrect, vérifiez votre saisie."
+msgstr ""
+
+#: c:\wp_sellsy/wp_sellsy-settings.class.php:442
+msgid "L'Utilisateur Secret est manquant ou incorrect, vérifiez votre saisie."
+msgstr ""
+
+#: c:\wp_sellsy/wp_sellsy-settings.class.php:449
+msgid ""
+"L'adresse email est manquante ou incorrecte, vérifiez votre saisie ou vous "
+"ne recevrez pas d'email à chaque soumission du formulaire. Les prospects et/"
+"ou opportunités seront quand-même créé(e)s."
+msgstr ""
+
+#: c:\wp_sellsy/wp_sellsy-settings.class.php:456
+msgid ""
+"Vous avez choisi de créer une opportunité en plus d'un prospect, vous devez "
+"saisir une source d'opportunités ou le plugin créera que des prospects."
+msgstr ""
+
+#: c:\wp_sellsy/wp_sellsy-settings.class.php:462
+msgid ""
+"Vous avez choisi d'afficher le nom du formulaire mais vous ne l'avez pas "
+"renseigné."
+msgstr ""
+
+#: c:\wp_sellsy/wp_sellsy.php:153 c:\wp_sellsy/wp_sellsy.php:178
+#: c:\wp_sellsy/wp_sellsy.php:309 c:\wp_sellsy/inc/wp_sellsy-adm-page.php:45
+msgid "Vous n'avez pas les droits suffisants pour accéder à cette page."
+msgstr ""
+
+#: c:\wp_sellsy/wp_sellsy.php:205
+msgid ""
+"L'extension PHP cURL n'est pas installée ou activée sur votre hébergement. "
+"Vous ne pouvez pas utiliser le plugin WP Sellsy Prospection."
+msgstr ""
+
+#: c:\wp_sellsy/wp_sellsy.php:215
+msgid "de la raison sociale"
+msgstr ""
+
+#: c:\wp_sellsy/wp_sellsy.php:216
+msgid "du site internet"
+msgstr ""
+
+#: c:\wp_sellsy/wp_sellsy.php:217
+msgid "du nom du contact"
+msgstr ""
+
+#: c:\wp_sellsy/wp_sellsy.php:218
+msgid "du prénom du contact"
+msgstr ""
+
+#: c:\wp_sellsy/wp_sellsy.php:219
+msgid "de la fonction du contact"
+msgstr ""
+
+#: c:\wp_sellsy/wp_sellsy.php:220
+msgid "du téléphone"
+msgstr ""
+
+#: c:\wp_sellsy/wp_sellsy.php:221
+msgid "du portable"
+msgstr ""
+
+#: c:\wp_sellsy/wp_sellsy.php:222
+msgid "de l'email"
+msgstr ""
+
+#: c:\wp_sellsy/wp_sellsy.php:223
+msgid "du fax"
+msgstr ""
+
+#: c:\wp_sellsy/wp_sellsy.php:224
+msgid "de la note"
+msgstr ""
+
+#: c:\wp_sellsy/wp_sellsy.php:258
+msgid "Merci de vérifier la saisie "
+msgstr ""
+
+#: c:\wp_sellsy/wp_sellsy.php:279
+msgid "Accès interdit"
+msgstr ""
+
+#: c:\wp_sellsy/wp_sellsy.php:334
+msgid ""
+"Vous avez installé le plugin WP Sellsy Prospection. Cliquez ici pour "
+"procéder à sa configuration"
+msgstr ""
+
+#: c:\wp_sellsy/inc/wp_sellsy-adm-page.php:9
+msgid "Connexion à l'API Sellsy réussie. Paramètres Sellsy mis à jour."
+msgstr ""
+
+#: c:\wp_sellsy/inc/wp_sellsy-adm-page.php:11
+msgid ""
+"Erreur: Connexion à l'API Sellsy impossible. Les tokens saisis sont "
+"incorrects."
+msgstr ""
+
+#: c:\wp_sellsy/inc/wp_sellsy-adm-page.php:17
+msgid "La source saisie n'existe pas pour votre compte sur "
+msgstr ""
+
+#: c:\wp_sellsy/inc/wp_sellsy-adm-page.php:17
+msgid "Cliquez ici pour créer la source sur votre compte :"
+msgstr ""
+
+#: c:\wp_sellsy/inc/wp_sellsy-adm-page.php:17
+msgid "Créer la source "
+msgstr ""
+
+#: c:\wp_sellsy/inc/wp_sellsy-adm-page.php:17
+msgid ""
+"Si vous ne créez pas la source, les opportunités ne seront pas générées."
+msgstr ""
+
+#: c:\wp_sellsy/inc/wp_sellsy-adm-page.php:25
+msgid "WP Sellsy Prospection "
+msgstr ""
+
+#: c:\wp_sellsy/inc/wp_sellsy-adm-page.php:27
+msgid ""
+"Le plugin WP prospection Sellsy vous permet d'afficher un formulaire de "
+"contact connecté à votre compte Sellsy. Quand le formulaire sera soumis, un "
+"prospect et (optionnellement) une opportunité seront créés sur votre compte "
+"Sellsy. Pour activer le plugin, vous devez insérer ci-dessous vos tokens "
+"d'API Sellsy, disponibles depuis"
+msgstr ""
+
+#: c:\wp_sellsy/inc/wp_sellsy-adm-page.php:27
+msgid "Réglages puis Accès API."
+msgstr ""
+
+#: c:\wp_sellsy/inc/wp_sellsy-adm-page.php:27
+msgid ""
+"Pour afficher le formulaire sur une page ou dans un post insérez le code "
+"[wpsellsy]."
+msgstr ""
+
+#: c:\wp_sellsy/inc/wp_sellsy-adm-page.php:27
+msgid " Vous pouvez aussi utiliser le "
+msgstr ""
+
+#: c:\wp_sellsy/inc/wp_sellsy-adm-page.php:27
+msgid ""
+"si vous souhaitez insérer votre formulaire dans la sidebar de votre site."
+msgstr ""
+
+#: c:\wp_sellsy/inc/wp_sellsy-pub-page.php:135
+msgid "Formulaire site web: Demande d'informations"
+msgstr ""
+
+#: c:\wp_sellsy/inc/wp_sellsy-pub-page.php:140
+msgid "Votre message a bien été envoyé."
+msgstr ""
+
+#: c:\wp_sellsy/inc/wp_sellsy-pub-page.php:142
+msgid "Votre message n'a pas été envoyé."
+msgstr ""
+
+#: c:\wp_sellsy/inc/wp_sellsy-pub-page.php:225
+msgid "Contact site web"
+msgstr ""
+
+#: c:\wp_sellsy/inc/wp_sellsy-pub-page.php:237
+msgid ""
+"Votre message n'a pas été envoyé, vérifiez la saisie des champs suivant :"
+msgstr ""
+
+#: c:\wp_sellsy/inc/wp_sellsy-pub-page.php:242
+msgid "Vérifiez la saisie de votre raison sociale"
+msgstr ""
+
+#: c:\wp_sellsy/inc/wp_sellsy-pub-page.php:245
+msgid "Vérifiez la saisie de votre site internet"
+msgstr ""
+
+#: c:\wp_sellsy/inc/wp_sellsy-pub-page.php:248
+msgid "Vérifiez la saisie du prénom de la personne à contacter"
+msgstr ""
+
+#: c:\wp_sellsy/inc/wp_sellsy-pub-page.php:251
+msgid "Vérifiez la saisie du nom de la personne à contacter"
+msgstr ""
+
+#: c:\wp_sellsy/inc/wp_sellsy-pub-page.php:254
+msgid "Vérifiez la saisie de la fonction de la personne à contacter"
+msgstr ""
+
+#: c:\wp_sellsy/inc/wp_sellsy-pub-page.php:257
+msgid "Vérifiez la saisie du téléphone de la personne à contacter"
+msgstr ""
+
+#: c:\wp_sellsy/inc/wp_sellsy-pub-page.php:260
+msgid "Vérifiez la saisie du portable de la personne à contacter"
+msgstr ""
+
+#: c:\wp_sellsy/inc/wp_sellsy-pub-page.php:263
+msgid "Vérifiez la saisie de l'adresse email de la personne à contacter"
+msgstr ""
+
+#: c:\wp_sellsy/inc/wp_sellsy-pub-page.php:266
+msgid "Vérifiez la saisie du fax de la personne à contacter"
+msgstr ""
+
+#: c:\wp_sellsy/inc/wp_sellsy-pub-page.php:269
+msgid "Vérifiez la saisie de votre note"
+msgstr ""
+
+#: c:\wp_sellsy/inc/wp_sellsy-pub-page.php:305
+msgid "Site Internet"
+msgstr ""
+
+#: c:\wp_sellsy/inc/wp_sellsy-pub-page.php:321
+msgid "Téléphone"
+msgstr ""
+
+#: c:\wp_sellsy/inc/wp_sellsy-pub-page.php:325
+msgid "Portable"
+msgstr ""
+
+#: c:\wp_sellsy/inc/wp_sellsy-pub-page.php:329
+msgid "Email"
+msgstr ""
+
+#: c:\wp_sellsy/inc/wp_sellsy-pub-page.php:333
+msgid "Fax"
+msgstr ""
+
+#: c:\wp_sellsy/inc/wp_sellsy-pub-page.php:341
+msgid "Valider"
+msgstr ""
+
+#: c:\wp_sellsy/inc/wp_sellsy-widget.class.php:9
+msgid "WP Sellsy"
+msgstr ""
+
+#: c:\wp_sellsy/inc/wp_sellsy-widget.class.php:10
+msgid "Affiche le widget WP Sellsy"
+msgstr ""
+
+#: c:\wp_sellsy/inc/wp_sellsy-widget.class.php:61
+msgid "Titre:"
+msgstr ""
+
+#: c:\wp_sellsy/inc/wp_sellsy-widget.class.php:62
+msgid "Description:"
+msgstr ""

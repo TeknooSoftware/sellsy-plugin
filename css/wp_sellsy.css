@@ -1,0 +1,40 @@
+@CHARSET "UTF-8";
+
+/* Style des labels du formulaire de contact */
+form#wp-sellsy-form label {
+	float: left;
+	display: block;
+	width: 150px;
+	font-weight: bold;
+	margin: 4px 0 2px 0;
+}
+
+/* Style des labels de validation jQuery */
+form#wp-sellsy-form label.error {
+	display: block !important;
+	background: #ffd2d2 !important;
+	float: none !important;
+	font-weight: normal !important;
+	width: 100% !important;
+	padding: 0 10px !important;
+}
+
+/* Style des input text et textarea */
+form#wp-sellsy-form input[type="text"], #wp-sellsy-form textarea {
+	width: 100%;
+	border-radius: 5px;
+}
+
+/* Styles du message d'erreur */
+div.formError {
+	width: auto; /* A changer en fonction de la largeur de votre conteneur */
+	background-color: #F9C2C2;
+	border: solid 1px #FC0000;
+	color: #FC0000;
+	padding: 10px;
+	margin: 10px;
+}
+
+div.formError span {
+	font-weight: 700;
+}

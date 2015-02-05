@@ -1,0 +1,536 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WP Sellsy Prospection\n"
+"POT-Creation-Date: 2014-06-25 15:45+0100\n"
+"PO-Revision-Date: 2014-06-25 15:45+0100\n"
+"Last-Translator: Synaptech <contact@synaptech.fr>\n"
+"Language-Team: Sellsy <amevellec@sellsy.com>\n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.7\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop;__;_e\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: /Users/remyneuter/Downloads/wp_sellsy\n"
+
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy-settings.class.php:17
+msgid "Connexion à votre compte Sellsy"
+msgstr "Connect your Sellsy account"
+
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy-settings.class.php:18
+msgid "Options du plugin"
+msgstr "Plugin options"
+
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy-settings.class.php:19
+msgid "Charger le framework jQuery du plugin ("
+msgstr "Load the jQuery from the plugin ("
+
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy-settings.class.php:20
+msgid "Validation Javascript (requiert jQuery)"
+msgstr "Javascript validation (jQuery required)"
+
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy-settings.class.php:21
+msgid "Afficher / Masquer les champs"
+msgstr "Display / Hide fields"
+
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy-settings.class.php:35
+msgid "Description par défaut"
+msgstr "Default description"
+
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy-settings.class.php:129
+msgid "Consumer Token"
+msgstr "Consumer Token"
+
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy-settings.class.php:137
+msgid "Consumer Secret"
+msgstr "Consumer Secret"
+
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy-settings.class.php:145
+msgid "Utilisateur Token"
+msgstr "User Token"
+
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy-settings.class.php:153
+msgid "Utilisateur Secret"
+msgstr "User secret"
+
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy-settings.class.php:163
+msgid "Créer"
+msgstr "Create"
+
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy-settings.class.php:169
+msgid "Un prospect seulement"
+msgstr "Prospect only"
+
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy-settings.class.php:170
+msgid "Un prospect et une opportunité"
+msgstr "Prospect and opportunity"
+
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy-settings.class.php:175
+msgid "Envoyer une copie à"
+msgstr "Send an email copy to"
+
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy-settings.class.php:183
+msgid "Nom de la source pour les opportunités"
+msgstr "Source name for opportunities"
+
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy-settings.class.php:184
+msgid ""
+"Vous devez renseigner ce champ si vous souhaitez créer une opportunité en "
+"plus d'un prospect. La source doit exister sur votre compte <a href="
+"\"https://www.sellsy.com/?_f=prospection_prefs&action=sources\" target="
+"\"_blank\">Sellsy.com</a>."
+msgstr ""
+"You have to fill this field if you want to create an opportunity attached to "
+"the prospect. The source must exist on your Sellsy account <a href=\"https://"
+"www.sellsy.com/?_f=prospection_prefs&action=sources\" target=\"_blank"
+"\">Sellsy.com</a>."
+
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy-settings.class.php:191
+msgid "Nom du formulaire"
+msgstr "Form title"
+
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy-settings.class.php:199
+msgid "Afficher le nom du formulaire"
+msgstr "Display the form title"
+
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy-settings.class.php:200
+msgid ""
+"Vous permet d'afficher ou de masquer le nom du formulaire inclus dans vos "
+"pages et/ou articles via le shortcode."
+msgstr "Display or hide the title of the form in your pages or articles."
+
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy-settings.class.php:205
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy-settings.class.php:219
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy-settings.class.php:233
+msgid "Oui"
+msgstr "Yes"
+
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy-settings.class.php:206
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy-settings.class.php:220
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy-settings.class.php:234
+msgid "Non"
+msgstr "No"
+
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy-settings.class.php:213
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy-settings.class.php:227
+msgid "Activer"
+msgstr "Activate"
+
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy-settings.class.php:214
+msgid ""
+"Désactive la version de jQuery incluse dans votre thème (si il y en a une) "
+"et intègre la version 1.9.1 du CDN Google."
+msgstr ""
+"Unloads jQuery from your theme (if any) and use version 1.9.1 from Google"
+
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy-settings.class.php:228
+msgid ""
+"La validation Javascript permet de vérifier les informations saisies avant "
+"que le formulaire soit soumis au serveur (sans rafraîchissement de la page)."
+msgstr ""
+"Javascript validation allows you to check the information you entered before "
+"the form is submitted to the server (without page refresh)."
+
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy-settings.class.php:242
+#: /Users/remyneuter/Downloads/wp_sellsy/inc/wp_sellsy-pub-page.php:301
+msgid "Raison sociale"
+msgstr "Company name"
+
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy-settings.class.php:243
+msgid "Zone de saisie de la raison sociale du prospect"
+msgstr "Input field for prospect company name"
+
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy-settings.class.php:247
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy-settings.class.php:260
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy-settings.class.php:273
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy-settings.class.php:286
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy-settings.class.php:299
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy-settings.class.php:312
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy-settings.class.php:325
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy-settings.class.php:338
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy-settings.class.php:350
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy-settings.class.php:363
+msgid "Ne pas afficher"
+msgstr "Don't display"
+
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy-settings.class.php:248
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy-settings.class.php:261
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy-settings.class.php:274
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy-settings.class.php:287
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy-settings.class.php:300
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy-settings.class.php:313
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy-settings.class.php:326
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy-settings.class.php:351
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy-settings.class.php:364
+msgid "Afficher seulement"
+msgstr "Display only"
+
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy-settings.class.php:249
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy-settings.class.php:262
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy-settings.class.php:275
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy-settings.class.php:288
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy-settings.class.php:301
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy-settings.class.php:314
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy-settings.class.php:327
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy-settings.class.php:339
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy-settings.class.php:352
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy-settings.class.php:365
+msgid "Afficher et forcer la saisie"
+msgstr "Display and make mandatory"
+
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy-settings.class.php:255
+msgid "Site internet"
+msgstr "Website"
+
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy-settings.class.php:256
+msgid "Zone de saisie du site internet du prospect"
+msgstr "Input field for prospect website"
+
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy-settings.class.php:268
+#: /Users/remyneuter/Downloads/wp_sellsy/inc/wp_sellsy-pub-page.php:313
+msgid "Nom du contact"
+msgstr "Contact name"
+
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy-settings.class.php:269
+msgid "Zone de saisie du nom de la personne à contacter"
+msgstr "Input field for prospect surname"
+
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy-settings.class.php:281
+#: /Users/remyneuter/Downloads/wp_sellsy/inc/wp_sellsy-pub-page.php:309
+msgid "Prénom du contact"
+msgstr "Contact forename"
+
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy-settings.class.php:282
+msgid "Zone de saisie du prénom de la personne à contacter"
+msgstr "Input field for prospect forename"
+
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy-settings.class.php:294
+#: /Users/remyneuter/Downloads/wp_sellsy/inc/wp_sellsy-pub-page.php:317
+msgid "Fonction du contact"
+msgstr "Contact position"
+
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy-settings.class.php:295
+msgid "Zone de saisie de la fonction de la personne à contacter"
+msgstr "Input field for prospect position"
+
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy-settings.class.php:307
+msgid "Téléphone du prospect"
+msgstr "Prospect phone"
+
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy-settings.class.php:308
+msgid "Zone de saisie du numéro de téléphone fixe du prospect"
+msgstr "Input field for prospect phone number"
+
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy-settings.class.php:320
+msgid "Portable du prospect"
+msgstr "Prospect mobile"
+
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy-settings.class.php:321
+msgid "Zone de saisie du numéro de téléphone portable du prospect"
+msgstr "Input field for prospect mobile number"
+
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy-settings.class.php:333
+msgid "Email du prospect"
+msgstr "Prospect email"
+
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy-settings.class.php:334
+msgid ""
+"Zone de saisie de l'adresse email du prospect (saisie obligatoire si affiché)"
+msgstr "Input field for prospect email address"
+
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy-settings.class.php:345
+msgid "Fax du prospect"
+msgstr "Prospect fax"
+
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy-settings.class.php:346
+msgid "Zone de saisie du numéro de fax du prospect"
+msgstr "Input field for prospect fax number"
+
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy-settings.class.php:358
+#: /Users/remyneuter/Downloads/wp_sellsy/inc/wp_sellsy-pub-page.php:337
+msgid "Brief / Note"
+msgstr "Brief / Note"
+
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy-settings.class.php:359
+msgid "Zone de saisie du la note ou du brief"
+msgstr "Input field for prospect brief or note"
+
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy-settings.class.php:421
+msgid "Le Consumer Token est manquant ou incorrect, vérifiez votre saisie."
+msgstr "Consumer token is missing or incorrect. Please check your input."
+
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy-settings.class.php:428
+msgid "Le Consumer Secret est manquant ou incorrect, vérifiez votre saisie."
+msgstr "Consumer secret is missing or incorrect. Please check your input."
+
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy-settings.class.php:435
+msgid "L'Utilisateur Token est manquant ou incorrect, vérifiez votre saisie."
+msgstr "User token is missing or incorrect. Please check your input."
+
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy-settings.class.php:442
+msgid "L'Utilisateur Secret est manquant ou incorrect, vérifiez votre saisie."
+msgstr "User secret is missing or incorrect. Please check your input."
+
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy-settings.class.php:449
+msgid ""
+"L'adresse email est manquante ou incorrecte, vérifiez votre saisie ou vous "
+"ne recevrez pas d'email à chaque soumission du formulaire. Les prospects et/"
+"ou opportunités seront quand-même créé(e)s."
+msgstr ""
+"Email address is missing or incorrect, please check your input or you won't "
+"receive an email copy when a form is submitted. Prospects and opportunities "
+"will be created anyway."
+
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy-settings.class.php:456
+msgid ""
+"Vous avez choisi de créer une opportunité en plus d'un prospect, vous devez "
+"saisir une source d'opportunités ou le plugin créera que des prospects."
+msgstr ""
+"You have chosen to create an opportunity in addition to a prospect, you must "
+"enter a source for opportunities or the plugin will create prospects only."
+
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy-settings.class.php:462
+msgid ""
+"Vous avez choisi d'afficher le nom du formulaire mais vous ne l'avez pas "
+"renseigné."
+msgstr "You have chosen to display the name of the form but you left it blank."
+
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy.php:152
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy.php:177
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy.php:308
+#: /Users/remyneuter/Downloads/wp_sellsy/inc/wp_sellsy-adm-page.php:45
+msgid "Vous n'avez pas les droits suffisants pour accéder à cette page."
+msgstr "You do not have sufficient privileges to access this page."
+
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy.php:204
+msgid ""
+"L'extension PHP cURL n'est pas installée ou activée sur votre hébergement. "
+"Vous ne pouvez pas utiliser le plugin WP Sellsy Prospection."
+msgstr ""
+"The PHP cURL extension is not installed or enabled on your hosting. You "
+"can't use the WP Sellsy plugin."
+
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy.php:214
+msgid "de la raison sociale"
+msgstr "company name"
+
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy.php:215
+msgid "du site internet"
+msgstr "website"
+
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy.php:216
+msgid "du nom du contact"
+msgstr "contact name"
+
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy.php:217
+msgid "du prénom du contact"
+msgstr "contact forename"
+
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy.php:218
+msgid "de la fonction du contact"
+msgstr "contact position"
+
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy.php:219
+msgid "du téléphone"
+msgstr "phone"
+
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy.php:220
+msgid "du portable"
+msgstr "mobile"
+
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy.php:221
+msgid "de l'email"
+msgstr "email"
+
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy.php:222
+msgid "du fax"
+msgstr "fax"
+
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy.php:223
+msgid "de la note"
+msgstr "note"
+
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy.php:257
+msgid "Merci de vérifier la saisie "
+msgstr "Please check input"
+
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy.php:278
+msgid "Accès interdit"
+msgstr "Access forbidden"
+
+#: /Users/remyneuter/Downloads/wp_sellsy/wp_sellsy.php:333
+msgid ""
+"Vous avez installé le plugin WP Sellsy Prospection. Cliquez ici pour "
+"procéder à sa configuration"
+msgstr ""
+"You have installed the WP Sellsy plugin. Click here to proceed to the "
+"settings"
+
+#: /Users/remyneuter/Downloads/wp_sellsy/inc/wp_sellsy-adm-page.php:9
+msgid "Connexion à l'API Sellsy réussie. Paramètres Sellsy mis à jour."
+msgstr "Sellsy API connection successful. Sellsy parameters updated."
+
+#: /Users/remyneuter/Downloads/wp_sellsy/inc/wp_sellsy-adm-page.php:11
+msgid ""
+"Erreur: Connexion à l'API Sellsy impossible. Les tokens saisis sont "
+"incorrects."
+msgstr ""
+"Error: impossible to connect to Sellsy API. Tokens entered are incorrect."
+
+#: /Users/remyneuter/Downloads/wp_sellsy/inc/wp_sellsy-adm-page.php:17
+msgid "La source saisie n'existe pas pour votre compte sur "
+msgstr "The selected source doesn't exist on your account on"
+
+#: /Users/remyneuter/Downloads/wp_sellsy/inc/wp_sellsy-adm-page.php:17
+msgid "Cliquez ici pour créer la source sur votre compte :"
+msgstr "Click here to create the source on your account :"
+
+#: /Users/remyneuter/Downloads/wp_sellsy/inc/wp_sellsy-adm-page.php:17
+msgid "Créer la source "
+msgstr "Create source"
+
+#: /Users/remyneuter/Downloads/wp_sellsy/inc/wp_sellsy-adm-page.php:17
+msgid ""
+"Si vous ne créez pas la source, les opportunités ne seront pas générées."
+msgstr "If you don't create the source, opportunities won't be created."
+
+#: /Users/remyneuter/Downloads/wp_sellsy/inc/wp_sellsy-adm-page.php:25
+msgid "WP Sellsy Prospection "
+msgstr "WP Sellsy CRM"
+
+#: /Users/remyneuter/Downloads/wp_sellsy/inc/wp_sellsy-adm-page.php:27
+msgid ""
+"Le plugin WP prospection Sellsy vous permet d'afficher un formulaire de "
+"contact connecté à votre compte Sellsy. Quand le formulaire sera soumis, un "
+"prospect et (optionnellement) une opportunité seront créés sur votre compte "
+"Sellsy. Pour activer le plugin, vous devez insérer ci-dessous vos tokens "
+"d'API Sellsy, disponibles depuis"
+msgstr ""
+"WP Sellsy CRM plugin allows you to display a contact form connected to your "
+"Sellsy account. When the form is submitted, a prospect and (optionally) an "
+"opportunity will be created on your account. To activate the plugin, insert "
+"below your Sellsy API tokens, available from"
+
+#: /Users/remyneuter/Downloads/wp_sellsy/inc/wp_sellsy-adm-page.php:27
+msgid "Réglages puis Accès API."
+msgstr "Settings and API access"
+
+#: /Users/remyneuter/Downloads/wp_sellsy/inc/wp_sellsy-adm-page.php:27
+msgid ""
+"Pour afficher le formulaire sur une page ou dans un post insérez le code "
+"[wpsellsy]."
+msgstr ""
+"To display the form on a page or a post, simply insert the [wpsellsy] short "
+"code where you want the form to display."
+
+#: /Users/remyneuter/Downloads/wp_sellsy/inc/wp_sellsy-adm-page.php:27
+msgid " Vous pouvez aussi utiliser le "
+msgstr "You can also use the"
+
+#: /Users/remyneuter/Downloads/wp_sellsy/inc/wp_sellsy-adm-page.php:27
+msgid ""
+"si vous souhaitez insérer votre formulaire dans la sidebar de votre site."
+msgstr "if you wish to insert the form in your site sidebar."
+
+#: /Users/remyneuter/Downloads/wp_sellsy/inc/wp_sellsy-pub-page.php:135
+msgid "Formulaire site web: Demande d'informations"
+msgstr "Contact form : information request"
+
+#: /Users/remyneuter/Downloads/wp_sellsy/inc/wp_sellsy-pub-page.php:140
+msgid "Votre message a bien été envoyé."
+msgstr "Your message has been sent."
+
+#: /Users/remyneuter/Downloads/wp_sellsy/inc/wp_sellsy-pub-page.php:142
+msgid "Votre message n'a pas été envoyé."
+msgstr "Your message was not sent."
+
+#: /Users/remyneuter/Downloads/wp_sellsy/inc/wp_sellsy-pub-page.php:225
+msgid "Contact site web"
+msgstr "Website contact"
+
+#: /Users/remyneuter/Downloads/wp_sellsy/inc/wp_sellsy-pub-page.php:237
+msgid ""
+"Votre message n'a pas été envoyé, vérifiez la saisie des champs suivant :"
+msgstr "Your message has not been sent, check the following fields:"
+
+#: /Users/remyneuter/Downloads/wp_sellsy/inc/wp_sellsy-pub-page.php:242
+msgid "Vérifiez la saisie de votre raison sociale"
+msgstr "Check your company name input"
+
+#: /Users/remyneuter/Downloads/wp_sellsy/inc/wp_sellsy-pub-page.php:245
+msgid "Vérifiez la saisie de votre site internet"
+msgstr "Check your website input"
+
+#: /Users/remyneuter/Downloads/wp_sellsy/inc/wp_sellsy-pub-page.php:248
+msgid "Vérifiez la saisie du prénom de la personne à contacter"
+msgstr "Check your contact forename input"
+
+#: /Users/remyneuter/Downloads/wp_sellsy/inc/wp_sellsy-pub-page.php:251
+msgid "Vérifiez la saisie du nom de la personne à contacter"
+msgstr "Check your contact name input"
+
+#: /Users/remyneuter/Downloads/wp_sellsy/inc/wp_sellsy-pub-page.php:254
+msgid "Vérifiez la saisie de la fonction de la personne à contacter"
+msgstr "Check your website input"
+
+#: /Users/remyneuter/Downloads/wp_sellsy/inc/wp_sellsy-pub-page.php:257
+msgid "Vérifiez la saisie du téléphone de la personne à contacter"
+msgstr "Check your phone number input"
+
+#: /Users/remyneuter/Downloads/wp_sellsy/inc/wp_sellsy-pub-page.php:260
+msgid "Vérifiez la saisie du portable de la personne à contacter"
+msgstr "Check your mobile phone number input"
+
+#: /Users/remyneuter/Downloads/wp_sellsy/inc/wp_sellsy-pub-page.php:263
+msgid "Vérifiez la saisie de l'adresse email de la personne à contacter"
+msgstr "Check your email address input"
+
+#: /Users/remyneuter/Downloads/wp_sellsy/inc/wp_sellsy-pub-page.php:266
+msgid "Vérifiez la saisie du fax de la personne à contacter"
+msgstr "Check your fax number input"
+
+#: /Users/remyneuter/Downloads/wp_sellsy/inc/wp_sellsy-pub-page.php:269
+msgid "Vérifiez la saisie de votre note"
+msgstr "Check your brief / note input"
+
+#: /Users/remyneuter/Downloads/wp_sellsy/inc/wp_sellsy-pub-page.php:305
+msgid "Site Internet"
+msgstr "Website"
+
+#: /Users/remyneuter/Downloads/wp_sellsy/inc/wp_sellsy-pub-page.php:321
+msgid "Téléphone"
+msgstr "Phone"
+
+#: /Users/remyneuter/Downloads/wp_sellsy/inc/wp_sellsy-pub-page.php:325
+msgid "Portable"
+msgstr "Mobile"
+
+#: /Users/remyneuter/Downloads/wp_sellsy/inc/wp_sellsy-pub-page.php:329
+msgid "Email"
+msgstr "Email"
+
+#: /Users/remyneuter/Downloads/wp_sellsy/inc/wp_sellsy-pub-page.php:333
+msgid "Fax"
+msgstr "Fax"
+
+#: /Users/remyneuter/Downloads/wp_sellsy/inc/wp_sellsy-pub-page.php:341
+msgid "Valider"
+msgstr "Send"
+
+#: /Users/remyneuter/Downloads/wp_sellsy/inc/wp_sellsy-widget.class.php:9
+msgid "WP Sellsy"
+msgstr "WP Sellsy"
+
+#: /Users/remyneuter/Downloads/wp_sellsy/inc/wp_sellsy-widget.class.php:10
+msgid "Affiche le widget WP Sellsy"
+msgstr "Displays Sellsy Widget"
+
+#: /Users/remyneuter/Downloads/wp_sellsy/inc/wp_sellsy-widget.class.php:61
+msgid "Titre:"
+msgstr "Title:"
+
+#: /Users/remyneuter/Downloads/wp_sellsy/inc/wp_sellsy-widget.class.php:62
+msgid "Description:"
+msgstr "Description:"
