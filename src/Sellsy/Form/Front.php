@@ -2,9 +2,31 @@
 
 namespace UniAlteri\Sellsy\Form;
 
+use UniAlteri\Sellsy\OptionsBag;
+
+/**
+ * Class Front
+ * Class to configure Wordpress front to use this plugin
+ * @package UniAlteri\Sellsy\Form
+ */
 class Front
 {
+    /**
+     * @var OptionsBag
+     */
+    protected $options;
 
+    /**
+     * @param OptionsBag $options
+     */
+    public function __construct($options)
+    {
+        $this->options = $options;
+    }
+
+    /**
+     * To declare needed javascript in the front
+     */
     public function addJS()
     {
         if (!is_admin()) {
@@ -33,6 +55,9 @@ class Front
         }
     }
 
+    /**
+     * To declare needed css in front
+     */
     public function addCSS()
     {
         if (!is_admin()) {
@@ -48,132 +73,15 @@ class Front
         }
     }
 
-    function shortcode() {
-
-        add_shortcode('wpsellsy', array($this, 'wpi_shortcode_body'));
-
-    }
-
-    function shortcodeBody($attr, $content = null) {
-
-        include_once WPI_PATH_INC . '/wp_sellsy-pub-page.php';
-
-    }
-
-    function widget() {
-
-        include_once WPI_PATH_INC . '/wp_sellsy-widget.class.php';
-
-    }
-
-    function formValidate() {
-
-        $options = get_option('wpsellsy_options');
-        $txtVal = array(
-            'WPIraisonsociale' => __('de la raison sociale', 'wpsellsy'),
-            'WPIsiteweb' => __('du site internet', 'wpsellsy'),
-            'WPInomcont' => __('du nom du contact', 'wpsellsy'),
-            'WPIprenomcont' => __('du prénom du contact', 'wpsellsy'),
-            'WPIfonccont' => __('de la fonction du contact', 'wpsellsy'),
-            'WPItel' => __('du téléphone', 'wpsellsy'),
-            'WPIport' => __('du portable', 'wpsellsy'),
-            'WPIemail' => __('de l\'email', 'wpsellsy'),
-            'WPIfax' => __('du fax', 'wpsellsy'),
-            'WPInote' => __('de la note', 'wpsellsy')
-        );
-        if (isset($options['WPIjsValid']) AND $options['WPIjsValid'] == 'choice1') {
-            ?>
-            <script type="text/javascript">
-                //<![CDATA[
-                jQuery(document).ready(function($) {
-                    $('#wp-sellsy-form').validate({
-                        rules: {
-                            <?php
-                                foreach($options AS $key => $value) {
-
-                                    if ($value == 'choice3') {
-                                        switch ($key) {
-                                            case 'WPIsiteweb':
-                                                echo 'WPIsiteweb: { required: true, url: true }, ';
-                                                break;
-                                            case 'WPIemail':
-                                                echo 'WPIemail: { required: true, email: true }, ';
-                                                break;
-                                            default:
-                                                echo $key . ': { required: true, minlength: 3 }, ';
-                                        }
-                                    }
-
-                                }
-                            ?>
-                        },
-                        messages: {
-                            <?php
-
-                                foreach($options AS $key => $value) {
-
-                                    if ($value == 'choice3') {
-                                        echo $key . ': "' . __ ('Merci de vérifier la saisie ', 'wpsellsy') . $txtVal[$key] . '", ';
-                                    }
-
-                                }
-
-                            ?>
-                        }
-                    });
-                });
-                //]]>
-            </script>
-        <?php
+    /**
+     * To compute shortcode insert in a page
+     * @param string $attr
+     * @param null|mixed $content
+     */
+    public function shortcode($attr, $content = null)
+    {
+        if (is_readable(SELLSY_WP_PATH_INC.'/wp_sellsy-pub-page.php')) {
+            include_once SELLSY_WP_PATH_INC . '/wp_sellsy-pub-page.php';
         }
-
     }
-
-    function pointersStyles($hook_suffix) {
-
-        $wp_sellsyScriptStyles = false;
-        $dismissed_pointers = explode(',', get_user_meta(get_current_user_id(), 'dismissed_wp_pointers', true));
-
-        if(! in_array('wpi_pointer', $dismissed_pointers)) {
-            $wp_sellsyScriptStyles = true;
-            add_action('admin_print_footer_scripts', array($this, 'wpi_pointers_scripts'));
-        }
-
-        if($wp_sellsyScriptStyles) {
-            wp_enqueue_style('wp-pointer');
-            wp_enqueue_script('wp-pointer');
-        }
-
-    }
-
-    function pointersScripts() {
-
-        $pointer_content  = '<h3>WP Sellsy Prospection</h3>';
-        $pointer_content .= '<p><img src="../wp-content/plugins/wp_sellsy/img/sellsy_34.png" alt="" style="float:left;margin-right:10px" /> ' . __('Vous avez installé le plugin WP Sellsy Prospection. Cliquez ici pour procéder à sa configuration', 'wpsellsy') . '</p>';
-        ?>
-        <script type="text/javascript">
-            //<![CDATA[
-            jQuery(document).ready(function($) {
-                $('#toplevel_page_wpi-admPage').pointer({
-                    content:	'<?php echo $pointer_content; ?>',
-                    position: 	{
-                        edge:	'left',
-                        align:	'right'
-                    },
-                    pointerWidth:	350,
-                    close:			function() {
-                        $.post(ajaxurl, {
-                            pointer: 'wpi_pointer',
-                            action: 'dismiss-wp-pointer'
-                        });
-                    }
-                }).pointer('open');
-            });
-            //]]>
-        </script>
-
-    <?php
-
-    }
-
 }
