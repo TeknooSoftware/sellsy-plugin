@@ -83,8 +83,8 @@ class Widget extends WP_Widget
             $afterWidget = $args['after_widget'];
         }
 
-        if (!empty($out) && is_readable(SELLSY_WP_PATH_INC.'/wp_sellsy_widget.php')) {
-            include SELLSY_WP_PATH_INC.'/wp_sellsy_widget.php';
+        if (!empty($out) && is_readable(SELLSY_WP_PATH_INC.'/widget.php')) {
+            include SELLSY_WP_PATH_INC.'/widget.php';
         }
     }
 
@@ -137,8 +137,8 @@ class Widget extends WP_Widget
             $texte = esc_attr($instance['texte']);
         }
 
-        if (is_readable(SELLSY_WP_PATH_INC.'/wp_sellsy_form.php')) {
-            include SELLSY_WP_PATH_INC.'/wp_sellsy_form.php';
+        if (is_readable(SELLSY_WP_PATH_INC.'/form.php')) {
+            include SELLSY_WP_PATH_INC.'/form.php';
         }
     }
 }

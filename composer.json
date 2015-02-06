@@ -27,7 +27,7 @@
         "phpunit/phpunit-selenium": "*",
         "phpunit/phpunit-story": "*"
     },
-    "minimum-stability": "beta",
+    "minimum-stability": "dev",
     "archive": {
         "exclude": ["demo", "vendor", ".idea"]
     }

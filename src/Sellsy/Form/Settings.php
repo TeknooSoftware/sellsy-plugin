@@ -35,8 +35,8 @@ class Settings
     public function __construct(OptionsBag $options)
     {
         //Initialize this object
-        $this->settings = $this->getSettings();
-        $this->sections = $this->getSections();
+        $this->settings = $this->loadSettings();
+        $this->sections = $this->loadSections();
 
         //Register the options bag
         $this->options = $options;
@@ -51,7 +51,7 @@ class Settings
      * Return the list of available settings in the wordpress admin
      * @return array
      */
-    public function getSettings()
+    public function loadSettings()
     {
         return [
             /* Section Connexion Sellsy */
@@ -158,7 +158,7 @@ class Settings
      * Return the list of available sections in the wordpress admin
      * @return array
      */
-    public function getSections()
+    public function loadSections()
     {
         return [
             'sellsy_connexion'	=> __('Connexion à votre compte Sellsy', 'wpsellsy'),
@@ -167,6 +167,15 @@ class Settings
             'sellsy_jsValid' => __('Validation Javascript (requiert jQuery)', 'wpsellsy'),
             'sellsy_Champs' => __('Afficher / Masquer les champs', 'wpsellsy')
         ];
+    }
+
+    /**
+     * Return sections configured by this object
+     * @return array
+     */
+    public function getSections()
+    {
+        return $this->sections;
     }
 
     /**

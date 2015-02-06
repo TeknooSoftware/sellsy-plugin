@@ -2,6 +2,8 @@
 
 namespace UniAlteri\Sellsy\Form;
 
+use UniAlteri\Sellsy\OptionsBag;
+
 /**
  * Class Admin
  * Class to configure Wordpress admin to configure this plugin
@@ -9,6 +11,19 @@ namespace UniAlteri\Sellsy\Form;
  */
 class Admin 
 {
+    /**
+     * @var OptionsBag
+     */
+    protected $options;
+
+    /**
+     * @param OptionsBag $options
+     */
+    public function __construct($options)
+    {
+        $this->options = $options;
+    }
+
     /**
      * Method to add sellsy javascript for Wordpress admin
      */
@@ -20,7 +35,7 @@ class Admin
             array('jquery'),
             '1.0',
             1
-        );
+       );
 
         wp_localize_script(
             'wpsellsyjscsource',
@@ -29,7 +44,7 @@ class Admin
                 'url' => admin_url('admin-ajax.php'),
                 'nonce' => wp_create_nonce('wpi_ajax_nonce')
             ]
-       );
+      );
     }
 
     /**
@@ -49,7 +64,7 @@ class Admin
                 array(),
                 '1.0',
                 'screen'
-            );
+           );
 
             wp_enqueue_style('wpsellsystylesadmin');
         }
@@ -65,9 +80,9 @@ class Admin
             'WP Sellsy',
             'manage_options',
             'wpi-admPage',
-            [$this, 'wpi_admPage'],
+            [$this, 'page'],
             plugins_url('/img/sellsy_15.png', SELLSY_WP_PATH_FILE)
-        );
+       );
     }
 
     /**
@@ -75,8 +90,53 @@ class Admin
      */
     public function page()
     {
-        if (is_admin() && current_user_can('manage_options') && is_readable(SELLSY_WP_PATH_INC.'/wp_sellsy-adm-page.php')) {
-            include_once SELLSY_WP_PATH_INC.'/wp_sellsy-adm-page.php';
+        if (is_admin() && current_user_can('manage_options') && is_readable(SELLSY_WP_PATH_INC.'/admin-page.php')) {
+            include_once SELLSY_WP_PATH_INC.'/admin-page.php';
+        }
+    }
+
+    public function displaySettings($setting = array())
+    {
+        $id = null;
+        if (isset($setting['id'])) {
+            $id = $setting['id'];
+        }
+
+        $class = null;
+        if (isset($setting['class'])) {
+            $class = ' '.$setting['class'];
+        }
+
+        $type = null;
+        if (isset($setting['type'])) {
+            $type = $setting['type'];
+        }
+
+        $std = null;
+        if (isset($setting['std'])) {
+            $std = $setting['std'];
+        }
+
+        $desc = null;
+        if (isset($setting['desc'])) {
+            $desc = $setting['desc'];
+        }
+
+        $choices = [];
+        if (isset($setting['choices'])) {
+            $choices = $setting['choices'];
+        }
+
+        $options = $this->options->toArray();
+
+        if (!isset($options[$id]) && 'checkbox' != $type) {
+            $options[$id] = $std;
+        } elseif (!isset($options[$id])) {
+            $options[$id] = 0;
+        }
+
+        if (is_readable(SELLSY_WP_PATH_INC.'/admin-setting.php')) {
+            include_once SELLSY_WP_PATH_INC.'/admin-setting.php';
         }
     }
 }

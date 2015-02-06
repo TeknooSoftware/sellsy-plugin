@@ -80,8 +80,8 @@ class Front
      */
     public function shortcode($attr, $content = null)
     {
-        if (is_readable(SELLSY_WP_PATH_INC.'/wp_sellsy-pub-page.php')) {
-            include_once SELLSY_WP_PATH_INC . '/wp_sellsy-pub-page.php';
+        if (is_readable(SELLSY_WP_PATH_INC.'/front-page.php')) {
+            include_once SELLSY_WP_PATH_INC.'/front-page.php';
         }
     }
 }
