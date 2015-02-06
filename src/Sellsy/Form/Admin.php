@@ -1,8 +1,8 @@
 <?php
 
-namespace UniAlteri\Sellsy\Form;
+namespace UniAlteri\Sellsy\Wordpress\Form;
 
-use UniAlteri\Sellsy\OptionsBag;
+use UniAlteri\Sellsy\Wordpress\OptionsBag;
 
 /**
  * Class Admin
@@ -29,20 +29,20 @@ class Admin
      */
     public function addJS()
     {
-        wp_enqueue_script(
+        \wp_enqueue_script(
             'wpsellsyjscsource',
-            plugins_url('/js/wp_sellsy.js', SELLSY_WP_PATH_FILE),
+            \plugins_url('/js/wp_sellsy.js', SELLSY_WP_PATH_FILE),
             array('jquery'),
             '1.0',
             1
        );
 
-        wp_localize_script(
+        \wp_localize_script(
             'wpsellsyjscsource',
             'ajax_var',
             [
-                'url' => admin_url('admin-ajax.php'),
-                'nonce' => wp_create_nonce('wpi_ajax_nonce')
+                'url' => \admin_url('admin-ajax.php'),
+                'nonce' => \wp_create_nonce('wpi_ajax_nonce')
             ]
       );
     }
@@ -53,20 +53,20 @@ class Admin
      */
     public function addCSS($hook)
     {
-        if (is_admin()) {
+        if (\is_admin()) {
             if ('toplevel_page_wpi-admPage' != $hook) {
                 return;
             }
 
-            wp_register_style(
+            \wp_register_style(
                 'wpsellsystylesadmin',
-                plugins_url('/css/wp_sellsy_admin.css', SELLSY_WP_PATH_FILE),
+                \plugins_url('/css/wp_sellsy_admin.css', SELLSY_WP_PATH_FILE),
                 array(),
                 '1.0',
                 'screen'
            );
 
-            wp_enqueue_style('wpsellsystylesadmin');
+            \wp_enqueue_style('wpsellsystylesadmin');
         }
     }
 
@@ -75,13 +75,13 @@ class Admin
      */
     public function addMenu()
     {
-        add_menu_page(
+        \add_menu_page(
             'WP Sellsy',
             'WP Sellsy',
             'manage_options',
             'wpi-admPage',
             [$this, 'page'],
-            plugins_url('/img/sellsy_15.png', SELLSY_WP_PATH_FILE)
+            \plugins_url('/img/sellsy_15.png', SELLSY_WP_PATH_FILE)
        );
     }
 
@@ -90,7 +90,7 @@ class Admin
      */
     public function page()
     {
-        if (is_admin() && current_user_can('manage_options') && is_readable(SELLSY_WP_PATH_INC.'/admin-page.php')) {
+        if (\is_admin() && \current_user_can('manage_options') && is_readable(SELLSY_WP_PATH_INC.'/admin-page.php')) {
             include_once SELLSY_WP_PATH_INC.'/admin-page.php';
         }
     }

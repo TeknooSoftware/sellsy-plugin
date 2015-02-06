@@ -20,14 +20,23 @@ if (class_exists('UniAlteri\Sellsy\Wordpress\Plugin')) {
 	$sellsyClient = new \UniAlteri\Sellsy\Client\Client($requestGenerator);
 
 	//Initialize the options bag/manager of this plugin
-	$options = new \UniAlteri\Sellsy\OptionsBag();
+	$options = new \UniAlteri\Sellsy\Wordpress\OptionsBag();
 
 	//Initialize this plugin
 	$wpSellsyPlugin = new \UniAlteri\Sellsy\Wordpress\Plugin($sellsyClient, $options);
 
 	//Initialize views
-	$wpSellsyFront = new \UniAlteri\Sellsy\Form\Front($wpSellsyPlugin, $options);
-	$wpSellsyAdmin = new \UniAlteri\Sellsy\Form\Admin($wpSellsyPlugin);
+	$wpSellsyFront = new \UniAlteri\Sellsy\Wordpress\Form\Front($wpSellsyPlugin, $options);
+	$wpSellsyAdmin = new \UniAlteri\Sellsy\Wordpress\Form\Admin($wpSellsyPlugin);
+
+	//Configure wordpress to load options
+	add_action(
+		'init',
+		function() use ($options) {
+			$options->registerHooks();
+		},
+		1
+	);
 
 	//Configure wordpress to require it to check if CUrl is available in this platforme
 	add_action('admin_init', [$wpSellsyPlugin, 'checkCUrlExtensions'], 2);
@@ -45,7 +54,7 @@ if (class_exists('UniAlteri\Sellsy\Wordpress\Plugin')) {
 	//Configure wordpress to manage disable/uninstall of this plugin
 	register_deactivation_hook(SELLSY_WP_PATH_FILE, [$wpSellsyPlugin, 'disablePlugin']);
 	add_action('admin_init', function() use ($options, $wpSellsyAdmin) {
-			$settings = new \UniAlteri\Sellsy\Form\Settings($options);
+			$settings = new \UniAlteri\Sellsy\Wordpress\Form\Settings($options);
 			$settings->buildForms([$wpSellsyAdmin, 'displaySettings']);
 		},
 		5
@@ -61,10 +70,10 @@ if (class_exists('UniAlteri\Sellsy\Wordpress\Plugin')) {
 
 	//Configure wordpress to allow this module to load a widget
 	add_action('widgets_init', function() {
-		if (class_exists('\UniAlteri\Sellsy\Widget')) {
-			register_widget('\UniAlteri\Sellsy\Widget');
+		if (class_exists('\UniAlteri\Sellsy\Wordpress\Widget')) {
+			register_widget('\UniAlteri\Sellsy\Wordpress\Widget');
 		} else {
-			wp_die('Error, class \UniAlteri\Sellsy\Widget not found');
+			wp_die('Error, class \UniAlteri\Sellsy\Wordpress\Widget not found');
 		}
 	});
 

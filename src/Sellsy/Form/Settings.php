@@ -1,8 +1,8 @@
 <?php
 
-namespace UniAlteri\Sellsy\Form;
+namespace UniAlteri\Sellsy\Wordpress\Form;
 
-use UniAlteri\Sellsy\OptionsBag;
+use UniAlteri\Sellsy\Wordpress\OptionsBag;
 
 /**
  * Class Settings

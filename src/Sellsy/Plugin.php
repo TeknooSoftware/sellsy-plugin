@@ -3,7 +3,7 @@
 namespace UniAlteri\Sellsy\Wordpress;
 
 use UniAlteri\Sellsy\Client\Client;
-use UniAlteri\Sellsy\OptionsBag;
+use UniAlteri\Sellsy\Wordpress\OptionsBag;
 
 /**
  * Class Plugin
@@ -55,7 +55,7 @@ class Plugin
      */
     public function loadTranslation()
     {
-        load_plugin_textdomain(
+        \load_plugin_textdomain(
             'wpsellsy',
             true,
             SELLSY_WP_PATH_LANG
@@ -70,7 +70,7 @@ class Plugin
      */
     public function disablePlugin()
     {
-        delete_option(OptionsBag::WORDPRESS_SETTINGS_NAME);
+        \delete_option(OptionsBag::WORDPRESS_SETTINGS_NAME);
 
         return $this;
     }
@@ -162,8 +162,8 @@ class Plugin
         }
 
         //Check Nonce/XSRF to avoid attacks
-        if (!wp_verify_nonce($nonce, 'wpi_ajax_nonce')) {
-            wp_die(__('Accès interdit', 'wpsellsy'));
+        if (!\wp_verify_nonce($nonce, 'wpi_ajax_nonce')) {
+            \wp_die(__('Accès interdit', 'wpsellsy'));
         }
 
         //Check if the

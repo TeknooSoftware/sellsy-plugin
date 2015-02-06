@@ -28,6 +28,11 @@
         "phpunit/phpunit-story": "*"
     },
     "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "UniAlteri\\Sellsy\\Wordpress\\": ["src/Sellsy/"]
+        }
+    },
     "archive": {
         "exclude": ["demo", "vendor", ".idea"]
     }

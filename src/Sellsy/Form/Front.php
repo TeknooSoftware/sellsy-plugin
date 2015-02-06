@@ -1,8 +1,8 @@
 <?php
 
-namespace UniAlteri\Sellsy\Form;
+namespace UniAlteri\Sellsy\Wordpress\Form;
 
-use UniAlteri\Sellsy\OptionsBag;
+use UniAlteri\Sellsy\Wordpress\OptionsBag;
 
 /**
  * Class Front
@@ -29,20 +29,20 @@ class Front
      */
     public function addJS()
     {
-        if (!is_admin()) {
+        if (!\is_admin()) {
             if ('choice1' == $this->options['WPIloadjQuery']) {
-                wp_deregister_script('jquery');
-                wp_register_script(
+                \wp_deregister_script('jquery');
+                \wp_register_script(
                     'jquery',
                     SELLSY_WP_JQUERY_URL,
                     false,
                     SELLSY_WP_JQUERY_VERSION
                 );
-                wp_enqueue_script('jquery');
+                \wp_enqueue_script('jquery');
             }
 
             if ('choice1' == $this->options['WPIjsValid']) {
-                wp_register_script(
+                \wp_register_script(
                     'wpsellsyjsvalid',
                     plugins_url('/js/jquery.validate.min.js', SELLSY_WP_PATH_FILE),
                     ['jquery'],
@@ -50,7 +50,7 @@ class Front
                     true
                 );
 
-                wp_enqueue_script('wpsellsyjsvalid');
+                \wp_enqueue_script('wpsellsyjsvalid');
             }
         }
     }
@@ -60,16 +60,16 @@ class Front
      */
     public function addCSS()
     {
-        if (!is_admin()) {
-            wp_register_style(
+        if (!\is_admin()) {
+            \wp_register_style(
                 'wpsellsystyles',
-                plugins_url('/css/wp_sellsy.css', SELLSY_WP_PATH_FILE),
+                \plugins_url('/css/wp_sellsy.css', SELLSY_WP_PATH_FILE),
                 [],
                 '1.0',
                 'screen'
             );
 
-            wp_enqueue_style('wpsellsystyles');
+            \wp_enqueue_style('wpsellsystyles');
         }
     }
 

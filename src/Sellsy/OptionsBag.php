@@ -1,6 +1,6 @@
 <?php
 
-namespace UniAlteri\Sellsy;
+namespace UniAlteri\Sellsy\Wordpress;
 
 /**
  * Class OptionsBag
@@ -21,18 +21,18 @@ class OptionsBag implements \ArrayAccess
     /**
      * @var array
      */
-    protected $options = [];
+    protected $options = null;
 
     /**
-     * To initialize this object
+     * To registers hooks to validate
      */
-    public function __construct()
+    public function registerHooks()
     {
         //Register this bag to sanitize data
-        register_setting(self::WORDPRESS_SETTINGS_NAME, self::WORDPRESS_SETTINGS_NAME, [$this, 'sanitize']);
+        \register_setting(self::WORDPRESS_SETTINGS_NAME, self::WORDPRESS_SETTINGS_NAME, [$this, 'sanitize']);
 
         //Register this bag to filter data
-        add_filter(self::WORDPRESS_VALIDATE_FILTER, [$this, 'validate'], 10, 1);
+        \add_filter(self::WORDPRESS_VALIDATE_FILTER, [$this, 'validate'], 10, 1);
     }
 
     /**
@@ -42,7 +42,7 @@ class OptionsBag implements \ArrayAccess
     public function reload()
     {
         //Retrieve options from wordpress
-        $options = get_option(self::WORDPRESS_SETTINGS_NAME, null);
+        $options = \get_option(self::WORDPRESS_SETTINGS_NAME, null);
 
         if (empty($options)) {
             $this->options = [];
@@ -59,7 +59,7 @@ class OptionsBag implements \ArrayAccess
      */
     public function save()
     {
-        update_option(self::WORDPRESS_SETTINGS_NAME, $this->options);
+        \update_option(self::WORDPRESS_SETTINGS_NAME, $this->options);
 
         return $this;
     }
@@ -90,6 +90,10 @@ class OptionsBag implements \ArrayAccess
      */
     public function offsetExists($offset)
     {
+        if (empty($this->options)) {
+            $this->reload();
+        }
+
         if (!is_string($offset)) {
             return false;
         }
@@ -105,6 +109,10 @@ class OptionsBag implements \ArrayAccess
      */
     public function offsetGet($offset)
     {
+        if (empty($this->options)) {
+            $this->reload();
+        }
+
         if (!is_string($offset)) {
             return false;
         }
@@ -125,6 +133,10 @@ class OptionsBag implements \ArrayAccess
      */
     public function offsetSet($offset, $value)
     {
+        if (empty($this->options)) {
+            $this->reload();
+        }
+
         if (!is_string($offset)) {
             return;
         }
@@ -140,6 +152,10 @@ class OptionsBag implements \ArrayAccess
      */
     public function offsetUnset($offset)
     {
+        if (empty($this->options)) {
+            $this->reload();
+        }
+
         if (!is_string($offset)) {
             return;
         }
@@ -160,7 +176,7 @@ class OptionsBag implements \ArrayAccess
             switch ($key){
                 case 'WPIconsumer_token':
                     if (strlen($val) != 40) {
-                        add_settings_error(
+                        \add_settings_error(
                             self::WORDPRESS_SETTINGS_NAME,
                             'WPIconsumer_token',
                             __('Le Consumer Token est manquant ou incorrect, vérifiez votre saisie.', 'wpsellsy'),
@@ -168,13 +184,13 @@ class OptionsBag implements \ArrayAccess
                         );
 
                     } else {
-                        $val = sanitize_text_field($val);
+                        $val = \sanitize_text_field($val);
                     }
                     break;
 
                 case 'WPIconsumer_secret':
                     if (strlen($val) != 40) {
-                        add_settings_error(
+                        \add_settings_error(
                             self::WORDPRESS_SETTINGS_NAME,
                             'WPIconsumer_secret',
                             __('Le Consumer Secret est manquant ou incorrect, vérifiez votre saisie.', 'wpsellsy'),
@@ -182,13 +198,13 @@ class OptionsBag implements \ArrayAccess
                         );
 
                     } else {
-                        $val = sanitize_text_field($val);
+                        $val = \sanitize_text_field($val);
                     }
                     break;
 
                 case 'WPIutilisateur_token':
                     if (strlen($val) != 40) {
-                        add_settings_error(
+                        \add_settings_error(
                             self::WORDPRESS_SETTINGS_NAME,
                             'WPIutilisateur_token',
                             __('L\'Utilisateur Token est manquant ou incorrect, vérifiez votre saisie.', 'wpsellsy'),
@@ -196,13 +212,13 @@ class OptionsBag implements \ArrayAccess
                         );
 
                     } else {
-                        $val = sanitize_text_field($val);
+                        $val = \sanitize_text_field($val);
                     }
                     break;
 
                 case 'WPIutilisateur_secret':
                     if (strlen($val) != 40) {
-                        add_settings_error(
+                        \add_settings_error(
                             self::WORDPRESS_SETTINGS_NAME,
                             'WPIutilisateur_secret',
                             __('L\'Utilisateur Secret est manquant ou incorrect, vérifiez votre saisie.', 'wpsellsy'),
@@ -210,13 +226,13 @@ class OptionsBag implements \ArrayAccess
                         );
 
                     } else {
-                        $val = sanitize_text_field($val);
+                        $val = \sanitize_text_field($val);
                     }
                     break;
 
                 case 'WPIenvoyer_copie':
-                    if (empty($val) || !is_email($val)) {
-                        add_settings_error(
+                    if (empty($val) || !\is_email($val)) {
+                        \add_settings_error(
                             self::WORDPRESS_SETTINGS_NAME,
                             'WPIenvoyer_copie',
                             __('L\'adresse email est manquante ou incorrecte, vérifiez votre saisie ou vous ne recevrez pas d\'email à chaque soumission du formulaire. Les prospects et/ou opportunités seront quand-même créé(e)s.', 'wpsellsy'),
@@ -224,25 +240,25 @@ class OptionsBag implements \ArrayAccess
                         );
 
                     } else {
-                        $val = sanitize_text_field($val);
+                        $val = \sanitize_text_field($val);
                     }
                     break;
 
                 case 'WPIcreer_prospopp':
                     if ('choice2' == $val && empty($input['WPInom_opp_source'])) {
-                        add_settings_error(
+                        \add_settings_error(
                             self::WORDPRESS_SETTINGS_NAME,
                             'WPInom_opp_source',
                             __('Vous avez choisi de créer une opportunité en plus d\'un prospect, vous devez saisir une source d\'opportunités ou le plugin créera que des prospects.', 'wpsellsy'),
                             'error'
                         );
                     }
-                    $val = sanitize_text_field($val);
+                    $val = \sanitize_text_field($val);
                     break;
 
                 case 'WPIaff_form':
                     if ('choice1' == $val && empty($input['WPInom_form'])) {
-                        add_settings_error(
+                        \add_settings_error(
                             self::WORDPRESS_SETTINGS_NAME,
                             'WPInom_opp_source',
                             __('Vous avez choisi d\'afficher le nom du formulaire mais vous ne l\'avez pas renseigné.', 'wpsellsy'),
@@ -265,13 +281,13 @@ class OptionsBag implements \ArrayAccess
     public function sanitize(&$input)
     {
         //Check if the user has right
-        if (current_user_can('manage_options') && check_admin_referer('wpi_nonce_field', 'wpi_nonce_verify_adm')) {
+        if (\current_user_can('manage_options') && \check_admin_referer('wpi_nonce_field', 'wpi_nonce_verify_adm')) {
 
             foreach($input AS $key => &$value) {
                 strip_tags(stripslashes($value));
             }
 
-            return apply_filters(self::WORDPRESS_VALIDATE_FILTER, $input);
+            return \apply_filters(self::WORDPRESS_VALIDATE_FILTER, $input);
         }
     }
 }

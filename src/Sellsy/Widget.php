@@ -1,13 +1,13 @@
 <?php
 
-namespace UniAlteri\Sellsy;
+namespace UniAlteri\Sellsy\Wordpress;
 
 /**
  * Class Widget
  * Widget to display in front website
  * @package UniAlteri\Sellsy
  */
-class Widget extends WP_Widget
+class Widget extends \WP_Widget
 {
     /**
      * PHP5 constructor.
@@ -54,7 +54,7 @@ class Widget extends WP_Widget
     public function widget($args, $instance)
     {
         //Extract title
-        $title = apply_filters('widget_title', $instance['titre']) ;
+        $title = \apply_filters('widget_title', $instance['titre']) ;
 
         //Extract body
         $out = '';
@@ -129,12 +129,12 @@ class Widget extends WP_Widget
     {
         $titre = '';
         if (isset($instance['titre'])) {
-            $titre = esc_attr($instance['titre']);
+            $titre = \esc_attr($instance['titre']);
         }
 
         $texte = '';
         if (isset($instance['titre'])) {
-            $texte = esc_attr($instance['texte']);
+            $texte = \esc_attr($instance['texte']);
         }
 
         if (is_readable(SELLSY_WP_PATH_INC.'/form.php')) {
