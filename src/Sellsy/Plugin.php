@@ -137,7 +137,7 @@ class Plugin
     public function checkOppSource($label)
     {
         try {
-            $sources = $this->sellsyClient->opportunities->getSources();
+            $sources = $this->sellsyClient->opportunities()->getSources();
             foreach ($sources->response as $source) {
                 if (strcasecmp($source->label, $label) == 0) {
                     return true;
@@ -150,35 +150,44 @@ class Plugin
         }
     }
 
-    function createOppSource() {
-
-        $nonce = $_POST['nonce'];
-
-        if (!wp_verify_nonce($nonce, 'wpi_ajax_nonce'))
-            die (__('Accès interdit', 'wpsellsy'));
-
-        if (isset($_POST['action']) AND $_POST['action'] == 'wpi_createOppSource'
-            AND isset($_POST['param']) AND $_POST['param'] == 'creerSource') {
-
-            $options = get_option('wpsellsy_options');
-            $source = $options['WPInom_opp_source'];
-
-            $request = array(
-                'method' => 'Opportunities.createSource',
-                'params' => array(
-                    'source'	=> array(
-                        'label'		=> $source
-                   )
-               )
-           );
-
-            $creersource = sellsyConnect_curl::load()->requestApi($request);
-            if ($creersource->response != '')
-                echo 'true';
-            else
-                echo 'false';
-            die();
+    /**
+     * Method to create a opportunitiy source via the wordpress admin
+     */
+    public function createOppSource()
+    {
+        //Retrieve the Nonce/XSRF id to check its validity
+        $nonce = null;
+        if (isset($_POST['nonce'])) {
+            $nonce = $_POST['nonce'];
         }
 
+        //Check Nonce/XSRF to avoid attacks
+        if (!wp_verify_nonce($nonce, 'wpi_ajax_nonce')) {
+            wp_die(__('Accès interdit', 'wpsellsy'));
+        }
+
+        //Check if the
+        if (isset($_POST['action']) && 'wpi_createOppSource' == $_POST['action']
+            && isset($_POST['param']) && 'creerSource' == $_POST['param']) {
+
+            //Create the source via the client
+            try {
+                $source = $this->options['WPInom_opp_source'];
+                $result = $this->sellsyClient->opportunities()->createSource(['source' => ['label' => $source]]);
+
+                if (!empty($result->response)) {
+                    //Successful
+                    echo 'true';
+                    return;
+                }
+            } catch (\Exception $e) {
+                //Failure
+                echo 'false';
+                return;
+            }
+        }
+
+        //Failure
+        echo 'false';
     }
 }
