@@ -52,8 +52,8 @@ if (class_exists('UniAlteri\Sellsy\Wordpress\Plugin')) {
 
 	//Configure wordpress to manage disable/uninstall of this plugin
 	register_deactivation_hook(SELLSY_WP_PATH_FILE, [$wpSellsyPlugin, 'disablePlugin']);
-	add_action('admin_init', function() use ($options, $wpSellsyAdmin) {
-			$settings = new \UniAlteri\Sellsy\Wordpress\Form\Settings($options);
+	add_action('admin_init', function() use ($options, $wpSellsyAdmin, $wpSellsyPlugin) {
+			$settings = new \UniAlteri\Sellsy\Wordpress\Form\Settings($wpSellsyPlugin, $options);
 			$settings->buildForms(function () {}, [$wpSellsyAdmin, 'displaySettings']);
 		},
 		5

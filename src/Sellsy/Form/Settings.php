@@ -3,6 +3,7 @@
 namespace UniAlteri\Sellsy\Wordpress\Form;
 
 use UniAlteri\Sellsy\Wordpress\OptionsBag;
+use UniAlteri\Sellsy\Wordpress\Plugin;
 
 /**
  * Class Settings
@@ -29,17 +30,24 @@ class Settings
     protected $options;
 
     /**
+     * @var Plugin
+     */
+    protected $sellsyPlugin;
+
+    /**
      * Initialize this object
+     * @param Plugin $sellsyPlugin
      * @param OptionsBag $options
      */
-    public function __construct(OptionsBag $options)
+    public function __construct(Plugin $sellsyPlugin, OptionsBag $options)
     {
+        //Register the options bag
+        $this->sellsyPlugin = $sellsyPlugin;
+        $this->options = $options;
+
         //Initialize this object
         $this->settings = $this->loadSettings();
         $this->sections = $this->loadSections();
-
-        //Register the options bag
-        $this->options = $options;
 
         //If there are no registered options
         if (false == $options->isDefined()) {
@@ -150,7 +158,16 @@ class Settings
                     'choice1' => __('Oui', 'wpsellsy'),
                     'choice2' => __('Non', 'wpsellsy')
                 ]
-            ]
+            ],
+            /* Section Champs */
+            'WPIFieldsSelected' => [
+                'title' => __('Activer', 'wpsellsy'),
+                'desc' => __('Sélectionner les champs à afficher', 'wpsellsy'),
+                'type' => 'multiselect',
+                'std' => '',
+                'section' => 'sellsy_Champs',
+                'choices' => $this->sellsyPlugin->listCustomFields()
+            ],
         ];
     }
 
@@ -165,7 +182,7 @@ class Settings
             'sellsy_options' => __('Options du plugin', 'wpsellsy'),
             'sellsy_loadjQuery' => __('Charger le framework jQuery du plugin (' . SELLSY_WP_JQUERY_VERSION . ')', 'wpsellsy'),
             'sellsy_jsValid' => __('Validation Javascript (requiert jQuery)', 'wpsellsy'),
-            'sellsy_Champs' => __('Afficher / Masquer les champs', 'wpsellsy')
+            'sellsy_Champs' => __('Sélection des champs', 'wpsellsy')
         ];
     }
 

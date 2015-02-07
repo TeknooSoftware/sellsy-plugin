@@ -3,6 +3,7 @@
 namespace UniAlteri\Sellsy\Wordpress;
 
 use UniAlteri\Sellsy\Client\Client;
+use UniAlteri\Sellsy\Wordpress\Form\CustomField;
 use UniAlteri\Sellsy\Wordpress\OptionsBag;
 
 /**
@@ -127,6 +128,30 @@ class Plugin
         } catch (\Exception $e) {
             return false;
         }
+    }
+
+    /**
+     * Return the list of fields
+     * @param string $for
+     * @return CustomField[]
+     */
+    public function listCustomFields($for='prospect')
+    {
+        $final = [];
+        $customFields = $this->sellsyClient->customFields()->getList(['search'=>['useOn'=>(array)$for]]);
+        foreach ($customFields->response->result as $customFields) {
+            $final[$customFields->id] = new CustomField(
+                $customFields->id,
+                $customFields->type,
+                $customFields->name,
+                $customFields->code,
+                $customFields->description,
+                $customFields->defaultValue,
+                $customFields->prefsList
+            );
+        }
+
+        return $final;
     }
 
     /**

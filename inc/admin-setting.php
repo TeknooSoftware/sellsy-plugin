@@ -16,6 +16,26 @@ switch ($type) {
 
         break;
 
+    case 'multiselect':
+        echo '<select class="select'.$class.'" name="'.\UniAlteri\Sellsy\Wordpress\OptionsBag::WORDPRESS_SETTINGS_NAME.'['.$id.']" multiple="multiple">';
+
+        foreach ($choices as $value=>$label) {
+            if ($label instanceof \UniAlteri\Sellsy\Wordpress\Form\CustomField) {
+                $label = $label->getName();
+                echo '<option value="' . esc_attr($value) . '"' . selected($options[$id], $value, false) . '>' . $label . '</option>';
+            } else {
+                echo '<option value="' . esc_attr($value) . '"' . selected($options[$id], $value, false) . '>' . $label . '</option>';
+            }
+        }
+
+        echo '</select>';
+
+        if (!empty($desc)) {
+            echo '<br><span class="description">' . $desc . '</span>';
+        }
+
+        break;
+
     case 'radio':
         $i = 0;
         foreach ($choices as $value => $label) {
