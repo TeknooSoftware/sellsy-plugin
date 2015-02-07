@@ -170,7 +170,7 @@ class OptionsBag implements \ArrayAccess
      * @param array $input
      * @return mixed
      */
-    public function validate(&$input)
+    public function validate($input)
     {
         foreach ($input AS $key => &$val) {
             switch ($key){
@@ -278,7 +278,7 @@ class OptionsBag implements \ArrayAccess
      * @param mixed $input
      * @return mixed
      */
-    public function sanitize(&$input)
+    public function sanitize($input)
     {
         //Check if the user has right
         if (\current_user_can('manage_options') && \check_admin_referer('slswp_nonce_field', 'slswp_nonce_verify_adm')) {
