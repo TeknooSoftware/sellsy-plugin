@@ -34,8 +34,7 @@ if (class_exists('UniAlteri\Sellsy\Wordpress\Plugin')) {
 		'init',
 		function() use ($options) {
 			$options->registerHooks();
-		},
-		1
+		}
 	);
 
 	//Configure wordpress to require it to check if CUrl is available in this platforme

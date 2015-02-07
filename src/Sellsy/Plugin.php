@@ -100,7 +100,7 @@ class Plugin
     protected function configureSellsy()
     {
         //Configure the client
-        $this->sellsyClient->setApiUrl(SELLSY_WP_WEBAPI_URL);
+        $this->sellsyClient->setApiUrl(SELLSY_WP_API_URL);
         $this->sellsyClient->setOAuthAccessToken($this->options['WPIutilisateur_token']);
         $this->sellsyClient->setOAuthAccessTokenSecret($this->options['WPIutilisateur_secret']);
         $this->sellsyClient->setOAuthConsumerKey($this->options['WPIconsumer_token']);
