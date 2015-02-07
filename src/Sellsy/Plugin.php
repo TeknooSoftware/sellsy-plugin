@@ -162,12 +162,12 @@ class Plugin
         }
 
         //Check Nonce/XSRF to avoid attacks
-        if (!\wp_verify_nonce($nonce, 'wpi_ajax_nonce')) {
+        if (!\wp_verify_nonce($nonce, 'slswp_ajax_nonce')) {
             \wp_die(__('Accès interdit', 'wpsellsy'));
         }
 
         //Check if the
-        if (isset($_POST['action']) && 'wpi_createOppSource' == $_POST['action']
+        if (isset($_POST['action']) && 'slswp_createOppSource' == $_POST['action']
             && isset($_POST['param']) && 'creerSource' == $_POST['param']) {
 
             //Create the source via the client

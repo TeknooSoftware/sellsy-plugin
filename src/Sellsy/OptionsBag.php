@@ -281,7 +281,7 @@ class OptionsBag implements \ArrayAccess
     public function sanitize(&$input)
     {
         //Check if the user has right
-        if (\current_user_can('manage_options') && \check_admin_referer('wpi_nonce_field', 'wpi_nonce_verify_adm')) {
+        if (\current_user_can('manage_options') && \check_admin_referer('slswp_nonce_field', 'slswp_nonce_verify_adm')) {
 
             foreach($input AS $key => &$value) {
                 strip_tags(stripslashes($value));

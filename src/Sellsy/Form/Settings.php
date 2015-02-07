@@ -163,7 +163,7 @@ class Settings
         return [
             'sellsy_connexion'	=> __('Connexion à votre compte Sellsy', 'wpsellsy'),
             'sellsy_options' => __('Options du plugin', 'wpsellsy'),
-            'sellsy_loadjQuery' => __('Charger le framework jQuery du plugin (' . WPI_JQUERY_VERSION . ')', 'wpsellsy'),
+            'sellsy_loadjQuery' => __('Charger le framework jQuery du plugin (' . SELLSY_WP_JQUERY_VERSION . ')', 'wpsellsy'),
             'sellsy_jsValid' => __('Validation Javascript (requiert jQuery)', 'wpsellsy'),
             'sellsy_Champs' => __('Afficher / Masquer les champs', 'wpsellsy')
         ];
@@ -199,18 +199,23 @@ class Settings
 
     /**
      * Method to build form in wordpress admin to manage this plugin
-     * @param callable $displayCallback
+     * @param callable $displaySectionCallback
+     * @param callable $displayFieldsCallback
      * @return $this
      */
-    public function buildForms($displayCallback)
+    public function buildForms($displaySectionCallback, $displayFieldsCallback)
     {
-        if (!is_callable($displayCallback)) {
+        if (!is_callable($displaySectionCallback) || !is_callable($displayFieldsCallback)) {
             return $this;
         }
 
-        foreach ($this->settings AS $id=>$setting) {
+        foreach ($this->sections as $slug=>$title) {
+            \add_settings_section($slug, $title, $displaySectionCallback, 'slswp-admPage');
+        }
+
+        foreach ($this->settings as $id=>$setting) {
             $setting['id'] = $id;
-            $this->createInput($setting, $displayCallback);
+            $this->createInput($setting, $displayFieldsCallback);
         }
 
         return $this;
@@ -251,7 +256,7 @@ class Settings
             $setting['id'],
             $setting['title'],
             $displayCallback,
-            'wpi-admPage',
+            'slswp-admPage',
             $setting['section'],
             $fieldSettings
         );

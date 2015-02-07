@@ -3,6 +3,7 @@
 namespace UniAlteri\Sellsy\Wordpress\Form;
 
 use UniAlteri\Sellsy\Wordpress\OptionsBag;
+use UniAlteri\Sellsy\Wordpress\Plugin;
 
 /**
  * Class Front
@@ -12,15 +13,22 @@ use UniAlteri\Sellsy\Wordpress\OptionsBag;
 class Front
 {
     /**
+     * @var Plugin
+     */
+    protected $sellsyPlugin;
+
+    /**
      * @var OptionsBag
      */
     protected $options;
 
     /**
+     * @param Plugin $sellsyPlugin
      * @param OptionsBag $options
      */
-    public function __construct($options)
+    public function __construct($sellsyPlugin, $options)
     {
+        $this->sellsyPlugin = $sellsyPlugin;
         $this->options = $options;
     }
 
@@ -81,7 +89,7 @@ class Front
     public function shortcode($attr, $content = null)
     {
         if (is_readable(SELLSY_WP_PATH_INC.'/front-page.php')) {
-            include_once SELLSY_WP_PATH_INC.'/front-page.php';
+            include SELLSY_WP_PATH_INC.'/front-page.php';
         }
     }
 }

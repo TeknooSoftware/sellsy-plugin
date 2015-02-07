@@ -1,12 +1,8 @@
 <?php
-require_once ABSPATH . WPINC . '/class-phpmailer.php';
-require_once ABSPATH . WPINC . '/class-smtp.php';
-require_once WPI_PATH_INC . '/fonctions.php';
-require_once WPI_PATH_INC . '/sellsyconnect_curl.php';
-require_once WPI_PATH_INC . '/sellsytools.php';
+require_once SELLSY_WP_PATH_INC . '/fonctions.php';
 
 if ( !is_admin() AND isset( $_POST['send_wp_sellsy'] ) ) {
-	if ( wp_verify_nonce( $_POST['wpi_nonce_verify_page'], 'wpi_nonce_field' ) ) {
+	if ( wp_verify_nonce( $_POST['slswp_nonce_verify_page'], 'slswp_nonce_field' ) ) {
 		
 		$options = get_option( 'wpsellsy_options' );
 		
@@ -342,7 +338,7 @@ if ( !is_admin() ) {
 	    </div>
 		<?php 
 			if ( function_exists( 'wp_nonce_field' ) ) 
-				wp_nonce_field( 'wpi_nonce_field', 'wpi_nonce_verify_page' );
+				wp_nonce_field( 'slswp_nonce_field', 'slswp_nonce_verify_page' );
 		?>
 	</form>
 <?php

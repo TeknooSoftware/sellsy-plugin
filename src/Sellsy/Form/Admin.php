@@ -3,6 +3,7 @@
 namespace UniAlteri\Sellsy\Wordpress\Form;
 
 use UniAlteri\Sellsy\Wordpress\OptionsBag;
+use UniAlteri\Sellsy\Wordpress\Plugin;
 
 /**
  * Class Admin
@@ -12,15 +13,22 @@ use UniAlteri\Sellsy\Wordpress\OptionsBag;
 class Admin 
 {
     /**
+     * @var Plugin
+     */
+    protected $sellsyPlugin;
+
+    /**
      * @var OptionsBag
      */
     protected $options;
 
     /**
+     * @param Plugin $sellsyPlugin
      * @param OptionsBag $options
      */
-    public function __construct($options)
+    public function __construct($sellsyPlugin, $options)
     {
+        $this->sellsyPlugin = $sellsyPlugin;
         $this->options = $options;
     }
 
@@ -42,7 +50,7 @@ class Admin
             'ajax_var',
             [
                 'url' => \admin_url('admin-ajax.php'),
-                'nonce' => \wp_create_nonce('wpi_ajax_nonce')
+                'nonce' => \wp_create_nonce('slswp_ajax_nonce')
             ]
       );
     }
@@ -54,7 +62,7 @@ class Admin
     public function addCSS($hook)
     {
         if (\is_admin()) {
-            if ('toplevel_page_wpi-admPage' != $hook) {
+            if ('toplevel_page_slswp-admPage' != $hook) {
                 return;
             }
 
@@ -79,7 +87,7 @@ class Admin
             'WP Sellsy',
             'WP Sellsy',
             'manage_options',
-            'wpi-admPage',
+            'slswp-admPage',
             [$this, 'page'],
             \plugins_url('/img/sellsy_15.png', SELLSY_WP_PATH_FILE)
        );
@@ -91,7 +99,7 @@ class Admin
     public function page()
     {
         if (\is_admin() && \current_user_can('manage_options') && is_readable(SELLSY_WP_PATH_INC.'/admin-page.php')) {
-            include_once SELLSY_WP_PATH_INC.'/admin-page.php';
+            include SELLSY_WP_PATH_INC.'/admin-page.php';
         }
     }
 
@@ -136,7 +144,7 @@ class Admin
         }
 
         if (is_readable(SELLSY_WP_PATH_INC.'/admin-setting.php')) {
-            include_once SELLSY_WP_PATH_INC.'/admin-setting.php';
+            include SELLSY_WP_PATH_INC.'/admin-setting.php';
         }
     }
 }

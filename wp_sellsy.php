@@ -27,7 +27,7 @@ if (class_exists('UniAlteri\Sellsy\Wordpress\Plugin')) {
 
 	//Initialize views
 	$wpSellsyFront = new \UniAlteri\Sellsy\Wordpress\Form\Front($wpSellsyPlugin, $options);
-	$wpSellsyAdmin = new \UniAlteri\Sellsy\Wordpress\Form\Admin($wpSellsyPlugin);
+	$wpSellsyAdmin = new \UniAlteri\Sellsy\Wordpress\Form\Admin($wpSellsyPlugin, $options);
 
 	//Configure wordpress to load options
 	add_action(
@@ -55,7 +55,7 @@ if (class_exists('UniAlteri\Sellsy\Wordpress\Plugin')) {
 	register_deactivation_hook(SELLSY_WP_PATH_FILE, [$wpSellsyPlugin, 'disablePlugin']);
 	add_action('admin_init', function() use ($options, $wpSellsyAdmin) {
 			$settings = new \UniAlteri\Sellsy\Wordpress\Form\Settings($options);
-			$settings->buildForms([$wpSellsyAdmin, 'displaySettings']);
+			$settings->buildForms(function () {}, [$wpSellsyAdmin, 'displaySettings']);
 		},
 		5
 	);
@@ -80,5 +80,5 @@ if (class_exists('UniAlteri\Sellsy\Wordpress\Plugin')) {
 	//todo add_action('wp_footer', array(  $this, 'wpi_form_validate' ) );
 
 	//Configure wordpress to manage some ajax requests
-	add_action('wp_ajax_wpi_createOppSource', [$wpSellsyPlugin, 'checkOppSource']);
+	add_action('wp_ajax_sls_createOppSource', [$wpSellsyPlugin, 'checkOppSource']);
 }

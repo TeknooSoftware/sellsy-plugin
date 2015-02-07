@@ -7,7 +7,7 @@ if ($title) {
 <div>
     <?php
     echo $out;
-    include_once WPI_PATH_INC.'/wp_sellsy-pub-page.php';
+    include SELLSY_WP_PATH_INC.'/wp_sellsy-pub-page.php';
     ?>
 </div>
 <?php echo $after_widget;
