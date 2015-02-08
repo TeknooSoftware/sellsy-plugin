@@ -9,14 +9,13 @@ if (!is_admin()):
 			<span>
 				<?php echo __( 'Votre message n\'a pas été envoyé, vérifiez la saisie des champs suivant :', 'wpsellsy' ); ?>
 			</span>
-			<p>
-				<br />
+			<ul>
 				<?php
 				foreach ($errors as $error) {
-					echo $error.'<br/>';
+					echo '<li>'.$error.'</li>';
 				}
 				?>
-			</p>
+			</ul>
 		</div>
 	<?php endif; ?>
 	<form method="post" action="" id="wp-sellsy-form">

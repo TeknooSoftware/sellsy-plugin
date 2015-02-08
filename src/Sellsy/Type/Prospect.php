@@ -22,9 +22,6 @@ class Prospect implements TypeInterface
         'thirdRcs' => 'third.rcs',
         'thirdApenaf' => 'third.apenaf',
         'thirdCapital' => 'third.capital',
-        'thirdTags' => 'third.tags',
-        'thirdAccountingcode' => 'third.accountingcode',
-        'thirdAuxcode' => 'third.auxcode',
         'thirdStickyNote' => 'third.stickyNote',
         'contactName' => ['third.name','contact.name'],
         'contactForename' => 'contact.forename',
@@ -226,11 +223,110 @@ class Prospect implements TypeInterface
     /**
      * @param string $fieldName
      * @param mixed $value
+     * @param array $mandatoriesFields
      * @return boolean
      * @throws \Exception
      */
-    public function validateField($fieldName, &$value)
+    public function validateField($fieldName, &$value, $mandatoriesFields = array())
     {
-        // TODO: Implement validateField() method.
+        switch ($fieldName) {
+            case 'thirdName':
+                if (isset($mandatoriesFields[$fieldName]) && empty($value)) {
+                    throw new \Exception(__('Vérifiez la saisie de votre raison sociale', 'wpsellsy'));
+                }
+                break;
+            case 'thirdType':
+                if (isset($mandatoriesFields[$fieldName]) && empty($value)) {
+                    throw new \Exception(__('Vérifiez le type de votre société', 'wpsellsy'));
+                }
+                break;
+            case 'thirdEmail':
+                if (!is_email($value)) {
+                    throw new \Exception(__('Vérifiez la saisie de l\'adresse email de la personne à contacter', 'wpsellsy'));
+                }
+                break;
+            case 'thirdTel':
+                if (isset($mandatoriesFields[$fieldName]) && empty($value)) {
+                    throw new \Exception(__('Vérifiez la saisie du téléphone de la personne à contacter', 'wpsellsy'));
+                }
+                break;
+            case 'thirdFax':
+                if (isset($mandatoriesFields[$fieldName]) && empty($value)) {
+                    throw new \Exception(__('Vérifiez la saisie du fax de la personne à contacter', 'wpsellsy'));
+                }
+                break;
+            case 'thirdMobile':
+                if (isset($mandatoriesFields[$fieldName]) && empty($value)) {
+                    throw new \Exception(__('Vérifiez la saisie du portable de la personne à contacter', 'wpsellsy'));
+                }
+                break;
+            case 'thirdWeb':
+                if (!filter_var($value, FILTER_VALIDATE_URL)) {
+                    throw new \Exception(__('Vérifiez la saisie de votre site internet', 'wpsellsy'));
+                }
+                break;
+            case 'contactName':
+                if (!filter_var($value, FILTER_VALIDATE_URL)) {
+                    throw new \Exception(__('Vérifiez la saisie du prénom de la personne à contacter', 'wpsellsy'));
+                }
+                break;
+            case 'contactForename':
+                if (!filter_var($value, FILTER_VALIDATE_URL)) {
+                    throw new \Exception(__('Vérifiez la saisie du nom de la personne à contacter', 'wpsellsy'));
+                }
+                break;
+            case 'contactEmail':
+                if (!is_email($value)) {
+                    throw new \Exception(__('Vérifiez la saisie de l\'adresse email de la personne à contacter', 'wpsellsy'));
+                }
+                break;
+            case 'contactTel':
+                if (isset($mandatoriesFields[$fieldName]) && empty($value)) {
+                    throw new \Exception(__('Vérifiez la saisie du téléphone de la personne à contacter', 'wpsellsy'));
+                }
+                break;
+            case 'contactFax':
+                if (isset($mandatoriesFields[$fieldName]) && empty($value)) {
+                    throw new \Exception(__('Vérifiez la saisie du fax de la personne à contacter', 'wpsellsy'));
+                }
+                break;
+            case 'contactMobile':
+                if (isset($mandatoriesFields[$fieldName]) && empty($value)) {
+                    throw new \Exception(__('Vérifiez la saisie du portable de la personne à contacter', 'wpsellsy'));
+                }
+                break;
+            case 'addressName':
+                if (isset($mandatoriesFields[$fieldName]) && empty($value)) {
+                    throw new \Exception(__('Vérifiez votre adresse postale', 'wpsellsy'));
+                }
+                break;
+            case 'addressPart1':
+                if (isset($mandatoriesFields[$fieldName]) && empty($value)) {
+                    throw new \Exception(__('Vérifiez votre adresse postale', 'wpsellsy'));
+                }
+                break;
+            case 'addressPart2':
+                if (isset($mandatoriesFields[$fieldName]) && empty($value)) {
+                    throw new \Exception(__('Vérifiez votre adresse postale', 'wpsellsy'));
+                }
+                break;
+            case 'addressZip':
+                if (isset($mandatoriesFields[$fieldName]) && empty($value)) {
+                    throw new \Exception(__('Vérifiez votre code postal', 'wpsellsy'));
+                }
+                break;
+            case 'addressTown':
+                if (isset($mandatoriesFields[$fieldName]) && empty($value)) {
+                    throw new \Exception(__('Vérifiez la ville saisie dans votre adresse', 'wpsellsy'));
+                }
+                break;
+            case 'addressCountrycode':
+                if (isset($mandatoriesFields[$fieldName]) && empty($value)) {
+                    throw new \Exception(__('Vérifiez le pays saisie dans votre adresse', 'wpsellsy'));
+                }
+                break;
+        }
+
+        $value = \sanitize_text_field(stripslashes($value));
     }
 }

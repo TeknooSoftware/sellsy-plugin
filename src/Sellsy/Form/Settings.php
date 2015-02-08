@@ -178,6 +178,19 @@ class Settings
                 'section' => 'sellsy_Champs',
                 'choices' => $this->sellsyPlugin->listCustomFields($element)
             ],
+            'WPIMandatoryFields' => [
+                'title' => __('Activer', 'wpsellsy'),
+                'desc' => __('Sélectionner les champs obligatoires', 'wpsellsy'),
+                'type' => 'multiselect',
+                'std' => '',
+                'section' => 'sellsy_Champs',
+                'choices' => array_map(
+                    function($field){
+                        return $field->getName();
+                    },
+                    $this->sellsyPlugin->listSelectedFields()
+                )
+            ],
         ];
     }
 

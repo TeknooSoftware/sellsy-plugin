@@ -267,9 +267,11 @@ class Plugin
 
         //Extract fields, validate them and prepare registering
         $params = [];
+
+        $mandatoryFields = array_flip($this->options['WPIMandatoryFields']);
         foreach ($formValues as $key=>$fieldValue) {
             try {
-                $prospectType->validateField($key, $fieldValue);
+                $prospectType->validateField($key, $fieldValue, $mandatoryFields);
                 $prospectType->populateParams($key, $fieldValue, $params);
             } catch (\Exception $e) {
                 $errors[$key] = $e->getMessage();
