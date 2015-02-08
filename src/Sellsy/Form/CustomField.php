@@ -58,7 +58,7 @@ class CustomField
         $this->defaultValue = $defaultValue;
 
         $optionsVals = [];
-        if (!empty($options) && is_array($options)) {
+        if (!empty($options)) {
             foreach ($options as $option) {
                 $optionsVals[$option->rank] = [
                     'id' => $option->id,

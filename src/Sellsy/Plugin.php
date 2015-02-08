@@ -4,7 +4,6 @@ namespace UniAlteri\Sellsy\Wordpress;
 
 use UniAlteri\Sellsy\Client\Client;
 use UniAlteri\Sellsy\Wordpress\Form\CustomField;
-use UniAlteri\Sellsy\Wordpress\OptionsBag;
 use UniAlteri\Sellsy\Wordpress\Type\Prospect;
 
 /**
@@ -158,6 +157,36 @@ class Plugin
                 $customFields->defaultValue,
                 $customFields->prefsList
             );
+        }
+
+        return $final;
+    }
+
+    /**
+     * @return CustomField[]
+     */
+    public function listSelectedFields()
+    {
+        $element = 'prospect';
+        if (isset($this->options['WPIcreer_prospopp'])) {
+            switch ($this->options['WPIcreer_prospopp']) {
+                case 'prospectOnly':
+                case 'prospectOpportunity':
+                    $element = 'prospect';
+                    break;
+            }
+        }
+
+        $selectedFields = $this->options['WPIFieldsSelected'];
+        if (empty($selectedFields)) {
+            return [];
+        }
+
+        $final = [];
+        foreach ($this->listCustomFields($element) as $name=>$field) {
+            if (in_array($name, $selectedFields)) {
+                $final[$name] = $field;
+            }
         }
 
         return $final;

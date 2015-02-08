@@ -89,6 +89,9 @@ class Front
     public function shortcode($attr, $content = null)
     {
         if (is_readable(SELLSY_WP_PATH_INC.'/front-page.php')) {
+            $options = $this->options;
+            $formFieldsList = $this->sellsyPlugin->listSelectedFields();
+
             include SELLSY_WP_PATH_INC.'/front-page.php';
         }
     }
