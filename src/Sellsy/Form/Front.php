@@ -89,8 +89,8 @@ class Front
         $postValues = $_POST;
         if (!\is_admin() //We are in front
             && isset($postValues['send_wp_sellsy']) //The form was sent
-            && isset($postValues['wpi_nonce_verify_page'])) { //Nonce/Xsrf is present
-            if (\wp_verify_nonce($postValues['wpi_nonce_verify_page'], 'wpi_nonce_field')) { //Nonce is valid
+            && isset($postValues['slswp_nonce_verify_page'])) { //Nonce/Xsrf is present
+            if (\wp_verify_nonce($postValues['slswp_nonce_verify_page'], 'slswp_nonce_field')) { //Nonce is valid
 
                 $postValues = array_intersect_key($postValues, $selectedFields);
                 $prospectId = $this->sellsyPlugin->createProspect($postValues);

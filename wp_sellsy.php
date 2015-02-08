@@ -79,5 +79,5 @@ if (class_exists('UniAlteri\Sellsy\Wordpress\Plugin')) {
 	//todo add_action('wp_footer', array(  $this, 'wpi_form_validate' ) );
 
 	//Configure wordpress to manage some ajax requests
-	add_action('wp_ajax_sls_createOppSource', [$wpSellsyPlugin, 'checkOppSource']);
+	add_action('wp_ajax_sls_createOppSource', [$wpSellsyPlugin, 'createOppSource']);
 }

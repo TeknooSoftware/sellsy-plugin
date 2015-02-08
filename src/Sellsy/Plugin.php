@@ -230,7 +230,7 @@ class Plugin
         }
 
         //Check if the
-        if (isset($_POST['action']) && 'slswp_createOppSource' == $_POST['action']
+        if (isset($_POST['action']) && 'sls_createOppSource' == $_POST['action']
             && isset($_POST['param']) && 'creerSource' == $_POST['param']) {
 
             //Create the source via the client
@@ -303,6 +303,9 @@ class Plugin
             if (is_object($funnel) && 'default' == $funnel->name) {
                 $pipelineId = $funnel->id;
                 break;
+            } elseif ('defaultFunnel' == $key) {
+                $pipelineId = intval($funnel);
+                break;
             }
         }
 
@@ -315,13 +318,16 @@ class Plugin
      */
     public function getStepId($funnelId)
     {
-        $stepsList = $this->sellsyClient->opportunities()->getStepsForFunnel(['funnelid' => $funnelId])->response;
-
         $stepId = null;
-        foreach ($stepsList as $key=>$step) {
-            $stepId = $step->id;
-            break;
+        if (!empty($funnelId)) {
+            $stepsList = $this->sellsyClient->opportunities()->getStepsForFunnel(['funnelid' => $funnelId])->response;
+
+            foreach ($stepsList as $key => $step) {
+                $stepId = $step->id;
+                break;
+            }
         }
+
         return $stepId;
     }
 
@@ -336,6 +342,7 @@ class Plugin
         foreach ($sourcesList as $key=>$source) {
             if (!empty($source->label) && $sourceName == $source->label){
                 $sourceId = $source->id;
+                break;
             }
         }
 
