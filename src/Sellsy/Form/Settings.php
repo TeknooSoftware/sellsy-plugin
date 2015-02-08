@@ -61,6 +61,20 @@ class Settings
      */
     public function loadSettings()
     {
+        $element = 'prospect';
+        if (isset($this->options['WPIcreer_prospopp'])) {
+            switch ($this->options['WPIcreer_prospopp']) {
+                case 'prospectOnly':
+                case 'prospectOpportunity':
+                    $element = 'prospect';
+                    break;
+                case 'contactOnly':
+                case 'contactOpportunity':
+                    $element = 'contact';
+                    break;
+            }
+        }
+
         return [
             /* Section Connexion Sellsy */
             'WPIconsumer_token' => [
@@ -99,8 +113,10 @@ class Settings
                 'std' => '',
                 'section' => 'sellsy_options',
                 'choices' => [
-                    'choice1' => __('Un prospect seulement', 'wpsellsy'),
-                    'choice2' => __('Un prospect et une opportunité', 'wpsellsy')
+                    'prospectOnly' => __('Un prospect seulement', 'wpsellsy'),
+                    'contactOnly' => __('Un contact seulement', 'wpsellsy'),
+                    'prospectOpportunity' => __('Un prospect et une opportunité', 'wpsellsy'),
+                    'contactOpportunity' => __('Un contact et une opportunité', 'wpsellsy')
                 ]
             ],
             'WPIenvoyer_copie' => [
@@ -131,8 +147,8 @@ class Settings
                 'std' => '',
                 'section' => 'sellsy_options',
                 'choices' => [
-                    'choice1' => __('Oui', 'wpsellsy'),
-                    'choice2' => __('Non', 'wpsellsy')
+                    'displayTitle' => __('Oui', 'wpsellsy'),
+                    'none' => __('Non', 'wpsellsy')
                 ]
             ],
             /* Section Charger jQuery */
@@ -143,8 +159,8 @@ class Settings
                 'std'     => '',
                 'section' => 'sellsy_loadjQuery',
                 'choices' => [
-                    'choice1' => __('Oui', 'wpsellsy'),
-                    'choice2' => __('Non', 'wpsellsy')
+                    'enableJQuery' => __('Oui', 'wpsellsy'),
+                    'disableJQuery' => __('Non', 'wpsellsy')
                 ]
             ],
             /* Section Activer validation JS */
@@ -155,8 +171,8 @@ class Settings
                 'std' => '',
                 'section' => 'sellsy_jsValid',
                 'choices' => [
-                    'choice1' => __('Oui', 'wpsellsy'),
-                    'choice2' => __('Non', 'wpsellsy')
+                    'enableJsValidation' => __('Oui', 'wpsellsy'),
+                    'disableJsValidation' => __('Non', 'wpsellsy')
                 ]
             ],
             /* Section Champs */
@@ -166,7 +182,7 @@ class Settings
                 'type' => 'multiselect',
                 'std' => '',
                 'section' => 'sellsy_Champs',
-                'choices' => $this->sellsyPlugin->listCustomFields()
+                'choices' => $this->sellsyPlugin->listCustomFields($element)
             ],
         ];
     }

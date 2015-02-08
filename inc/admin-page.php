@@ -10,7 +10,7 @@ if (\is_admin() && \current_user_can('manage_options')):
 
 			if (!$this->sellsyPlugin->checkOppSource($this->options['WPInom_opp_source'])
 				&& '' != $this->options['WPInom_opp_source']
-				&& 'choice2' == $this->options['WPInom_opp_source']) {
+				&& false !== strpos($this->options['WPIcreer_prospopp'], 'Opportunity')) {
 				add_settings_error(OptionsBag::WORDPRESS_SETTINGS_NAME, 'WPInom_opp_source', __('La source saisie n\'existe pas pour votre compte sur ', 'wpsellsy') . '<a href="' . SELLSY_WP_WEB_URL . '" target="_blank">Sellsy.com</a>.<br>' . __('Cliquez ici pour créer la source sur votre compte :', 'wpsellsy') . '<a id="creer_source" href="#">' . __('Créer la source ', 'wpsellsy') . $wp_sellsy->wpi_sellsy_options('WPInom_opp_source') . '</a><img id="imgloader" src="' . WPI_URL . '/img/loader.gif" alt="" /><br>' . __('Si vous ne créez pas la source, les opportunités ne seront pas générées.', 'wpsellsy') , 'error');
 			}
 		} else {

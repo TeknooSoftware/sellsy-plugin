@@ -248,7 +248,7 @@ class OptionsBag implements \ArrayAccess
                     break;
 
                 case 'WPIcreer_prospopp':
-                    if ('choice2' == $val && empty($input['WPInom_opp_source'])) {
+                    if (('prospectOpportunity' == $val || 'contactOpportunity' == $val) && empty($input['WPInom_opp_source'])) {
                         \add_settings_error(
                             self::WORDPRESS_SETTINGS_NAME,
                             'WPInom_opp_source',
@@ -260,7 +260,7 @@ class OptionsBag implements \ArrayAccess
                     break;
 
                 case 'WPIaff_form':
-                    if ('choice1' == $val && empty($input['WPInom_form'])) {
+                    if ('enableJQuery' == $val && empty($input['WPInom_form'])) {
                         \add_settings_error(
                             self::WORDPRESS_SETTINGS_NAME,
                             'WPInom_opp_source',

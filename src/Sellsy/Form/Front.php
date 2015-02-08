@@ -38,7 +38,7 @@ class Front
     public function addJS()
     {
         if (!\is_admin()) {
-            if ('choice1' == $this->options['WPIloadjQuery']) {
+            if ('enableJQuery' == $this->options['WPIloadjQuery']) {
                 \wp_deregister_script('jquery');
                 \wp_register_script(
                     'jquery',
@@ -49,7 +49,7 @@ class Front
                 \wp_enqueue_script('jquery');
             }
 
-            if ('choice1' == $this->options['WPIjsValid']) {
+            if ('enableJsValidation' == $this->options['WPIjsValid']) {
                 \wp_register_script(
                     'wpsellsyjsvalid',
                     plugins_url('/js/jquery.validate.min.js', SELLSY_WP_PATH_FILE),
