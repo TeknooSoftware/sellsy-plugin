@@ -216,5 +216,157 @@ class Plugin
         echo 'false';
     }
 
+    protected $fieldsCorrespondence = [
+        'thirdName' => 'third.name',
+        'thirdType' => 'third.type',
+        'thirdEmail' => 'third.email',
+        'thirdTel' => 'third.tel',
+        'thirdFax' => 'third.fax',
+        'thirdMobile' => 'third.mobile',
+        'thirdWeb' => 'third.web',
+        'thirdSiret' => 'third.siret',
+        'thirdVat' => 'third.vat',
+        'thirdRcs' => 'third.rcs',
+        'thirdApenaf' => 'third.apenaf',
+        'thirdCapital' => 'third.capital',
+        'thirdTags' => 'third.tags',
+        'thirdAccountingcode' => 'third.accountingcode',
+        'thirdAuxcode' => 'third.auxcode',
+        'thirdStickyNote' => 'third.stickyNote',
+        'contactName' => 'contact.name',
+        'contactForename' => 'contact.forename',
+        'contactEmail' => 'contact.email',
+        'contactTel' => 'contact.tel',
+        'contactFax' => 'contact.fax',
+        'contactMobile' => 'contact.mobile',
+        'contactPosition' => 'contact.position',
+        'addressName' => 'address.name',
+        'addressPart1' => 'address.part1',
+        'addressPart2' => 'address.part2',
+        'addressZip' => 'address.zip',
+        'addressTown' => 'address.town',
+        'addressCountrycode' => 'address.countrycode'
+    ];
 
+    /**
+     * @param string $key
+     * @param mixed $value
+     * @param array $finalSource
+     */
+    protected function populateParams($key, &$value, &$finalSource)
+    {
+        if (isset($this->fieldsCorrespondence[$key])) {
+            $path = explode('.', $this->fieldsCorrespondence[$key]);
+
+            if (count($path) == 2) {
+                $finalSource[$path[0]][$path[1]] = $value;
+            }
+        }
+    }
+
+    /**
+     * Create prospect
+     * @param array $formValues
+     * @param int
+     */
+    public function createProspect(array &$formValues)
+    {
+        //Extract fields, validate them and prepare registering
+        $params = [];
+        foreach ($formValues as $key=>$fieldValue) {
+            $this->populateParams($key, $fieldValue, $params);
+        }
+
+        //Register prospect
+        return $this->sellsyClient->prospects()->create($params)->response;
+    }
+
+    /**
+     * @return int
+     */
+    public function getOpportunityCurrentIdent()
+    {
+        return $this->sellsyClient->opportunities()->getCurrentIdent()->response;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getFunnelId()
+    {
+        $funnelsList = $this->sellsyClient->opportunities()->getFunnels()->response;
+        $pipelineId = null;
+        foreach ($funnelsList as $key=>$funnel) {
+            if (is_object($funnel) && 'default' == $funnel->name) {
+                $pipelineId = $funnel->id;
+                break;
+            }
+        }
+
+        return $pipelineId;
+    }
+
+    /**
+     * @param int $funnelId
+     * @return null|int
+     */
+    public function getStepId($funnelId)
+    {
+        $stepsList = $this->sellsyClient->opportunities()->getStepsForFunnel(['funnelid' => $funnelId])->response;
+
+        $stepId = null;
+        foreach ($stepsList as $key=>$step) {
+            $stepId = $step->id;
+            break;
+        }
+        return $stepId;
+    }
+
+    /**
+     * @param string $sourceName
+     * @return int|null
+     */
+    public function getSourceId($sourceName)
+    {
+        $sourceId = null;
+        $sourcesList = $this->sellsyClient->opportunities()->getSources()->response;
+        foreach ($sourcesList as $key=>$source) {
+            if (!empty($source->label) && $sourceName == $source->label){
+                $sourceId = $source->id;
+            }
+        }
+
+        return $sourceId;
+    }
+
+    /**
+     * @param int $prospectId
+     * @param string $sourceName
+     * @param string $note
+     * @return int|null
+     */
+    public function createOpportunity($prospectId, $sourceName, $note)
+    {
+        $lastOpportunityId = $this->getOpportunityCurrentIdent();
+        $funnelId = $this->getFunnelId();
+        $sourceId = $this->getSourceId($sourceName);
+        $stepId = $this->getStepId($funnelId);
+        $date = strtotime('+1 week', time());
+
+        return $this->sellsyClient->opportunities()->create(
+            [
+                'opportunity' => [
+                    'linkedtype' => 'prospect',
+                    'linkedid' => $prospectId,
+                    'ident' => $lastOpportunityId,
+                    'sourceid' => $sourceId,
+                    'dueDate' => $date,
+                    'name' => __('Contact site web', 'wpsellsy'),
+                    'funnelid' => $funnelId,
+                    'stepid' => $stepId,
+                    'brief' => $note
+                ]
+            ]
+        )->response;
+    }
 }
