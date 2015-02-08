@@ -68,10 +68,6 @@ class Settings
                 case 'prospectOpportunity':
                     $element = 'prospect';
                     break;
-                case 'contactOnly':
-                case 'contactOpportunity':
-                    $element = 'contact';
-                    break;
             }
         }
 
@@ -114,9 +110,7 @@ class Settings
                 'section' => 'sellsy_options',
                 'choices' => [
                     'prospectOnly' => __('Un prospect seulement', 'wpsellsy'),
-                    'contactOnly' => __('Un contact seulement', 'wpsellsy'),
-                    'prospectOpportunity' => __('Un prospect et une opportunité', 'wpsellsy'),
-                    'contactOpportunity' => __('Un contact et une opportunité', 'wpsellsy')
+                    'prospectOpportunity' => __('Un prospect et une opportunité', 'wpsellsy')
                 ]
             ],
             'WPIenvoyer_copie' => [

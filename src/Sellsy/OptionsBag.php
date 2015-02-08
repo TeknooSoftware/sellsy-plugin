@@ -248,7 +248,7 @@ class OptionsBag implements \ArrayAccess
                     break;
 
                 case 'WPIcreer_prospopp':
-                    if (('prospectOpportunity' == $val || 'contactOpportunity' == $val) && empty($input['WPInom_opp_source'])) {
+                    if (('prospectOpportunity' == $val) && empty($input['WPInom_opp_source'])) {
                         \add_settings_error(
                             self::WORDPRESS_SETTINGS_NAME,
                             'WPInom_opp_source',
