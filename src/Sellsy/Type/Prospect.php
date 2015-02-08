@@ -185,7 +185,7 @@ class Prospect implements TypeInterface
      */
     public function getStandardFields()
     {
-        //Add default prospect fields
+        //Add default prospect fields as fields
         $final = array();
         foreach ($this->fieldsName as $fieldName=>$fieldParams) {
             $final[$fieldName] = new CustomField(
@@ -203,14 +203,17 @@ class Prospect implements TypeInterface
     }
 
     /**
+     * Method to populate the array passed to the api to create a new prospect
      * @param string $fieldName
      * @param mixed $value
      * @param array $finalSource
      */
     public function populateParams($fieldName, &$value, &$finalSource)
     {
+        //If there are a correspondance
         if (isset($this->fieldsCorrespondence[$fieldName])) {
             foreach ((array) $this->fieldsCorrespondence[$fieldName] as $apiPath) {
+                //Populate for each path defined for this field the final source
                 $path = explode('.', $apiPath);
 
                 if (count($path) == 2) {
@@ -221,6 +224,7 @@ class Prospect implements TypeInterface
     }
 
     /**
+     * Method to validate each fiilms
      * @param string $fieldName
      * @param mixed $value
      * @param array $mandatoriesFields
@@ -327,6 +331,7 @@ class Prospect implements TypeInterface
                 break;
         }
 
+        //No error, sanitaize inputs
         $value = \sanitize_text_field(stripslashes($value));
     }
 }

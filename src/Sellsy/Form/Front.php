@@ -82,7 +82,7 @@ class Front
     }
 
     /**
-     *
+     * Add JS to enable front side validation
      */
     protected function validateForm(array &$selectedFields)
     {

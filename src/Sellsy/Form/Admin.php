@@ -103,6 +103,10 @@ class Admin
         }
     }
 
+    /**
+     * Method to generate and display the admin page to configure this plugin
+     * @param array $setting
+     */
     public function displaySettings($setting = array())
     {
         $id = null;
