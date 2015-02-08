@@ -5,6 +5,7 @@ namespace UniAlteri\Sellsy\Wordpress;
 use UniAlteri\Sellsy\Client\Client;
 use UniAlteri\Sellsy\Wordpress\Form\CustomField;
 use UniAlteri\Sellsy\Wordpress\OptionsBag;
+use UniAlteri\Sellsy\Wordpress\Type\Prospect;
 
 /**
  * Class Plugin
@@ -138,6 +139,14 @@ class Plugin
     public function listCustomFields($for='prospect')
     {
         $final = [];
+
+        switch ($for) {
+            case 'prospect':
+                $prospectType = new Prospect();
+                $final = $prospectType->getStandardFields();
+                break;
+        }
+
         $customFields = $this->sellsyClient->customFields()->getList(['search'=>['useOn'=>(array)$for]]);
         foreach ($customFields->response->result as $customFields) {
             $final[$customFields->id] = new CustomField(
@@ -216,69 +225,34 @@ class Plugin
         echo 'false';
     }
 
-    protected $fieldsCorrespondence = [
-        'thirdName' => 'third.name',
-        'thirdType' => 'third.type',
-        'thirdEmail' => 'third.email',
-        'thirdTel' => 'third.tel',
-        'thirdFax' => 'third.fax',
-        'thirdMobile' => 'third.mobile',
-        'thirdWeb' => 'third.web',
-        'thirdSiret' => 'third.siret',
-        'thirdVat' => 'third.vat',
-        'thirdRcs' => 'third.rcs',
-        'thirdApenaf' => 'third.apenaf',
-        'thirdCapital' => 'third.capital',
-        'thirdTags' => 'third.tags',
-        'thirdAccountingcode' => 'third.accountingcode',
-        'thirdAuxcode' => 'third.auxcode',
-        'thirdStickyNote' => 'third.stickyNote',
-        'contactName' => 'contact.name',
-        'contactForename' => 'contact.forename',
-        'contactEmail' => 'contact.email',
-        'contactTel' => 'contact.tel',
-        'contactFax' => 'contact.fax',
-        'contactMobile' => 'contact.mobile',
-        'contactPosition' => 'contact.position',
-        'addressName' => 'address.name',
-        'addressPart1' => 'address.part1',
-        'addressPart2' => 'address.part2',
-        'addressZip' => 'address.zip',
-        'addressTown' => 'address.town',
-        'addressCountrycode' => 'address.countrycode'
-    ];
-
-    /**
-     * @param string $key
-     * @param mixed $value
-     * @param array $finalSource
-     */
-    protected function populateParams($key, &$value, &$finalSource)
-    {
-        if (isset($this->fieldsCorrespondence[$key])) {
-            $path = explode('.', $this->fieldsCorrespondence[$key]);
-
-            if (count($path) == 2) {
-                $finalSource[$path[0]][$path[1]] = $value;
-            }
-        }
-    }
-
     /**
      * Create prospect
      * @param array $formValues
-     * @param int
+     * @return int|array
      */
     public function createProspect(array &$formValues)
     {
+        $prospectType = new Prospect();
+
+        $errors = [];
+
         //Extract fields, validate them and prepare registering
         $params = [];
         foreach ($formValues as $key=>$fieldValue) {
-            $this->populateParams($key, $fieldValue, $params);
+            try {
+                $prospectType->validateField($key, $fieldValue);
+                $prospectType->populateParams($key, $fieldValue, $params);
+            } catch (\Exception $e) {
+                $errors[$key] = $e->getMessage();
+            }
         }
 
-        //Register prospect
-        return $this->sellsyClient->prospects()->create($params)->response;
+        //Register prospect if no error
+        if (empty($errors)) {
+            return $this->sellsyClient->prospects()->create($params)->response;
+        } else {
+            return $errors;
+        }
     }
 
     /**
