@@ -82,15 +82,45 @@ class Front
     }
 
     /**
+     *
+     */
+    protected function validateForm(array &$selectedFields)
+    {
+        $postValues = $_POST;
+        if (!\is_admin() //We are in front
+            && isset($postValues['send_wp_sellsy']) //The form was sent
+            && isset($postValues['wpi_nonce_verify_page'])) { //Nonce/Xsrf is present
+            if (\wp_verify_nonce($postValues['wpi_nonce_verify_page'], 'wpi_nonce_field')) { //Nonce is valid
+
+                $postValues = array_intersect_key($postValues, $selectedFields);
+                $prospectId = $this->sellsyPlugin->createProspect($postValues);
+
+                if (is_numeric($prospectId) && 'prospectOpportunity' == $this->options['WPIcreer_prospopp']) {
+                    $this->sellsyPlugin->createOpportunity($prospectId, $this->options['WPInom_opp_source'], '');
+                    return true;
+                } else {
+                    return $prospectId;
+                }
+            }
+        }
+    }
+
+    /**
      * To compute shortcode insert in a page
      * @param string $attr
      * @param null|mixed $content
      */
     public function shortcode($attr, $content = null)
     {
+        $formFieldsList = $this->sellsyPlugin->listSelectedFields();
+        $result = $this->validateForm($formFieldsList);
+
         if (is_readable(SELLSY_WP_PATH_INC.'/front-page.php')) {
             $options = $this->options;
-            $formFieldsList = $this->sellsyPlugin->listSelectedFields();
+
+            if (true !== $result) {
+                $errors = $result;
+            }
 
             include SELLSY_WP_PATH_INC.'/front-page.php';
         }

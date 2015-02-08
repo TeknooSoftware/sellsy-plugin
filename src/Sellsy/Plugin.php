@@ -185,7 +185,7 @@ class Plugin
         $final = [];
         foreach ($this->listCustomFields($element) as $name=>$field) {
             if (in_array($name, $selectedFields)) {
-                $final[$name] = $field;
+                $final[$field->getCode()] = $field;
             }
         }
 

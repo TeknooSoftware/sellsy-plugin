@@ -3,7 +3,22 @@ if (!is_admin()):
 	if (isset($options['WPIaff_form']) && 'displayTitle' == $options['WPIaff_form'] && !empty($options['WPInom_form'])) {
 		echo '<h3>'.$options['WPInom_form'].'</h3>';
 	}
-	?>
+
+	if (!empty($errors)): ?>
+		<div class="formError">
+			<span>
+				<?php echo __( 'Votre message n\'a pas été envoyé, vérifiez la saisie des champs suivant :', 'wpsellsy' ); ?>
+			</span>
+			<p>
+				<br />
+				<?php
+				foreach ($errors as $error) {
+					echo $error.'<br/>';
+				}
+				?>
+			</p>
+		</div>
+	<?php endif; ?>
 	<form method="post" action="" id="wp-sellsy-form">
 		<?php foreach ($formFieldsList as $key=>$field) {
 			$value = '';
