@@ -241,7 +241,7 @@ class Prospect implements TypeInterface
                 }
                 break;
             case 'thirdEmail':
-                if (!is_email($value)) {
+                if (!filter_var($value, FILTER_VALIDATE_EMAIL) || !(isset($mandatoriesFields[$fieldName]) && empty($value))) {
                     throw new \Exception(__('Vérifiez la saisie de l\'adresse email de la personne à contacter', 'wpsellsy'));
                 }
                 break;
@@ -261,22 +261,22 @@ class Prospect implements TypeInterface
                 }
                 break;
             case 'thirdWeb':
-                if (!filter_var($value, FILTER_VALIDATE_URL)) {
+                if (!filter_var($value, FILTER_VALIDATE_URL) || (isset($mandatoriesFields[$fieldName]) && empty($value))) {
                     throw new \Exception(__('Vérifiez la saisie de votre site internet', 'wpsellsy'));
                 }
                 break;
             case 'contactName':
-                if (!filter_var($value, FILTER_VALIDATE_URL)) {
+                if (isset($mandatoriesFields[$fieldName]) && empty($value)) {
                     throw new \Exception(__('Vérifiez la saisie du prénom de la personne à contacter', 'wpsellsy'));
                 }
                 break;
             case 'contactForename':
-                if (!filter_var($value, FILTER_VALIDATE_URL)) {
+                if (isset($mandatoriesFields[$fieldName]) && empty($value)) {
                     throw new \Exception(__('Vérifiez la saisie du nom de la personne à contacter', 'wpsellsy'));
                 }
                 break;
             case 'contactEmail':
-                if (!is_email($value)) {
+                if ((isset($mandatoriesFields[$fieldName]) && empty($value)) || !filter_var($value, FILTER_VALIDATE_EMAIL)) {
                     throw new \Exception(__('Vérifiez la saisie de l\'adresse email de la personne à contacter', 'wpsellsy'));
                 }
                 break;

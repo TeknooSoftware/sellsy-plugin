@@ -280,7 +280,11 @@ class Plugin
 
         //Register prospect if no error
         if (empty($errors)) {
-            return $this->sellsyClient->prospects()->create($params)->response;
+            try {
+                return $this->sellsyClient->prospects()->create($params)->response;
+            } catch (\Exception $e) {
+                return [$e->getMessage()];
+            }
         } else {
             return $errors;
         }
