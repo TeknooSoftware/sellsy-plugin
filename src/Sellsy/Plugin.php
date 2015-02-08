@@ -291,6 +291,7 @@ class Plugin
     }
 
     /**
+     * Get next value to use for the opportunity
      * @return int
      */
     public function getOpportunityCurrentIdent()
@@ -299,6 +300,7 @@ class Plugin
     }
 
     /**
+     * Get the default funnel id configured in Sellsy to register new opportunity
      * @return int|null
      */
     public function getFunnelId()
@@ -319,6 +321,7 @@ class Plugin
     }
 
     /**
+     * Get the default step id for the passed funnel)
      * @param int $funnelId
      * @return null|int
      */
@@ -338,6 +341,7 @@ class Plugin
     }
 
     /**
+     * Get the source id from it's name (can be configured in admin)
      * @param string $sourceName
      * @return int|null
      */
@@ -356,19 +360,22 @@ class Plugin
     }
 
     /**
+     * Method to create an opportunity when a prospect is created
      * @param int $prospectId
      * @param string $sourceName
      * @param string $note
      * @return int|null
      */
-    public function createOpportunity($prospectId, $sourceName, $note)
+    public function createOpportunity($prospectId, $sourceName, $note='')
     {
+        //Retrieve needed id to create the opportunity
         $lastOpportunityId = $this->getOpportunityCurrentIdent();
         $funnelId = $this->getFunnelId();
         $sourceId = $this->getSourceId($sourceName);
         $stepId = $this->getStepId($funnelId);
         $date = strtotime('+1 week', time());
 
+        //Register it
         return $this->sellsyClient->opportunities()->create(
             [
                 'opportunity' => [
