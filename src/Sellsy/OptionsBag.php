@@ -29,7 +29,10 @@ class OptionsBag implements \ArrayAccess
     public function registerHooks()
     {
         //Register this bag to sanitize data
-        \register_setting(self::WORDPRESS_SETTINGS_NAME, self::WORDPRESS_SETTINGS_NAME, [$this, 'sanitize']);
+        if (function_exists('\register_setting')) {
+            //This function is only available in admin, so check if this method is available to avoid errors
+            \register_setting(self::WORDPRESS_SETTINGS_NAME, self::WORDPRESS_SETTINGS_NAME, [$this, 'sanitize']);
+        }
 
         //Register this bag to filter data
         \add_filter(self::WORDPRESS_VALIDATE_FILTER, [$this, 'validate'], 10, 1);
@@ -284,7 +287,13 @@ class OptionsBag implements \ArrayAccess
         if (\current_user_can('manage_options') && \check_admin_referer('slswp_nonce_field', 'slswp_nonce_verify_adm')) {
 
             foreach($input AS $key => &$value) {
-                strip_tags(stripslashes($value));
+                if (is_array($value)) {
+                    foreach ($value as &$sv) {
+                        $sv = strip_tags(stripslashes($sv));
+                    }
+                } else {
+                    $value = strip_tags(stripslashes($value));
+                }
             }
 
             return \apply_filters(self::WORDPRESS_VALIDATE_FILTER, $input);

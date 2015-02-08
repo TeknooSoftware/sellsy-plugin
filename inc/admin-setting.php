@@ -17,14 +17,18 @@ switch ($type) {
         break;
 
     case 'multiselect':
-        echo '<select class="select'.$class.'" name="'.\UniAlteri\Sellsy\Wordpress\OptionsBag::WORDPRESS_SETTINGS_NAME.'['.$id.']" multiple="multiple">';
+        echo '<select class="select'.$class.'" name="'.\UniAlteri\Sellsy\Wordpress\OptionsBag::WORDPRESS_SETTINGS_NAME.'['.$id.'][]" multiple="multiple">';
 
         foreach ($choices as $value=>$label) {
+            $isSelected = '';
+            if (!empty($options[$id]) && in_array($value, (array) $options[$id])) {
+                $isSelected = ' selected="selected"';
+            }
             if ($label instanceof \UniAlteri\Sellsy\Wordpress\Form\CustomField) {
                 $label = $label->getName();
-                echo '<option value="' . esc_attr($value) . '"' . selected($options[$id], $value, false) . '>' . $label . '</option>';
+                echo '<option value="'.esc_attr($value).'"'.$isSelected.'>'.$label.'</option>';
             } else {
-                echo '<option value="' . esc_attr($value) . '"' . selected($options[$id], $value, false) . '>' . $label . '</option>';
+                echo '<option value="'.esc_attr($value).'"'.$isSelected.'>'.$label.'</option>';
             }
         }
 
