@@ -263,9 +263,10 @@ class Plugin
     /**
      * Create prospect
      * @param array $formValues
+     * @param string $body output body used for email notification
      * @return int|array
      */
-    public function createProspect(array &$formValues)
+    public function createProspect(array &$formValues, &$body)
     {
         $prospectType = new Prospect();
 
@@ -275,10 +276,15 @@ class Plugin
         $params = [];
 
         $mandatoryFields = array_flip((array) $this->options[Settings::MANDATORIES_FIELDS]);
+        $selectedFields = $this->listSelectedFields();
         foreach ($formValues as $key=>$fieldValue) {
             try {
                 $prospectType->validateField($key, $fieldValue, $mandatoryFields);
-                $prospectType->populateParams($key, $fieldValue, $params);
+                $prospectType->populateParams($key, $fieldValue, $params, $body);
+
+                if (isset($selectedFields[$key])) {
+                    $body .= $selectedFields[$key]->getName().' : '.$fieldValue.'<br/>';
+                }
             } catch (\Exception $e) {
                 $errors[$key] = $e->getMessage();
             }
@@ -397,5 +403,34 @@ class Plugin
                 ]
             ]
         )->response;
+    }
+
+    /**
+     * Send a mail to contact
+     * @param string $body
+     * @return bool
+     */
+    public function sendMail($body)
+    {
+        require_once ABSPATH.WPINC.'/class-phpmailer.php';
+        require_once ABSPATH.WPINC.'/class-smtp.php';
+
+        $domain = preg_replace('/^www\./', '', $_SERVER['SERVER_NAME']);
+        $mail = new \PHPMailer();
+        $mail->SetFrom('sellsy-form@'.$domain, 'Sellsy Plugin');
+        $mail->AddAddress($this->options[Settings::SUBMIT_NOTIFICATION]);
+        if (!empty($this->options[Settings::FORM_NAME])) {
+            $mail->Subject = $this->options[Settings::FORM_NAME];
+        } else {
+            $mail->Subject = __('Formulaire site web: Demande d\'informations', 'wpsellsy');
+        }
+        $mail->MsgHTML($body);
+        $mail->CharSet="UTF-8";
+
+        if ( $mail->Send() ) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

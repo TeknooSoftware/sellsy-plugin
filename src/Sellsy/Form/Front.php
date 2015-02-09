@@ -62,14 +62,17 @@ class Front
             if (\wp_verify_nonce($postValues['slswp_nonce_verify_page'], 'slswp_nonce_field')) { //Nonce is valid
 
                 $postValues = array_intersect_key($postValues, $selectedFields);
-                $prospectId = $this->sellsyPlugin->createProspect($postValues);
+                $prospectId = $this->sellsyPlugin->createProspect($postValues, $body);
 
                 if (is_numeric($prospectId) && 'prospectOpportunity' == $this->options[Settings::OPPORTUNITY_CREATION]) {
                     $this->sellsyPlugin->createOpportunity($prospectId, $this->options[Settings::OPPORTUNITY_SOURCE], '');
-                    return true;
-                } else {
-                    return $prospectId;
                 }
+
+                if (!empty($this->options[Settings::SUBMIT_NOTIFICATION]) && !empty($body)) {
+                    $this->sellsyPlugin->sendMail($body);
+                }
+
+                return $prospectId;
             }
         }
     }

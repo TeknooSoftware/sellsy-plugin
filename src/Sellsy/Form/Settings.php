@@ -44,6 +44,7 @@ class Settings
     const OPPORTUNITY_CREATION = 'opportunityCreation';
     const OPPORTUNITY_SOURCE = 'opportunitySource';
     const SUBMIT_NOTIFICATION = 'submitNotification';
+    const FROM_NOTIFICATION = 'fromNotification';
     const FORM_NAME = 'formName';
     const DISPLAY_FORM_NAME = 'displayFormName';
     const ENABLE_HTML_CHECK = 'enableHtmlCheck';
@@ -156,14 +157,6 @@ class Settings
                 ],
                 'originalKey' => 'WPIcreer_prospopp' //To be compliant with official Sellsy plugin
             ],
-            self::SUBMIT_NOTIFICATION => [
-                'title' => __('Envoyer une copie à', 'wpsellsy'),
-                'desc' => '',
-                'std' => '',
-                'type' => 'text',
-                'section' => 'sellsy_options',
-                'originalKey' => 'WPIenvoyer_copie' //To be compliant with official Sellsy plugin
-            ],
             self::OPPORTUNITY_SOURCE => [
                 'title' => __('Nom de la source pour les opportunités', 'wpsellsy'),
                 'desc' => __('Vous devez renseigner ce champ si vous souhaitez créer une opportunité en plus d\'un prospect. La source doit exister sur votre compte <a href="https://www.sellsy.com/?_f=prospection_prefs&action=sources" target="_blank">Sellsy.com</a>.' , 'wpsellsy'),
@@ -192,13 +185,29 @@ class Settings
                 ],
                 'originalKey' => 'WPIaff_form' //To be compliant with official Sellsy plugin
             ],
+            self::SUBMIT_NOTIFICATION => [
+                'title' => __('Envoyer une copie à', 'wpsellsy'),
+                'desc' => '',
+                'std' => '',
+                'type' => 'text',
+                'section' => 'sellsy_notification',
+                'originalKey' => 'WPIenvoyer_copie' //To be compliant with official Sellsy plugin
+            ],
+            self::FROM_NOTIFICATION => [
+                'title' => __('Expediteur', 'wpsellsy'),
+                'desc' => '',
+                'std' => '',
+                'type' => 'text',
+                'section' => 'sellsy_notification',
+                'originalKey' => null //Not present in official plugin
+            ],
             /* Section Activer validation Client */
             self::ENABLE_HTML_CHECK => [
                 'title' => __('Activer', 'wpsellsy'),
                 'desc' => __('La validation Javascript permet de vérifier les informations saisies avant que le formulaire soit soumis au serveur (sans rafraîchissement de la page).', 'wpsellsy'),
                 'type' => 'radio',
                 'std' => '',
-                'section' => 'sellsy_jsValid',
+                'section' => 'sellsy_frontValid',
                 'choices' => [
                     'enableJsValidation' => __('Oui', 'wpsellsy'),
                     'disableJsValidation' => __('Non', 'wpsellsy')
@@ -236,7 +245,8 @@ class Settings
         return [
             'sellsy_connexion'	=> __('Connexion à votre compte Sellsy', 'wpsellsy'),
             'sellsy_options' => __('Options du plugin', 'wpsellsy'),
-            'sellsy_jsValid' => __('Validation Javascript (requiert jQuery)', 'wpsellsy'),
+            'sellsy_notification' => __('Notification', 'wpsellsy'),
+            'sellsy_frontValid' => __('Validation côté client', 'wpsellsy'),
             'sellsy_Champs' => __('Sélection des champs', 'wpsellsy')
         ];
     }
