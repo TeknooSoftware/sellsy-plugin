@@ -38,9 +38,25 @@ class Admin
     public function addJS()
     {
         \wp_enqueue_script(
+            'jqueryui',
+            \plugins_url('/js/jquery-ui.min.js', SELLSY_WP_PATH_FILE),
+            array('jquery'),
+            '1.0',
+            1
+        );
+
+        \wp_enqueue_script(
+            'uimultiselect',
+            \plugins_url('/js/ui.multiselect.js', SELLSY_WP_PATH_FILE),
+            array('jquery', 'jqueryui'),
+            '1.0',
+            1
+        );
+
+        \wp_enqueue_script(
             'wpsellsyjscsource',
             \plugins_url('/js/wp_sellsy.js', SELLSY_WP_PATH_FILE),
-            array('jquery'),
+            array('jquery', 'uimultiselect'),
             '1.0',
             1
        );
@@ -75,6 +91,26 @@ class Admin
            );
 
             \wp_enqueue_style('wpsellsystylesadmin');
+
+            \wp_register_style(
+                'jqueryuicss',
+                \plugins_url('/css/jquery-ui.min.css', SELLSY_WP_PATH_FILE),
+                array(),
+                '1.0',
+                'screen'
+            );
+
+            \wp_enqueue_style('jqueryuicss');
+
+            \wp_register_style(
+                'multiselect',
+                \plugins_url('/css/ui.multiselect.css', SELLSY_WP_PATH_FILE),
+                array('jqueryuicss'),
+                '1.0',
+                'screen'
+            );
+
+            \wp_enqueue_style('multiselect');
         }
     }
 

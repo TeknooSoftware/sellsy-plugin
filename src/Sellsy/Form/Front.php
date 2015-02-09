@@ -33,37 +33,6 @@ class Front
     }
 
     /**
-     * To declare needed javascript in the front
-     */
-    public function addJS()
-    {
-        if (!\is_admin()) {
-            if ('enableJQuery' == $this->options['WPIloadjQuery']) {
-                \wp_deregister_script('jquery');
-                \wp_register_script(
-                    'jquery',
-                    SELLSY_WP_JQUERY_URL,
-                    false,
-                    SELLSY_WP_JQUERY_VERSION
-                );
-                \wp_enqueue_script('jquery');
-            }
-
-            if ('enableJsValidation' == $this->options[Settings::ENABLE_HTML_CHECK]) {
-                \wp_register_script(
-                    'wpsellsyjsvalid',
-                    plugins_url('/js/jquery.validate.min.js', SELLSY_WP_PATH_FILE),
-                    ['jquery'],
-                    '1.0',
-                    true
-                );
-
-                \wp_enqueue_script('wpsellsyjsvalid');
-            }
-        }
-    }
-
-    /**
      * To declare needed css in front
      */
     public function addCSS()

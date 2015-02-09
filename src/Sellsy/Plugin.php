@@ -150,7 +150,7 @@ class Plugin
         try {
             $customFields = $this->sellsyClient->customFields()->getList(['search' => ['useOn' => (array)$for]]);
             foreach ($customFields->response->result as $customFields) {
-                $final[$customFields->id] = new CustomField(
+                $final[$customFields->code] = new CustomField(
                     $customFields->id,
                     $customFields->type,
                     $customFields->name,
@@ -187,10 +187,11 @@ class Plugin
             return [];
         }
 
+        $availableFields = $this->listCustomFields($element);
         $final = [];
-        foreach ($this->listCustomFields($element) as $name=>$field) {
-            if (in_array($name, $selectedFields)) {
-                $final[$field->getCode()] = $field;
+        foreach ($selectedFields as $name) {
+            if (isset($availableFields[$name])) {
+                $final[$name] = $availableFields[$name];
             }
         }
 

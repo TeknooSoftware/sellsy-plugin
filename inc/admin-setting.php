@@ -17,7 +17,7 @@ switch ($type) {
         break;
 
     case 'multiselect':
-        echo '<select class="select'.$class.'" name="'.\UniAlteri\Sellsy\Wordpress\OptionsBag::WORDPRESS_SETTINGS_NAME.'['.$id.'][]" multiple="multiple">';
+        echo '<select class="select'.$class.' multiselect" name="'.\UniAlteri\Sellsy\Wordpress\OptionsBag::WORDPRESS_SETTINGS_NAME.'['.$id.'][]" multiple="multiple">';
 
         foreach ($choices as $value=>$label) {
             $isSelected = '';

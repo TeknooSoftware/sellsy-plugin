@@ -40,8 +40,7 @@ if (class_exists('UniAlteri\Sellsy\Wordpress\Plugin')) {
 	//Configure wordpress to require it to check if CUrl is available in this platforme
 	add_action('admin_init', [$wpSellsyPlugin, 'checkCUrlExtensions'], 2);
 
-	//Configure wordpress to customize views to use this plgin
-	add_action('wp_enqueue_scripts', [$wpSellsyFront, 'addJS']);
+	//Configure wordpress to customize views to use this plugin
 	add_action('wp_enqueue_scripts', [$wpSellsyFront, 'addCSS']);
 	add_action('admin_enqueue_scripts', [$wpSellsyAdmin, 'addCSS']);
 	add_action('admin_enqueue_scripts', [$wpSellsyAdmin, 'addJS']);

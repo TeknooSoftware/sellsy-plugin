@@ -75,6 +75,7 @@ class Settings
      */
     public function loadSettings()
     {
+        //Extract entity type to use to extract custom fields
         $element = 'prospect';
         if (isset($this->options[self::OPPORTUNITY_CREATION])) {
             switch ($this->options[self::OPPORTUNITY_CREATION]) {
@@ -84,6 +85,29 @@ class Settings
                     break;
             }
         }
+
+        //Extract usable ordered list of selected fields
+        $selectedFieldsList = array_map(
+            function($field){
+                return $field->getName();
+            },
+            $this->sellsyPlugin->listSelectedFields()
+        );
+
+        //Get available fields
+        $availableFields = $this->sellsyPlugin->listCustomFields($element);
+
+        //Reorder them
+        $availableOrderedFieldsList = [];
+        foreach ($selectedFieldsList as $fieldName=>$name) {
+            if (isset($availableFields[$fieldName])) {
+                $availableOrderedFieldsList[$fieldName] = $availableFields[$fieldName];
+                unset($availableFields[$fieldName]);
+            }
+        }
+
+        //Add other field at end
+        $availableOrderedFieldsList = array_merge($availableOrderedFieldsList, $availableFields);
 
         return [
             /* Section Connexion Sellsy */
@@ -188,21 +212,16 @@ class Settings
                 'type' => 'multiselect',
                 'std' => '',
                 'section' => 'sellsy_Champs',
-                'choices' => $this->sellsyPlugin->listCustomFields($element),
+                'choices' => $availableOrderedFieldsList,
                 'originalKey' => null //Not present in official plugin
             ],
             self::MANDATORIES_FIELDS => [
                 'title' => __('Champs obligatoires', 'wpsellsy'),
-                'desc' => __('Sélectionner les champs obligatoires', 'wpsellsy'),
+                'desc' => __('Sélectionner les champs obligatoires. (Enregistrer pour rafraichir la liste)', 'wpsellsy'),
                 'type' => 'multiselect',
                 'std' => '',
                 'section' => 'sellsy_Champs',
-                'choices' => array_map(
-                    function($field){
-                        return $field->getName();
-                    },
-                    $this->sellsyPlugin->listSelectedFields()
-                ),
+                'choices' => $selectedFieldsList,
                 'originalKey' => null //Not present in official plugin
             ],
         ];
