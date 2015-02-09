@@ -335,6 +335,7 @@ class Plugin
         $customValues = [];
         //Browse all form's fields
         foreach ($formValues as $key=>$fieldValue) {
+            $originalValue = $fieldValue;
             try {
                 //Check field validity
                 $prospectType->validateField($key, $fieldValue, $mandatoryFields);
@@ -350,7 +351,7 @@ class Plugin
                     }
 
                     //Update mail body
-                    $body .= $field->getName().' : '.$fieldValue.'<br/>';
+                    $body .= $field->getName().' : '.$originalValue.'<br/>'.PHP_EOL;
                 }
             } catch (\Exception $e) {
                 $errors[$key] = $e->getMessage();
