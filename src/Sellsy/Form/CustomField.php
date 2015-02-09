@@ -40,6 +40,16 @@ class CustomField
     protected $options;
 
     /**
+     * @var bool
+     */
+    protected $isCustomField = false;
+
+    /**
+     * @var bool
+     */
+    protected $isRequiredField = false;
+
+    /**
      * @param int $id
      * @param string $type
      * @param string $name
@@ -47,8 +57,10 @@ class CustomField
      * @param string $description
      * @param string $defaultValue
      * @param array $options
+     * @param bool $isCustomField
+     * @param bool $isRequiredField
      */
-    public function __construct($id, $type, $name, $code, $description, $defaultValue, $options)
+    public function __construct($id, $type, $name, $code, $description, $defaultValue, $options, $isCustomField, $isRequiredField=false)
     {
         $this->id = $id;
         $this->type = $type;
@@ -56,10 +68,17 @@ class CustomField
         $this->code = $code;
         $this->description = $description;
         $this->defaultValue = $defaultValue;
+        $this->isCustomField = $isCustomField;
+        $this->isRequiredField = $isRequiredField;
 
         $optionsVals = [];
         if (!empty($options)) {
             foreach ($options as $option) {
+                if ('Y' == $option->isDefault) {
+                    //Extract default value from the list
+                    $this->defaultValue = $option->value;
+                }
+
                 $optionsVals[$option->rank] = [
                     'id' => $option->id,
                     'value' => $option->value
@@ -124,6 +143,22 @@ class CustomField
     public function getOptions()
     {
         return $this->options;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isCustomField()
+    {
+        return !empty($this->isCustomField);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isRequiredField()
+    {
+        return !empty($this->isRequiredField);
     }
 
     /**

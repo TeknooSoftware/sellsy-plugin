@@ -50,7 +50,7 @@ if (!is_admin()):
 					foreach ($field->getOptions() as $option) {
 						echo '<div class="radio">';
 						echo '<label for="'.$code.$counter.'">'.$option['value'];
-						echo '<input type="radio" name="'.$code.'" id="'.$code.$counter++.'" value="'.$option['id'].'"'.$required.' /></label>';
+						echo '<input type="radio" name="'.$code.'" id="'.$code.$counter++.'" value="'.$option['value'].'"'.$required.' /></label>';
 						echo '</div>';
 					}
 					break;
@@ -60,7 +60,7 @@ if (!is_admin()):
 					foreach ($field->getOptions() as $option) {
 						echo '<div class="checkbox">';
 						echo '<label for="'.$code.$counter.'">'.$option['value'];
-						echo '<input type="checkbox" name="'.$code.'[]" id="'.$code.$counter++.'" value="'.$option['id'].'"'.$required.' /></label>';
+						echo '<input type="checkbox" name="'.$code.'[]" id="'.$code.$counter++.'" value="'.$option['value'].'"'.$required.' /></label>';
 						echo '</div>';
 					}
 					break;

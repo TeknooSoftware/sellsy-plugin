@@ -195,7 +195,8 @@ class Prospect implements TypeInterface
                 $fieldParams['code'],
                 $fieldParams['description'],
                 $fieldParams['defaultValue'],
-                $fieldParams['prefsList']
+                $fieldParams['prefsList'],
+                false
             );
         }
 

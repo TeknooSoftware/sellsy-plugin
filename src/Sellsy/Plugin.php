@@ -25,6 +25,11 @@ class Plugin
     protected $sellsyClient;
 
     /**
+     * @var array
+     */
+    protected $customFieldsByType = [];
+
+    /**
      * @param Client $sellsyClient
      * @param OptionsBag $options
      */
@@ -138,6 +143,11 @@ class Plugin
      */
     public function listCustomFields($for='prospect')
     {
+        if (isset($this->customFieldsByType[$for])) {
+            //To avoid multiple request
+            return $this->customFieldsByType[$for];
+        }
+
         $final = [];
 
         switch ($for) {
@@ -157,11 +167,34 @@ class Plugin
                     $customFields->code,
                     $customFields->description,
                     $customFields->defaultValue,
-                    $customFields->prefsList
+                    $customFields->prefsList,
+                    true,
+                    ($customFields->isRequired == 'Y')
                 );
             }
         } catch (\Exception $e) {
             add_settings_error(OptionsBag::WORDPRESS_SETTINGS_NAME, 'sellSyTokens', __('Erreur: Connexion à l\'API Sellsy impossible. Les tokens saisis sont incorrects.', 'wpsellsy'), 'error');
+        }
+
+        //Backup in local cache to avoid multiple api request for this execution
+        $this->customFieldsByType[$for] = $final;
+
+        return $final;
+    }
+
+    /**
+     * Return all required custom field : Sellsy can not add to an entity some custom fields
+     * if there are some missing required fields...
+     * @param string $for
+     * @return CustomField[]
+     */
+    public function listRequiredCustomFields($for='prospect')
+    {
+        $final = [];
+        foreach ($this->listCustomFields($for) as $code=>$field) {
+            if ($field->isRequiredField() && $field->isCustomField()) {
+                $final[$field->getId()] = $field;
+            }
         }
 
         return $final;
@@ -261,6 +294,27 @@ class Plugin
     }
 
     /**
+     * Method to find missing required custom fields to populate the new record with default value to avoid error
+     * @param string $for entity type in Sellsy
+     * @param array $customValues already populated values
+     */
+    protected function addMissingRequiredField($for, &$customValues)
+    {
+        //Exclude already populated custom type
+        $requiredFields = $this->listRequiredCustomFields($for);
+        foreach ($customValues as &$value) {
+            if (isset($requiredFields[$value['cfid']])) {
+                unset($requiredFields[$value['cfid']]);
+            }
+        }
+
+        //Add missing fields
+        foreach ($requiredFields as $field) {
+            $customValues[] = ['cfid' => $field->getId(), 'value' => $field->getDefaultValue()];
+        }
+    }
+
+    /**
      * Create prospect
      * @param array $formValues
      * @param string $body output body used for email notification
@@ -277,13 +331,26 @@ class Plugin
 
         $mandatoryFields = array_flip((array) $this->options[Settings::MANDATORIES_FIELDS]);
         $selectedFields = $this->listSelectedFields();
+
+        $customValues = [];
+        //Browse all form's fields
         foreach ($formValues as $key=>$fieldValue) {
             try {
+                //Check field validity
                 $prospectType->validateField($key, $fieldValue, $mandatoryFields);
+                //Convert to API Param
                 $prospectType->populateParams($key, $fieldValue, $params, $body);
 
                 if (isset($selectedFields[$key])) {
-                    $body .= $selectedFields[$key]->getName().' : '.$fieldValue.'<br/>';
+                    $field = $selectedFields[$key];
+
+                    if ($field->isCustomField()) {
+                        //Is custom field, keep to save them after
+                        $customValues[] = ['cfid' => $field->getId(), 'value' => $fieldValue];
+                    }
+
+                    //Update mail body
+                    $body .= $field->getName().' : '.$fieldValue.'<br/>';
                 }
             } catch (\Exception $e) {
                 $errors[$key] = $e->getMessage();
@@ -293,7 +360,24 @@ class Plugin
         //Register prospect if no error
         if (empty($errors)) {
             try {
-                return $this->sellsyClient->prospects()->create($params)->response;
+                $prospectId = $this->sellsyClient->prospects()->create($params)->response;
+
+                if (!empty($customValues)) {
+                    $this->addMissingRequiredField('prospect', $customValues);
+
+                    //Save custom fields
+                    $this->sellsyClient->customFields()->recordValues(
+                        [
+                            'linkedtype' => 'prospect',
+                            'linkedid' => $prospectId,
+                            'values' => $customValues
+                        ]
+                    );
+                }
+
+                return $prospectId;
+            } catch (\RuntimeException $e) {
+                return [$e->getMessage()];
             } catch (\Exception $e) {
                 return [$e->getMessage()];
             }
