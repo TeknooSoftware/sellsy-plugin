@@ -48,9 +48,14 @@ if (!is_admin()):
 					echo '<label>'.$field->getName().'</label>';
 					$counter = 0;
 					foreach ($field->getOptions() as $option) {
+						$selected = '';
+						if (in_array($option['value'], (array) $value)) {
+							$selected = ' checked="checked"';
+						}
+
 						echo '<div class="radio">';
 						echo '<label for="'.$code.$counter.'">'.$option['value'];
-						echo '<input type="radio" name="'.$code.'" id="'.$code.$counter++.'" value="'.$option['value'].'"'.$required.' /></label>';
+						echo '<input type="radio" name="'.$code.'" id="'.$code.$counter++.'" value="'.$option['value'].'"'.$required.$selected.' /></label>';
 						echo '</div>';
 					}
 					break;
@@ -58,9 +63,14 @@ if (!is_admin()):
 					echo '<label>'.$field->getName().'</label>';
 					$counter = 0;
 					foreach ($field->getOptions() as $option) {
+						$selected = '';
+						if (in_array($option['value'], (array) $value)) {
+							$selected = ' checked="checked"';
+						}
+
 						echo '<div class="checkbox">';
 						echo '<label for="'.$code.$counter.'">'.$option['value'];
-						echo '<input type="checkbox" name="'.$code.'[]" id="'.$code.$counter++.'" value="'.$option['value'].'"'.$required.' /></label>';
+						echo '<input type="checkbox" name="'.$code.'[]" id="'.$code.$counter++.'" value="'.$option['value'].'"'.$required.$selected.' /></label>';
 						echo '</div>';
 					}
 					break;
