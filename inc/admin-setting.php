@@ -56,6 +56,14 @@ switch ($type) {
 
         break;
 
+    case 'textarea':
+        echo '<textarea class="regular-text'.$class.'" cols="80" rows="7" id="'.$id.'" name="'.\UniAlteri\Sellsy\Wordpress\OptionsBag::WORDPRESS_SETTINGS_NAME.'['.$id.']" placeholder="'.$std.'">'.$options[$id].'</textarea>';
+
+        if (!empty($desc)) {
+            echo '<br><span class="description">'.$desc.'</span>';
+        }
+        break;
+
     case 'text':
     default:
         echo '<input class="regular-text'.$class.'" type="text" id="'.$id.'" name="'.\UniAlteri\Sellsy\Wordpress\OptionsBag::WORDPRESS_SETTINGS_NAME.'['.$id.']" placeholder="'.$std.'" value="'.esc_attr($options[$id]).'" />';
