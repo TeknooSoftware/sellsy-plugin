@@ -112,7 +112,10 @@ class Front
      */
     public function shortcode($attr, $content = null)
     {
+        //Get fields to display
         $formFieldsList = $this->sellsyPlugin->listSelectedFields();
+        //Get mandatories fields
+        $mandatoryFieldsList = array_flip((array) $this->options[Settings::MANDATORIES_FIELDS]);
         $result = $this->validateForm($formFieldsList);
 
         if (is_readable(SELLSY_WP_PATH_INC.'/front-page.php')) {

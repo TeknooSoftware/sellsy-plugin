@@ -273,7 +273,7 @@ class Plugin
         //Extract fields, validate them and prepare registering
         $params = [];
 
-        $mandatoryFields = array_flip($this->options[Settings::MANDATORIES_FIELDS]);
+        $mandatoryFields = array_flip((array) $this->options[Settings::MANDATORIES_FIELDS]);
         foreach ($formValues as $key=>$fieldValue) {
             try {
                 $prospectType->validateField($key, $fieldValue, $mandatoryFields);

@@ -28,18 +28,23 @@ if (!is_admin()):
 				$value = $_POST[$key];
 			}
 
+			$required = '';
+			if (isset($mandatoryFieldsList[$key])) {
+				$required = ' required="required"';
+			}
+
 			$code = $field->getCode();
 			switch ($field->getType()) {
 				case 'text':
 					echo '<label for="'.$key.'">'.$field->getName();
-					echo '<input type="text" name="' . $code . '" id="' . $code . '" value="' . $value . '" />';
+					echo '<input type="text" name="' . $code . '" id="' . $code . '" value="' . $value . '"'.$required.' />';
 					echo '</label>';
 					break;
 				case 'radio':
 					echo '<div>'.$field->getName();
 					foreach ($field->getOptions() as $option) {
 						echo '<label>'.$option['value'];
-						echo '<input type="radio" name="' . $code . '" id="' . $code . '" value="' . $option['id'] . '" />';
+						echo '<input type="radio" name="' . $code . '" id="' . $code . '" value="' . $option['id'] . '"'.$required.' />';
 						echo '</label>';
 					}
 					echo '</div>';
@@ -48,14 +53,14 @@ if (!is_admin()):
 					echo '<div>'.$field->getName();
 					foreach ($field->getOptions() as $option) {
 						echo '<label>'.$option['value'];
-						echo '<input type="checkbox" name="' . $code . '[]" id="' . $code . '" value="' . $option['id'] . '" />';
+						echo '<input type="checkbox" name="' . $code . '[]" id="' . $code . '" value="' . $option['id'] . '"'.$required.' />';
 						echo '</label>';
 					}
 					echo '</div>';
 					break;
 				case 'select':
 					echo '<label for="'.$code.'">'.$field->getName();
-					echo '<select name="' . $code . '" id="' . $code . '">';
+					echo '<select name="' . $code . '" id="' . $code . '"'.$required.'>';
 					foreach ($field->getOptions() as $option) {
 						echo '<option value="' . $option['id'] . '">'.$option['value'].'</option>';
 					}
