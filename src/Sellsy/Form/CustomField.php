@@ -74,7 +74,7 @@ class CustomField
         $this->isCustomField = $isCustomField;
         $this->isRequiredField = $isRequiredField;
 
-        $optionsVals = [];
+        $optionsVals = array();
         if (!empty($options)) {
             foreach ($options as $option) {
                 if ('Y' == $option->isDefault) {
@@ -82,10 +82,10 @@ class CustomField
                     $this->defaultValue = $option->value;
                 }
 
-                $optionsVals[$option->rank] = [
+                $optionsVals[$option->rank] = array(
                     'id' => $option->id,
                     'value' => $option->value
-                ];
+                );
             }
         }
 

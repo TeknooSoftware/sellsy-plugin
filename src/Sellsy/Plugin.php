@@ -27,7 +27,7 @@ class Plugin
     /**
      * @var array
      */
-    protected $customFieldsByType = [];
+    protected $customFieldsByType = array();
 
     /**
      * @param Client $sellsyClient
@@ -148,7 +148,7 @@ class Plugin
             return $this->customFieldsByType[$for];
         }
 
-        $final = [];
+        $final = array();
 
         switch ($for) {
             case 'prospect':
@@ -158,7 +158,7 @@ class Plugin
         }
 
         try {
-            $customFields = $this->sellsyClient->customFields()->getList(['search' => ['useOn' => (array)$for]]);
+            $customFields = $this->sellsyClient->customFields()->getList(array('search' => array('useOn' => (array)$for)));
             foreach ($customFields->response->result as $customFields) {
                 $final[$customFields->code] = new CustomField(
                     $customFields->id,
@@ -190,7 +190,7 @@ class Plugin
      */
     public function listRequiredCustomFields($for='prospect')
     {
-        $final = [];
+        $final = array();
         foreach ($this->listCustomFields($for) as $code=>$field) {
             if ($field->isRequiredField() && $field->isCustomField()) {
                 $final[$field->getId()] = $field;
@@ -217,11 +217,11 @@ class Plugin
 
         $selectedFields = $this->options[Settings::FIELDS_SELECTED];
         if (empty($selectedFields)) {
-            return [];
+            return array();
         }
 
         $availableFields = $this->listCustomFields($element);
-        $final = [];
+        $final = array();
         foreach ($selectedFields as $name) {
             if (isset($availableFields[$name])) {
                 $final[$name] = $availableFields[$name];
@@ -275,7 +275,7 @@ class Plugin
             //Create the source via the client
             try {
                 $source = $this->options[Settings::OPPORTUNITY_SOURCE];
-                $result = $this->sellsyClient->opportunities()->createSource(['source' => ['label' => $source]]);
+                $result = $this->sellsyClient->opportunities()->createSource(array('source' => array('label' => $source)));
 
                 if (!empty($result->response)) {
                     //Successful
@@ -310,7 +310,7 @@ class Plugin
 
         //Add missing fields
         foreach ($requiredFields as $field) {
-            $customValues[] = ['cfid' => $field->getId(), 'value' => $field->getDefaultValue()];
+            $customValues[] = array('cfid' => $field->getId(), 'value' => $field->getDefaultValue());
         }
     }
 
@@ -324,15 +324,15 @@ class Plugin
     {
         $prospectType = new Prospect();
 
-        $errors = [];
+        $errors = array();
 
         //Extract fields, validate them and prepare registering
-        $params = [];
+        $params = array();
 
         $mandatoryFields = array_flip((array) $this->options[Settings::MANDATORIES_FIELDS]);
         $selectedFields = $this->listSelectedFields();
 
-        $customValues = [];
+        $customValues = array();
         //Browse all form's fields
         foreach ($formValues as $key=>$fieldValue) {
             $originalValue = $fieldValue;
@@ -352,7 +352,7 @@ class Plugin
 
                     if ($field->isCustomField()) {
                         //Is custom field, keep to save them after
-                        $customValues[] = ['cfid' => $field->getId(), 'value' => $fieldValue];
+                        $customValues[] = array('cfid' => $field->getId(), 'value' => $fieldValue);
                     }
 
                     //Update mail body
@@ -376,19 +376,19 @@ class Plugin
 
                     //Save custom fields
                     $this->sellsyClient->customFields()->recordValues(
-                        [
+                        array(
                             'linkedtype' => 'prospect',
                             'linkedid' => $prospectId,
                             'values' => $customValues
-                        ]
+                        )
                     );
                 }
 
                 return $prospectId;
             } catch (\RuntimeException $e) {
-                return [$e->getMessage()];
+                return array($e->getMessage());
             } catch (\Exception $e) {
-                return [$e->getMessage()];
+                return array($e->getMessage());
             }
         } else {
             return $errors;
@@ -434,7 +434,7 @@ class Plugin
     {
         $stepId = null;
         if (!empty($funnelId)) {
-            $stepsList = $this->sellsyClient->opportunities()->getStepsForFunnel(['funnelid' => $funnelId])->response;
+            $stepsList = $this->sellsyClient->opportunities()->getStepsForFunnel(array('funnelid' => $funnelId))->response;
 
             foreach ($stepsList as $key => $step) {
                 $stepId = $step->id;
@@ -482,8 +482,8 @@ class Plugin
 
         //Register it
         return $this->sellsyClient->opportunities()->create(
-            [
-                'opportunity' => [
+            array(
+                'opportunity' => array(
                     'linkedtype' => 'prospect',
                     'linkedid' => $prospectId,
                     'ident' => $lastOpportunityId,
@@ -493,8 +493,8 @@ class Plugin
                     'funnelid' => $funnelId,
                     'stepid' => $stepId,
                     'brief' => $note
-                ]
-            ]
+                )
+            )
         )->response;
     }
 

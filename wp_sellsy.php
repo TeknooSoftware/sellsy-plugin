@@ -38,33 +38,33 @@ if (class_exists('UniAlteri\Sellsy\Wordpress\Plugin')) {
 	);
 
 	//Configure wordpress to require it to check if CUrl is available in this platforme
-	add_action('admin_init', [$wpSellsyPlugin, 'checkCUrlExtensions'], 2);
+	add_action('admin_init', array($wpSellsyPlugin, 'checkCUrlExtensions'), 2);
 
 	//Configure wordpress to customize views to use this plugin
-	add_action('wp_enqueue_scripts', [$wpSellsyFront, 'addCSS']);
-	add_action('admin_enqueue_scripts', [$wpSellsyAdmin, 'addCSS']);
-	add_action('admin_enqueue_scripts', [$wpSellsyAdmin, 'addJS']);
+	add_action('wp_enqueue_scripts', array($wpSellsyFront, 'addCSS'));
+	add_action('admin_enqueue_scripts', array($wpSellsyAdmin, 'addCSS'));
+	add_action('admin_enqueue_scripts', array($wpSellsyAdmin, 'addJS'));
 	//todo add_action('admin_enqueue_scripts', array( $this, 'wpi_pointers_styles' ) );
 
 	//Configure wordpress to allow this plugin to add a menu to manage its
-	add_action('admin_menu', [$wpSellsyAdmin, 'addMenu']);
+	add_action('admin_menu', array($wpSellsyAdmin, 'addMenu'));
 
 	//Configure wordpress to manage disable/uninstall of this plugin
-	register_deactivation_hook(SELLSY_WP_PATH_FILE, [$wpSellsyPlugin, 'disablePlugin']);
+	register_deactivation_hook(SELLSY_WP_PATH_FILE, array($wpSellsyPlugin, 'disablePlugin'));
 	add_action('admin_init', function() use ($options, $wpSellsyAdmin, $wpSellsyPlugin) {
 			$settings = new \UniAlteri\Sellsy\Wordpress\Form\Settings($wpSellsyPlugin, $options);
-			$settings->buildForms(function () {}, [$wpSellsyAdmin, 'displaySettings']);
+			$settings->buildForms(function () {}, array($wpSellsyAdmin, 'displaySettings'));
 		},
 		5
 	);
 
 	//Configure wordpress to allow this module to define a new shortcode
 	add_action('init', function() use ($wpSellsyFront) {
-		add_shortcode('wpsellsy', [$wpSellsyFront, 'shortcode']);
+		add_shortcode('wpsellsy', array($wpSellsyFront, 'shortcode'));
 	});
 
 	//Configure wordpress to load translations needed by this module
-	add_action('init', [$wpSellsyPlugin, 'loadTranslation']);
+	add_action('init', array($wpSellsyPlugin, 'loadTranslation'));
 
 	//Configure wordpress to allow this module to load a widget
 	add_action('widgets_init', function() {
@@ -78,5 +78,5 @@ if (class_exists('UniAlteri\Sellsy\Wordpress\Plugin')) {
 	//todo add_action('wp_footer', array(  $this, 'wpi_form_validate' ) );
 
 	//Configure wordpress to manage some ajax requests
-	add_action('wp_ajax_sls_createOppSource', [$wpSellsyPlugin, 'createOppSource']);
+	add_action('wp_ajax_sls_createOppSource', array($wpSellsyPlugin, 'createOppSource'));
 }

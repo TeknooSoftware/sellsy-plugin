@@ -30,10 +30,10 @@ class Widget extends \WP_Widget
         }
         
         if (empty($widget_options)) {
-            $widget_options = [
+            $widget_options = array(
                 'classname' => 'sellsy_widget_single',
                 'description' => __('Affiche le widget WP Sellsy', 'wpsellsy')
-            ];
+            );
         }
 
         parent::__construct($id_base, $name, $widget_options, $control_options);

@@ -9,13 +9,13 @@ class Prospect implements TypeInterface
     /**
      * Correspondence between fields in form and sellsy api
      */
-    protected $fieldsCorrespondence = [
-        'thirdName' => ['third.name','contact.name'],
+    protected $fieldsCorrespondence = array(
+        'thirdName' => array('third.name','contact.name'),
         'thirdType' => 'third.type',
-        'thirdEmail' => ['third.email','contact.email'],
-        'thirdTel' => ['third.tel','contact.tel'],
-        'thirdFax' => ['third.fax','contact.fax'],
-        'thirdMobile' => ['third.mobile','contact.mobile'],
+        'thirdEmail' => array('third.email','contact.email'),
+        'thirdTel' => array('third.tel','contact.tel'),
+        'thirdFax' => array('third.fax','contact.fax'),
+        'thirdMobile' => array('third.mobile','contact.mobile'),
         'thirdWeb' => 'third.web',
         'thirdSiret' => 'third.siret',
         'thirdVat' => 'third.vat',
@@ -24,12 +24,12 @@ class Prospect implements TypeInterface
         'thirdCapital' => 'third.capital',
         'thirdStickyNote' => 'third.stickyNote',
         'contactCivil' => 'contact.civil',
-        'contactName' => ['third.name','contact.name'],
+        'contactName' => array('third.name','contact.name'),
         'contactForename' => 'contact.forename',
-        'contactEmail' => ['third.email','contact.email'],
-        'contactTel' => ['third.tel','contact.tel'],
-        'contactFax' => ['third.fax','contact.fax'],
-        'contactMobile' => ['third.mobile','contact.mobile'],
+        'contactEmail' => array('third.email','contact.email'),
+        'contactTel' => array('third.tel','contact.tel'),
+        'contactFax' => array('third.fax','contact.fax'),
+        'contactMobile' => array('third.mobile','contact.mobile'),
         'contactPosition' => 'contact.position',
         'addressName' => 'address.name',
         'addressPart1' => 'address.part1',
@@ -37,167 +37,167 @@ class Prospect implements TypeInterface
         'addressZip' => 'address.zip',
         'addressTown' => 'address.town',
         'addressCountrycode' => 'address.countrycode'
-    ];
+    );
 
     /**
      * Correspondence between fields and field value
      */
-    protected $fieldsName = [];
+    protected $fieldsName = array();
 
     /**
      * Initialize
      */
     public function __construct()
     {
-        $this->fieldsName = [
-            'thirdName' => [
+        $this->fieldsName = array(
+            'thirdName' => array(
                 'type' => 'text',
                 'name' => __('Nom ou Raison sociale','wpsellsy'),
                 'code' => 'thirdName',
                 'description' => __('Nom ou Raison sociale','wpsellsy'),
                 'defaultValue' => '',
                 'prefsList' => null
-            ],
-            'thirdEmail' => [
+            ),
+            'thirdEmail' => array(
                 'type' => 'text',
                 'name' => __('Email de l\'entreprise','wpsellsy'),
                 'code' => 'thirdEmail',
                 'description' => __('Email de l\'entreprise','wpsellsy'),
                 'defaultValue' => '',
                 'prefsList' => null
-            ],
-            'thirdTel' => [
+            ),
+            'thirdTel' => array(
                 'type' => 'text',
                 'name' => __('Téléphone de l\'entreprise','wpsellsy'),
                 'code' => 'thirdTel',
                 'description' => __('Téléphone de l\'entreprise','wpsellsy'),
                 'defaultValue' => '',
                 'prefsList' => null
-            ],
-            'thirdMobile' => [
+            ),
+            'thirdMobile' => array(
                 'type' => 'text',
                 'name' => __('Téléhone portable de l\'entreprise','wpsellsy'),
                 'code' => 'thirdMobile',
                 'description' => __('Téléhone portable de l\'entreprise','wpsellsy'),
                 'defaultValue' => '',
                 'prefsList' => null
-            ],
-            'thirdWeb' => [
+            ),
+            'thirdWeb' => array(
                 'type' => 'text',
                 'name' => __('Site web','wpsellsy'),
                 'code' => 'thirdWeb',
                 'description' => __('Site web','wpsellsy'),
                 'defaultValue' => '',
                 'prefsList' => null
-            ],
-            'contactCivil' => [
+            ),
+            'contactCivil' => array(
                 'type' => 'radio',
                 'name' => __('Civilité','wpsellsy'),
                 'code' => 'contactCivil',
                 'description' => __('Civilité','wpsellsy'),
                 'defaultValue' => '',
-                'prefsList' => (object) [
-                    (object) [
+                'prefsList' => (object) array(
+                    (object) array(
                         'id' => __('woman','wpsellsy'),
                         'value' => __('Madame','wpsellsy'),
                         'rank' => 0
-                    ],
-                    (object) [
+                    ),
+                    (object) array(
                         'id' => __('man','wpsellsy'),
                         'value' => __('Monsieur','wpsellsy'),
                         'rank' => 1
-                    ]
-                ]
-            ],
-            'contactName' => [
+                    )
+                )
+            ),
+            'contactName' => array(
                 'type' => 'text',
                 'name' => __('Nom','wpsellsy'),
                 'code' => 'contactName',
                 'description' => __('Nom','wpsellsy'),
                 'defaultValue' => '',
                 'prefsList' => null
-            ],
-            'contactForename' => [
+            ),
+            'contactForename' => array(
                 'type' => 'text',
                 'name' => __('Prénom','wpsellsy'),
                 'code' => 'contactForename',
                 'description' => __('Prénom','wpsellsy'),
                 'defaultValue' => '',
                 'prefsList' => null
-            ],
-            'contactEmail' => [
+            ),
+            'contactEmail' => array(
                 'type' => 'text',
                 'name' => __('Email','wpsellsy'),
                 'code' => 'contactEmail',
                 'description' => __('Email','wpsellsy'),
                 'defaultValue' => '',
                 'prefsList' => null
-            ],
-            'contactTel' => [
+            ),
+            'contactTel' => array(
                 'type' => 'text',
                 'name' => __('Téléphone','wpsellsy'),
                 'code' => 'contactTel',
                 'description' => __('Téléphone','wpsellsy'),
                 'defaultValue' => '',
                 'prefsList' => null
-            ],
-            'contactMobile' => [
+            ),
+            'contactMobile' => array(
                 'type' => 'text',
                 'name' => __('Mobile','wpsellsy'),
                 'code' => 'contactMobile',
                 'description' => __('Mobile','wpsellsy'),
                 'defaultValue' => '',
                 'prefsList' => null
-            ],
-            'addressName' => [
+            ),
+            'addressName' => array(
                 'type' => 'text',
                 'name' => __('Adresse 1','wpsellsy'),
                 'code' => 'addressName',
                 'description' => __('Adresse 1','wpsellsy'),
                 'defaultValue' => '',
                 'prefsList' => null
-            ],
-            'addressPart1' => [
+            ),
+            'addressPart1' => array(
                 'type' => 'text',
                 'name' => __('Adresse 2','wpsellsy'),
                 'code' => 'addressPart1',
                 'description' => __('Adresse 2','wpsellsy'),
                 'defaultValue' => '',
                 'prefsList' => null
-            ],
-            'addressPart2' => [
+            ),
+            'addressPart2' => array(
                 'type' => 'text',
                 'name' => __('Adresse 3','wpsellsy'),
                 'code' => 'addressPart2',
                 'description' => __('Adresse 3','wpsellsy'),
                 'defaultValue' => '',
                 'prefsList' => null
-            ],
-            'addressZip' => [
+            ),
+            'addressZip' => array(
                 'type' => 'text',
                 'name' => __('Code postale','wpsellsy'),
                 'code' => 'addressZip',
                 'description' => __('Code postale','wpsellsy'),
                 'defaultValue' => '',
                 'prefsList' => null
-            ],
-            'addressTown' => [
+            ),
+            'addressTown' => array(
                 'type' => 'text',
                 'name' => __('Ville','wpsellsy'),
                 'code' => 'addressTown',
                 'description' => __('Ville','wpsellsy'),
                 'defaultValue' => '',
                 'prefsList' => null
-            ],
-            'addressCountrycode' => [
+            ),
+            'addressCountrycode' => array(
                 'type' => 'text',
                 'name' => __('Pays','wpsellsy'),
                 'code' => 'addressCountrycode',
                 'description' => __('Pays','wpsellsy'),
                 'defaultValue' => '',
                 'prefsList' => null
-            ]
-        ];
+            )
+        );
     }
 
     /**

@@ -41,7 +41,7 @@ class Front
             \wp_register_style(
                 'wpsellsystyles',
                 \plugins_url('/css/wp_sellsy.css', SELLSY_WP_PATH_FILE),
-                [],
+                array(),
                 '1.0',
                 'screen'
             );

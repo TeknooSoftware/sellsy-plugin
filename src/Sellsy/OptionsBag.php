@@ -32,11 +32,11 @@ class OptionsBag implements \ArrayAccess
         //Register this bag to sanitize data
         if (function_exists('\register_setting')) {
             //This function is only available in admin, so check if this method is available to avoid errors
-            \register_setting(self::WORDPRESS_SETTINGS_NAME, self::WORDPRESS_SETTINGS_NAME, [$this, 'sanitize']);
+            \register_setting(self::WORDPRESS_SETTINGS_NAME, self::WORDPRESS_SETTINGS_NAME, array($this, 'sanitize'));
         }
 
         //Register this bag to filter data
-        \add_filter(self::WORDPRESS_VALIDATE_FILTER, [$this, 'validate'], 10, 1);
+        \add_filter(self::WORDPRESS_VALIDATE_FILTER, array($this, 'validate'), 10, 1);
     }
 
     /**
@@ -49,7 +49,7 @@ class OptionsBag implements \ArrayAccess
         $options = \get_option(self::WORDPRESS_SETTINGS_NAME, null);
 
         if (empty($options)) {
-            $this->options = [];
+            $this->options = array();
         } else {
             $this->options = $options;
         }

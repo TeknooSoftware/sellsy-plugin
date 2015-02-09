@@ -64,10 +64,10 @@ class Admin
         \wp_localize_script(
             'wpsellsyjscsource',
             'ajax_var',
-            [
+            array(
                 'url' => \admin_url('admin-ajax.php'),
                 'nonce' => \wp_create_nonce('slswp_ajax_nonce')
-            ]
+            )
       );
     }
 
@@ -124,7 +124,7 @@ class Admin
             'WP Sellsy',
             'manage_options',
             'slswp-admPage',
-            [$this, 'page'],
+            array($this, 'page'),
             \plugins_url('/img/sellsy_15.png', SELLSY_WP_PATH_FILE)
        );
     }
@@ -170,7 +170,7 @@ class Admin
             $desc = $setting['desc'];
         }
 
-        $choices = [];
+        $choices = array();
         if (isset($setting['choices'])) {
             $choices = $setting['choices'];
         }
