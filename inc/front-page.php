@@ -74,6 +74,18 @@ if (!is_admin()):
 						echo '</div>';
 					}
 					break;
+				case 'boolean':
+					$selected = '';
+					if (!empty($value)) {
+						$selected = ' checked="checked"';
+					}
+
+					echo '<div class="checkbox">';
+					echo '<label for="'.$code.'">';
+					echo '<input type="hidden" name="'.$code.'" id="'.$code.'" value="" />';
+					echo '<input type="checkbox" name="'.$code.'" id="'.$code.'" value="Y"'.$required.$selected.' />'.$field->getName().'</label>';
+					echo '</div>';
+					break;
 				case 'select':
 					echo '<label for="'.$code.'">'.$field->getName().'</label>';
 					echo '<select name="'.$code.'" id="'.$code.'"'.$required.'>';

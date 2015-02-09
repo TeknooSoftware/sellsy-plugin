@@ -68,6 +68,9 @@ class CustomField
         $this->code = $code;
         $this->description = $description;
         $this->defaultValue = $defaultValue;
+        if ('boolean' == $isRequiredField && empty($defaultValue)) {
+            $this->defaultValue = 'N';
+        }
         $this->isCustomField = $isCustomField;
         $this->isRequiredField = $isRequiredField;
 

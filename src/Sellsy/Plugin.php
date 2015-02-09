@@ -339,11 +339,16 @@ class Plugin
             try {
                 //Check field validity
                 $prospectType->validateField($key, $fieldValue, $mandatoryFields);
-                //Convert to API Param
-                $prospectType->populateParams($key, $fieldValue, $params, $body);
 
                 if (isset($selectedFields[$key])) {
                     $field = $selectedFields[$key];
+
+                    //Manage boolean fields
+                    if ('boolean' == $field->getType()) {
+                        if ('Y' != $fieldValue) {
+                            $fieldValue = 'N';
+                        }
+                    }
 
                     if ($field->isCustomField()) {
                         //Is custom field, keep to save them after
@@ -353,6 +358,9 @@ class Plugin
                     //Update mail body
                     $body .= $field->getName().' : '.$originalValue.'<br/>'.PHP_EOL;
                 }
+
+                //Convert to API Param
+                $prospectType->populateParams($key, $fieldValue, $params, $body);
             } catch (\Exception $e) {
                 $errors[$key] = $e->getMessage();
             }
