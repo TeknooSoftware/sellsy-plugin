@@ -45,6 +45,8 @@ class Settings
     const OPPORTUNITY_SOURCE = 'opportunitySource';
     const SPLIT_COLUMNS = 'splitColumns';
     const COLUMNS_CLASS = 'columnsClass';
+    const MESSAGE_SENT = 'messageSent';
+    const MESSAGE_ERROR = 'messageError';
     const SUBMIT_NOTIFICATION = 'submitNotification';
     const FROM_NOTIFICATION = 'fromNotification';
     const FORM_NAME = 'formName';
@@ -172,7 +174,7 @@ class Settings
                 'desc' => '',
                 'std' => '',
                 'type' => 'text',
-                'section' => 'sellsy_options',
+                'section' => 'sellsy_display',
                 'originalKey' => 'WPInom_form' //To be compliant with official Sellsy plugin
             ],
             self::DISPLAY_FORM_NAME => [
@@ -180,7 +182,7 @@ class Settings
                 'desc' => __('Vous permet d\'afficher ou de masquer le nom du formulaire inclus dans vos pages et/ou articles via le shortcode.', 'wpsellsy'),
                 'type' => 'radio',
                 'std' => '',
-                'section' => 'sellsy_options',
+                'section' => 'sellsy_display',
                 'choices' => [
                     'displayTitle' => __('Oui', 'wpsellsy'),
                     'none' => __('Non', 'wpsellsy')
@@ -192,7 +194,7 @@ class Settings
                 'desc' => __('Vous permet d\'afficher le formulaire dans plusieurs colonnes.', 'wpsellsy'),
                 'type' => 'text',
                 'std' => '1',
-                'section' => 'sellsy_options',
+                'section' => 'sellsy_display',
                 'originalKey' => 'WPIaff_form' //To be compliant with official Sellsy plugin
             ],
             self::COLUMNS_CLASS => [
@@ -200,7 +202,23 @@ class Settings
                 'desc' => __('Vous permet de spécifier les class HTML à utiliser pour vos colonnes', 'wpsellsy'),
                 'type' => 'text',
                 'std' => '',
-                'section' => 'sellsy_options',
+                'section' => 'sellsy_display',
+                'originalKey' => 'WPIaff_form' //To be compliant with official Sellsy plugin
+            ],
+            self::MESSAGE_SENT => [
+                'title' => __('Message de confirmation', 'wpsellsy'),
+                'desc' => __('Vous permet de spécifier le message de confirmation lorsque le message a été envoyé', 'wpsellsy'),
+                'type' => 'textarea',
+                'std' => __( 'Votre message a été envoyé. Merci de votre visite.', 'wpsellsy' ),
+                'section' => 'sellsy_display',
+                'originalKey' => 'WPIaff_form' //To be compliant with official Sellsy plugin
+            ],
+            self::MESSAGE_ERROR => [
+                'title' => __('Message d\'erreur', 'wpsellsy'),
+                'desc' => __('Vous permet de spécifier l\'en-tête du message d\'erreur', 'wpsellsy'),
+                'type' => 'textarea',
+                'std' => __( 'Votre message n\'a pas été envoyé, vérifiez la saisie des champs suivant :', 'wpsellsy' ),
+                'section' => 'sellsy_display',
                 'originalKey' => 'WPIaff_form' //To be compliant with official Sellsy plugin
             ],
             self::SUBMIT_NOTIFICATION => [
@@ -263,6 +281,7 @@ class Settings
         return [
             'sellsy_connexion'	=> __('Connexion à votre compte Sellsy', 'wpsellsy'),
             'sellsy_options' => __('Options du plugin', 'wpsellsy'),
+            'sellsy_display' => __('Options d\'affichage', 'wpsellsy'),
             'sellsy_notification' => __('Notification', 'wpsellsy'),
             'sellsy_frontValid' => __('Validation côté client', 'wpsellsy'),
             'sellsy_Champs' => __('Sélection des champs', 'wpsellsy')

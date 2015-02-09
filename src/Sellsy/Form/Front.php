@@ -62,19 +62,25 @@ class Front
             if (\wp_verify_nonce($postValues['slswp_nonce_verify_page'], 'slswp_nonce_field')) { //Nonce is valid
 
                 $postValues = array_intersect_key($postValues, $selectedFields);
-                $prospectId = $this->sellsyPlugin->createProspect($postValues, $body);
+                $prospectReturn = $this->sellsyPlugin->createProspect($postValues, $body);
 
-                if (is_numeric($prospectId) && 'prospectOpportunity' == $this->options[Settings::OPPORTUNITY_CREATION]) {
-                    $this->sellsyPlugin->createOpportunity($prospectId, $this->options[Settings::OPPORTUNITY_SOURCE], '');
+                if (is_numeric($prospectReturn)) {
+                    if ('prospectOpportunity' == $this->options[Settings::OPPORTUNITY_CREATION]) {
+                        $this->sellsyPlugin->createOpportunity($prospectReturn, $this->options[Settings::OPPORTUNITY_SOURCE], '');
+                    }
+
+                    if (!empty($this->options[Settings::SUBMIT_NOTIFICATION]) && !empty($body)) {
+                        $this->sellsyPlugin->sendMail($body);
+                    }
+
+                    return true;
+                } else {
+                    return $prospectReturn;
                 }
-
-                if (!empty($this->options[Settings::SUBMIT_NOTIFICATION]) && !empty($body)) {
-                    $this->sellsyPlugin->sendMail($body);
-                }
-
-                return true;
             }
         }
+
+        return null;
     }
 
     /**
@@ -93,7 +99,10 @@ class Front
         if (is_readable(SELLSY_WP_PATH_INC.'/front-page.php')) {
             $options = $this->options;
 
-            if (true !== $result) {
+            $messageSent = false;
+            if (true === $result) {
+                $messageSent = true;
+            } elseif (!empty($result)) {
                 $errors = $result;
             }
 
