@@ -7,7 +7,8 @@ if ($title) {
 <div>
     <?php
     echo $out;
-    include SELLSY_WP_PATH_INC.'/wp_sellsy-pub-page.php';
+    //Execute sellsy shortcode
+    do_shortcode('[wpsellsy]');
     ?>
 </div>
 <?php echo $after_widget;
