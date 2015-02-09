@@ -23,6 +23,7 @@ class Prospect implements TypeInterface
         'thirdApenaf' => 'third.apenaf',
         'thirdCapital' => 'third.capital',
         'thirdStickyNote' => 'third.stickyNote',
+        'contactCivil' => 'contact.civil',
         'contactName' => ['third.name','contact.name'],
         'contactForename' => 'contact.forename',
         'contactEmail' => ['third.email','contact.email'],
@@ -88,6 +89,25 @@ class Prospect implements TypeInterface
                 'description' => __('Site web','wpsellsy'),
                 'defaultValue' => '',
                 'prefsList' => null
+            ],
+            'contactCivil' => [
+                'type' => 'radio',
+                'name' => __('Civilité','wpsellsy'),
+                'code' => 'contactCivil',
+                'description' => __('Civilité','wpsellsy'),
+                'defaultValue' => '',
+                'prefsList' => (object) [
+                    (object) [
+                        'id' => __('woman','wpsellsy'),
+                        'value' => __('Madame','wpsellsy'),
+                        'rank' => 0
+                    ],
+                    (object) [
+                        'id' => __('man','wpsellsy'),
+                        'value' => __('Monsieur','wpsellsy'),
+                        'rank' => 1
+                    ]
+                ]
             ],
             'contactName' => [
                 'type' => 'text',
@@ -268,6 +288,17 @@ class Prospect implements TypeInterface
             case 'thirdWeb':
                 if (!filter_var($value, FILTER_VALIDATE_URL) || (isset($mandatoriesFields[$fieldName]) && empty($value))) {
                     throw new \Exception(__('Vérifiez la saisie de votre site internet', 'wpsellsy'));
+                }
+                break;
+            case 'contactCivil':
+                $value = strtolower($value);
+                switch ($value) {
+                    case 'madame':
+                        $value = 'woman';
+                        break;
+                    case 'monsieur':
+                        $value = 'man';
+                        break;
                 }
                 break;
             case 'contactName':
