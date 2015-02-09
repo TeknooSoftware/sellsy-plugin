@@ -33,7 +33,7 @@ if (!is_admin()):
 			}
 
 			$required = '';
-			if (isset($mandatoryFieldsList[$key])) {
+			if (isset($mandatoryFieldsList[$key]) || $field->isRequiredField()) {
 				$required = ' required="required"';
 			}
 
