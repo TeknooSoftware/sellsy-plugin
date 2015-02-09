@@ -43,6 +43,8 @@ class Settings
     const ACCESS_SECRET = 'accessSecret';
     const OPPORTUNITY_CREATION = 'opportunityCreation';
     const OPPORTUNITY_SOURCE = 'opportunitySource';
+    const SPLIT_COLUMNS = 'splitColumns';
+    const COLUMNS_CLASS = 'columnsClass';
     const SUBMIT_NOTIFICATION = 'submitNotification';
     const FROM_NOTIFICATION = 'fromNotification';
     const FORM_NAME = 'formName';
@@ -183,6 +185,22 @@ class Settings
                     'displayTitle' => __('Oui', 'wpsellsy'),
                     'none' => __('Non', 'wpsellsy')
                 ],
+                'originalKey' => 'WPIaff_form' //To be compliant with official Sellsy plugin
+            ],
+            self::SPLIT_COLUMNS => [
+                'title' => __('Diviser par colonne', 'wpsellsy'),
+                'desc' => __('Vous permet d\'afficher le formulaire dans plusieurs colonnes.', 'wpsellsy'),
+                'type' => 'text',
+                'std' => '1',
+                'section' => 'sellsy_options',
+                'originalKey' => 'WPIaff_form' //To be compliant with official Sellsy plugin
+            ],
+            self::COLUMNS_CLASS => [
+                'title' => __('Class HTML des colonnes', 'wpsellsy'),
+                'desc' => __('Vous permet de spécifier les class HTML à utiliser pour vos colonnes', 'wpsellsy'),
+                'type' => 'text',
+                'std' => '',
+                'section' => 'sellsy_options',
                 'originalKey' => 'WPIaff_form' //To be compliant with official Sellsy plugin
             ],
             self::SUBMIT_NOTIFICATION => [
