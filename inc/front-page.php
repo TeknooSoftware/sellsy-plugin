@@ -1,7 +1,10 @@
 <?php
+
+use \UniAlteri\Sellsy\Wordpress\Form\Settings;
+
 if (!is_admin()):
-	if (isset($options['WPIaff_form']) && 'displayTitle' == $options['WPIaff_form'] && !empty($options['WPInom_form'])) {
-		echo '<h3>'.$options['WPInom_form'].'</h3>';
+	if (isset($options[Settings::DISPLAY_FORM_NAME]) && 'displayTitle' == $options[Settings::DISPLAY_FORM_NAME] && !empty($options[Settings::FORM_NAME])) {
+		echo '<h3>'.$options[Settings::FORM_NAME].'</h3>';
 	}
 
 	if (!empty($errors)): ?>

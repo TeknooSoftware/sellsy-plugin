@@ -1,20 +1,21 @@
 <?php
 
 use \UniAlteri\Sellsy\Wordpress\OptionsBag;
+use \UniAlteri\Sellsy\Wordpress\Form\Settings;
 
 if (\is_admin() && \current_user_can('manage_options')):
     if (!empty($_GET['settings-updated'])) {
 		//todo migrate
         if ($this->sellsyPlugin->checkSellsyCredentials()) {
-			add_settings_error(OptionsBag::WORDPRESS_SETTINGS_NAME, 'WPIupdated', __('Connexion à l\'API Sellsy réussie. Paramètres Sellsy mis à jour.', 'wpsellsy'), 'updated');
+			add_settings_error(OptionsBag::WORDPRESS_SETTINGS_NAME, 'sellSyUpdated', __('Connexion à l\'API Sellsy réussie. Paramètres Sellsy mis à jour.', 'wpsellsy'), 'updated');
 
-			if (!$this->sellsyPlugin->checkOppSource($this->options['WPInom_opp_source'])
-				&& '' != $this->options['WPInom_opp_source']
-				&& false !== strpos($this->options['WPIcreer_prospopp'], 'Opportunity')) {
-				add_settings_error(OptionsBag::WORDPRESS_SETTINGS_NAME, 'WPInom_opp_source', __('La source saisie n\'existe pas pour votre compte sur ', 'wpsellsy') . '<a href="' . SELLSY_WP_WEB_URL . '" target="_blank">Sellsy.com</a>.<br>' . __('Cliquez ici pour créer la source sur votre compte :', 'wpsellsy') . '<a id="creer_source" href="#">' . __('Créer la source ', 'wpsellsy') . $this->options['WPInom_opp_source'] . '</a><img id="imgloader" src="' . WPI_URL . '/img/loader.gif" alt="" /><br>' . __('Si vous ne créez pas la source, les opportunités ne seront pas générées.', 'wpsellsy') , 'error');
+			if (!$this->sellsyPlugin->checkOppSource($this->options[Settings::OPPORTUNITY_SOURCE])
+				&& '' != $this->options[Settings::OPPORTUNITY_SOURCE]
+				&& false !== strpos($this->options[Settings::OPPORTUNITY_CREATION], 'Opportunity')) {
+				add_settings_error(OptionsBag::WORDPRESS_SETTINGS_NAME, Settings::OPPORTUNITY_SOURCE, __('La source saisie n\'existe pas pour votre compte sur ', 'wpsellsy') . '<a href="' . SELLSY_WP_WEB_URL . '" target="_blank">Sellsy.com</a>.<br>' . __('Cliquez ici pour créer la source sur votre compte :', 'wpsellsy') . '<a id="creer_source" href="#">' . __('Créer la source ', 'wpsellsy') . $this->options[Settings::OPPORTUNITY_SOURCE] . '</a><img id="imgloader" src="' . SELLSY_WP_URL . '/img/loader.gif" alt="" /><br>' . __('Si vous ne créez pas la source, les opportunités ne seront pas générées.', 'wpsellsy') , 'error');
 			}
 		} else {
-			add_settings_error(OptionsBag::WORDPRESS_SETTINGS_NAME, 'WPItokens', __('Erreur: Connexion à l\'API Sellsy impossible. Les tokens saisis sont incorrects.', 'wpsellsy'), 'error');
+			add_settings_error(OptionsBag::WORDPRESS_SETTINGS_NAME, 'sellSyTokens', __('Erreur: Connexion à l\'API Sellsy impossible. Les tokens saisis sont incorrects.', 'wpsellsy'), 'error');
 		}
     }
     ?>

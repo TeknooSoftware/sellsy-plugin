@@ -49,7 +49,7 @@ class Front
                 \wp_enqueue_script('jquery');
             }
 
-            if ('enableJsValidation' == $this->options['WPIjsValid']) {
+            if ('enableJsValidation' == $this->options[Settings::ENABLE_HTML_CHECK]) {
                 \wp_register_script(
                     'wpsellsyjsvalid',
                     plugins_url('/js/jquery.validate.min.js', SELLSY_WP_PATH_FILE),
@@ -95,8 +95,8 @@ class Front
                 $postValues = array_intersect_key($postValues, $selectedFields);
                 $prospectId = $this->sellsyPlugin->createProspect($postValues);
 
-                if (is_numeric($prospectId) && 'prospectOpportunity' == $this->options['WPIcreer_prospopp']) {
-                    $this->sellsyPlugin->createOpportunity($prospectId, $this->options['WPInom_opp_source'], '');
+                if (is_numeric($prospectId) && 'prospectOpportunity' == $this->options[Settings::OPPORTUNITY_CREATION]) {
+                    $this->sellsyPlugin->createOpportunity($prospectId, $this->options[Settings::OPPORTUNITY_SOURCE], '');
                     return true;
                 } else {
                     return $prospectId;

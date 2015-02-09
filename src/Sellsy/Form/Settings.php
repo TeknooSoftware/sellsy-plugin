@@ -35,6 +35,22 @@ class Settings
     protected $sellsyPlugin;
 
     /**
+     * Available settings
+     */
+    const CONSUMER_TOKEN = 'consumerToken';
+    const CONSUMER_SECRET = 'consumerSecret';
+    const ACCESS_TOKEN = 'accessToken';
+    const ACCESS_SECRET = 'accessSecret';
+    const OPPORTUNITY_CREATION = 'opportunityCreation';
+    const OPPORTUNITY_SOURCE = 'opportunitySource';
+    const SUBMIT_NOTIFICATION = 'submitNotification';
+    const FORM_NAME = 'formName';
+    const DISPLAY_FORM_NAME = 'displayFormName';
+    const ENABLE_HTML_CHECK = 'enableHtmlCheck';
+    const FIELDS_SELECTED = 'fieldsSelected';
+    const MANDATORIES_FIELDS = 'mandatoriesFields';
+
+    /**
      * Initialize this object
      * @param Plugin $sellsyPlugin
      * @param OptionsBag $options
@@ -50,9 +66,7 @@ class Settings
         $this->sections = $this->loadSections();
 
         //If there are no registered options
-        if (false == $options->isDefined()) {
-            $this->initialize();
-        }
+        $this->initialize(!$options->isDefined());
     }
 
     /**
@@ -62,8 +76,8 @@ class Settings
     public function loadSettings()
     {
         $element = 'prospect';
-        if (isset($this->options['WPIcreer_prospopp'])) {
-            switch ($this->options['WPIcreer_prospopp']) {
+        if (isset($this->options[self::OPPORTUNITY_CREATION])) {
+            switch ($this->options[self::OPPORTUNITY_CREATION]) {
                 case 'prospectOnly':
                 case 'prospectOpportunity':
                     $element = 'prospect';
@@ -73,36 +87,40 @@ class Settings
 
         return [
             /* Section Connexion Sellsy */
-            'WPIconsumer_token' => [
+            self::CONSUMER_TOKEN => [
                 'title' => __('Consumer Token', 'wpsellsy'),
                 'desc' => '',
                 'std' => '',
                 'type' => 'text',
-                'section' => 'sellsy_connexion'
+                'section' => 'sellsy_connexion',
+                'originalKey' => 'WPIconsumer_token' //To be compliant with official Sellsy plugin
             ],
-            'WPIconsumer_secret' => [
+            self::CONSUMER_SECRET => [
                 'title' => __('Consumer Secret', 'wpsellsy'),
                 'desc' => '',
                 'std' => '',
                 'type' => 'text',
-                'section' => 'sellsy_connexion'
+                'section' => 'sellsy_connexion',
+                'originalKey' => 'WPIconsumer_secret' //To be compliant with official Sellsy plugin
             ],
-            'WPIutilisateur_token' => [
+            self::ACCESS_TOKEN => [
                 'title' => __('Utilisateur Token', 'wpsellsy'),
                 'desc' => '',
                 'std' => '',
                 'type' => 'text',
-                'section' => 'sellsy_connexion'
+                'section' => 'sellsy_connexion',
+                'originalKey' => 'WPIutilisateur_token' //To be compliant with official Sellsy plugin
             ],
-            'WPIutilisateur_secret' => [
+            self::ACCESS_SECRET => [
                 'title' => __('Utilisateur Secret', 'wpsellsy'),
                 'desc' => '',
                 'std' => '',
                 'type' => 'text',
-                'section' => 'sellsy_connexion'
+                'section' => 'sellsy_connexion',
+                'originalKey' => 'WPIutilisateur_secret' //To be compliant with official Sellsy plugin
             ],
             /* Section Options du plugin */
-            'WPIcreer_prospopp' => [
+            self::OPPORTUNITY_CREATION => [
                 'title' => __('Créer', 'wpsellsy'),
                 'desc' => '',
                 'type' => 'radio',
@@ -111,30 +129,34 @@ class Settings
                 'choices' => [
                     'prospectOnly' => __('Un prospect seulement', 'wpsellsy'),
                     'prospectOpportunity' => __('Un prospect et une opportunité', 'wpsellsy')
-                ]
+                ],
+                'originalKey' => 'WPIcreer_prospopp' //To be compliant with official Sellsy plugin
             ],
-            'WPIenvoyer_copie' => [
+            self::SUBMIT_NOTIFICATION => [
                 'title' => __('Envoyer une copie à', 'wpsellsy'),
                 'desc' => '',
                 'std' => '',
                 'type' => 'text',
-                'section' => 'sellsy_options'
+                'section' => 'sellsy_options',
+                'originalKey' => 'WPIenvoyer_copie' //To be compliant with official Sellsy plugin
             ],
-            'WPInom_opp_source' => [
+            self::OPPORTUNITY_SOURCE => [
                 'title' => __('Nom de la source pour les opportunités', 'wpsellsy'),
                 'desc' => __('Vous devez renseigner ce champ si vous souhaitez créer une opportunité en plus d\'un prospect. La source doit exister sur votre compte <a href="https://www.sellsy.com/?_f=prospection_prefs&action=sources" target="_blank">Sellsy.com</a>.' , 'wpsellsy'),
                 'std' => '',
                 'type' => 'text',
-                'section' => 'sellsy_options'
+                'section' => 'sellsy_options',
+                'originalKey' => 'WPInom_opp_source' //To be compliant with official Sellsy plugin
             ],
-            'WPInom_form' => [
+            self::FORM_NAME => [
                 'title' => __('Nom du formulaire', 'wpsellsy'),
                 'desc' => '',
                 'std' => '',
                 'type' => 'text',
-                'section' => 'sellsy_options'
+                'section' => 'sellsy_options',
+                'originalKey' => 'WPInom_form' //To be compliant with official Sellsy plugin
             ],
-            'WPIaff_form' => [
+            self::DISPLAY_FORM_NAME => [
                 'title' => __('Afficher le nom du formulaire', 'wpsellsy'),
                 'desc' => __('Vous permet d\'afficher ou de masquer le nom du formulaire inclus dans vos pages et/ou articles via le shortcode.', 'wpsellsy'),
                 'type' => 'radio',
@@ -143,22 +165,11 @@ class Settings
                 'choices' => [
                     'displayTitle' => __('Oui', 'wpsellsy'),
                     'none' => __('Non', 'wpsellsy')
-                ]
+                ],
+                'originalKey' => 'WPIaff_form' //To be compliant with official Sellsy plugin
             ],
-            /* Section Charger jQuery */
-            'WPIloadjQuery' => [
-                'title'   => __('Activer', 'wpsellsy'),
-                'desc'    => __('Désactive la version de jQuery incluse dans votre thème (si il y en a une) et intègre la version 1.9.1 du CDN Google.', 'wpsellsy'),
-                'type'    => 'radio',
-                'std'     => '',
-                'section' => 'sellsy_loadjQuery',
-                'choices' => [
-                    'enableJQuery' => __('Oui', 'wpsellsy'),
-                    'disableJQuery' => __('Non', 'wpsellsy')
-                ]
-            ],
-            /* Section Activer validation JS */
-            'WPIjsValid' => [
+            /* Section Activer validation Client */
+            self::ENABLE_HTML_CHECK => [
                 'title' => __('Activer', 'wpsellsy'),
                 'desc' => __('La validation Javascript permet de vérifier les informations saisies avant que le formulaire soit soumis au serveur (sans rafraîchissement de la page).', 'wpsellsy'),
                 'type' => 'radio',
@@ -167,19 +178,21 @@ class Settings
                 'choices' => [
                     'enableJsValidation' => __('Oui', 'wpsellsy'),
                     'disableJsValidation' => __('Non', 'wpsellsy')
-                ]
+                ],
+                'originalKey' => 'WPIjsValid' //To be compliant with official Sellsy plugin
             ],
             /* Section Champs */
-            'WPIFieldsSelected' => [
-                'title' => __('Activer', 'wpsellsy'),
+            self::FIELDS_SELECTED => [
+                'title' => __('Afficher', 'wpsellsy'),
                 'desc' => __('Sélectionner les champs à afficher', 'wpsellsy'),
                 'type' => 'multiselect',
                 'std' => '',
                 'section' => 'sellsy_Champs',
-                'choices' => $this->sellsyPlugin->listCustomFields($element)
+                'choices' => $this->sellsyPlugin->listCustomFields($element),
+                'originalKey' => null //Not present in official plugin
             ],
-            'WPIMandatoryFields' => [
-                'title' => __('Activer', 'wpsellsy'),
+            self::MANDATORIES_FIELDS => [
+                'title' => __('Champs obligatoires', 'wpsellsy'),
                 'desc' => __('Sélectionner les champs obligatoires', 'wpsellsy'),
                 'type' => 'multiselect',
                 'std' => '',
@@ -189,7 +202,8 @@ class Settings
                         return $field->getName();
                     },
                     $this->sellsyPlugin->listSelectedFields()
-                )
+                ),
+                'originalKey' => null //Not present in official plugin
             ],
         ];
     }
@@ -203,7 +217,6 @@ class Settings
         return [
             'sellsy_connexion'	=> __('Connexion à votre compte Sellsy', 'wpsellsy'),
             'sellsy_options' => __('Options du plugin', 'wpsellsy'),
-            'sellsy_loadjQuery' => __('Charger le framework jQuery du plugin (' . SELLSY_WP_JQUERY_VERSION . ')', 'wpsellsy'),
             'sellsy_jsValid' => __('Validation Javascript (requiert jQuery)', 'wpsellsy'),
             'sellsy_Champs' => __('Sélection des champs', 'wpsellsy')
         ];
@@ -220,14 +233,22 @@ class Settings
 
     /**
      * Initialize options of this plugin with default value
+     * @param $forceDefault
      * @return $this;
      */
-    public function initialize()
+    public function initialize($forceDefault=false)
     {
         //Set default value in options bag
         foreach ($this->settings as $id=>&$params) {
-            if (isset($params['std'])) { //by pass fields without default value
+            if (true === $forceDefault && isset($params['std'])) { //by pass fields without default value
                 $this->options[$id] = $params['std'];
+            } elseif (isset($params['originalKey'])) {
+                //Option defined in old format, convert it to new format
+                $originalKey = $params['originalKey'];
+                if (!isset($this->options[$id]) && isset($this->options[$originalKey])) {
+                    $this->options[$id] = $this->options[$originalKey];
+                    unset($this->options[$originalKey]);
+                }
             }
         }
 

@@ -4,6 +4,7 @@ namespace UniAlteri\Sellsy\Wordpress;
 
 use UniAlteri\Sellsy\Client\Client;
 use UniAlteri\Sellsy\Wordpress\Form\CustomField;
+use UniAlteri\Sellsy\Wordpress\Form\Settings;
 use UniAlteri\Sellsy\Wordpress\Type\Prospect;
 
 /**
@@ -102,10 +103,10 @@ class Plugin
     {
         //Configure the client
         $this->sellsyClient->setApiUrl(SELLSY_WP_API_URL);
-        $this->sellsyClient->setOAuthAccessToken($this->options['WPIutilisateur_token']);
-        $this->sellsyClient->setOAuthAccessTokenSecret($this->options['WPIutilisateur_secret']);
-        $this->sellsyClient->setOAuthConsumerKey($this->options['WPIconsumer_token']);
-        $this->sellsyClient->setOAuthConsumerSecret($this->options['WPIconsumer_secret']);
+        $this->sellsyClient->setOAuthAccessToken($this->options[Settings::ACCESS_TOKEN]);
+        $this->sellsyClient->setOAuthAccessTokenSecret($this->options[Settings::ACCESS_SECRET]);
+        $this->sellsyClient->setOAuthConsumerKey($this->options[Settings::CONSUMER_TOKEN]);
+        $this->sellsyClient->setOAuthConsumerSecret($this->options[Settings::CONSUMER_SECRET]);
 
         return $this;
     }
@@ -146,17 +147,21 @@ class Plugin
                 break;
         }
 
-        $customFields = $this->sellsyClient->customFields()->getList(['search'=>['useOn'=>(array)$for]]);
-        foreach ($customFields->response->result as $customFields) {
-            $final[$customFields->id] = new CustomField(
-                $customFields->id,
-                $customFields->type,
-                $customFields->name,
-                $customFields->code,
-                $customFields->description,
-                $customFields->defaultValue,
-                $customFields->prefsList
-            );
+        try {
+            $customFields = $this->sellsyClient->customFields()->getList(['search' => ['useOn' => (array)$for]]);
+            foreach ($customFields->response->result as $customFields) {
+                $final[$customFields->id] = new CustomField(
+                    $customFields->id,
+                    $customFields->type,
+                    $customFields->name,
+                    $customFields->code,
+                    $customFields->description,
+                    $customFields->defaultValue,
+                    $customFields->prefsList
+                );
+            }
+        } catch (\Exception $e) {
+            add_settings_error(OptionsBag::WORDPRESS_SETTINGS_NAME, 'sellSyTokens', __('Erreur: Connexion à l\'API Sellsy impossible. Les tokens saisis sont incorrects.', 'wpsellsy'), 'error');
         }
 
         return $final;
@@ -168,8 +173,8 @@ class Plugin
     public function listSelectedFields()
     {
         $element = 'prospect';
-        if (isset($this->options['WPIcreer_prospopp'])) {
-            switch ($this->options['WPIcreer_prospopp']) {
+        if (isset($this->options[Settings::OPPORTUNITY_CREATION])) {
+            switch ($this->options[Settings::OPPORTUNITY_CREATION]) {
                 case 'prospectOnly':
                 case 'prospectOpportunity':
                     $element = 'prospect';
@@ -177,7 +182,7 @@ class Plugin
             }
         }
 
-        $selectedFields = $this->options['WPIFieldsSelected'];
+        $selectedFields = $this->options[Settings::FIELDS_SELECTED];
         if (empty($selectedFields)) {
             return [];
         }
@@ -235,7 +240,7 @@ class Plugin
 
             //Create the source via the client
             try {
-                $source = $this->options['WPInom_opp_source'];
+                $source = $this->options[Settings::OPPORTUNITY_SOURCE];
                 $result = $this->sellsyClient->opportunities()->createSource(['source' => ['label' => $source]]);
 
                 if (!empty($result->response)) {
@@ -268,7 +273,7 @@ class Plugin
         //Extract fields, validate them and prepare registering
         $params = [];
 
-        $mandatoryFields = array_flip($this->options['WPIMandatoryFields']);
+        $mandatoryFields = array_flip($this->options[Settings::MANDATORIES_FIELDS]);
         foreach ($formValues as $key=>$fieldValue) {
             try {
                 $prospectType->validateField($key, $fieldValue, $mandatoryFields);
