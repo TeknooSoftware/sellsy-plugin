@@ -12,13 +12,17 @@ if (!is_admin()):
 			<span>
 				<?php echo __( 'Votre message n\'a pas été envoyé, vérifiez la saisie des champs suivant :', 'wpsellsy' ); ?>
 			</span>
-			<ul>
-				<?php
-				foreach ($errors as $error) {
-					echo '<li>'.$error.'</li>';
-				}
-				?>
-			</ul>
+			<?php if (is_array($errors)): ?>
+				<ul>
+					<?php
+					foreach ($errors as $error) {
+						echo '<li>'.$error.'</li>';
+					}
+					?>
+				</ul>
+			<?php else: ?>
+				<?php echo $errors; ?>
+			<?php endif; ?>
 		</div>
 	<?php endif; ?>
 	<form method="post" action="" id="wp-sellsy-form">
@@ -34,40 +38,42 @@ if (!is_admin()):
 			}
 
 			$code = $field->getCode();
+			echo '<div class="form-group">';
 			switch ($field->getType()) {
 				case 'text':
-					echo '<label for="'.$key.'">'.$field->getName();
-					echo '<input type="text" name="' . $code . '" id="' . $code . '" value="' . $value . '"'.$required.' />';
-					echo '</label>';
+					echo '<label for="'.$key.'">'.$field->getName().'</label>';
+					echo '<input type="text" name="'.$code.'" id="'.$code.'" value="'.$value.'"'.$required.' />';
 					break;
 				case 'radio':
-					echo '<div>'.$field->getName();
+					echo '<label>'.$field->getName().'</label>';
+					$counter = 0;
 					foreach ($field->getOptions() as $option) {
-						echo '<label>'.$option['value'];
-						echo '<input type="radio" name="' . $code . '" id="' . $code . '" value="' . $option['id'] . '"'.$required.' />';
-						echo '</label>';
+						echo '<div class="radio">';
+						echo '<label for="'.$code.$counter.'">'.$option['value'];
+						echo '<input type="radio" name="'.$code.'" id="'.$code.$counter++.'" value="'.$option['id'].'"'.$required.' /></label>';
+						echo '</div>';
 					}
-					echo '</div>';
 					break;
 				case 'checkbox':
-					echo '<div>'.$field->getName();
+					echo '<label>'.$field->getName().'</label>';
+					$counter = 0;
 					foreach ($field->getOptions() as $option) {
-						echo '<label>'.$option['value'];
-						echo '<input type="checkbox" name="' . $code . '[]" id="' . $code . '" value="' . $option['id'] . '"'.$required.' />';
-						echo '</label>';
+						echo '<div class="checkbox">';
+						echo '<label for="'.$code.$counter.'">'.$option['value'];
+						echo '<input type="checkbox" name="'.$code.'[]" id="'.$code.$counter++.'" value="'.$option['id'].'"'.$required.' /></label>';
+						echo '</div>';
 					}
-					echo '</div>';
 					break;
 				case 'select':
-					echo '<label for="'.$code.'">'.$field->getName();
-					echo '<select name="' . $code . '" id="' . $code . '"'.$required.'>';
+					echo '<label for="'.$code.'">'.$field->getName().'</label>';
+					echo '<select name="'.$code.'" id="'.$code.'"'.$required.'>';
 					foreach ($field->getOptions() as $option) {
-						echo '<option value="' . $option['id'] . '">'.$option['value'].'</option>';
+						echo '<option value="'.$option['id'].'">'.$option['value'].'</option>';
 					}
 					echo '</select>';
-					echo '</label>';
 					break;
 			}
+			echo '</div>';
 		}
 		?>
 		<div class="submit">

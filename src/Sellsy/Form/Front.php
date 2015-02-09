@@ -72,7 +72,7 @@ class Front
                     $this->sellsyPlugin->sendMail($body);
                 }
 
-                return $prospectId;
+                return true;
             }
         }
     }

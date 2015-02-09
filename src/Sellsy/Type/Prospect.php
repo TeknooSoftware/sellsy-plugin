@@ -59,25 +59,25 @@ class Prospect implements TypeInterface
             ],
             'thirdEmail' => [
                 'type' => 'text',
-                'name' => __('Email du prospect','wpsellsy'),
+                'name' => __('Email de l\'entreprise','wpsellsy'),
                 'code' => 'thirdEmail',
-                'description' => __('Email du prospect','wpsellsy'),
+                'description' => __('Email de l\'entreprise','wpsellsy'),
                 'defaultValue' => '',
                 'prefsList' => null
             ],
             'thirdTel' => [
                 'type' => 'text',
-                'name' => __('Téléphone','wpsellsy'),
+                'name' => __('Téléphone de l\'entreprise','wpsellsy'),
                 'code' => 'thirdTel',
-                'description' => __('Téléphone','wpsellsy'),
+                'description' => __('Téléphone de l\'entreprise','wpsellsy'),
                 'defaultValue' => '',
                 'prefsList' => null
             ],
             'thirdMobile' => [
                 'type' => 'text',
-                'name' => __('Téléhone portable','wpsellsy'),
+                'name' => __('Téléhone portable de l\'entreprise','wpsellsy'),
                 'code' => 'thirdMobile',
-                'description' => __('Téléhone portable','wpsellsy'),
+                'description' => __('Téléhone portable de l\'entreprise','wpsellsy'),
                 'defaultValue' => '',
                 'prefsList' => null
             ],
