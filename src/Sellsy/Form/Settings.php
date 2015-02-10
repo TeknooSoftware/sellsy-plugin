@@ -54,6 +54,8 @@ class Settings
     const ENABLE_HTML_CHECK = 'enableHtmlCheck';
     const FIELDS_SELECTED = 'fieldsSelected';
     const MANDATORIES_FIELDS = 'mandatoriesFields';
+    const FORM_CUSTOM_HEADER = 'customHeader';
+    const FORM_CUSTOM_FOOTER = 'customFooter';
 
     /**
      * Initialize this object
@@ -162,8 +164,8 @@ class Settings
                 'originalKey' => 'WPIcreer_prospopp' //To be compliant with official Sellsy plugin
             ),
             self::OPPORTUNITY_SOURCE => array(
-                'title' => __('Nom de la source pour les opportunités', 'wpsellsy'),
-                'desc' => __('Vous devez renseigner ce champ si vous souhaitez créer une opportunité en plus d\'un prospect. La source doit exister sur votre compte <a href="https://www.sellsy.com/?_f=prospection_prefs&action=sources" target="_blank">Sellsy.com</a>.' , 'wpsellsy'),
+                'title' => __('Nom des sources pour les opportunités', 'wpsellsy'),
+                'desc' => __('Vous devez renseigner ce champ si vous souhaitez créer une opportunité en plus d\'un prospect. La source doit exister sur votre compte <a href="https://www.sellsy.com/?_f=prospection_prefs&action=sources" target="_blank">Sellsy.com</a>. Pour renseigner plusieurs sources, séparez-les par des virgules' , 'wpsellsy'),
                 'std' => '',
                 'type' => 'text',
                 'section' => 'sellsy_options',
@@ -205,13 +207,29 @@ class Settings
                 'section' => 'sellsy_display',
                 'originalKey' => 'WPIaff_form' //To be compliant with official Sellsy plugin
             ),
+            self::FORM_CUSTOM_HEADER => array(
+                'title' => __('En tête HTML du formulaire', 'wpsellsy'),
+                'desc' => __('Vous permet de définir du code HTML au début du formulaire', 'wpsellsy'),
+                'type' => 'textarea',
+                'std' => '',
+                'section' => 'sellsy_display',
+                'originalKey' => null //To be compliant with official Sellsy plugin
+            ),
+            self::FORM_CUSTOM_FOOTER => array(
+                'title' => __('Pied HTML du formulaire', 'wpsellsy'),
+                'desc' => __('Vous permet de définir du code HTML à la fin du formulaire', 'wpsellsy'),
+                'type' => 'textarea',
+                'std' => '',
+                'section' => 'sellsy_display',
+                'originalKey' => null //To be compliant with official Sellsy plugin
+            ),
             self::MESSAGE_SENT => array(
                 'title' => __('Message de confirmation', 'wpsellsy'),
                 'desc' => __('Vous permet de spécifier le message de confirmation lorsque le message a été envoyé', 'wpsellsy'),
                 'type' => 'textarea',
                 'std' => __( 'Votre message a été envoyé. Merci de votre visite.', 'wpsellsy' ),
                 'section' => 'sellsy_display',
-                'originalKey' => 'WPIaff_form' //To be compliant with official Sellsy plugin
+                'originalKey' => null //To be compliant with official Sellsy plugin
             ),
             self::MESSAGE_ERROR => array(
                 'title' => __('Message d\'erreur', 'wpsellsy'),
@@ -219,7 +237,7 @@ class Settings
                 'type' => 'textarea',
                 'std' => __( 'Votre message n\'a pas été envoyé, vérifiez la saisie des champs suivant :', 'wpsellsy' ),
                 'section' => 'sellsy_display',
-                'originalKey' => 'WPIaff_form' //To be compliant with official Sellsy plugin
+                'originalKey' => null //To be compliant with official Sellsy plugin
             ),
             self::SUBMIT_NOTIFICATION => array(
                 'title' => __('Envoyer une copie à', 'wpsellsy'),

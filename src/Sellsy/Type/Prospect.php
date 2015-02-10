@@ -175,9 +175,9 @@ class Prospect implements TypeInterface
             ),
             'addressZip' => array(
                 'type' => 'text',
-                'name' => __('Code postale','wpsellsy'),
+                'name' => __('Code postal','wpsellsy'),
                 'code' => 'addressZip',
-                'description' => __('Code postale','wpsellsy'),
+                'description' => __('Code postal','wpsellsy'),
                 'defaultValue' => '',
                 'prefsList' => null
             ),

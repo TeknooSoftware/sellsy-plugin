@@ -232,6 +232,35 @@ class Plugin
     }
 
     /**
+     * Return the list of defined sources
+     * @return string[]
+     */
+    public function getSourcesList()
+    {
+        $sourcesListString = $this->options[Settings::OPPORTUNITY_SOURCE];
+        if (empty($sourcesListString)) {
+            return array();
+        }
+
+        return explode(',', $sourcesListString);
+    }
+
+    /**
+     * Check if all sources are defined
+     * @param array $sourcesLabelsList
+     * @return array
+     */
+    public function checkOppListSources($sourcesLabelsList)
+    {
+        $final = array();
+        foreach ($sourcesLabelsList as $sourceLabel) {
+            $final[$sourceLabel] = $this->checkOppSource($sourceLabel);
+        }
+
+        return $final;
+    }
+
+    /**
      * Check if a opportunity source exist in the sellsy account
      * @param string $label
      * @return bool
@@ -258,6 +287,7 @@ class Plugin
     public function createOppSource()
     {
         //Retrieve the Nonce/XSRF id to check its validity
+        //todo remove in another method
         $nonce = null;
         if (isset($_POST['nonce'])) {
             $nonce = $_POST['nonce'];
@@ -274,23 +304,24 @@ class Plugin
 
             //Create the source via the client
             try {
-                $source = $this->options[Settings::OPPORTUNITY_SOURCE];
+                $source = $_POST['source'];
                 $result = $this->sellsyClient->opportunities()->createSource(array('source' => array('label' => $source)));
 
                 if (!empty($result->response)) {
                     //Successful
                     echo 'true';
-                    return;
+                    exit;
                 }
             } catch (\Exception $e) {
                 //Failure
                 echo 'false';
-                return;
+                exit;
             }
         }
 
         //Failure
         echo 'false';
+        exit;
     }
 
     /**

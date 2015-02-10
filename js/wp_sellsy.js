@@ -6,7 +6,7 @@ jQuery(document).ready(function($) {
             $.ajax({
                 type: "post",
                 url: ajax_var.url,
-                data: "action=sls_createOppSource&nonce="+ajax_var.nonce+"&param=creerSource",
+                data: "action=sls_createOppSource&nonce="+ajax_var.nonce+"&param=creerSource&source="+$(this).data('label'),
                 success: function( retour ){
                     if ( retour == 'true' ) {
                         $( "#submit" ).click();
