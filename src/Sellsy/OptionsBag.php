@@ -289,7 +289,7 @@ class OptionsBag implements \ArrayAccess
                 foreach ($value as &$sv) {
                     $sv = strip_tags(stripslashes($sv));
                 }
-            } elseif (Settings::MESSAGE_SENT != $key && Settings::MESSAGE_ERROR != $key) {
+            } elseif (Settings::MESSAGE_SENT != $key && Settings::MESSAGE_ERROR != $key && Settings::FORM_CUSTOM_HEADER != $key && Settings::FORM_CUSTOM_FOOTER != $key) {
                 $value = strip_tags(stripslashes($value));
             }
         }
