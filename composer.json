@@ -1,7 +1,7 @@
 {
     "name": "unialteri/wp-sellsy",
     "type": "library",
-    "description": "Wordpress module to use Sellsy via its API to generate leads",
+    "description": "Wordpress plugin to generate contact form with Sellsy and send it leads captured",
     "keywords": ["sellsy", "wordpress", "module", "lead"],
     "time": "2015-02-01",
     "homepage": "http://teknoo.it/wp-sellsy",
@@ -19,13 +19,13 @@
     },
     "require":{
         "php": ">=5.4.0",
-        "unialteri/sellsy-client": "*"
+        "unialteri/sellsy-client": ">=0.8.0-beta,<2.0"
     },
     "require-dev": {
         "phpunit/phpunit": ">=4.0.0,<5.0",
-        "phpunit/phpunit-mock-objects": "*",
-        "phpunit/phpunit-selenium": "*",
-        "phpunit/phpunit-story": "*"
+        "phpunit/phpunit-mock-objects": "~2.3",
+        "phpunit/phpunit-selenium": "~1.4",
+        "phpunit/phpunit-story": "~1.0"
     },
     "minimum-stability": "dev",
     "autoload": {
