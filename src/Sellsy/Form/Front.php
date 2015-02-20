@@ -164,6 +164,8 @@ class Front
                 $errors = $result;
             }
 
+            $opportunityId = $this->sellsyPlugin->getOpportunityCurrentIdent();
+
             include SELLSY_WP_PATH_INC.'/front-page.php';
         }
     }
