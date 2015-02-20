@@ -520,7 +520,7 @@ class Plugin
                     'ident' => $lastOpportunityId,
                     'sourceid' => $sourceId,
                     'dueDate' => $date,
-                    'name' => __('Contact site web', 'wpsellsy'),
+                    'name' => __('Contact from', 'wpsellsy').' '.$sourceName,
                     'funnelid' => $funnelId,
                     'stepid' => $stepId,
                     'brief' => $note
