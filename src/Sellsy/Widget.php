@@ -10,11 +10,7 @@ namespace UniAlteri\Sellsy\Wordpress;
 class Widget extends \WP_Widget
 {
     /**
-     * PHP5 constructor.
-     *
-     * @since 2.8.0
-     * @access public
-     *
+     * PHP5 constructor.     *
      * @param string $id_base         Optional Base ID for the widget, lowercase and unique. If left empty,
      *                                a portion of the widget's class name will be used Has to be unique.
      * @param string $name            Name for the widget displayed on the configuration page.
@@ -43,10 +39,6 @@ class Widget extends \WP_Widget
      * Echo the widget content.
      *
      * Subclasses should over-ride this function to generate their widget code.
-     *
-     * @since 2.8.0
-     * @access public
-     *
      * @param array $args     Display arguments including before_title, after_title,
      *                        before_widget, and after_widget.
      * @param array $instance The settings for the particular instance of the widget.
@@ -94,10 +86,6 @@ class Widget extends \WP_Widget
      * This function should check that $new_instance is set correctly. The newly-calculated
      * value of `$instance` should be returned. If false is returned, the instance won't be
      * saved/updated.
-     *
-     * @since 2.8.0
-     * @access public
-     *
      * @param array $new_instance New settings for this instance as input by the user via
      *                            {@see WP_Widget::form()}.
      * @param array $old_instance Old settings for this instance.
@@ -118,10 +106,6 @@ class Widget extends \WP_Widget
 
     /**
      * Output the settings update form.
-     *
-     * @since 2.8.0
-     * @access public
-     *
      * @param array $instance Current settings.
      * @return string Default return is 'noform'.
      */

@@ -1,9 +1,9 @@
 <?php
-/*
+/**
 Plugin Name: WP Sellsy
-Plugin URI: http://www.sellsy.com/
-Description: Le plugin WP prospection Sellsy vous permet d'afficher un formulaire de contact connecté avec votre compte Sellsy. Quand le formulaire sera soumis, un prospect et (optionnellement) une opportunité seront créées sur votre compte Sellsy. Pour activer le plugin, vous devez insérer ci-dessous vos tokens d'API Sellsy, disponibles depuis Réglages puis Accès API. Pour afficher le formulaire sur une page ou dans un post insérez le code [wpsellsy].
-Version: 1.1
+Plugin URI: http://teknoo.it/wp-sellsy
+Description: Sellsy WP plugin allows you to create and display a contact form connected with your Sellsy account. When the form is submitted, a prospect and optionally an opportunity will be created on your Sellsy account. Forms can also use custom fields configured for your prospects. To activate the plugin, you must insert below your tokens to Sellsy API, available from Settings and API access. To display the form on a page or in a post insert code [wpsellsy].
+Version: 0.9.1
 Author: <a href="mailto:r.deloge@uni-alteri.com">Richard DELOGE, Uni Alteri</a>
 Author URI: http://agence.net.ua
 */
@@ -13,17 +13,14 @@ require_once 'define.php';
 $composerLoader = require_once 'vendor/autoload.php';
 
 if (class_exists('UniAlteri\Sellsy\Wordpress\Plugin')) {
-	//Prepare generator to use curl for the api
-	$requestGenerator = new \UniAlteri\Curl\RequestGenerator();
-
 	//Initialize the Sellsy API Client
-	$sellsyClient = new \UniAlteri\Sellsy\Client\Client($requestGenerator);
+	$sellsyClientGenerator = new \UniAlteri\Sellsy\Client\ClientGenerator();
 
 	//Initialize the options bag/manager of this plugin
 	$options = new \UniAlteri\Sellsy\Wordpress\OptionsBag();
 
 	//Initialize this plugin
-	$wpSellsyPlugin = new \UniAlteri\Sellsy\Wordpress\Plugin($sellsyClient, $options);
+	$wpSellsyPlugin = new \UniAlteri\Sellsy\Wordpress\Plugin($sellsyClientGenerator->getClient(), $options);
 
 	//Initialize views
 	$wpSellsyFront = new \UniAlteri\Sellsy\Wordpress\Form\Front($wpSellsyPlugin, $options);
@@ -37,14 +34,13 @@ if (class_exists('UniAlteri\Sellsy\Wordpress\Plugin')) {
 		}
 	);
 
-	//Configure wordpress to require it to check if CUrl is available in this platforme
+	//Configure wordpress to require it to check if CUrl is available in this platform
 	add_action('admin_init', array($wpSellsyPlugin, 'checkCUrlExtensions'), 2);
 
 	//Configure wordpress to customize views to use this plugin
 	add_action('wp_enqueue_scripts', array($wpSellsyFront, 'addCSS'));
 	add_action('admin_enqueue_scripts', array($wpSellsyAdmin, 'addCSS'));
 	add_action('admin_enqueue_scripts', array($wpSellsyAdmin, 'addJS'));
-	//todo add_action('admin_enqueue_scripts', array( $this, 'wpi_pointers_styles' ) );
 
 	//Configure wordpress to allow this plugin to add a menu to manage its
 	add_action('admin_menu', array($wpSellsyAdmin, 'addMenu'));
@@ -74,8 +70,6 @@ if (class_exists('UniAlteri\Sellsy\Wordpress\Plugin')) {
 			wp_die('Error, class \UniAlteri\Sellsy\Wordpress\Widget not found');
 		}
 	});
-
-	//todo add_action('wp_footer', array(  $this, 'wpi_form_validate' ) );
 
 	//Configure wordpress to manage some ajax requests
 	add_action('wp_ajax_sls_createOppSource', array($wpSellsyPlugin, 'createOppSource'));

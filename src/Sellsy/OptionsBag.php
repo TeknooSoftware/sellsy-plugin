@@ -1,6 +1,7 @@
 <?php
 
 namespace UniAlteri\Sellsy\Wordpress;
+
 use UniAlteri\Sellsy\Wordpress\Form\Settings;
 
 /**

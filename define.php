@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * Author : Richard Déloge, richard@uni-alteri.fr, www.uni-alteri.fr
- * Date: 05/02/15
- * Time: 23:09
- */
-
 define('SELLSY_WP_VERSION', '1.0');
 define('SELLSY_WP_PATH', __DIR__);
 define('SELLSY_WP_PATH_FILE', SELLSY_WP_PATH.'/wp_sellsy.php');

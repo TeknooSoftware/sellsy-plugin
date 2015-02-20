@@ -3,6 +3,7 @@
 namespace UniAlteri\Sellsy\Wordpress;
 
 use UniAlteri\Sellsy\Client\Client;
+use UniAlteri\Sellsy\Client\ClientInterface;
 use UniAlteri\Sellsy\Wordpress\Form\CustomField;
 use UniAlteri\Sellsy\Wordpress\Form\Settings;
 use UniAlteri\Sellsy\Wordpress\Type\Prospect;
@@ -20,7 +21,7 @@ class Plugin
     protected $options;
 
     /**
-     * @var Client
+     * @var ClientInterface
      */
     protected $sellsyClient;
 
@@ -30,7 +31,7 @@ class Plugin
     protected $customFieldsByType = array();
 
     /**
-     * @param Client $sellsyClient
+     * @param ClientInterface $sellsyClient
      * @param OptionsBag $options
      */
     public function __construct($sellsyClient, $options)
@@ -536,11 +537,15 @@ class Plugin
      */
     public function sendMail($body)
     {
+        //Get mailer from Wordpress
         require_once ABSPATH.WPINC.'/class-phpmailer.php';
         require_once ABSPATH.WPINC.'/class-smtp.php';
 
+        //Initialiez mailer
         $domain = preg_replace('/^www\./', '', $_SERVER['SERVER_NAME']);
         $mail = new \PHPMailer();
+
+        //Configure new mail
         $mail->SetFrom('sellsy-form@'.$domain, 'Sellsy Plugin');
         $mail->AddAddress($this->options[Settings::SUBMIT_NOTIFICATION]);
         if (!empty($this->options[Settings::FORM_NAME])) {
@@ -551,7 +556,8 @@ class Plugin
         $mail->MsgHTML($body);
         $mail->CharSet="UTF-8";
 
-        if ( $mail->Send() ) {
+        //Send email
+        if ($mail->Send()) {
             return true;
         } else {
             return false;
