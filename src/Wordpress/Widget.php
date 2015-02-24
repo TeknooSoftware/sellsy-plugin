@@ -46,7 +46,7 @@ class Widget extends \WP_Widget
     public function widget($args, $instance)
     {
         //Extract title
-        $title = \apply_filters('widget_title', $instance['titre']) ;
+        $title = \apply_filters('widget_title', $instance['title']) ;
 
         //Extract body
         $out = '';
@@ -111,14 +111,14 @@ class Widget extends \WP_Widget
      */
     public function form($instance)
     {
-        $titre = '';
-        if (isset($instance['titre'])) {
-            $titre = \esc_attr($instance['titre']);
+        $title = '';
+        if (isset($instance['title'])) {
+            $title = \esc_attr($instance['title']);
         }
 
-        $texte = '';
-        if (isset($instance['titre'])) {
-            $texte = \esc_attr($instance['texte']);
+        $text = '';
+        if (isset($instance['text'])) {
+            $text = \esc_attr($instance['text']);
         }
 
         if (is_readable(SELLSY_WP_PATH_INC.'/form.php')) {
