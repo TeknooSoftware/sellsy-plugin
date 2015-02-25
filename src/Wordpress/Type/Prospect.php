@@ -52,39 +52,39 @@ class Prospect implements TypeInterface
         $this->fieldsName = array(
             'thirdName' => array(
                 'type' => 'text',
-                'name' => __('Nom ou Raison sociale','wpsellsy'),
+                'name' => __('Last name or Company name','wpsellsy'),
                 'code' => 'thirdName',
-                'description' => __('Nom ou Raison sociale','wpsellsy'),
+                'description' => __('Last name or Company name','wpsellsy'),
                 'defaultValue' => '',
                 'prefsList' => null
             ),
             'thirdEmail' => array(
                 'type' => 'text',
-                'name' => __('Email de l\'entreprise','wpsellsy'),
+                'name' => __('Company email','wpsellsy'),
                 'code' => 'thirdEmail',
-                'description' => __('Email de l\'entreprise','wpsellsy'),
+                'description' => __('Company email','wpsellsy'),
                 'defaultValue' => '',
                 'prefsList' => null
             ),
             'thirdTel' => array(
                 'type' => 'text',
-                'name' => __('Téléphone de l\'entreprise','wpsellsy'),
+                'name' => __('Company phone','wpsellsy'),
                 'code' => 'thirdTel',
-                'description' => __('Téléphone de l\'entreprise','wpsellsy'),
+                'description' => __('Company phone','wpsellsy'),
                 'defaultValue' => '',
                 'prefsList' => null
             ),
             'thirdMobile' => array(
                 'type' => 'text',
-                'name' => __('Téléhone portable de l\'entreprise','wpsellsy'),
+                'name' => __('Company mobile','wpsellsy'),
                 'code' => 'thirdMobile',
-                'description' => __('Téléhone portable de l\'entreprise','wpsellsy'),
+                'description' => __('Company mobile','wpsellsy'),
                 'defaultValue' => '',
                 'prefsList' => null
             ),
             'thirdWeb' => array(
                 'type' => 'text',
-                'name' => __('Site web','wpsellsy'),
+                'name' => __('Website','wpsellsy'),
                 'code' => 'thirdWeb',
                 'description' => __('Site web','wpsellsy'),
                 'defaultValue' => '',
@@ -92,36 +92,36 @@ class Prospect implements TypeInterface
             ),
             'contactCivil' => array(
                 'type' => 'radio',
-                'name' => __('Civilité','wpsellsy'),
+                'name' => __('Civility','wpsellsy'),
                 'code' => 'contactCivil',
-                'description' => __('Civilité','wpsellsy'),
+                'description' => __('Civility','wpsellsy'),
                 'defaultValue' => '',
                 'prefsList' => (object) array(
                     (object) array(
                         'id' => __('woman','wpsellsy'),
-                        'value' => __('Madame','wpsellsy'),
+                        'value' => __('Mrs','wpsellsy'),
                         'rank' => 0
                     ),
                     (object) array(
                         'id' => __('man','wpsellsy'),
-                        'value' => __('Monsieur','wpsellsy'),
+                        'value' => __('Mr','wpsellsy'),
                         'rank' => 1
                     )
                 )
             ),
             'contactName' => array(
                 'type' => 'text',
-                'name' => __('Nom','wpsellsy'),
+                'name' => __('Last name','wpsellsy'),
                 'code' => 'contactName',
-                'description' => __('Nom','wpsellsy'),
+                'description' => __('Last name','wpsellsy'),
                 'defaultValue' => '',
                 'prefsList' => null
             ),
             'contactForename' => array(
                 'type' => 'text',
-                'name' => __('Prénom','wpsellsy'),
+                'name' => __('First name','wpsellsy'),
                 'code' => 'contactForename',
-                'description' => __('Prénom','wpsellsy'),
+                'description' => __('First name','wpsellsy'),
                 'defaultValue' => '',
                 'prefsList' => null
             ),
@@ -135,9 +135,9 @@ class Prospect implements TypeInterface
             ),
             'contactTel' => array(
                 'type' => 'text',
-                'name' => __('Téléphone','wpsellsy'),
+                'name' => __('Phone','wpsellsy'),
                 'code' => 'contactTel',
-                'description' => __('Téléphone','wpsellsy'),
+                'description' => __('Phone','wpsellsy'),
                 'defaultValue' => '',
                 'prefsList' => null
             ),
@@ -151,49 +151,49 @@ class Prospect implements TypeInterface
             ),
             'addressName' => array(
                 'type' => 'text',
-                'name' => __('Adresse 1','wpsellsy'),
+                'name' => __('Address 1','wpsellsy'),
                 'code' => 'addressName',
-                'description' => __('Adresse 1','wpsellsy'),
+                'description' => __('Adress 1','wpsellsy'),
                 'defaultValue' => '',
                 'prefsList' => null
             ),
             'addressPart1' => array(
                 'type' => 'text',
-                'name' => __('Adresse 2','wpsellsy'),
+                'name' => __('Adress 2','wpsellsy'),
                 'code' => 'addressPart1',
-                'description' => __('Adresse 2','wpsellsy'),
+                'description' => __('Adress 2','wpsellsy'),
                 'defaultValue' => '',
                 'prefsList' => null
             ),
             'addressPart2' => array(
                 'type' => 'text',
-                'name' => __('Adresse 3','wpsellsy'),
+                'name' => __('Adress 3','wpsellsy'),
                 'code' => 'addressPart2',
-                'description' => __('Adresse 3','wpsellsy'),
+                'description' => __('Adress 3','wpsellsy'),
                 'defaultValue' => '',
                 'prefsList' => null
             ),
             'addressZip' => array(
                 'type' => 'text',
-                'name' => __('Code postal','wpsellsy'),
+                'name' => __('Zipcode','wpsellsy'),
                 'code' => 'addressZip',
-                'description' => __('Code postal','wpsellsy'),
+                'description' => __('Zipcode','wpsellsy'),
                 'defaultValue' => '',
                 'prefsList' => null
             ),
             'addressTown' => array(
                 'type' => 'text',
-                'name' => __('Ville','wpsellsy'),
+                'name' => __('City','wpsellsy'),
                 'code' => 'addressTown',
-                'description' => __('Ville','wpsellsy'),
+                'description' => __('City','wpsellsy'),
                 'defaultValue' => '',
                 'prefsList' => null
             ),
             'addressCountrycode' => array(
                 'type' => 'text',
-                'name' => __('Pays','wpsellsy'),
+                'name' => __('Country','wpsellsy'),
                 'code' => 'addressCountrycode',
-                'description' => __('Pays','wpsellsy'),
+                'description' => __('Country','wpsellsy'),
                 'defaultValue' => '',
                 'prefsList' => null
             )
@@ -257,37 +257,27 @@ class Prospect implements TypeInterface
         switch ($fieldName) {
             case 'thirdName':
                 if (isset($mandatoriesFields[$fieldName]) && empty($value)) {
-                    throw new \Exception(__('Vérifiez la saisie de votre raison sociale', 'wpsellsy'));
-                }
-                break;
-            case 'thirdType':
-                if (isset($mandatoriesFields[$fieldName]) && empty($value)) {
-                    throw new \Exception(__('Vérifiez le type de votre société', 'wpsellsy'));
+                    throw new \Exception(__('Please check the company name', 'wpsellsy'));
                 }
                 break;
             case 'thirdEmail':
                 if (!filter_var($value, FILTER_VALIDATE_EMAIL) || !(isset($mandatoriesFields[$fieldName]) && empty($value))) {
-                    throw new \Exception(__('Vérifiez la saisie de l\'adresse email de la personne à contacter', 'wpsellsy'));
+                    throw new \Exception(__('Please check the company namee', 'wpsellsy'));
                 }
                 break;
             case 'thirdTel':
                 if (isset($mandatoriesFields[$fieldName]) && empty($value)) {
-                    throw new \Exception(__('Vérifiez la saisie du téléphone de la personne à contacter', 'wpsellsy'));
-                }
-                break;
-            case 'thirdFax':
-                if (isset($mandatoriesFields[$fieldName]) && empty($value)) {
-                    throw new \Exception(__('Vérifiez la saisie du fax de la personne à contacter', 'wpsellsy'));
+                    throw new \Exception(__('Please check the company phone', 'wpsellsy'));
                 }
                 break;
             case 'thirdMobile':
                 if (isset($mandatoriesFields[$fieldName]) && empty($value)) {
-                    throw new \Exception(__('Vérifiez la saisie du portable de la personne à contacter', 'wpsellsy'));
+                    throw new \Exception(__('Please check the company mobile', 'wpsellsy'));
                 }
                 break;
             case 'thirdWeb':
                 if (!filter_var($value, FILTER_VALIDATE_URL) || (isset($mandatoriesFields[$fieldName]) && empty($value))) {
-                    throw new \Exception(__('Vérifiez la saisie de votre site internet', 'wpsellsy'));
+                    throw new \Exception(__('Please check the website url', 'wpsellsy'));
                 }
                 break;
             case 'contactCivil':
@@ -303,62 +293,57 @@ class Prospect implements TypeInterface
                 break;
             case 'contactName':
                 if (isset($mandatoriesFields[$fieldName]) && empty($value)) {
-                    throw new \Exception(__('Vérifiez la saisie du prénom de la personne à contacter', 'wpsellsy'));
+                    throw new \Exception(__('Please check your last name', 'wpsellsy'));
                 }
                 break;
             case 'contactForename':
                 if (isset($mandatoriesFields[$fieldName]) && empty($value)) {
-                    throw new \Exception(__('Vérifiez la saisie du nom de la personne à contacter', 'wpsellsy'));
+                    throw new \Exception(__('Please check your first name', 'wpsellsy'));
                 }
                 break;
             case 'contactEmail':
                 if ((isset($mandatoriesFields[$fieldName]) && empty($value)) || !filter_var($value, FILTER_VALIDATE_EMAIL)) {
-                    throw new \Exception(__('Vérifiez la saisie de l\'adresse email de la personne à contacter', 'wpsellsy'));
+                    throw new \Exception(__('Please check your email', 'wpsellsy'));
                 }
                 break;
             case 'contactTel':
                 if (isset($mandatoriesFields[$fieldName]) && empty($value)) {
-                    throw new \Exception(__('Vérifiez la saisie du téléphone de la personne à contacter', 'wpsellsy'));
-                }
-                break;
-            case 'contactFax':
-                if (isset($mandatoriesFields[$fieldName]) && empty($value)) {
-                    throw new \Exception(__('Vérifiez la saisie du fax de la personne à contacter', 'wpsellsy'));
+                    throw new \Exception(__('Please check your phone number', 'wpsellsy'));
                 }
                 break;
             case 'contactMobile':
                 if (isset($mandatoriesFields[$fieldName]) && empty($value)) {
-                    throw new \Exception(__('Vérifiez la saisie du portable de la personne à contacter', 'wpsellsy'));
+                    throw new \Exception(__('Please check your mobile number', 'wpsellsy'));
                 }
                 break;
             case 'addressName':
                 if (isset($mandatoriesFields[$fieldName]) && empty($value)) {
-                    throw new \Exception(__('Vérifiez votre adresse postale', 'wpsellsy'));
+                    throw new \Exception(__('Please check your address 1', 'wpsellsy'));
                 }
                 break;
             case 'addressPart1':
                 if (isset($mandatoriesFields[$fieldName]) && empty($value)) {
-                    throw new \Exception(__('Vérifiez votre adresse postale', 'wpsellsy'));
+                    throw new \Exception(__('Please check your address 2', 'wpsellsy'));
                 }
                 break;
             case 'addressPart2':
                 if (isset($mandatoriesFields[$fieldName]) && empty($value)) {
-                    throw new \Exception(__('Vérifiez votre adresse postale', 'wpsellsy'));
+                    throw new \Exception(__('Please check your address 3', 'wpsellsy'));
                 }
                 break;
             case 'addressZip':
                 if (isset($mandatoriesFields[$fieldName]) && empty($value)) {
-                    throw new \Exception(__('Vérifiez votre code postal', 'wpsellsy'));
+                    throw new \Exception(__('Please check your zipcode', 'wpsellsy'));
                 }
                 break;
             case 'addressTown':
                 if (isset($mandatoriesFields[$fieldName]) && empty($value)) {
-                    throw new \Exception(__('Vérifiez la ville saisie dans votre adresse', 'wpsellsy'));
+                    throw new \Exception(__('Please check your city name', 'wpsellsy'));
                 }
                 break;
             case 'addressCountrycode':
                 if (isset($mandatoriesFields[$fieldName]) && empty($value)) {
-                    throw new \Exception(__('Vérifiez le pays saisie dans votre adresse', 'wpsellsy'));
+                    throw new \Exception(__('Please check your country name', 'wpsellsy'));
                 }
                 break;
         }

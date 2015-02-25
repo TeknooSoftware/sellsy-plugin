@@ -150,7 +150,7 @@ class Front
 
         //Get fields to display
         $formFieldsList = $this->sellsyPlugin->listSelectedFields();
-        //Get mandatories fields
+        //Get mandatory fields
         $mandatoryFieldsList = array_flip((array) $this->options[Settings::MANDATORIES_FIELDS]);
         $result = $this->validateForm($formFieldsList, $attr, $formId);
 

@@ -135,7 +135,7 @@ class Settings
                 'originalKey' => 'WPIconsumer_secret' //To be compliant with official Sellsy plugin
             ),
             self::ACCESS_TOKEN => array(
-                'title' => __('Utilisateur Token', 'wpsellsy'),
+                'title' => __('User Token', 'wpsellsy'),
                 'desc' => '',
                 'std' => '',
                 'type' => 'text',
@@ -143,7 +143,7 @@ class Settings
                 'originalKey' => 'WPIutilisateur_token' //To be compliant with official Sellsy plugin
             ),
             self::ACCESS_SECRET => array(
-                'title' => __('Utilisateur Secret', 'wpsellsy'),
+                'title' => __('User Secret', 'wpsellsy'),
                 'desc' => '',
                 'std' => '',
                 'type' => 'text',
@@ -152,27 +152,27 @@ class Settings
             ),
             /* Section Options du plugin */
             self::OPPORTUNITY_CREATION => array(
-                'title' => __('Créer', 'wpsellsy'),
+                'title' => __('Create', 'wpsellsy'),
                 'desc' => '',
                 'type' => 'radio',
                 'std' => '',
                 'section' => 'sellsy_options',
                 'choices' => array(
-                    'prospectOnly' => __('Un prospect seulement', 'wpsellsy'),
-                    'prospectOpportunity' => __('Un prospect et une opportunité', 'wpsellsy')
+                    'prospectOnly' => __('Only a lead', 'wpsellsy'),
+                    'prospectOpportunity' => __('A lead with its opportunity', 'wpsellsy')
                 ),
                 'originalKey' => 'WPIcreer_prospopp' //To be compliant with official Sellsy plugin
             ),
             self::OPPORTUNITY_SOURCE => array(
-                'title' => __('Nom des sources pour les opportunités', 'wpsellsy'),
-                'desc' => __('Vous devez renseigner ce champ si vous souhaitez créer une opportunité en plus d\'un prospect. La source doit exister sur votre compte <a href="https://www.sellsy.com/?_f=prospection_prefs&action=sources" target="_blank">Sellsy.com</a>. Pour renseigner plusieurs sources, séparez-les par des virgules' , 'wpsellsy'),
+                'title' => __('Opportunity source names', 'wpsellsy'),
+                'desc' => __('You must define this parameter if you must create an opportunity. The source must exist on your <a href="https://www.sellsy.com/?_f=prospection_prefs&action=sources" target="_blank">Sellsy.com</a> account. Several sources can be defined, splited by a comma.' , 'wpsellsy'),
                 'std' => '',
                 'type' => 'text',
                 'section' => 'sellsy_options',
                 'originalKey' => 'WPInom_opp_source' //To be compliant with official Sellsy plugin
             ),
             self::FORM_NAME => array(
-                'title' => __('Nom du formulaire', 'wpsellsy'),
+                'title' => __('Form name', 'wpsellsy'),
                 'desc' => '',
                 'std' => '',
                 'type' => 'text',
@@ -180,8 +180,8 @@ class Settings
                 'originalKey' => 'WPInom_form' //To be compliant with official Sellsy plugin
             ),
             self::DISPLAY_FORM_NAME => array(
-                'title' => __('Afficher le nom du formulaire', 'wpsellsy'),
-                'desc' => __('Vous permet d\'afficher ou de masquer le nom du formulaire inclus dans vos pages et/ou articles via le shortcode.', 'wpsellsy'),
+                'title' => __('Display the form name', 'wpsellsy'),
+                'desc' => __('To display the name of the form in your page and article.', 'wpsellsy'),
                 'type' => 'radio',
                 'std' => '',
                 'section' => 'sellsy_display',
@@ -192,55 +192,55 @@ class Settings
                 'originalKey' => 'WPIaff_form' //To be compliant with official Sellsy plugin
             ),
             self::SPLIT_COLUMNS => array(
-                'title' => __('Diviser par colonne', 'wpsellsy'),
-                'desc' => __('Vous permet d\'afficher le formulaire dans plusieurs colonnes.', 'wpsellsy'),
+                'title' => __('Split fields in several columns', 'wpsellsy'),
+                'desc' => __('To dispatch fields in several columns. By default, all fields are displayed in a column', 'wpsellsy'),
                 'type' => 'text',
                 'std' => '1',
                 'section' => 'sellsy_display',
                 'originalKey' => 'WPIaff_form' //To be compliant with official Sellsy plugin
             ),
             self::COLUMNS_CLASS => array(
-                'title' => __('Class HTML des colonnes', 'wpsellsy'),
-                'desc' => __('Vous permet de spécifier les class HTML à utiliser pour vos colonnes', 'wpsellsy'),
+                'title' => __('Column HTML classess', 'wpsellsy'),
+                'desc' => __('To define the class to use in your HTML column.', 'wpsellsy'),
                 'type' => 'text',
                 'std' => '',
                 'section' => 'sellsy_display',
                 'originalKey' => 'WPIaff_form' //To be compliant with official Sellsy plugin
             ),
             self::FORM_CUSTOM_HEADER => array(
-                'title' => __('En tête HTML du formulaire', 'wpsellsy'),
-                'desc' => __('Vous permet de définir du code HTML au début du formulaire', 'wpsellsy'),
+                'title' => __('HTML form header', 'wpsellsy'),
+                'desc' => __('HTML code to print before the form', 'wpsellsy'),
                 'type' => 'textarea',
                 'std' => '',
                 'section' => 'sellsy_display',
                 'originalKey' => null //To be compliant with official Sellsy plugin
             ),
             self::FORM_CUSTOM_FOOTER => array(
-                'title' => __('Pied HTML du formulaire', 'wpsellsy'),
-                'desc' => __('Vous permet de définir du code HTML à la fin du formulaire', 'wpsellsy'),
+                'title' => __('HTML form footer', 'wpsellsy'),
+                'desc' => __('HTML code to print after the form', 'wpsellsy'),
                 'type' => 'textarea',
                 'std' => '',
                 'section' => 'sellsy_display',
                 'originalKey' => null //To be compliant with official Sellsy plugin
             ),
             self::MESSAGE_SENT => array(
-                'title' => __('Message de confirmation', 'wpsellsy'),
-                'desc' => __('Vous permet de spécifier le message de confirmation lorsque le message a été envoyé', 'wpsellsy'),
+                'title' => __('Confirmation message', 'wpsellsy'),
+                'desc' => __('To define the message to display when the lead has been created', 'wpsellsy'),
                 'type' => 'textarea',
-                'std' => __( 'Votre message a été envoyé. Merci de votre visite.', 'wpsellsy' ),
+                'std' => __( 'Thanks, your message has been sent.', 'wpsellsy' ),
                 'section' => 'sellsy_display',
                 'originalKey' => null //To be compliant with official Sellsy plugin
             ),
             self::MESSAGE_ERROR => array(
-                'title' => __('Message d\'erreur', 'wpsellsy'),
-                'desc' => __('Vous permet de spécifier l\'en-tête du message d\'erreur', 'wpsellsy'),
+                'title' => __('Error message', 'wpsellsy'),
+                'desc' => __('To define the message to display when an error has been encounted', 'wpsellsy'),
                 'type' => 'textarea',
-                'std' => __( 'Votre message n\'a pas été envoyé, vérifiez la saisie des champs suivant :', 'wpsellsy' ),
+                'std' => __( 'Your message has not been sent, please check these following fields :', 'wpsellsy' ),
                 'section' => 'sellsy_display',
                 'originalKey' => null //To be compliant with official Sellsy plugin
             ),
             self::SUBMIT_NOTIFICATION => array(
-                'title' => __('Envoyer une copie à', 'wpsellsy'),
+                'title' => __('Send a notification by email', 'wpsellsy'),
                 'desc' => '',
                 'std' => '',
                 'type' => 'text',
@@ -248,7 +248,7 @@ class Settings
                 'originalKey' => 'WPIenvoyer_copie' //To be compliant with official Sellsy plugin
             ),
             self::FROM_NOTIFICATION => array(
-                'title' => __('Expediteur', 'wpsellsy'),
+                'title' => __('Email sender', 'wpsellsy'),
                 'desc' => '',
                 'std' => '',
                 'type' => 'text',
@@ -257,8 +257,8 @@ class Settings
             ),
             /* Section Activer validation Client */
             self::ENABLE_HTML_CHECK => array(
-                'title' => __('Activer', 'wpsellsy'),
-                'desc' => __('La validation Javascript permet de vérifier les informations saisies avant que le formulaire soit soumis au serveur (sans rafraîchissement de la page).', 'wpsellsy'),
+                'title' => __('Enable HTML5 validation', 'wpsellsy'),
+                'desc' => __('Enable frontside validation build on HTML5 capacity (required, email).', 'wpsellsy'),
                 'type' => 'radio',
                 'std' => '',
                 'section' => 'sellsy_frontValid',
@@ -270,8 +270,8 @@ class Settings
             ),
             /* Section Champs */
             self::FIELDS_SELECTED => array(
-                'title' => __('Afficher', 'wpsellsy'),
-                'desc' => __('Sélectionner les champs à afficher', 'wpsellsy'),
+                'title' => __('Fields', 'wpsellsy'),
+                'desc' => __('Select and sort fields to display in the form', 'wpsellsy'),
                 'type' => 'multiselect',
                 'std' => '',
                 'section' => 'sellsy_Champs',
@@ -279,8 +279,8 @@ class Settings
                 'originalKey' => null //Not present in official plugin
             ),
             self::MANDATORIES_FIELDS => array(
-                'title' => __('Champs obligatoires', 'wpsellsy'),
-                'desc' => __('Sélectionner les champs obligatoires. (Enregistrer pour rafraichir la liste)', 'wpsellsy'),
+                'title' => __('Mandatories Fields', 'wpsellsy'),
+                'desc' => __('Select mandatories fields in fhe form', 'wpsellsy'),
                 'type' => 'multiselect',
                 'std' => '',
                 'section' => 'sellsy_Champs',
@@ -297,12 +297,12 @@ class Settings
     public function loadSections()
     {
         return array(
-            'sellsy_connexion'	=> __('Connexion à votre compte Sellsy', 'wpsellsy'),
-            'sellsy_options' => __('Options du plugin', 'wpsellsy'),
-            'sellsy_display' => __('Options d\'affichage', 'wpsellsy'),
+            'sellsy_connexion'	=> __('Connection to Sellsy Account', 'wpsellsy'),
+            'sellsy_options' => __('Plugin options', 'wpsellsy'),
+            'sellsy_display' => __('Display options', 'wpsellsy'),
             'sellsy_notification' => __('Notification', 'wpsellsy'),
-            'sellsy_frontValid' => __('Validation côté client', 'wpsellsy'),
-            'sellsy_Champs' => __('Sélection des champs', 'wpsellsy')
+            'sellsy_frontValid' => __('Frontside validation', 'wpsellsy'),
+            'sellsy_Champs' => __('Fields selection', 'wpsellsy')
         );
     }
 
