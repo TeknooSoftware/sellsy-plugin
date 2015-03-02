@@ -1,5 +1,10 @@
 <?php
 
+global $methodCalled;
+global $methodArgs;
+$methodCalled = array();
+$methodArgs = array();
+
 /**
  * Hooks a function on to a specific action.
  * @param string   $tag
@@ -10,6 +15,10 @@
  */
 function add_action($tag, $function_to_add, $priority = 10, $accepted_args = 1)
 {
+    global $methodCalled;
+    global $methodArgs;
+    $methodCalled[] = __FUNCTION__;
+    $methodArgs[] = func_get_args();
 }
 
 /**
@@ -19,6 +28,10 @@ function add_action($tag, $function_to_add, $priority = 10, $accepted_args = 1)
  */
 function register_deactivation_hook($file, $function)
 {
+    global $methodCalled;
+    global $methodArgs;
+    $methodCalled[] = __FUNCTION__;
+    $methodArgs[] = func_get_args();
 }
 
 /**
@@ -29,6 +42,10 @@ function register_deactivation_hook($file, $function)
  */
 function add_shortcode($tag, $func)
 {
+    global $methodCalled;
+    global $methodArgs;
+    $methodCalled[] = __FUNCTION__;
+    $methodArgs[] = func_get_args();
 }
 
 /**
@@ -37,6 +54,10 @@ function add_shortcode($tag, $func)
  */
 function register_widget($widget_class)
 {
+    global $methodCalled;
+    global $methodArgs;
+    $methodCalled[] = __FUNCTION__;
+    $methodArgs[] = func_get_args();
 }
 
 /**
@@ -47,6 +68,10 @@ function register_widget($widget_class)
  */
 function wp_die( $message = '', $title = '', $args = array() )
 {
+    global $methodCalled;
+    global $methodArgs;
+    $methodCalled[] = __FUNCTION__;
+    $methodArgs[] = func_get_args();
 }
 
 /**
@@ -57,6 +82,10 @@ function wp_die( $message = '', $title = '', $args = array() )
  */
 function apply_filters( $tag, $value )
 {
+    global $methodCalled;
+    global $methodArgs;
+    $methodCalled[] = __FUNCTION__;
+    $methodArgs[] = func_get_args();
 }
 
 /**
@@ -66,17 +95,25 @@ function apply_filters( $tag, $value )
  */
 function esc_attr( $text )
 {
+    global $methodCalled;
+    global $methodArgs;
+    $methodCalled[] = __FUNCTION__;
+    $methodArgs[] = func_get_args();
 }
 
 /**
  * Load a plugin's translated strings.
  * @param string $domain          Unique identifier for retrieving translated strings
- * @param string $deprecated      Use the $plugin_rel_path parameter instead.
- * @param string $plugin_rel_path Optional. Relative path to WP_PLUGIN_DIR where the .mo file resides.
+ * @param string|bool $deprecated      Use the $plugin_rel_path parameter instead.
+ * @param string|bool $plugin_rel_path Optional. Relative path to WP_PLUGIN_DIR where the .mo file resides.
  * @return bool True when textdomain is successfully loaded, false otherwise.
  */
 function load_plugin_textdomain( $domain, $deprecated = false, $plugin_rel_path = false )
 {
+    global $methodCalled;
+    global $methodArgs;
+    $methodCalled[] = __FUNCTION__;
+    $methodArgs[] = func_get_args();
 }
 
 /**
@@ -86,6 +123,10 @@ function load_plugin_textdomain( $domain, $deprecated = false, $plugin_rel_path 
  */
 function delete_option( $option )
 {
+    global $methodCalled;
+    global $methodArgs;
+    $methodCalled[] = __FUNCTION__;
+    $methodArgs[] = func_get_args();
 }
 
 /**
@@ -97,6 +138,10 @@ function delete_option( $option )
  */
 function add_settings_error( $setting, $code, $message, $type = 'error' )
 {
+    global $methodCalled;
+    global $methodArgs;
+    $methodCalled[] = __FUNCTION__;
+    $methodArgs[] = func_get_args();
 }
 
 /**
@@ -107,16 +152,24 @@ function add_settings_error( $setting, $code, $message, $type = 'error' )
  */
 function wp_verify_nonce( $nonce, $action = -1 )
 {
+    global $methodCalled;
+    global $methodArgs;
+    $methodCalled[] = __FUNCTION__;
+    $methodArgs[] = func_get_args();
 }
 
 /**
  * Register a setting and its sanitization callback
  * @param string $option_group A settings group name. Should correspond to a whitelisted option key name.
  * @param string $option_name The name of an option to sanitize and save.
- * @param callable $sanitize_callback A callback function that sanitizes the option's value.
+ * @param callable|string $sanitize_callback A callback function that sanitizes the option's value.
  */
 function register_setting( $option_group, $option_name, $sanitize_callback = '' )
 {
+    global $methodCalled;
+    global $methodArgs;
+    $methodCalled[] = __FUNCTION__;
+    $methodArgs[] = func_get_args();
 }
 
 /**
@@ -129,6 +182,10 @@ function register_setting( $option_group, $option_name, $sanitize_callback = '' 
  */
 function add_filter( $tag, $function_to_add, $priority = 10, $accepted_args = 1 )
 {
+    global $methodCalled;
+    global $methodArgs;
+    $methodCalled[] = __FUNCTION__;
+    $methodArgs[] = func_get_args();
 }
 
 /**
@@ -139,6 +196,10 @@ function add_filter( $tag, $function_to_add, $priority = 10, $accepted_args = 1 
  */
 function get_option( $option, $default = false )
 {
+    global $methodCalled;
+    global $methodArgs;
+    $methodCalled[] = __FUNCTION__;
+    $methodArgs[] = func_get_args();
 }
 
 /**
@@ -149,6 +210,10 @@ function get_option( $option, $default = false )
  */
 function update_option( $option, $value )
 {
+    global $methodCalled;
+    global $methodArgs;
+    $methodCalled[] = __FUNCTION__;
+    $methodArgs[] = func_get_args();
 }
 
 /**
@@ -158,6 +223,10 @@ function update_option( $option, $value )
  */
 function sanitize_text_field( $value )
 {
+    global $methodCalled;
+    global $methodArgs;
+    $methodCalled[] = __FUNCTION__;
+    $methodArgs[] = func_get_args();
 }
 
 /**
@@ -169,6 +238,10 @@ function sanitize_text_field( $value )
  */
 function add_settings_section($id, $title, $callback, $page)
 {
+    global $methodCalled;
+    global $methodArgs;
+    $methodCalled[] = __FUNCTION__;
+    $methodArgs[] = func_get_args();
 }
 
 /**
@@ -180,16 +253,24 @@ function add_settings_section($id, $title, $callback, $page)
  */
 function __( $text, $domain = 'default' )
 {
+    global $methodCalled;
+    global $methodArgs;
+    $methodCalled[] = __FUNCTION__;
+    $methodArgs[] = func_get_args();
 }
 
 /**
  * Merge user defined arguments into defaults array.
  * @param string|array $args     Value to merge with $defaults
- * @param array        $defaults Optional. Array that serves as the defaults. Default empty.
+ * @param array|string        $defaults Optional. Array that serves as the defaults. Default empty.
  * @return array Merged user defined values with defaults.
  */
 function wp_parse_args( $args, $defaults = '' )
 {
+    global $methodCalled;
+    global $methodArgs;
+    $methodCalled[] = __FUNCTION__;
+    $methodArgs[] = func_get_args();
 }
 
 /**
@@ -203,7 +284,10 @@ function wp_parse_args( $args, $defaults = '' )
  */
 function add_settings_field($id, $title, $callback, $page, $section = 'default', $args = array())
 {
-
+    global $methodCalled;
+    global $methodArgs;
+    $methodCalled[] = __FUNCTION__;
+    $methodArgs[] = func_get_args();
 }
 
 /**
@@ -217,7 +301,10 @@ function add_settings_field($id, $title, $callback, $page, $section = 'default',
  */
 function wp_enqueue_script( $handle, $src = false, $deps = array(), $ver = false, $in_footer = false )
 {
-
+    global $methodCalled;
+    global $methodArgs;
+    $methodCalled[] = __FUNCTION__;
+    $methodArgs[] = func_get_args();
 }
 
 /**
@@ -232,7 +319,10 @@ function wp_enqueue_script( $handle, $src = false, $deps = array(), $ver = false
  */
 function plugins_url( $path = '', $plugin = '' )
 {
-
+    global $methodCalled;
+    global $methodArgs;
+    $methodCalled[] = __FUNCTION__;
+    $methodArgs[] = func_get_args();
 }
 
 
@@ -246,7 +336,10 @@ function plugins_url( $path = '', $plugin = '' )
  */
 function wp_localize_script( $handle, $object_name, $l10n )
 {
-
+    global $methodCalled;
+    global $methodArgs;
+    $methodCalled[] = __FUNCTION__;
+    $methodArgs[] = func_get_args();
 }
 
 /**
@@ -257,7 +350,10 @@ function wp_localize_script( $handle, $object_name, $l10n )
  */
 function admin_url( $path = '', $scheme = 'admin' )
 {
-
+    global $methodCalled;
+    global $methodArgs;
+    $methodCalled[] = __FUNCTION__;
+    $methodArgs[] = func_get_args();
 }
 
 /**
@@ -267,7 +363,10 @@ function admin_url( $path = '', $scheme = 'admin' )
  */
 function wp_create_nonce($action = -1)
 {
-
+    global $methodCalled;
+    global $methodArgs;
+    $methodCalled[] = __FUNCTION__;
+    $methodArgs[] = func_get_args();
 }
 
 /**
@@ -278,7 +377,10 @@ function wp_create_nonce($action = -1)
  */
 function is_email( $email, $deprecated = false )
 {
-
+    global $methodCalled;
+    global $methodArgs;
+    $methodCalled[] = __FUNCTION__;
+    $methodArgs[] = func_get_args();
 }
 
 /**
@@ -287,7 +389,10 @@ function is_email( $email, $deprecated = false )
  */
 function is_admin()
 {
-
+    global $methodCalled;
+    global $methodArgs;
+    $methodCalled[] = __FUNCTION__;
+    $methodArgs[] = func_get_args();
 }
 
 /**
@@ -300,7 +405,10 @@ function is_admin()
  */
 function wp_register_style( $handle, $src, $deps = array(), $ver = false, $media = 'all' )
 {
-
+    global $methodCalled;
+    global $methodArgs;
+    $methodCalled[] = __FUNCTION__;
+    $methodArgs[] = func_get_args();
 }
 
 /**
@@ -313,7 +421,10 @@ function wp_register_style( $handle, $src, $deps = array(), $ver = false, $media
  */
 function wp_enqueue_style( $handle, $src = false, $deps = array(), $ver = false, $media = 'all' )
 {
-
+    global $methodCalled;
+    global $methodArgs;
+    $methodCalled[] = __FUNCTION__;
+    $methodArgs[] = func_get_args();
 }
 
 
@@ -323,7 +434,7 @@ function wp_enqueue_style( $handle, $src = false, $deps = array(), $ver = false,
  * @param string $menu_title The text to be used for the menu
  * @param string $capability The capability required for this menu to be displayed to the user.
  * @param string $menu_slug The slug name to refer to this menu by (should be unique for this menu)
- * @param callback $function The function to be called to output the content for this page.
+ * @param callback|string $function The function to be called to output the content for this page.
  * @param string $icon_url The url to the icon to be used for this menu.
  * @param int $position The position in the menu order this one should appear
  *
@@ -331,7 +442,10 @@ function wp_enqueue_style( $handle, $src = false, $deps = array(), $ver = false,
  */
 function add_menu_page( $page_title, $menu_title, $capability, $menu_slug, $function = '', $icon_url = '', $position = null )
 {
-
+    global $methodCalled;
+    global $methodArgs;
+    $methodCalled[] = __FUNCTION__;
+    $methodArgs[] = func_get_args();
 }
 
 /**
@@ -341,5 +455,17 @@ function add_menu_page( $page_title, $menu_title, $capability, $menu_slug, $func
  */
 function current_user_can( $capability )
 {
+    global $methodCalled;
+    global $methodArgs;
+    $methodCalled[] = __FUNCTION__;
+    $methodArgs[] = func_get_args();
+}
 
+/**
+ * @param string $path
+ * @return string
+ */
+function plugin_basename($path)
+{
+    return dirname($path);
 }

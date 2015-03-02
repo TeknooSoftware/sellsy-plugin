@@ -50,8 +50,8 @@ class Widget extends \WP_Widget
 
         //Extract body
         $out = '';
-        if (isset($instance['texte'])) {
-            $out = $instance['texte'];
+        if (isset($instance['text'])) {
+            $out = $instance['text'];
         }
 
         //Extract options
@@ -93,12 +93,12 @@ class Widget extends \WP_Widget
      */
     public function update($new_instance, $old_instance)
     {
-        if (isset($new_instance['titre'])) {
-            $old_instance['titre'] = strip_tags($new_instance['titre']);
+        if (isset($new_instance['title'])) {
+            $old_instance['title'] = strip_tags($new_instance['title']);
         }
 
         if (isset($new_instance['texte'])) {
-            $old_instance['texte'] = strip_tags($new_instance['texte']);
+            $old_instance['text'] = strip_tags($new_instance['text']);
         }
 
         return $old_instance;
