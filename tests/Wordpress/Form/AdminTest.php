@@ -455,14 +455,127 @@ class AdminTest extends \PHPUnit_Framework_TestCase
 
         $exceptedMethods = array(
             'is_admin',
-            'current_user_can'
+            'current_user_can',
         );
+        array_splice($methodCalled, 2);
         $this->assertEquals($exceptedMethods, $methodCalled);
 
         $exceptedArgs = array(
             array(),
             array('manage_options')
         );
+        array_splice($methodArgs, 2);
+        $this->assertEquals($exceptedArgs, $methodArgs);
+    }
+
+    public function testDisplaySettingsNotAdmin()
+    {
+        $admin = $this->buildObject();
+
+        global $methodCalled;
+        $methodCalled = array();
+        global $methodArgs;
+        $methodArgs = array();
+
+        //No admin
+        prepareMock('is_admin', array(), false);
+
+        ob_start();
+        $admin->displaySettings(array());
+        $content = ob_get_contents();
+        ob_end_clean();
+
+        $this->assertEmpty($content);
+
+        $exceptedMethods = array(
+            'is_admin'
+        );
+        $this->assertEquals($exceptedMethods, $methodCalled);
+
+        $exceptedArgs = array(
+            array()
+        );
+        $this->assertEquals($exceptedArgs, $methodArgs);
+    }
+
+    public function testDisplaySettingsAdmin()
+    {
+        $admin = $this->buildObject();
+
+        global $methodCalled;
+        $methodCalled = array();
+        global $methodArgs;
+        $methodArgs = array();
+
+        //No admin
+        prepareMock('is_admin', array(), true);
+
+        ob_start();
+        $admin->displaySettings(
+            array(
+                'id' => 'idVal',
+                'class' => 'classVal',
+                'type' => 'typeVal',
+                'std' => 'stdVal',
+                'desc' => 'descVal'
+            )
+        );
+        $content = ob_get_contents();
+        ob_end_clean();
+
+        $this->assertNotEmpty($content);
+
+        $exceptedMethods = array(
+            'is_admin'
+        );
+        array_splice($methodCalled, 1);
+        $this->assertEquals($exceptedMethods, $methodCalled);
+
+        $exceptedArgs = array(
+            array()
+        );
+        array_splice($methodArgs, 1);
+        $this->assertEquals($exceptedArgs, $methodArgs);
+    }
+
+    public function testDisplaySettingsAdminCheckbox()
+    {
+        $admin = $this->buildObject();
+
+        global $methodCalled;
+        $methodCalled = array();
+        global $methodArgs;
+        $methodArgs = array();
+
+        //No admin
+        prepareMock('is_admin', array(), true);
+
+        ob_start();
+        $admin->displaySettings(
+            array(
+                'id' => 'idVal',
+                'class' => 'classVal',
+                'type' => 'checkbox',
+                'std' => 'stdVal',
+                'desc' => 'descVal',
+                'choices' => array('val1', 'val2')
+            )
+        );
+        $content = ob_get_contents();
+        ob_end_clean();
+
+        $this->assertNotEmpty($content);
+
+        $exceptedMethods = array(
+            'is_admin'
+        );
+        array_splice($methodCalled, 1);
+        $this->assertEquals($exceptedMethods, $methodCalled);
+
+        $exceptedArgs = array(
+            array()
+        );
+        array_splice($methodArgs, 1);
         $this->assertEquals($exceptedArgs, $methodArgs);
     }
 }

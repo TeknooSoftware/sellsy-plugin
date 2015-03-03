@@ -37,7 +37,9 @@ if (\is_admin() && \current_user_can('manage_options')):
         <form id="wp-sellsy-admform" action="options.php" method="POST">
             <?php
             settings_fields(OptionsBag::WORDPRESS_SETTINGS_NAME);
-            do_settings_sections($_GET['page']);
+            if (isset($_GET['page'])) {
+                do_settings_sections($_GET['page']);
+            }
             submit_button();
 
             if (function_exists('wp_nonce_field')) {

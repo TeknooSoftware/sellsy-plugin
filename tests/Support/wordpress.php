@@ -56,6 +56,7 @@ function add_action($tag, $function_to_add, $priority = 10, $accepted_args = 1)
  * Set the deactivation hook for a plugin.
  * @param string   $file     The filename of the plugin including the path.
  * @param callback $function The function hooked to the 'deactivate_PLUGIN' action.
+ * @return mixed
  */
 function register_deactivation_hook($file, $function)
 {
@@ -67,6 +68,7 @@ function register_deactivation_hook($file, $function)
  * @uses $shortcode_tags *
  * @param string $tag Shortcode tag to be searched in post content.
  * @param callable $func Hook to run when shortcode is found.
+ * @return mixed
  */
 function add_shortcode($tag, $func)
 {
@@ -76,6 +78,7 @@ function add_shortcode($tag, $func)
 /**
  * Register a widget
  * @param string $widget_class The name of a class that extends WP_Widget
+ * @return mixed
  */
 function register_widget($widget_class)
 {
@@ -87,6 +90,7 @@ function register_widget($widget_class)
  * @param string  $message
  * @param string|int       $title
  * @param string|array|int $args
+ * @return mixed
  */
 function wp_die( $message = '', $title = '', $args = array() )
 {
@@ -142,6 +146,7 @@ function delete_option( $option )
  * @param string $code    Slug-name to identify the error. Used as part of 'id' attribute in HTML output.
  * @param string $message The formatted message text to display to the user (will be shown inside styled
  * @param string $type    The type of message it is, controls HTML class. Use 'error' or 'updated'.
+ * @return mixed
  */
 function add_settings_error( $setting, $code, $message, $type = 'error' )
 {
@@ -164,6 +169,7 @@ function wp_verify_nonce( $nonce, $action = -1 )
  * @param string $option_group A settings group name. Should correspond to a whitelisted option key name.
  * @param string $option_name The name of an option to sanitize and save.
  * @param callable|string $sanitize_callback A callback function that sanitizes the option's value.
+ * @return mixed
  */
 function register_setting( $option_group, $option_name, $sanitize_callback = '' )
 {
@@ -221,6 +227,7 @@ function sanitize_text_field( $value )
  * @param string $title Formatted title of the section. Shown as the heading for the section.
  * @param string $callback Function that echos out any content at the top of the section (between heading and fields).
  * @param string $page The slug-name of the settings page on which to show the section. Built-in pages include 'general', 'reading', 'writing', 'discussion', 'media', etc. Create your own using add_options_page();
+ * @return mixed
  */
 function add_settings_section($id, $title, $callback, $page)
 {
@@ -258,6 +265,7 @@ function wp_parse_args( $args, $defaults = '' )
  * @param string $page The slug-name of the settings page on which to show the section (general, reading, writing, ...).
  * @param string $section The slug-name of the section of the settings page in which to show the box (default, ...).
  * @param array $args Additional arguments
+ * @return mixed
  */
 function add_settings_field($id, $title, $callback, $page, $section = 'default', $args = array())
 {
@@ -272,6 +280,7 @@ function add_settings_field($id, $title, $callback, $page, $section = 'default',
  * @param array       $deps      An array of registered handles this script depends on. Default empty array.
  * @param string|bool $ver       Optional. String specifying the script version number, if it has one.
  * @param bool        $in_footer Optional. Whether to enqueue the script before </head> or before </body>.
+ * @return mixed
  */
 function wp_enqueue_script( $handle, $src = false, $deps = array(), $ver = false, $in_footer = false )
 {
@@ -355,6 +364,7 @@ function is_admin()
  * @param array       $deps   An array of registered style handles this stylesheet depends on. Default empty array.
  * @param string|bool $ver    String specifying the stylesheet version number.
  * @param string      $media  Optional. The media for which this stylesheet has been defined.
+ * @return mixed
  */
 function wp_register_style( $handle, $src, $deps = array(), $ver = false, $media = 'all' )
 {
@@ -368,6 +378,7 @@ function wp_register_style( $handle, $src, $deps = array(), $ver = false, $media
  * @param array       $deps   An array of registered style handles this stylesheet depends on. Default empty array.
  * @param string|bool $ver    String specifying the stylesheet version number, if it has one.
  * @param string      $media  Optional. The media for which this stylesheet has been defined.
+ * @return mixed
  */
 function wp_enqueue_style( $handle, $src = false, $deps = array(), $ver = false, $media = 'all' )
 {
@@ -398,6 +409,77 @@ function add_menu_page( $page_title, $menu_title, $capability, $menu_slug, $func
  * @return bool
  */
 function current_user_can( $capability )
+{
+    return mockMethodTrace(__FUNCTION__, func_get_args());
+}
+
+/**
+ * Display translated text.
+ * @param string $text   Text to translate.
+ * @param string $domain Optional. Text domain. Unique identifier for retrieving translated strings.
+ * @return mixed
+ */
+function _e( $text, $domain = 'default' )
+{
+    return mockMethodTrace(__FUNCTION__, func_get_args());
+}
+
+/**
+ * Display settings errors registered by {@see add_settings_error()}.
+ * @param string $setting Optional slug title of a specific setting who's errors you want.
+ * @param boolean $sanitize Whether to re-sanitize the setting value before returning errors.
+ * @param boolean $hide_on_update If set to true errors will not be shown if the settings page has already been submitted.
+ * @return mixed
+ */
+function settings_errors( $setting = '', $sanitize = false, $hide_on_update = false )
+{
+    return mockMethodTrace(__FUNCTION__, func_get_args());
+}
+
+/**
+ * Output nonce, action, and option_page fields for a settings page.
+ * @param string $option_group A settings group name. This should match the group name used in register_setting().
+ * @return mixed
+ */
+function settings_fields($option_group)
+{
+    return mockMethodTrace(__FUNCTION__, func_get_args());
+}
+
+/**
+ * Prints out all settings sections added to a particular settings page
+ * @param string $page The slug name of the page whos settings sections you want to output
+ * @return mixed
+ */
+function do_settings_sections( $page )
+{
+    return mockMethodTrace(__FUNCTION__, func_get_args());
+}
+
+/**
+ * Echoes a submit button, with provided text and appropriate class(es).
+ *
+ * @since 3.1.0
+ *
+ * @see get_submit_button()
+ *
+ * @param string       $text             The text of the button (defaults to 'Save Changes')
+ * @param string       $type             Optional. The type and CSS class(es) of the button. Core values
+ *                                       include 'primary', 'secondary', 'delete'. Default 'primary'
+ * @param string       $name             The HTML name of the submit button. Defaults to "submit". If no
+ *                                       id attribute is given in $other_attributes below, $name will be
+ *                                       used as the button's id.
+ * @param bool         $wrap             True if the output button should be wrapped in a paragraph tag,
+ *                                       false otherwise. Defaults to true
+ * @param array|string $other_attributes Other attributes that should be output with the button, mapping
+ *                                       attributes to their values, such as setting tabindex to 1, etc.
+ *                                       These key/value attribute pairs will be output as attribute="value",
+ *                                       where attribute is the key. Other attributes can also be provided
+ *                                       as a string such as 'tabindex="1"', though the array format is
+ *                                       preferred. Default null.
+ * @return mixed
+ */
+function submit_button( $text = null, $type = 'primary', $name = 'submit', $wrap = true, $other_attributes = null )
 {
     return mockMethodTrace(__FUNCTION__, func_get_args());
 }
