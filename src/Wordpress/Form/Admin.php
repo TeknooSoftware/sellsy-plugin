@@ -37,38 +37,40 @@ class Admin
      */
     public function addJS()
     {
-        \wp_enqueue_script(
-            'jqueryui',
-            \plugins_url('/js/jquery-ui.min.js', SELLSY_WP_PATH_FILE),
-            array('jquery'),
-            '1.0',
-            1
-        );
+        if (\is_admin()) {
+            \wp_enqueue_script(
+                'jqueryui',
+                \plugins_url('/js/jquery-ui.min.js', SELLSY_WP_PATH_FILE),
+                array('jquery'),
+                '1.0',
+                1
+            );
 
-        \wp_enqueue_script(
-            'uimultiselect',
-            \plugins_url('/js/ui.multiselect.js', SELLSY_WP_PATH_FILE),
-            array('jquery', 'jqueryui'),
-            '1.0',
-            1
-        );
+            \wp_enqueue_script(
+                'uimultiselect',
+                \plugins_url('/js/ui.multiselect.js', SELLSY_WP_PATH_FILE),
+                array('jquery', 'jqueryui'),
+                '1.0',
+                1
+            );
 
-        \wp_enqueue_script(
-            'wpsellsyjscsource',
-            \plugins_url('/js/wp_sellsy.js', SELLSY_WP_PATH_FILE),
-            array('jquery', 'uimultiselect'),
-            '1.0',
-            1
-       );
+            \wp_enqueue_script(
+                'wpsellsyjscsource',
+                \plugins_url('/js/wp_sellsy.js', SELLSY_WP_PATH_FILE),
+                array('jquery', 'uimultiselect'),
+                '1.0',
+                1
+            );
 
-        \wp_localize_script(
-            'wpsellsyjscsource',
-            'ajax_var',
-            array(
-                'url' => \admin_url('admin-ajax.php'),
-                'nonce' => \wp_create_nonce('slswp_ajax_nonce')
-            )
-      );
+            \wp_localize_script(
+                'wpsellsyjscsource',
+                'ajax_var',
+                array(
+                    'url' => \admin_url('admin-ajax.php'),
+                    'nonce' => \wp_create_nonce('slswp_ajax_nonce')
+                )
+            );
+        }
     }
 
     /**
@@ -119,14 +121,16 @@ class Admin
      */
     public function addMenu()
     {
-        \add_menu_page(
-            'WP Sellsy',
-            'WP Sellsy',
-            'manage_options',
-            'slswp-admPage',
-            array($this, 'page'),
-            \plugins_url('/img/sellsy_15.png', SELLSY_WP_PATH_FILE)
-       );
+        if (\is_admin()) {
+            \add_menu_page(
+                'WP Sellsy',
+                'WP Sellsy',
+                'manage_options',
+                'slswp-admPage',
+                array($this, 'page'),
+                \plugins_url('/img/sellsy_15.png', SELLSY_WP_PATH_FILE)
+            );
+        }
     }
 
     /**
@@ -145,46 +149,48 @@ class Admin
      */
     public function displaySettings($setting = array())
     {
-        $id = null;
-        if (isset($setting['id'])) {
-            $id = $setting['id'];
-        }
+        if (\is_admin()) {
+            $id = null;
+            if (isset($setting['id'])) {
+                $id = $setting['id'];
+            }
 
-        $class = null;
-        if (isset($setting['class'])) {
-            $class = ' '.$setting['class'];
-        }
+            $class = null;
+            if (isset($setting['class'])) {
+                $class = ' ' . $setting['class'];
+            }
 
-        $type = null;
-        if (isset($setting['type'])) {
-            $type = $setting['type'];
-        }
+            $type = null;
+            if (isset($setting['type'])) {
+                $type = $setting['type'];
+            }
 
-        $std = null;
-        if (isset($setting['std'])) {
-            $std = $setting['std'];
-        }
+            $std = null;
+            if (isset($setting['std'])) {
+                $std = $setting['std'];
+            }
 
-        $desc = null;
-        if (isset($setting['desc'])) {
-            $desc = $setting['desc'];
-        }
+            $desc = null;
+            if (isset($setting['desc'])) {
+                $desc = $setting['desc'];
+            }
 
-        $choices = array();
-        if (isset($setting['choices'])) {
-            $choices = $setting['choices'];
-        }
+            $choices = array();
+            if (isset($setting['choices'])) {
+                $choices = $setting['choices'];
+            }
 
-        $options = $this->options->toArray();
+            $options = $this->options->toArray();
 
-        if (!isset($options[$id]) && 'checkbox' != $type) {
-            $options[$id] = $std;
-        } elseif (!isset($options[$id])) {
-            $options[$id] = 0;
-        }
+            if (!isset($options[$id]) && 'checkbox' != $type) {
+                $options[$id] = $std;
+            } elseif (!isset($options[$id])) {
+                $options[$id] = 0;
+            }
 
-        if (is_readable(SELLSY_WP_PATH_INC.'/admin-setting.php')) {
-            include SELLSY_WP_PATH_INC.'/admin-setting.php';
+            if (is_readable(SELLSY_WP_PATH_INC . '/admin-setting.php')) {
+                include SELLSY_WP_PATH_INC . '/admin-setting.php';
+            }
         }
     }
 }

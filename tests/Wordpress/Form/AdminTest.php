@@ -62,7 +62,7 @@ class AdminTest extends \PHPUnit_Framework_TestCase
         return new Admin($this->buildPluginMock(), $this->buildOptionsMock());
     }
 
-    public function testAddJS()
+    public function testAddJSAdminNotAdmin()
     {
         $admin = $this->buildObject();
 
@@ -71,9 +71,38 @@ class AdminTest extends \PHPUnit_Framework_TestCase
         global $methodArgs;
         $methodArgs = array();
 
+        //No admin
+        prepareMock('is_admin', array(), false);
+
         $admin->addJS();
 
-        $exceptedMethods = array (
+        $exceptedMethods = array(
+            'is_admin'
+        );
+        $this->assertEquals($exceptedMethods, $methodCalled);
+
+        $exceptedArgs = array(
+            array()
+        );
+        $this->assertEquals($exceptedArgs, $methodArgs);
+    }
+
+    public function testAddJSAdmin()
+    {
+        $admin = $this->buildObject();
+
+        global $methodCalled;
+        $methodCalled = array();
+        global $methodArgs;
+        $methodArgs = array();
+
+        //admin
+        prepareMock('is_admin', array(), true);
+
+        $admin->addJS();
+
+        $exceptedMethods = array(
+            'is_admin',
             'plugins_url',
             'wp_enqueue_script',
             'plugins_url',
@@ -86,62 +115,353 @@ class AdminTest extends \PHPUnit_Framework_TestCase
         );
         $this->assertEquals($exceptedMethods, $methodCalled);
 
-        $exceptedArgs = array (
-            array (
+        $exceptedArgs = array(
+            array(),
+            array(
                 '/js/jquery-ui.min.js',
                 '/home/richard/Prog/uni_alteri/wordpress/sellsy-plugin/wp_sellsy.php',
             ),
-            array (
+            array(
                 'jqueryui',
                 NULL,
-                array (
+                array(
                     'jquery',
                 ),
                 '1.0',
                 1,
             ),
-            array (
+            array(
                 '/js/ui.multiselect.js',
                 '/home/richard/Prog/uni_alteri/wordpress/sellsy-plugin/wp_sellsy.php',
             ),
-            array (
+            array(
                 'uimultiselect',
                 NULL,
-                array (
+                array(
                     'jquery',
                     'jqueryui',
                 ),
                 '1.0',
                 1,
             ),
-            array (
+            array(
                 '/js/wp_sellsy.js',
                 '/home/richard/Prog/uni_alteri/wordpress/sellsy-plugin/wp_sellsy.php',
             ),
-            array (
+            array(
                 'wpsellsyjscsource',
                 NULL,
-                array (
+                array(
                     0 => 'jquery',
                     1 => 'uimultiselect',
                 ),
                 '1.0',
                 1,
             ),
-            array (
+            array(
                 'admin-ajax.php',
             ),
-            array (
+            array(
                 'slswp_ajax_nonce',
             ),
-            array (
+            array(
                 'wpsellsyjscsource',
                 'ajax_var',
-                array (
+                array(
                     'url' => NULL,
                     'nonce' => NULL,
                 ),
             ),
+        );
+        $this->assertEquals($exceptedArgs, $methodArgs);
+    }
+
+    public function testAddCSSNotAdmin()
+    {
+        $admin = $this->buildObject();
+
+        global $methodCalled;
+        $methodCalled = array();
+        global $methodArgs;
+        $methodArgs = array();
+
+        //No admin
+        prepareMock('is_admin', array(), false);
+
+        $admin->addCSS('hook');
+
+        $exceptedMethods = array(
+            'is_admin'
+        );
+        $this->assertEquals($exceptedMethods, $methodCalled);
+
+        $exceptedArgs = array(
+            array()
+        );
+        $this->assertEquals($exceptedArgs, $methodArgs);
+    }
+
+    public function testAddCSSAdminBadHook()
+    {
+        $admin = $this->buildObject();
+
+        global $methodCalled;
+        $methodCalled = array();
+        global $methodArgs;
+        $methodArgs = array();
+
+        //No admin
+        prepareMock('is_admin', array(), true);
+
+        $admin->addCSS('hook');
+
+        $exceptedMethods = array(
+            'is_admin'
+        );
+        $this->assertEquals($exceptedMethods, $methodCalled);
+
+        $exceptedArgs = array(
+            array()
+        );
+        $this->assertEquals($exceptedArgs, $methodArgs);
+    }
+
+    public function testAddCSSAdminGoodHook()
+    {
+        $admin = $this->buildObject();
+
+        global $methodCalled;
+        $methodCalled = array();
+        global $methodArgs;
+        $methodArgs = array();
+
+        //admin
+        prepareMock('is_admin', array(), true);
+
+        $admin->addCSS('toplevel_page_slswp-admPage');
+
+        $exceptedMethods = array(
+            'is_admin',
+            'plugins_url',
+            'wp_register_style',
+            'wp_enqueue_style',
+            'plugins_url',
+            'wp_register_style',
+            'wp_enqueue_style',
+            'plugins_url',
+            'wp_register_style',
+            'wp_enqueue_style'
+        );
+        $this->assertEquals($exceptedMethods, $methodCalled);
+
+        $exceptedArgs = array(
+            array(),
+            array(
+                '/css/wp_sellsy_admin.css',
+                '/home/richard/Prog/uni_alteri/wordpress/sellsy-plugin/wp_sellsy.php',
+            ),
+            array(
+                'wpsellsystylesadmin',
+                NULL,
+                array(),
+                '1.0',
+                'screen',
+            ),
+            array(
+                'wpsellsystylesadmin',
+            ),
+            array(
+                '/css/jquery-ui.min.css',
+                '/home/richard/Prog/uni_alteri/wordpress/sellsy-plugin/wp_sellsy.php',
+            ),
+            array(
+                'jqueryuicss',
+                NULL,
+                array(),
+                '1.0',
+                'screen',
+            ),
+            array(
+                'jqueryuicss',
+            ),
+            array(
+                '/css/ui.multiselect.css',
+                '/home/richard/Prog/uni_alteri/wordpress/sellsy-plugin/wp_sellsy.php',
+            ),
+            array(
+                'multiselect',
+                NULL,
+                array(
+                    'jqueryuicss',
+                ),
+                '1.0',
+                'screen',
+            ),
+            array(
+                'multiselect',
+            )
+        );
+        $this->assertEquals($exceptedArgs, $methodArgs);
+    }
+
+    public function testAddMenuNotAdmin()
+    {
+        $admin = $this->buildObject();
+
+        global $methodCalled;
+        $methodCalled = array();
+        global $methodArgs;
+        $methodArgs = array();
+
+        //No admin
+        prepareMock('is_admin', array(), false);
+
+        $admin->addMenu();
+
+        $exceptedMethods = array(
+            'is_admin'
+        );
+        $this->assertEquals($exceptedMethods, $methodCalled);
+
+        $exceptedArgs = array(
+            array()
+        );
+        $this->assertEquals($exceptedArgs, $methodArgs);
+    }
+
+    public function testAddMenuAdmin()
+    {
+        $admin = $this->buildObject();
+
+        global $methodCalled;
+        $methodCalled = array();
+        global $methodArgs;
+        $methodArgs = array();
+
+        //admin
+        prepareMock('is_admin', array(), true);
+        //plugin
+        prepareMock('plugins_url', array('/img/sellsy_15.png', SELLSY_WP_PATH_FILE), 'fooBar');
+
+        $admin->addMenu();
+
+        $exceptedMethods = array(
+            'is_admin',
+            'plugins_url',
+            'add_menu_page'
+        );
+        $this->assertEquals($exceptedMethods, $methodCalled);
+
+        $exceptedArgs = array(
+            array(),
+            array(
+                '/img/sellsy_15.png',
+                SELLSY_WP_PATH_FILE
+            ),
+            array(
+                'WP Sellsy',
+                'WP Sellsy',
+                'manage_options',
+                'slswp-admPage',
+                array($admin, 'page'),
+                'fooBar'
+            )
+        );
+        $this->assertEquals($exceptedArgs, $methodArgs);
+    }
+
+    public function testPageNotAdmin()
+    {
+        $admin = $this->buildObject();
+
+        global $methodCalled;
+        $methodCalled = array();
+        global $methodArgs;
+        $methodArgs = array();
+
+        //No admin
+        prepareMock('is_admin', array(), false);
+
+        ob_start();
+        $admin->page();
+        $content = ob_get_contents();
+        ob_end_clean();
+
+        $this->assertEmpty($content);
+
+        $exceptedMethods = array(
+            'is_admin'
+        );
+        $this->assertEquals($exceptedMethods, $methodCalled);
+
+        $exceptedArgs = array(
+            array()
+        );
+        $this->assertEquals($exceptedArgs, $methodArgs);
+    }
+
+    public function testPageAdminNotRight()
+    {
+        $admin = $this->buildObject();
+
+        global $methodCalled;
+        $methodCalled = array();
+        global $methodArgs;
+        $methodArgs = array();
+
+        //admin
+        prepareMock('is_admin', array(), true);
+        prepareMock('current_user_can', array('manage_options'), false);
+
+        ob_start();
+        $admin->page();
+        $content = ob_get_contents();
+        ob_end_clean();
+
+        $this->assertEmpty($content);
+
+        $exceptedMethods = array(
+            'is_admin',
+            'current_user_can'
+        );
+        $this->assertEquals($exceptedMethods, $methodCalled);
+
+        $exceptedArgs = array(
+            array(),
+            array('manage_options')
+        );
+        $this->assertEquals($exceptedArgs, $methodArgs);
+    }
+
+    public function testPageAdminRight()
+    {
+        $admin = $this->buildObject();
+
+        global $methodCalled;
+        $methodCalled = array();
+        global $methodArgs;
+        $methodArgs = array();
+
+        //admin
+        prepareMock('is_admin', array(), true);
+        prepareMock('current_user_can', array('manage_options'), true);
+
+        ob_start();
+        $admin->page();
+        $content = ob_get_contents();
+        ob_end_clean();
+
+        $this->assertNotEmpty($content);
+
+        $exceptedMethods = array(
+            'is_admin',
+            'current_user_can'
+        );
+        $this->assertEquals($exceptedMethods, $methodCalled);
+
+        $exceptedArgs = array(
+            array(),
+            array('manage_options')
         );
         $this->assertEquals($exceptedArgs, $methodArgs);
     }
