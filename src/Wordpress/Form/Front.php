@@ -60,11 +60,15 @@ class Front
      * @param array $selectedFields
      * @param array $attr of the short code
      * @param string $formId to ignore request if this request is not destinate to this form
+     * @param array $postValues
      * @return null|int id of the prospect if it was created
      */
-    protected function validateForm(array &$selectedFields, $attr=array(), $formId)
+    public function validateForm(array &$selectedFields, $attr=array(), $formId, $postValues=array())
     {
-        $postValues = $_POST;
+        if (empty($postValues)) {
+            $postValues = $_POST;
+        }
+
         if (!\is_admin() //We are in front
             && isset($postValues['send_wp_sellsy']) //The form was sent
             && isset($postValues['slswp_nonce_verify_page'])) { //Nonce/Xsrf is present
@@ -76,6 +80,7 @@ class Front
                 }
 
                 $postValues = array_intersect_key($postValues, $selectedFields);
+                $body = null;
                 $prospectReturn = $this->sellsyPlugin->createProspect($postValues, $body);
 
                 if (is_numeric($prospectReturn)) {
@@ -150,8 +155,6 @@ class Front
 
         //Get fields to display
         $formFieldsList = $this->sellsyPlugin->listSelectedFields();
-        //Get mandatory fields
-        $mandatoryFieldsList = array_flip((array) $this->options[Settings::MANDATORIES_FIELDS]);
         $result = $this->validateForm($formFieldsList, $attr, $formId);
 
         if (is_readable(SELLSY_WP_PATH_INC.'/front-page.php')) {
