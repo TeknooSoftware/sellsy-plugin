@@ -32,11 +32,11 @@ if (!is_admin()):
 		<?php endif; ?>
 		<form method="post" action="" id="wp-sellsy-form">
 			<input type="hidden" name="formId" value="<?php echo $formId; ?>" :/>
-			<?php $columnsClass = $this->options[Settings::COLUMNS_CLASS]; ?>
-			<?php echo $this->option[Settings::FORM_CUSTOM_HEADER]; ?>
+			<?php $columnsClass = $options[Settings::COLUMNS_CLASS]; ?>
+			<?php echo $options[Settings::FORM_CUSTOM_HEADER]; ?>
 			<div class="<?php echo $columnsClass; ?>">
 				<?php
-				$splitColumns = $this->options[Settings::SPLIT_COLUMNS];
+				$splitColumns = $options[Settings::SPLIT_COLUMNS];
 				if (empty($splitColumns)) {
 					//To avoid errors
 					$splitColumns = 1;
@@ -50,6 +50,10 @@ if (!is_admin()):
 						</div>
 						<div class="<?php echo $columnsClass; ?>">
 					<?php endif;
+
+                    if (!$field instanceof \UniAlteri\Sellsy\Wordpress\Form\CustomField){
+                        continue;
+                    }
 
 					$value = '';
 					if (isset($_POST[$key])) {
@@ -126,7 +130,7 @@ if (!is_admin()):
 					<input type="submit" class="btn btn-default" name="send_wp_sellsy" value="<?php _e('Valider', 'wpsellsy') ?>" />
 				</div>
 			</div>
-			<?php echo $this->option[Settings::FORM_CUSTOM_FOOTER]; ?>
+			<?php echo $options[Settings::FORM_CUSTOM_FOOTER]; ?>
 			<?php
 			if (function_exists('wp_nonce_field')) {
 				wp_nonce_field('slswp_nonce_field', 'slswp_nonce_verify_page');

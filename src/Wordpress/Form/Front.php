@@ -71,32 +71,31 @@ class Front
 
         if (!\is_admin() //We are in front
             && isset($postValues['send_wp_sellsy']) //The form was sent
-            && isset($postValues['slswp_nonce_verify_page'])) { //Nonce/Xsrf is present
-            if (\wp_verify_nonce($postValues['slswp_nonce_verify_page'], 'slswp_nonce_field')) { //Nonce is valid
+            && isset($postValues['slswp_nonce_verify_page']) //Nonce/Xsrf is present
+            && \wp_verify_nonce($postValues['slswp_nonce_verify_page'], 'slswp_nonce_field')) { //Nonce is valid
 
-                if (!isset($postValues['formId']) || $postValues['formId'] != $formId) {
-                    //Not good form
-                    return null;
+            if (!isset($postValues['formId']) || $postValues['formId'] != $formId) {
+                //Not good form
+                return null;
+            }
+
+            $postValues = array_intersect_key($postValues, $selectedFields);
+            $body = null;
+            $prospectReturn = $this->sellsyPlugin->createProspect($postValues, $body);
+
+            if (is_numeric($prospectReturn)) {
+                if ('prospectOpportunity' == $this->options[Settings::OPPORTUNITY_CREATION]) {
+                    $source = $this->extractSource($attr);
+                    $this->sellsyPlugin->createOpportunity($prospectReturn, $source, '');
                 }
 
-                $postValues = array_intersect_key($postValues, $selectedFields);
-                $body = null;
-                $prospectReturn = $this->sellsyPlugin->createProspect($postValues, $body);
-
-                if (is_numeric($prospectReturn)) {
-                    if ('prospectOpportunity' == $this->options[Settings::OPPORTUNITY_CREATION]) {
-                        $source = $this->extractSource($attr);
-                        $this->sellsyPlugin->createOpportunity($prospectReturn, $source, '');
-                    }
-
-                    if (!empty($this->options[Settings::SUBMIT_NOTIFICATION]) && !empty($body)) {
-                        $this->sellsyPlugin->sendMail($body);
-                    }
-
-                    return true;
-                } else {
-                    return $prospectReturn;
+                if (!empty($this->options[Settings::SUBMIT_NOTIFICATION]) && !empty($body)) {
+                    $this->sellsyPlugin->sendMail($body);
                 }
+
+                return true;
+            } else {
+                return $prospectReturn;
             }
         }
 
@@ -156,6 +155,7 @@ class Front
         //Get fields to display
         $formFieldsList = $this->sellsyPlugin->listSelectedFields();
         $result = $this->validateForm($formFieldsList, $attr, $formId);
+
 
         if (is_readable(SELLSY_WP_PATH_INC.'/front-page.php')) {
             $options = $this->options;

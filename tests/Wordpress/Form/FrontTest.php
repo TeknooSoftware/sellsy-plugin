@@ -793,4 +793,126 @@ class FrontTest extends \PHPUnit_Framework_TestCase
         );
         $this->assertEquals($exceptedArgs, $methodArgs);
     }
+
+    public function testShortcodeNoFormId()
+    {
+        $front = $this->buildObject();
+
+        global $methodCalled;
+        $methodCalled = array();
+        global $methodArgs;
+        $methodArgs = array();
+
+        //No admin
+        prepareMock('is_admin', array(), false);
+        prepareMock('wp_verify_nonce', array(123, 'slswp_nonce_field'), false);
+
+        $this->buildPluginMock()
+            ->expects($this->once())
+            ->method('listSelectedFields')
+            ->willReturn(array('field1', 'field2'));
+
+        $this->buildOptionsMock()
+            ->expects($this->atLeastOnce())
+            ->method('offsetGet');
+
+        ob_start();
+        $front->shortcode(array('source' => 'source2'));
+        $result = ob_get_contents();
+        ob_end_clean();
+
+        $this->assertNotFalse(strpos($result, 'formId" value="wpSellsyForm1'));
+    }
+
+    public function testShortcodeFormId()
+    {
+        $front = $this->buildObject();
+
+        global $methodCalled;
+        $methodCalled = array();
+        global $methodArgs;
+        $methodArgs = array();
+
+        //No admin
+        prepareMock('is_admin', array(), false);
+        prepareMock('wp_verify_nonce', array(123, 'slswp_nonce_field'), false);
+
+        $this->buildPluginMock()
+            ->expects($this->once())
+            ->method('listSelectedFields')
+            ->willReturn(array('field1', 'field2'));
+
+        $this->buildOptionsMock()
+            ->expects($this->atLeastOnce())
+            ->method('offsetGet');
+
+        ob_start();
+        $front->shortcode(array('formId' => 'formName'));
+        $result = ob_get_contents();
+        ob_end_clean();
+
+        $this->assertNotFalse(strpos($result, 'formId" value="formName'));
+    }
+
+    public function testShortcodeOk()
+    {
+        $front = $this->buildObject();
+
+        global $methodCalled;
+        $methodCalled = array();
+        global $methodArgs;
+        $methodArgs = array();
+
+        //No admin
+        prepareMock('is_admin', array(), false);
+        prepareMock('wp_verify_nonce', array(123, 'slswp_nonce_field'), true);
+
+        $this->buildPluginMock()
+            ->expects($this->once())
+            ->method('listSelectedFields')
+            ->willReturn(array('field1', 'field2'));
+
+        $this->buildOptionsMock()
+            ->expects($this->atLeastOnce())
+            ->method('offsetGet');
+
+        $this->buildPluginMock()
+            ->expects($this->once())
+            ->method('createProspect')
+            ->willReturn(123);
+
+        $_POST = array('formId'=>'formName','send_wp_sellsy'=>'123','slswp_nonce_verify_page'=>123);
+        $front->shortcode(array('formId' => 'formName'));
+    }
+
+    public function testShortcodeNOk()
+    {
+        $front = $this->buildObject();
+
+        global $methodCalled;
+        $methodCalled = array();
+        global $methodArgs;
+        $methodArgs = array();
+
+        //No admin
+        prepareMock('is_admin', array(), false);
+        prepareMock('wp_verify_nonce', array(123, 'slswp_nonce_field'), true);
+
+        $this->buildPluginMock()
+            ->expects($this->once())
+            ->method('listSelectedFields')
+            ->willReturn(array('field1', 'field2'));
+
+        $this->buildOptionsMock()
+            ->expects($this->atLeastOnce())
+            ->method('offsetGet');
+
+        $this->buildPluginMock()
+            ->expects($this->once())
+            ->method('createProspect')
+            ->willReturn(array('foo'=>'bar'));
+
+        $_POST = array('formId'=>'formName','send_wp_sellsy'=>'123','slswp_nonce_verify_page'=>123);
+        $front->shortcode(array('formId' => 'formName'));
+    }
 }
