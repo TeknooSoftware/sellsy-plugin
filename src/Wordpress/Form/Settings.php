@@ -84,14 +84,6 @@ class Settings
     {
         //Extract entity type to use to extract custom fields
         $element = 'prospect';
-        if (isset($this->options[self::OPPORTUNITY_CREATION])) {
-            switch ($this->options[self::OPPORTUNITY_CREATION]) {
-                case 'prospectOnly':
-                case 'prospectOpportunity':
-                    $element = 'prospect';
-                    break;
-            }
-        }
 
         //Extract usable ordered list of selected fields
         $selectedFieldsList = array_map(
