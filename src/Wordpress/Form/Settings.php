@@ -308,6 +308,15 @@ class Settings
     }
 
     /**
+     * Return settings configured by this object
+     * @return array
+     */
+    public function getSettings()
+    {
+        return $this->settings;
+    }
+
+    /**
      * Initialize options of this plugin with default value
      * @param $forceDefault
      * @return $this;

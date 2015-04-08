@@ -14,8 +14,12 @@ $methodArgs = array();
 function prepareMock($methodName, $methodArgs, $willReturn)
 {
     global $methodMocks;
-    $argsHash = md5(serialize($methodArgs));
-    $methodMocks[$methodName][$argsHash] = $willReturn;
+    if (is_array($methodArgs)) {
+        $argsHash = md5(serialize($methodArgs));
+        $methodMocks[$methodName][$argsHash] = $willReturn;
+    } else {
+        $methodMocks[$methodName][$methodArgs] = $willReturn;
+    }
 }
 
 /**
@@ -33,7 +37,19 @@ function mockMethodTrace($methodName, $methodArgsValues)
     $methodArgs[] = $methodArgsValues;
     $argsHash = md5(serialize($methodArgsValues));
     if (isset($methodMocks[$methodName][$argsHash])) {
-        return $methodMocks[$methodName][$argsHash];
+        if (is_callable($methodMocks[$methodName][$argsHash])) {
+            return call_user_func_array($methodMocks[$methodName][$argsHash], $methodArgsValues);
+        } else {
+            return $methodMocks[$methodName][$argsHash];
+        }
+    }
+
+    if (isset($methodMocks[$methodName]['*'])) {
+        if (is_callable($methodMocks[$methodName]['*'])) {
+            return call_user_func_array($methodMocks[$methodName]['*'], $methodArgsValues);
+        } else {
+            return $methodMocks[$methodName]['*'];
+        }
     }
 
     return null;
