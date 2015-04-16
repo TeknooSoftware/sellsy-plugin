@@ -82,8 +82,8 @@ class SettingsTest extends \PHPUnit_Framework_TestCase
         $field3->expects($this->any())->method('getName')->willReturn('field3');
 
         $fieldsList = array(
-            $field3,
-            $field1
+            'field3' => $field3,
+            'field1' => $field1
         );
 
         $fieldsCustomList = array(
@@ -103,15 +103,30 @@ class SettingsTest extends \PHPUnit_Framework_TestCase
             ->with($this->equalTo('prospect'))
             ->willReturn($fieldsCustomList);
 
+        $this->buildOptionsMock()
+            ->expects($this->any())
+            ->method('offsetExists')
+            ->willReturnCallback(
+                function ($name) {
+                    if ('WPIjsValid' == $name) {
+                        return true;
+                    }
+                }
+            );
+
         prepareMock('__', '*', function($text, $tag) {return $text; });
 
         return $this->buildObject();
     }
 
-
     public function testInitialisation()
     {
         $this->prepareObject($field1, $field2, $field3);
+    }
+
+    public function testInitialisationDefault()
+    {
+        $this->prepareObject($field1, $field2, $field3)->initialize(false);
     }
 
     public function testGetSections()
@@ -305,7 +320,7 @@ class SettingsTest extends \PHPUnit_Framework_TestCase
                     'type' => 'multiselect',
                     'std' => '',
                     'section' => 'sellsy_Champs',
-                    'choices' => array('field3', 'field1'),
+                    'choices' => array('field3'=>'field3', 'field1'=>'field1'),
                     'originalKey' => null //Not present in official plugin
                 )
             ),
@@ -313,13 +328,29 @@ class SettingsTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    public function testBuildForms()
+    public function testBuildFormsNoDisplaySectionCallback()
     {
-
+        $obj = $this->prepareObject($field1, $field2, $field3);
+        $obj->buildForms(null, 'str_replace');
+        global $methodCalled;
+        $this->assertFalse(in_array('add_settings_section', $methodCalled));
     }
 
-    public function testCreateInput()
+    public function testBuildFormsNoDisplayFieldsCallback()
     {
+        $obj = $this->prepareObject($field1, $field2, $field3);
+        $obj->buildForms('str_replace', null);
+        global $methodCalled;
+        $this->assertFalse(in_array('add_settings_section', $methodCalled));
+    }
 
+    public function testBuildForms()
+    {
+        $obj = $this->prepareObject($field1, $field2, $field3);
+        $obj->buildForms('str_replace', 'str_replace');
+        global $methodCalled;
+        $this->assertEquals(6, count(array_keys($methodCalled, 'add_settings_section')));
+        $this->assertEquals(19, count(array_keys($methodCalled, 'wp_parse_args')));
+        $this->assertEquals(19, count(array_keys($methodCalled, 'add_settings_field')));
     }
 }
