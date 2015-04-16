@@ -77,7 +77,7 @@ class CustomField
         $optionsVals = array();
         if (!empty($options)) {
             foreach ($options as $option) {
-                if ('Y' == $option->isDefault) {
+                if (isset($option->isDefault) && 'Y' == $option->isDefault) {
                     //Extract default value from the list
                     $this->defaultValue = $option->value;
                 }
