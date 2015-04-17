@@ -61,4 +61,230 @@ class ProspectTest extends \PHPUnit_Framework_TestCase
         $this->buildObject()->populateParams('thirdFax', $value, $finalSource);
         $this->assertEquals(array('third'=>array('fax'=>'test'),'contact'=>array('fax'=>'test')), $finalSource);
     }
+
+    /**
+     * @expectedException \Exception
+     */
+    public function testValidateFieldThirdName()
+    {
+        $value = null;
+        $this->buildObject()->validateField('thirdName', $value, array('thirdName' => true));
+    }
+
+    /**
+     * @expectedException \Exception
+     */
+    public function testValidateFieldThirdEmailMissing()
+    {
+        $value = null;
+        $this->buildObject()->validateField('thirdEmail', $value, array('thirdEmail' => true));
+    }
+
+    /**
+     * @expectedException \Exception
+     */
+    public function testValidateFieldThirdEmailFilterVar()
+    {
+        $value = 'badEmail';
+        $this->buildObject()->validateField('thirdEmail', $value, array('thirdEmail' => true));
+    }
+
+    /**
+     * @expectedException \Exception
+     */
+    public function testValidateFieldThirdTel()
+    {
+        $value = null;
+        $this->buildObject()->validateField('thirdTel', $value, array('thirdTel' => true));
+    }
+
+    /**
+     * @expectedException \Exception
+     */
+    public function testValidateFieldThirdMobile()
+    {
+        $value = null;
+        $this->buildObject()->validateField('thirdMobile', $value, array('thirdMobile' => true));
+    }
+
+    /**
+     * @expectedException \Exception
+     */
+    public function testValidateFieldThirdWeb()
+    {
+        $value = null;
+        $this->buildObject()->validateField('thirdWeb', $value, array('thirdWeb' => true));
+    }
+
+    /**
+     * @expectedException \Exception
+     */
+    public function testValidateFieldThirdWebBadUrl()
+    {
+        $value = 'dssdqsd#';
+        $this->buildObject()->validateField('thirdWeb', $value, array('thirdWeb' => true));
+    }
+
+    /**
+     * @expectedException \Exception
+     */
+    public function testValidateFieldContactName()
+    {
+        $value = null;
+        $this->buildObject()->validateField('contactName', $value, array('contactName' => true));
+    }
+
+    /**
+     * @expectedException \Exception
+     */
+    public function testValidateFieldContactForename()
+    {
+        $value = null;
+        $this->buildObject()->validateField('contactForename', $value, array('contactForename' => true));
+    }
+
+    /**
+     * @expectedException \Exception
+     */
+    public function testValidateFieldContactEmail()
+    {
+        $value = null;
+        $this->buildObject()->validateField('contactEmail', $value, array('contactEmail' => true));
+    }
+
+    /**
+     * @expectedException \Exception
+     */
+    public function testValidateFieldContactEmailBadEmail()
+    {
+        $value = 'badEmail';
+        $this->buildObject()->validateField('contactEmail', $value, array('contactEmail' => true));
+    }
+
+    /**
+     * @expectedException \Exception
+     */
+    public function testValidateFieldContactTel()
+    {
+        $value = null;
+        $this->buildObject()->validateField('contactTel', $value, array('contactTel' => true));
+    }
+
+    /**
+     * @expectedException \Exception
+     */
+    public function testValidateFieldContactMobile()
+    {
+        $value = null;
+        $this->buildObject()->validateField('contactMobile', $value, array('contactMobile' => true));
+    }
+
+    /**
+     * @expectedException \Exception
+     */
+    public function testValidateFieldAddressName()
+    {
+        $value = null;
+        $this->buildObject()->validateField('addressName', $value, array('addressName' => true));
+    }
+
+    /**
+     * @expectedException \Exception
+     */
+    public function testValidateFieldAddressPart1()
+    {
+        $value = null;
+        $this->buildObject()->validateField('addressPart1', $value, array('addressPart1' => true));
+    }
+
+    /**
+     * @expectedException \Exception
+     */
+    public function testValidateFieldAddressPart2()
+    {
+        $value = null;
+        $this->buildObject()->validateField('addressPart2', $value, array('addressPart2' => true));
+    }
+
+    /**
+     * @expectedException \Exception
+     */
+    public function testValidateFieldAddressZip()
+    {
+        $value = null;
+        $this->buildObject()->validateField('addressZip', $value, array('addressZip' => true));
+    }
+
+    /**
+     * @expectedException \Exception
+     */
+    public function testValidateFieldAddressTown()
+    {
+        $value = null;
+        $this->buildObject()->validateField('addressTown', $value, array('addressTown' => true));
+    }
+
+    /**
+     * @expectedException \Exception
+     */
+    public function testValidateFieldAddressCountrycode()
+    {
+        $value = null;
+        $this->buildObject()->validateField('addressCountrycode', $value, array('addressCountrycode' => true));
+    }
+
+    public function testValidateField()
+    {
+        $value = 'value\"test';
+        prepareMock('sanitize_text_field', '*', function($text) {return $text; });
+        $this->buildObject()->validateField('addressCountrycode', $value, array('addressCountrycode' => true));
+        $this->assertEquals(
+            'value"test',
+            $value
+        );
+    }
+
+    public function testValidateFieldNonMandatory()
+    {
+        $value = 'value\"test';
+        prepareMock('sanitize_text_field', '*', function($text) {return $text; });
+        $this->buildObject()->validateField('addressCountrycode', $value, array());
+        $this->assertEquals(
+            'value"test',
+            $value
+        );
+    }
+
+    public function testValidateFieldContactCivil()
+    {
+        $value = 'valUe\"test';
+        prepareMock('sanitize_text_field', '*', function($text) {return $text; });
+        $this->buildObject()->validateField('contactCivil', $value, array('contactCivil' => true));
+        $this->assertEquals(
+            'value"test',
+            $value
+        );
+    }
+
+    public function testValidateFieldContactCivilWoman()
+    {
+        $value = 'madame';
+        prepareMock('sanitize_text_field', '*', function($text) {return $text; });
+        $this->buildObject()->validateField('contactCivil', $value, array('contactCivil' => true));
+        $this->assertEquals(
+            'woman',
+            $value
+        );
+    }
+
+    public function testValidateFieldContactCivilMan()
+    {
+        $value = 'monsieur';
+        prepareMock('sanitize_text_field', '*', function($text) {return $text; });
+        $this->buildObject()->validateField('contactCivil', $value, array('contactCivil' => true));
+        $this->assertEquals(
+            'man',
+            $value
+        );
+    }
 }
