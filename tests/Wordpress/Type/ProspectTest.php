@@ -62,6 +62,102 @@ class ProspectTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(array('third'=>array('fax'=>'test'),'contact'=>array('fax'=>'test')), $finalSource);
     }
 
+    public function testValidateFieldThirdNameNonMandatory()
+    {
+        $value = null;
+        $this->buildObject()->validateField('thirdName', $value, array());
+    }
+
+    public function testValidateFieldThirdEmailMissingNonMandatory()
+    {
+        $value = 'contact@unialteri.com';
+        $this->buildObject()->validateField('thirdEmail', $value, array());
+    }
+
+    public function testValidateFieldThirdTelNonMandatory()
+    {
+        $value = null;
+        $this->buildObject()->validateField('thirdTel', $value, array());
+    }
+
+    public function testValidateFieldThirdMobileNonMandatory()
+    {
+        $value = null;
+        $this->buildObject()->validateField('thirdMobile', $value, array());
+    }
+
+    public function testValidateFieldThirdWebNonMandatory()
+    {
+        $value = 'http://free.fr';
+        $this->buildObject()->validateField('thirdWeb', $value, array());
+    }
+
+    public function testValidateFieldContactNameNonMandatory()
+    {
+        $value = null;
+        $this->buildObject()->validateField('contactName', $value, array());
+    }
+
+    public function testValidateFieldContactForenameNonMandatory()
+    {
+        $value = null;
+        $this->buildObject()->validateField('contactForename', $value, array());
+    }
+
+    public function testValidateFieldContactEmailNonMandatory()
+    {
+        $value = 'contact@uni-alteri.com';
+        $this->buildObject()->validateField('contactEmail', $value, array());
+    }
+
+    public function testValidateFieldContactTelNonMandatory()
+    {
+        $value = null;
+        $this->buildObject()->validateField('contactTel', $value, array());
+    }
+
+    public function testValidateFieldContactMobileNonMandatory()
+    {
+        $value = null;
+        $this->buildObject()->validateField('contactMobile', $value, array());
+    }
+
+    public function testValidateFieldAddressNameNonMandatory()
+    {
+        $value = null;
+        $this->buildObject()->validateField('addressName', $value, array());
+    }
+
+    public function testValidateFieldAddressPart1NonMandatory()
+    {
+        $value = null;
+        $this->buildObject()->validateField('addressPart1', $value, array());
+    }
+
+    public function testValidateFieldAddressPart2NonMandatory()
+    {
+        $value = null;
+        $this->buildObject()->validateField('addressPart2', $value, array());
+    }
+
+    public function testValidateFieldAddressZipNonMandatory()
+    {
+        $value = null;
+        $this->buildObject()->validateField('addressZip', $value, array());
+    }
+
+    public function testValidateFieldAddressTownNonMandatory()
+    {
+        $value = null;
+        $this->buildObject()->validateField('addressTown', $value, array());
+    }
+
+    public function testValidateFieldAddressCountrycodeNonMandatory()
+    {
+        $value = null;
+        $this->buildObject()->validateField('addressCountrycode', $value, array());
+    }
+
     /**
      * @expectedException \Exception
      */

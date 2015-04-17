@@ -261,8 +261,8 @@ class Prospect implements TypeInterface
                 }
                 break;
             case 'thirdEmail':
-                if (!filter_var($value, FILTER_VALIDATE_EMAIL) || !(isset($mandatoriesFields[$fieldName]) && empty($value))) {
-                    throw new \Exception(__('Please check the company namee', 'wpsellsy'));
+                if (!filter_var($value, FILTER_VALIDATE_EMAIL) || (isset($mandatoriesFields[$fieldName]) && empty($value))) {
+                    throw new \Exception(__('Please check the company email', 'wpsellsy'));
                 }
                 break;
             case 'thirdTel':
