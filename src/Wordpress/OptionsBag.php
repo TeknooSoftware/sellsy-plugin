@@ -184,7 +184,7 @@ class OptionsBag implements \ArrayAccess
                         \add_settings_error(
                             self::WORDPRESS_SETTINGS_NAME,
                             Settings::CONSUMER_TOKEN,
-                            __('Le Consumer Token est manquant ou incorrect, vérifiez votre saisie.', 'wpsellsy'),
+                            __('The Consumer Token is missing or invalid, please check it.', 'wpsellsy'),
                             'error'
                         );
 
@@ -198,7 +198,7 @@ class OptionsBag implements \ArrayAccess
                         \add_settings_error(
                             self::WORDPRESS_SETTINGS_NAME,
                             Settings::CONSUMER_SECRET,
-                            __('Le Consumer Secret est manquant ou incorrect, vérifiez votre saisie.', 'wpsellsy'),
+                            __('The Consumer Secret is missing or invalid, please check it.', 'wpsellsy'),
                             'error'
                         );
 
@@ -212,7 +212,7 @@ class OptionsBag implements \ArrayAccess
                         \add_settings_error(
                             self::WORDPRESS_SETTINGS_NAME,
                             Settings::ACCESS_TOKEN,
-                            __('L\'Utilisateur Token est manquant ou incorrect, vérifiez votre saisie.', 'wpsellsy'),
+                            __('The User Token is missing or invalid, please check it', 'wpsellsy'),
                             'error'
                         );
 
@@ -226,7 +226,7 @@ class OptionsBag implements \ArrayAccess
                         \add_settings_error(
                             self::WORDPRESS_SETTINGS_NAME,
                             Settings::ACCESS_SECRET,
-                            __('L\'Utilisateur Secret est manquant ou incorrect, vérifiez votre saisie.', 'wpsellsy'),
+                            __('The User Secret is missing or invalid, please check it.', 'wpsellsy'),
                             'error'
                         );
 
@@ -240,7 +240,7 @@ class OptionsBag implements \ArrayAccess
                         \add_settings_error(
                             self::WORDPRESS_SETTINGS_NAME,
                             Settings::SUBMIT_NOTIFICATION,
-                            __('L\'adresse email est manquante ou incorrecte, vérifiez votre saisie ou vous ne recevrez pas d\'email à chaque soumission du formulaire. Les prospects et/ou opportunités seront quand-même créé(e)s.', 'wpsellsy'),
+                            __('Your email adress is missing or invalid, please check it to receive notifications. Prospects will be created anyway.', 'wpsellsy'),
                             'error'
                         );
 
@@ -254,7 +254,7 @@ class OptionsBag implements \ArrayAccess
                         \add_settings_error(
                             self::WORDPRESS_SETTINGS_NAME,
                             Settings::OPPORTUNITY_SOURCE,
-                            __('Vous avez choisi de créer une opportunité en plus d\'un prospect, vous devez saisir une source d\'opportunités ou le plugin créera que des prospects.', 'wpsellsy'),
+                            __('You must select the source used to create opportunities.', 'wpsellsy'),
                             'error'
                         );
                     }
@@ -266,7 +266,7 @@ class OptionsBag implements \ArrayAccess
                         \add_settings_error(
                             self::WORDPRESS_SETTINGS_NAME,
                             Settings::FORM_NAME,
-                            __('Vous avez choisi d\'afficher le nom du formulaire mais vous ne l\'avez pas renseigné.', 'wpsellsy'),
+                            __('You must input the form\'s title.', 'wpsellsy'),
                             'error'
                         );
                     }
