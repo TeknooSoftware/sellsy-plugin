@@ -390,4 +390,35 @@ class OptionsBagTest extends \PHPUnit_Framework_TestCase
         );
 
     }
+
+    public function testSanitize()
+    {
+        $values = array(
+            'val1' => array(
+                'val2' => '<p>\\"fooBar</p>'
+            ),
+            Settings::MESSAGE_SENT => '<p>test</p>',
+            Settings::MESSAGE_ERROR => '<p>test</p>',
+            Settings::FORM_CUSTOM_HEADER => '<p>test</p>',
+            Settings::FORM_CUSTOM_FOOTER => '<p>test</p>',
+            'val2' => '<p>test</p>'
+        );
+
+        prepareMock('apply_filters', '*', function($filter, $values) {return $values; });
+        $final = $this->buildObject()->sanitize($values);
+
+        $this->assertEquals(
+            array(
+                'val1' => array(
+                    'val2' => '"fooBar'
+                ),
+                Settings::MESSAGE_SENT => '<p>test</p>',
+                Settings::MESSAGE_ERROR => '<p>test</p>',
+                Settings::FORM_CUSTOM_HEADER => '<p>test</p>',
+                Settings::FORM_CUSTOM_FOOTER => '<p>test</p>',
+                'val2' => 'test'
+            ),
+            $final
+        );
+    }
 }
