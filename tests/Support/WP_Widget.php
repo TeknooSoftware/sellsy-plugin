@@ -71,4 +71,34 @@ class WP_Widget
     {
         return $this->controlOptions;
     }
+
+    /**
+     * Constructs id attributes for use in {@see WP_Widget::form()} fields.
+     *
+     * This function should be used in form() methods to create id attributes
+     * for fields to be saved by {@see WP_Widget::update()}.
+     *
+     * @since 2.8.0
+     * @access public
+     *
+     * @param string $field_name Field name.
+     * @return string ID attribute for `$field_name`.
+     */
+    public function get_field_id($field_name)
+    {
+        return $field_name;
+    }
+
+    /**
+     * Constructs name attributes for use in form() fields
+     *
+     * This function should be used in form() methods to create name attributes for fields to be saved by update()
+     *
+     * @param string $field_name Field name
+     * @return string Name attribute for $field_name
+     */
+    public function get_field_name($field_name)
+    {
+        return $field_name;
+    }
 }

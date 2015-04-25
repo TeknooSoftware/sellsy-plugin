@@ -508,3 +508,12 @@ function plugin_basename($path)
 {
     return dirname($path);
 }
+
+/**
+ * @param string $shortcode
+ * @return string
+ */
+function do_shortcode($shortcode)
+{
+    return mockMethodTrace(__FUNCTION__, func_get_args());
+}

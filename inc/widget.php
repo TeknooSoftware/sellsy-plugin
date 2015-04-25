@@ -11,4 +11,4 @@ if ($title) {
     do_shortcode('[wpsellsy]');
     ?>
 </div>
-<?php echo $after_widget;
+<?php echo $afterWidget;

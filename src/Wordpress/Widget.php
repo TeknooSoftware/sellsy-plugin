@@ -46,7 +46,10 @@ class Widget extends \WP_Widget
     public function widget($args, $instance)
     {
         //Extract title
-        $title = \apply_filters('widget_title', $instance['title']) ;
+        $title = '';
+        if (isset($instance['title'])) {
+            $title = \apply_filters('widget_title', $instance['title']);
+        }
 
         //Extract body
         $out = '';
@@ -86,22 +89,22 @@ class Widget extends \WP_Widget
      * This function should check that $new_instance is set correctly. The newly-calculated
      * value of `$instance` should be returned. If false is returned, the instance won't be
      * saved/updated.
-     * @param array $new_instance New settings for this instance as input by the user via
+     * @param array $newInstance New settings for this instance as input by the user via
      *                            {@see WP_Widget::form()}.
-     * @param array $old_instance Old settings for this instance.
+     * @param array $oldInstance Old settings for this instance.
      * @return array Settings to save or bool false to cancel saving.
      */
-    public function update($new_instance, $old_instance)
+    public function update($newInstance, $oldInstance)
     {
-        if (isset($new_instance['title'])) {
-            $old_instance['title'] = strip_tags($new_instance['title']);
+        if (isset($oldInstance['title'])) {
+            $newInstance['title'] = strip_tags($oldInstance['title']);
         }
 
-        if (isset($new_instance['texte'])) {
-            $old_instance['text'] = strip_tags($new_instance['text']);
+        if (isset($oldInstance['text'])) {
+            $newInstance['text'] = strip_tags($oldInstance['text']);
         }
 
-        return $old_instance;
+        return $newInstance;
     }
 
     /**
