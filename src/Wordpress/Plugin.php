@@ -159,7 +159,16 @@ class Plugin
         }
 
         try {
-            $customFields = $this->sellsyClient->customFields()->getList(array('search' => array('useOn' => (array)$for)));
+            $customFields = $this->sellsyClient
+                ->customFields()
+                ->getList(
+                    array(
+                        'search' => array(
+                            'useOn' => (array)$for
+                        )
+                    )
+                );
+
             foreach ($customFields->response->result as $customFields) {
                 $final[$customFields->code] = new CustomField(
                     $customFields->id,
@@ -174,7 +183,12 @@ class Plugin
                 );
             }
         } catch (\Exception $e) {
-            add_settings_error(OptionsBag::WORDPRESS_SETTINGS_NAME, 'sellSyTokens', __('Erreur: Connexion à l\'API Sellsy impossible. Les tokens saisis sont incorrects.', 'wpsellsy'), 'error');
+            add_settings_error(
+                OptionsBag::WORDPRESS_SETTINGS_NAME,
+                'sellSyTokens',
+                __('Erreur: Connexion à l\'API Sellsy impossible. Les tokens saisis sont incorrects.', 'wpsellsy'),
+                'error'
+            );
         }
 
         //Backup in local cache to avoid multiple api request for this execution
