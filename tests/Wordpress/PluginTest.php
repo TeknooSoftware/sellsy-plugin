@@ -394,6 +394,379 @@ class PluginTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(array(), array_values(array_diff($methodCalled, array('__'))));
     }
 
+    public function testListSelectedFieldsEmptyNoSelect()
+    {
+        $this->assertEquals(array(), $this->buildPlugin()->listSelectedFields());
+    }
+
+    public function testListSelectedFieldsEmptySelectCreationProspect()
+    {
+        $this->buildOptionsMock()
+            ->expects($this->any())
+            ->method('offsetGet')
+            ->willReturnCallback(
+                function ($name) {
+                    $map = array(
+                        Settings::OPPORTUNITY_CREATION => 'prospectOnly',
+                        Settings::FIELDS_SELECTED => array()
+                    );
+
+                    if (isset($map[$name])) {
+                        return $map[$name];
+                    }
+
+                    return null;
+                }
+            );
+
+        $this->assertEquals(array(), $this->buildPlugin()->listSelectedFields());
+    }
+
+    public function testListSelectedFieldsEmptySelectCreationOpp()
+    {
+        $this->buildOptionsMock()
+            ->expects($this->any())
+            ->method('offsetGet')
+            ->willReturnCallback(
+                function ($name) {
+                    $map = array(
+                        Settings::OPPORTUNITY_CREATION => 'prospectOpportunity',
+                        Settings::FIELDS_SELECTED => array()
+                    );
+
+
+                    if (isset($map[$name])) {
+                        return $map[$name];
+                    }
+
+                    return null;
+                }
+            );
+
+        $this->assertEquals(array(), $this->buildPlugin()->listSelectedFields());
+    }
+
+    public function testListSelectedFieldsSelectCreationProspect()
+    {
+        $listCustomFieldMock = array(
+            'response' => array(
+                'result' => array(
+                    array(
+                        'id' => 1,
+                        'type' => 'text',
+                        'name' => 'field1',
+                        'code' => 'field1',
+                        'description' => 'desc',
+                        'defaultValue' => 'def',
+                        'prefsList' => null,
+                        'isRequired' => 'Y'
+                    ),
+                    array(
+                        'id' => 2,
+                        'type' => 'text',
+                        'name' => 'field2',
+                        'code' => 'field2',
+                        'description' => 'desc',
+                        'defaultValue' => 'def',
+                        'prefsList' => null,
+                        'isRequired' => 'Y'
+                    )
+                )
+            )
+        );
+
+        $customFieldMock = $this->getMock('UniAlteri\Sellsy\Client\Collection\Collection', array('getList'), array(), '', false);
+        $customFieldMock->expects($this->once())
+            ->method('getList')
+            ->with(
+                $this->equalTo(
+                    array(
+                        'search' => array(
+                            'useOn' => (array) 'prospect'
+                        )
+                    )
+                )
+            )
+            ->willReturn(json_decode(json_encode($listCustomFieldMock)));
+
+        $this->buildClientMock()
+            ->expects($this->once())
+            ->method('customFields')
+            ->willReturn($customFieldMock);
+
+        $this->buildOptionsMock()
+            ->expects($this->any())
+            ->method('offsetGet')
+            ->willReturnCallback(
+                function ($name) {
+                    $map = array(
+                        Settings::OPPORTUNITY_CREATION => 'prospectOnly',
+                        Settings::FIELDS_SELECTED => array('contactCivil', 'field1')
+                    );
+
+                    if (isset($map[$name])) {
+                        return $map[$name];
+                    }
+
+                    return null;
+                }
+            );
+
+        $fieldsList = $this->buildPlugin()->listSelectedFields();
+
+        $this->assertEquals(
+            array (
+                'contactCivil',
+                'field1'
+            ),
+            array_keys($fieldsList)
+        );
+
+        foreach ($fieldsList as $code=>$field) {
+            $this->assertInstanceOf('UniAlteri\Sellsy\Wordpress\Form\CustomField', $field);
+            $this->assertEquals($code, $field->getCode());
+        }
+    }
+
+    public function testListSelectedFieldsSelectCreationOpp()
+    {
+        $listCustomFieldMock = array(
+            'response' => array(
+                'result' => array(
+                    array(
+                        'id' => 1,
+                        'type' => 'text',
+                        'name' => 'field1',
+                        'code' => 'field1',
+                        'description' => 'desc',
+                        'defaultValue' => 'def',
+                        'prefsList' => null,
+                        'isRequired' => 'Y'
+                    ),
+                    array(
+                        'id' => 2,
+                        'type' => 'text',
+                        'name' => 'field2',
+                        'code' => 'field2',
+                        'description' => 'desc',
+                        'defaultValue' => 'def',
+                        'prefsList' => null,
+                        'isRequired' => 'Y'
+                    )
+                )
+            )
+        );
+
+        $customFieldMock = $this->getMock('UniAlteri\Sellsy\Client\Collection\Collection', array('getList'), array(), '', false);
+        $customFieldMock->expects($this->once())
+            ->method('getList')
+            ->with(
+                $this->equalTo(
+                    array(
+                        'search' => array(
+                            'useOn' => (array) 'prospect'
+                        )
+                    )
+                )
+            )
+            ->willReturn(json_decode(json_encode($listCustomFieldMock)));
+
+        $this->buildClientMock()
+            ->expects($this->once())
+            ->method('customFields')
+            ->willReturn($customFieldMock);
+
+        $this->buildOptionsMock()
+            ->expects($this->any())
+            ->method('offsetGet')
+            ->willReturnCallback(
+                function ($name) {
+                    $map = array(
+                        Settings::OPPORTUNITY_CREATION => 'prospectOpportunity',
+                        Settings::FIELDS_SELECTED => array('contactCivil', 'field1')
+                    );
+
+
+                    if (isset($map[$name])) {
+                        return $map[$name];
+                    }
+
+                    return null;
+                }
+            );
+
+        $fieldsList = $this->buildPlugin()->listSelectedFields();
+
+        $this->assertEquals(
+            array (
+                'contactCivil',
+                'field1'
+            ),
+            array_keys($fieldsList)
+        );
+
+        foreach ($fieldsList as $code=>$field) {
+            $this->assertInstanceOf('UniAlteri\Sellsy\Wordpress\Form\CustomField', $field);
+            $this->assertEquals($code, $field->getCode());
+        }
+    }
+
+    public function testGetSourcesListEmpty()
+    {
+        $this->buildOptionsMock()
+            ->expects($this->any())
+            ->method('offsetGet')
+            ->willReturnCallback(
+                function ($name) {
+                    $map = array(
+                        Settings::OPPORTUNITY_SOURCE => ''
+                    );
+
+                    if (isset($map[$name])) {
+                        return $map[$name];
+                    }
+
+                    return null;
+                }
+            );
+
+        $this->assertEquals(array(), $this->buildPlugin()->getSourcesList());
+    }
+
+    public function testGetSourcesList()
+    {
+        $this->buildOptionsMock()
+            ->expects($this->any())
+            ->method('offsetGet')
+            ->willReturnCallback(
+                function ($name) {
+                    $map = array(
+                        Settings::OPPORTUNITY_SOURCE => 'source1,source2'
+                    );
+
+                    if (isset($map[$name])) {
+                        return $map[$name];
+                    }
+
+                    return null;
+                }
+            );
+
+        $this->assertEquals(array('source1','source2'), $this->buildPlugin()->getSourcesList());
+    }
+
+    public function testCheckOppListSources()
+    {
+        $sourceListMock = array(
+            'response' => array(
+                array(
+                    'id' => 1,
+                    'label' => 'label1'
+                ),
+                array(
+                    'id' => 2,
+                    'label' => 'label2'
+                )
+            )
+        );
+
+        $opportunitiesMock = $this->getMock('UniAlteri\Sellsy\Client\Collection\Collection', array('getSources'), array(), '', false);
+        $opportunitiesMock->expects($this->any())
+            ->method('getSources')
+            ->willReturn(json_decode(json_encode($sourceListMock)));
+
+        $this->buildClientMock()
+            ->expects($this->any())
+            ->method('opportunities')
+            ->willReturn($opportunitiesMock);
+
+        $this->assertEquals(
+            array(
+                'label1' => true,
+                'label3' => false,
+                'label2' => true
+            ),
+            $this->buildPlugin()->checkOppListSources(
+                array(
+                    'label1',
+                    'label3',
+                    'label2'
+                )
+            )
+        );
+    }
+
+    public function testCheckOppSourceException()
+    {
+        $opportunitiesMock = $this->getMock('UniAlteri\Sellsy\Client\Collection\Collection', array('getSources'), array(), '', false);
+        $opportunitiesMock->expects($this->once())
+            ->method('getSources')
+            ->willThrowException(new \Exception('error'));
+
+        $this->buildClientMock()
+            ->expects($this->once())
+            ->method('opportunities')
+            ->willReturn($opportunitiesMock);
+
+        $this->assertFalse($this->buildPlugin()->checkOppSource('label2'));
+    }
+
+    public function testCheckOppSourceYes()
+    {
+        $sourceListMock = array(
+            'response' => array(
+                array(
+                    'id' => 1,
+                    'label' => 'label1'
+                ),
+                array(
+                    'id' => 2,
+                    'label' => 'label2'
+                )
+            )
+        );
+
+        $opportunitiesMock = $this->getMock('UniAlteri\Sellsy\Client\Collection\Collection', array('getSources'), array(), '', false);
+        $opportunitiesMock->expects($this->once())
+            ->method('getSources')
+            ->willReturn(json_decode(json_encode($sourceListMock)));
+
+        $this->buildClientMock()
+            ->expects($this->once())
+            ->method('opportunities')
+            ->willReturn($opportunitiesMock);
+
+        $this->assertTrue($this->buildPlugin()->checkOppSource('label2'));
+    }
+
+    public function testCheckOppSourceNo()
+    {
+        $sourceListMock = array(
+            'response' => array(
+                array(
+                    'id' => 1,
+                    'label' => 'label1'
+                ),
+                array(
+                    'id' => 2,
+                    'label' => 'label2'
+                )
+            )
+        );
+
+        $opportunitiesMock = $this->getMock('UniAlteri\Sellsy\Client\Collection\Collection', array('getSources'), array(), '', false);
+        $opportunitiesMock->expects($this->once())
+            ->method('getSources')
+            ->willReturn(json_decode(json_encode($sourceListMock)));
+
+        $this->buildClientMock()
+            ->expects($this->once())
+            ->method('opportunities')
+            ->willReturn($opportunitiesMock);
+
+        $this->assertFalse($this->buildPlugin()->checkOppSource('label3'));
+    }
+
     public function testCheckCUrlExtensions()
     {
 
