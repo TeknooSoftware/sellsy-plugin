@@ -302,7 +302,6 @@ class Plugin
     public function createOppSource()
     {
         //Retrieve the Nonce/XSRF id to check its validity
-        //todo remove in another method
         $nonce = null;
         if (isset($_POST['nonce'])) {
             $nonce = $_POST['nonce'];
@@ -310,7 +309,8 @@ class Plugin
 
         //Check Nonce/XSRF to avoid attacks
         if (!\wp_verify_nonce($nonce, 'slswp_ajax_nonce')) {
-            \wp_die(__('Accès interdit', 'wpsellsy'));
+            \wp_die(__('Forbidden access', 'wpsellsy'));
+            return;
         }
 
         //Check if the
@@ -324,19 +324,18 @@ class Plugin
 
                 if (!empty($result->response)) {
                     //Successful
-                    echo 'true';
-                    exit;
+                    \wp_die('true');
+                    return;
                 }
             } catch (\Exception $e) {
                 //Failure
-                echo 'false';
-                exit;
+                \wp_die('false');
+                return;
             }
         }
 
         //Failure
-        echo 'false';
-        exit;
+        \wp_die('false');
     }
 
     /**

@@ -403,6 +403,23 @@ class PluginTest extends \PHPUnit_Framework_TestCase
     {
         $this->buildOptionsMock()
             ->expects($this->any())
+            ->method('offsetExists')
+            ->willReturnCallback(
+                function ($name) {
+                    if (Settings::OPPORTUNITY_CREATION == $name) {
+                        return true;
+                    }
+
+                    if (Settings::FIELDS_SELECTED == $name) {
+                        return true;
+                    }
+
+                    return false;
+                }
+            );
+
+        $this->buildOptionsMock()
+            ->expects($this->any())
             ->method('offsetGet')
             ->willReturnCallback(
                 function ($name) {
@@ -424,6 +441,23 @@ class PluginTest extends \PHPUnit_Framework_TestCase
 
     public function testListSelectedFieldsEmptySelectCreationOpp()
     {
+        $this->buildOptionsMock()
+            ->expects($this->any())
+            ->method('offsetExists')
+            ->willReturnCallback(
+                function ($name) {
+                    if (Settings::OPPORTUNITY_CREATION == $name) {
+                        return true;
+                    }
+
+                    if (Settings::FIELDS_SELECTED == $name) {
+                        return true;
+                    }
+
+                    return false;
+                }
+            );
+
         $this->buildOptionsMock()
             ->expects($this->any())
             ->method('offsetGet')
@@ -448,6 +482,23 @@ class PluginTest extends \PHPUnit_Framework_TestCase
 
     public function testListSelectedFieldsSelectCreationProspect()
     {
+        $this->buildOptionsMock()
+            ->expects($this->any())
+            ->method('offsetExists')
+            ->willReturnCallback(
+                function ($name) {
+                    if (Settings::OPPORTUNITY_CREATION == $name) {
+                        return true;
+                    }
+
+                    if (Settings::FIELDS_SELECTED == $name) {
+                        return true;
+                    }
+
+                    return false;
+                }
+            );
+
         $listCustomFieldMock = array(
             'response' => array(
                 'result' => array(
@@ -530,6 +581,23 @@ class PluginTest extends \PHPUnit_Framework_TestCase
 
     public function testListSelectedFieldsSelectCreationOpp()
     {
+        $this->buildOptionsMock()
+            ->expects($this->any())
+            ->method('offsetExists')
+            ->willReturnCallback(
+                function ($name) {
+                    if (Settings::OPPORTUNITY_CREATION == $name) {
+                        return true;
+                    }
+
+                    if (Settings::FIELDS_SELECTED == $name) {
+                        return true;
+                    }
+
+                    return false;
+                }
+            );
+
         $listCustomFieldMock = array(
             'response' => array(
                 'result' => array(
@@ -765,6 +833,328 @@ class PluginTest extends \PHPUnit_Framework_TestCase
             ->willReturn($opportunitiesMock);
 
         $this->assertFalse($this->buildPlugin()->checkOppSource('label3'));
+    }
+
+    public function testCreateOppSourceException()
+    {
+        $_POST = array('nonce' => 'nonceValue');
+
+        $plugin = $this->buildPlugin();
+        prepareMock('wp_verify_nonce', array('nonceValue', 'slswp_ajax_nonce'), false);
+
+        global $methodCalled;
+        $methodCalled = array();
+
+        $plugin->createOppSource();
+
+        $this->assertEquals(array('wp_verify_nonce', '__', 'wp_die'), $methodCalled);
+    }
+
+    public function testCreateOppSourceInvalid()
+    {
+        $_POST = array('nonce' => 'nonceValue');
+
+        $plugin = $this->buildPlugin();
+        prepareMock('wp_verify_nonce', array('nonceValue', 'slswp_ajax_nonce'), true);
+
+        global $methodCalled;
+        global $methodArgs;
+        $methodCalled = array();
+        $methodArgs = array();
+
+        $plugin->createOppSource();
+
+        $this->assertEquals(array('wp_verify_nonce', 'wp_die'), $methodCalled);
+        $this->assertEquals(
+            array(
+                array('nonceValue', 'slswp_ajax_nonce'),
+                array('false')
+            ),
+            $methodArgs
+        );
+    }
+
+    public function testCreateOppSourceNoForm()
+    {
+        $_POST = array(
+            'nonce' => 'nonceValue',
+            'action' => 'sls_createOppSource',
+            'param' => 'fooBar'
+        );
+
+        $plugin = $this->buildPlugin();
+        prepareMock('wp_verify_nonce', array('nonceValue', 'slswp_ajax_nonce'), true);
+
+        global $methodCalled;
+        global $methodArgs;
+        $methodCalled = array();
+        $methodArgs = array();
+
+        $plugin->createOppSource();
+
+        $this->assertEquals(array('wp_verify_nonce', 'wp_die'), $methodCalled);
+        $this->assertEquals(
+            array(
+                array('nonceValue', 'slswp_ajax_nonce'),
+                array('false')
+            ),
+            $methodArgs
+        );
+    }
+
+    public function testCreateOppSourceReturnFalse()
+    {
+        $_POST = array(
+            'nonce' => 'nonceValue',
+            'action' => 'sls_createOppSource',
+            'param' => 'creerSource',
+            'source' => 'source1'
+        );
+
+        $sourceListMock = array(
+            'response' => false
+        );
+
+        $opportunitiesMock = $this->getMock('UniAlteri\Sellsy\Client\Collection\Collection', array('createSource'), array(), '', false);
+        $opportunitiesMock->expects($this->any())
+            ->method('createSource')
+            ->with(
+                $this->equalTo(
+                    array('source' => array('label' => 'source1'))
+                )
+            )
+            ->willReturn(json_decode(json_encode($sourceListMock)));
+
+        $this->buildClientMock()
+            ->expects($this->any())
+            ->method('opportunities')
+            ->willReturn($opportunitiesMock);
+
+        $plugin = $this->buildPlugin();
+        prepareMock('wp_verify_nonce', array('nonceValue', 'slswp_ajax_nonce'), true);
+
+        global $methodCalled;
+        global $methodArgs;
+        $methodCalled = array();
+        $methodArgs = array();
+
+        $plugin->createOppSource();
+
+        $this->assertEquals(array('wp_verify_nonce', 'wp_die'), $methodCalled);
+        $this->assertEquals(
+            array(
+                array('nonceValue', 'slswp_ajax_nonce'),
+                array('false')
+            ),
+            $methodArgs
+        );
+    }
+
+    public function testCreateOppSourceReturnTrue()
+    {
+        $_POST = array(
+            'nonce' => 'nonceValue',
+            'action' => 'sls_createOppSource',
+            'param' => 'creerSource',
+            'source' => 'source1'
+        );
+
+        $sourceListMock = array(
+            'response' => true
+        );
+
+        $opportunitiesMock = $this->getMock('UniAlteri\Sellsy\Client\Collection\Collection', array('createSource'), array(), '', false);
+        $opportunitiesMock->expects($this->any())
+            ->method('createSource')
+            ->with(
+                $this->equalTo(
+                    array('source' => array('label' => 'source1'))
+                )
+            )
+            ->willReturn(json_decode(json_encode($sourceListMock)));
+
+        $this->buildClientMock()
+            ->expects($this->any())
+            ->method('opportunities')
+            ->willReturn($opportunitiesMock);
+
+        $plugin = $this->buildPlugin();
+        prepareMock('wp_verify_nonce', array('nonceValue', 'slswp_ajax_nonce'), true);
+
+        global $methodCalled;
+        global $methodArgs;
+        $methodCalled = array();
+        $methodArgs = array();
+
+        $plugin->createOppSource();
+
+        $this->assertEquals(array('wp_verify_nonce', 'wp_die'), $methodCalled);
+        $this->assertEquals(
+            array(
+                array('nonceValue', 'slswp_ajax_nonce'),
+                array('true')
+            ),
+            $methodArgs
+        );
+    }
+
+    public function testCreateProspect()
+    {
+        $listCustomFieldMock = array(
+            'response' => array(
+                'result' => array(
+                    array(
+                        'id' => 1,
+                        'type' => 'text',
+                        'name' => 'field1',
+                        'code' => 'field1',
+                        'description' => 'desc',
+                        'defaultValue' => 'def',
+                        'prefsList' => null,
+                        'isRequired' => 'Y'
+                    ),
+                    array(
+                        'id' => 2,
+                        'type' => 'text',
+                        'name' => 'field2',
+                        'code' => 'field2',
+                        'description' => 'desc',
+                        'defaultValue' => 'def',
+                        'prefsList' => null,
+                        'isRequired' => 'Y'
+                    )
+                )
+            )
+        );
+
+        $prospectMock = $this->getMock('UniAlteri\Sellsy\Client\Collection\Collection', array('create'), array(), '', false);
+        $prospectMock->expects($this->once())
+            ->method('create')
+            ->with(
+                $this->equalTo(
+                    array()
+                )
+            )
+            ->willReturn(345);
+
+        $customFieldMock = $this->getMock('UniAlteri\Sellsy\Client\Collection\Collection', array('getList'), array(), '', false);
+        $customFieldMock->expects($this->once())
+            ->method('getList')
+            ->with(
+                $this->equalTo(
+                    array(
+                        'search' => array(
+                            'useOn' => (array) 'prospect'
+                        )
+                    )
+                )
+            )
+            ->willReturn(json_decode(json_encode($listCustomFieldMock)));
+
+        $this->buildClientMock()
+            ->expects($this->once())
+            ->method('customFields')
+            ->willReturn($customFieldMock);
+
+        $this->buildClientMock()
+            ->expects($this->once())
+            ->method('prospects')
+            ->willReturn($prospectMock);
+
+        $plugin = $this->buildPlugin();
+
+        $this->buildOptionsMock()
+            ->expects($this->any())
+            ->method('offsetGet')
+            ->willReturnCallback(
+                function ($name) {
+                    if (Settings::MANDATORIES_FIELDS == $name) {
+                        return array('contactName', 'field1');
+                    }
+
+                    if (Settings::FIELDS_SELECTED == $name) {
+                        return array('contactName', 'field1', 'contactEmail');
+                    }
+                }
+            );
+
+        $formValues = array(
+            'contactName' => 'fooBar',
+            'addressPart1' => 'street address'
+        );
+        $plugin->createProspect($formValues, $bodyOutput);
+    }
+
+    public function testGetOpportunityCurrentIdent()
+    {
+        $listCustomFieldMock = array(
+            'response' => 123
+        );
+
+        $customFieldMock = $this->getMock('UniAlteri\Sellsy\Client\Collection\Collection', array('getCurrentIdent'), array(), '', false);
+        $customFieldMock->expects($this->once())
+            ->method('getCurrentIdent')->willReturn(json_decode(json_encode($listCustomFieldMock)));
+
+        $this->buildClientMock()
+            ->expects($this->once())
+            ->method('customFields')
+            ->willReturn($customFieldMock);
+
+        $this->assertEquals(123, $this->buildPlugin()->getOpportunityCurrentIdent());
+    }
+
+    public function testGetFunnelIdDefaultAsObject()
+    {
+        $listCustomFieldMock = array(
+            'response' => array(
+                array(
+                    'id' => 456,
+                    'name' => 'Bar'
+                ),
+                array(
+                    'id' => 876,
+                    'name' => 'foo'
+                ),
+                array(
+                    'name' => 'default',
+                    'id' => 123
+                )
+            )
+        );
+
+        $customFieldMock = $this->getMock('UniAlteri\Sellsy\Client\Collection\Collection', array('getFunnels'), array(), '', false);
+        $customFieldMock->expects($this->once())
+            ->method('getFunnels')->willReturn(json_decode(json_encode($listCustomFieldMock)));
+
+        $this->buildClientMock()
+            ->expects($this->once())
+            ->method('customFields')
+            ->willReturn($customFieldMock);
+
+        $this->assertEquals(123, $this->buildPlugin()->getFunnelId());
+    }
+
+    public function testGetFunnelIdDefaultAsString()
+    {
+        $listCustomFieldMock = array(
+            'response' => array(
+                'bar' => 456,
+                'foo' => 876,
+                'defaultFunnel' => 123
+            )
+        );
+
+        $customFieldMock = $this->getMock('UniAlteri\Sellsy\Client\Collection\Collection', array('getFunnels'), array(), '', false);
+        $customFieldMock->expects($this->once())
+            ->method('getFunnels')->willReturn(json_decode(json_encode($listCustomFieldMock)));
+
+        $this->buildClientMock()
+            ->expects($this->once())
+            ->method('customFields')
+            ->willReturn($customFieldMock);
+
+        $this->assertEquals(123, $this->buildPlugin()->getFunnelId());
+
     }
 
     public function testCheckCUrlExtensions()
