@@ -458,10 +458,10 @@ class Plugin
         $funnelsList = $this->sellsyClient->opportunities()->getFunnels()->response;
         $pipelineId = null;
         foreach ($funnelsList as $key=>$funnel) {
-            if (is_object($funnel) && 'default' == $funnel->name) {
+            if (is_object($funnel) && 'default' === $funnel->name) {
                 $pipelineId = $funnel->id;
                 break;
-            } elseif ('defaultFunnel' == $key) {
+            } elseif ('defaultFunnel' === $key) {
                 $pipelineId = intval($funnel);
                 break;
             }
