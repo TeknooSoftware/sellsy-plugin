@@ -1699,6 +1699,142 @@ class PluginTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(345, $this->buildPlugin()->getSourceId('source2'));
     }
 
+    public function testCreateOpportunity()
+    {
+        $opportunitiesMock = $this->getMock(
+            'UniAlteri\Sellsy\Client\Collection\Collection',
+            array('getCurrentIdent', 'getFunnels', 'getStepsForFunnel', 'getSources', 'create'),
+            array(),
+            '',
+            false
+        );
+        $opportunitiesMock->expects($this->once())
+            ->method('getCurrentIdent')->willReturn(
+                json_decode(
+                    json_encode(
+                        array(
+                            'response' => 123
+                        )
+                    )
+                )
+            );
+
+        $opportunitiesMock->expects($this->once())
+            ->method('getFunnels')
+            ->willReturn(
+                json_decode(
+                    json_encode(
+                        array(
+                            'response' => array(
+                                'bar' => 456,
+                                'foo' => 876,
+                                'defaultFunnel' => 12356
+                            )
+                        )
+                    )
+                )
+            );
+
+        $opportunitiesMock->expects($this->once())
+            ->method('getStepsForFunnel')
+            ->with(
+                $this->equalTo(
+                    array(
+                        'funnelid' => 12356
+                    )
+                )
+            )
+            ->willReturn(
+                json_decode(
+                    json_encode(
+                        array(
+                            'response' => array(
+                                array(
+                                    'id' => 456
+                                ),
+                                array(
+                                    'id' => 678
+                                )
+                            )
+                        )
+                    )
+                )
+            );
+
+        $opportunitiesMock->expects($this->once())
+            ->method('getSources')
+            ->willReturn(
+                json_decode(
+                    json_encode(
+                        array(
+                            'response' => array(
+                                array(
+                                    'label' => '',
+                                    'id' => 456
+                                ),
+                                array(
+                                    'label' => 'source1',
+                                    'id' => 678
+                                ),
+                                array(
+                                    'label' => 'source2',
+                                    'id' => 345
+                                ),
+                                array(
+                                    'label' => 'source3',
+                                    'id' => 897
+                                )
+                            )
+                        )
+                    )
+                )
+            );
+
+        $opportunitiesMock->expects($this->once())
+            ->method('create')
+            ->willReturnCallback(
+                function ($args) {
+                    unset($args['opportunity']['dueDate']);
+
+                    $this->assertEquals(
+                        array(
+                            'opportunity' => array(
+                                'linkedtype' => 'prospect',
+                                'linkedid' => 1000,
+                                'ident' => 123,
+                                'sourceid' => 345,
+                                'name' => __('Contact from', 'wpsellsy').' source2',
+                                'funnelid' => 12356,
+                                'stepid' => 456,
+                                'brief' => 'Note'
+                            )
+                        ),
+                        $args
+                    );
+
+                    return json_decode(
+                        json_encode(
+                            array('response' => 45600)
+                        )
+                    );
+                }
+            );
+
+        $this->buildClientMock()
+            ->expects($this->atLeastOnce())
+            ->method('opportunities')
+            ->willReturn($opportunitiesMock);
+
+        $this->assertEquals(
+            45600,
+            $this->buildPlugin()->createOpportunity(
+                1000,
+                'source2',
+                'Note'
+            )
+        );
+    }
+
     public function testCheckCUrlExtensions()
     {
 
