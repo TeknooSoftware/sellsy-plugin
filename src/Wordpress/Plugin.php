@@ -481,7 +481,7 @@ class Plugin
         if (!empty($funnelId)) {
             $stepsList = $this->sellsyClient->opportunities()->getStepsForFunnel(array('funnelid' => $funnelId))->response;
 
-            foreach ($stepsList as $key => $step) {
+            foreach ($stepsList as $step) {
                 $stepId = $step->id;
                 break;
             }
@@ -499,7 +499,7 @@ class Plugin
     {
         $sourceId = null;
         $sourcesList = $this->sellsyClient->opportunities()->getSources()->response;
-        foreach ($sourcesList as $key=>$source) {
+        foreach ($sourcesList as $source) {
             if (!empty($source->label) && $sourceName == $source->label){
                 $sourceId = $source->id;
                 break;

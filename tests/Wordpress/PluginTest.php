@@ -1617,6 +1617,88 @@ class PluginTest extends \PHPUnit_Framework_TestCase
 
     }
 
+    public function testGetStepIdNull()
+    {
+        $this->assertNull($this->buildPlugin()->getStepId(null));
+    }
+
+    public function testGetStepId()
+    {
+        $opportunitiesMock = $this->getMock('UniAlteri\Sellsy\Client\Collection\Collection', array('getStepsForFunnel'), array(), '', false);
+        $opportunitiesMock->expects($this->once())
+            ->method('getStepsForFunnel')
+            ->with(
+                $this->equalTo(
+                    array(
+                        'funnelid' => 123
+                    )
+                )
+            )
+            ->willReturn(
+                json_decode(
+                    json_encode(
+                        array(
+                            'response' => array(
+                                array(
+                                    'id' => 456
+                                ),
+                                array(
+                                    'id' => 678
+                                )
+                            )
+                        )
+                    )
+                )
+            );
+
+        $this->buildClientMock()
+            ->expects($this->atLeastOnce())
+            ->method('opportunities')
+            ->willReturn($opportunitiesMock);
+
+        $this->assertEquals(456, $this->buildPlugin()->getStepId(123));
+    }
+
+    public function testGetSourceId()
+    {
+        $opportunitiesMock = $this->getMock('UniAlteri\Sellsy\Client\Collection\Collection', array('getSources'), array(), '', false);
+        $opportunitiesMock->expects($this->once())
+            ->method('getSources')
+            ->willReturn(
+                json_decode(
+                    json_encode(
+                        array(
+                            'response' => array(
+                                array(
+                                    'label' => '',
+                                    'id' => 456
+                                ),
+                                array(
+                                    'label' => 'source1',
+                                    'id' => 678
+                                ),
+                                array(
+                                    'label' => 'source2',
+                                    'id' => 345
+                                ),
+                                array(
+                                    'label' => 'source3',
+                                    'id' => 897
+                                )
+                            )
+                        )
+                    )
+                )
+            );
+
+        $this->buildClientMock()
+            ->expects($this->atLeastOnce())
+            ->method('opportunities')
+            ->willReturn($opportunitiesMock);
+
+        $this->assertEquals(345, $this->buildPlugin()->getSourceId('source2'));
+    }
+
     public function testCheckCUrlExtensions()
     {
 
