@@ -998,6 +998,49 @@ class PluginTest extends \PHPUnit_Framework_TestCase
         );
     }
 
+    public function testCreateOppSourceReturnException()
+    {
+        $_POST = array(
+            'nonce' => 'nonceValue',
+            'action' => 'sls_createOppSource',
+            'param' => 'creerSource',
+            'source' => 'source1'
+        );
+
+        $sourceListMock = array(
+            'response' => true
+        );
+
+        $opportunitiesMock = $this->getMock('UniAlteri\Sellsy\Client\Collection\Collection', array('createSource'), array(), '', false);
+        $opportunitiesMock->expects($this->any())
+            ->method('createSource')
+            ->willThrowException(new \Exception('message'));
+
+        $this->buildClientMock()
+            ->expects($this->any())
+            ->method('opportunities')
+            ->willReturn($opportunitiesMock);
+
+        $plugin = $this->buildPlugin();
+        prepareMock('wp_verify_nonce', array('nonceValue', 'slswp_ajax_nonce'), true);
+
+        global $methodCalled;
+        global $methodArgs;
+        $methodCalled = array();
+        $methodArgs = array();
+
+        $plugin->createOppSource();
+
+        $this->assertEquals(array('wp_verify_nonce', 'wp_die'), $methodCalled);
+        $this->assertEquals(
+            array(
+                array('nonceValue', 'slswp_ajax_nonce'),
+                array('false')
+            ),
+            $methodArgs
+        );
+    }
+
     public function testCreateProspect()
     {
         $listCustomFieldMock = array(
@@ -1099,6 +1142,268 @@ class PluginTest extends \PHPUnit_Framework_TestCase
         prepareMock('sanitize_text_field', '*', function ($args) { return $args;});
 
         $this->assertEquals(345, $plugin->createProspect($formValues, $bodyOutput));
+    }
+
+    public function testCreateProspectNonValid()
+    {
+        $listCustomFieldMock = array('response' => array('result' => array()));
+
+        $customFieldMock = $this->getMock('UniAlteri\Sellsy\Client\Collection\Collection', array('getList', 'recordValues'), array(), '', false);
+        $customFieldMock->expects($this->once())
+            ->method('getList')
+            ->with(
+                $this->equalTo(
+                    array(
+                        'search' => array(
+                            'useOn' => (array) 'prospect'
+                        )
+                    )
+                )
+            )
+            ->willReturn(json_decode(json_encode($listCustomFieldMock)));
+
+        $customFieldMock->expects($this->never())
+            ->method('recordValues');
+
+        $this->buildClientMock()
+            ->expects($this->once())
+            ->method('customFields')
+            ->willReturn($customFieldMock);
+
+        $this->buildClientMock()
+            ->expects($this->never())
+            ->method('prospects');
+
+        $plugin = $this->buildPlugin();
+
+        $this->buildOptionsMock()
+            ->expects($this->any())
+            ->method('offsetGet')
+            ->willReturnCallback(
+                function ($name) {
+                    if (Settings::MANDATORIES_FIELDS == $name) {
+                        return array();
+                    }
+
+                    if (Settings::FIELDS_SELECTED == $name) {
+                        return array('contactEmail');
+                    }
+                }
+            );
+
+        $formValues = array(
+            'contactEmail' => 'fooBar'
+        );
+
+        prepareMock('sanitize_text_field', '*', function ($args) { return $args;});
+
+        $this->assertEquals(array('contactEmail'=>''), $plugin->createProspect($formValues, $bodyOutput));
+    }
+
+    public function testCreateProspectException()
+    {
+        $listCustomFieldMock = array(
+            'response' => array(
+                'result' => array(
+                    array(
+                        'id' => 1,
+                        'type' => 'text',
+                        'name' => 'field1',
+                        'code' => 'field1',
+                        'description' => 'desc',
+                        'defaultValue' => 'def',
+                        'prefsList' => null,
+                        'isRequired' => 'Y'
+                    ),
+                    array(
+                        'id' => 2,
+                        'type' => 'text',
+                        'name' => 'field2',
+                        'code' => 'field2',
+                        'description' => 'desc',
+                        'defaultValue' => 'def',
+                        'prefsList' => null,
+                        'isRequired' => 'Y'
+                    )
+                )
+            )
+        );
+
+        $prospectMock = $this->getMock('UniAlteri\Sellsy\Client\Collection\Collection', array('create'), array(), '', false);
+        $prospectMock->expects($this->once())
+            ->method('create')
+            ->with(
+                $this->equalTo(
+                    array(
+                        'third' => array(
+                            'name' => 'fooBar'
+                        ),
+                        'contact' => array(
+                            'name' => 'fooBar',
+                        ),
+                        'address' => array(
+                            'part1' => 'street address'
+                        )
+                    )
+                )
+            )
+            ->willThrowException(new \Exception('message'));
+
+        $customFieldMock = $this->getMock('UniAlteri\Sellsy\Client\Collection\Collection', array('getList', 'recordValues'), array(), '', false);
+        $customFieldMock->expects($this->once())
+            ->method('getList')
+            ->with(
+                $this->equalTo(
+                    array(
+                        'search' => array(
+                            'useOn' => (array) 'prospect'
+                        )
+                    )
+                )
+            )
+            ->willReturn(json_decode(json_encode($listCustomFieldMock)));
+
+        $customFieldMock->expects($this->never())
+            ->method('recordValues');
+
+        $this->buildClientMock()
+            ->expects($this->atLeastOnce())
+            ->method('customFields')
+            ->willReturn($customFieldMock);
+
+        $this->buildClientMock()
+            ->expects($this->once())
+            ->method('prospects')
+            ->willReturn($prospectMock);
+
+        $plugin = $this->buildPlugin();
+
+        $this->buildOptionsMock()
+            ->expects($this->any())
+            ->method('offsetGet')
+            ->willReturnCallback(
+                function ($name) {
+                    if (Settings::MANDATORIES_FIELDS == $name) {
+                        return array('contactName', 'field1');
+                    }
+
+                    if (Settings::FIELDS_SELECTED == $name) {
+                        return array('contactName', 'field1', 'contactEmail');
+                    }
+                }
+            );
+
+        $formValues = array(
+            'contactName' => 'fooBar',
+            'addressPart1' => 'street address'
+        );
+
+        prepareMock('sanitize_text_field', '*', function ($args) { return $args;});
+
+        $this->assertEquals(array('message'), $plugin->createProspect($formValues, $bodyOutput));
+    }
+
+    public function testCreateProspectRunTimeException()
+    {
+        $listCustomFieldMock = array(
+            'response' => array(
+                'result' => array(
+                    array(
+                        'id' => 1,
+                        'type' => 'text',
+                        'name' => 'field1',
+                        'code' => 'field1',
+                        'description' => 'desc',
+                        'defaultValue' => 'def',
+                        'prefsList' => null,
+                        'isRequired' => 'Y'
+                    ),
+                    array(
+                        'id' => 2,
+                        'type' => 'text',
+                        'name' => 'field2',
+                        'code' => 'field2',
+                        'description' => 'desc',
+                        'defaultValue' => 'def',
+                        'prefsList' => null,
+                        'isRequired' => 'Y'
+                    )
+                )
+            )
+        );
+
+        $prospectMock = $this->getMock('UniAlteri\Sellsy\Client\Collection\Collection', array('create'), array(), '', false);
+        $prospectMock->expects($this->once())
+            ->method('create')
+            ->with(
+                $this->equalTo(
+                    array(
+                        'third' => array(
+                            'name' => 'fooBar'
+                        ),
+                        'contact' => array(
+                            'name' => 'fooBar',
+                        ),
+                        'address' => array(
+                            'part1' => 'street address'
+                        )
+                    )
+                )
+            )
+            ->willThrowException(new \RuntimeException('message'));
+
+        $customFieldMock = $this->getMock('UniAlteri\Sellsy\Client\Collection\Collection', array('getList', 'recordValues'), array(), '', false);
+        $customFieldMock->expects($this->once())
+            ->method('getList')
+            ->with(
+                $this->equalTo(
+                    array(
+                        'search' => array(
+                            'useOn' => (array) 'prospect'
+                        )
+                    )
+                )
+            )
+            ->willReturn(json_decode(json_encode($listCustomFieldMock)));
+
+        $customFieldMock->expects($this->never())
+            ->method('recordValues');
+
+        $this->buildClientMock()
+            ->expects($this->atLeastOnce())
+            ->method('customFields')
+            ->willReturn($customFieldMock);
+
+        $this->buildClientMock()
+            ->expects($this->once())
+            ->method('prospects')
+            ->willReturn($prospectMock);
+
+        $plugin = $this->buildPlugin();
+
+        $this->buildOptionsMock()
+            ->expects($this->any())
+            ->method('offsetGet')
+            ->willReturnCallback(
+                function ($name) {
+                    if (Settings::MANDATORIES_FIELDS == $name) {
+                        return array('contactName', 'field1');
+                    }
+
+                    if (Settings::FIELDS_SELECTED == $name) {
+                        return array('contactName', 'field1', 'contactEmail');
+                    }
+                }
+            );
+
+        $formValues = array(
+            'contactName' => 'fooBar',
+            'addressPart1' => 'street address'
+        );
+
+        prepareMock('sanitize_text_field', '*', function ($args) { return $args;});
+
+        $this->assertEquals(array('message'), $plugin->createProspect($formValues, $bodyOutput));
     }
 
     public function testCreateProspectCustom()
