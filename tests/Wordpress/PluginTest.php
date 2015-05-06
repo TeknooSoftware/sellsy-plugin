@@ -1835,8 +1835,101 @@ class PluginTest extends \PHPUnit_Framework_TestCase
         );
     }
 
+    public function testSendMail()
+    {
+        $this->buildOptionsMock()
+            ->expects($this->any())
+            ->method('offsetGet')
+            ->willReturnCallback(
+                function ($name) {
+                    $map = array(
+                        Settings::SUBMIT_NOTIFICATION => 'notification@email',
+                        Settings::FORM_NAME => 'form name',
+                    );
+
+                    if (isset($map[$name])) {
+                        return $map[$name];
+                    }
+
+                    return '';
+                }
+            );
+
+        $bodyValue = 'fooBar';
+        $_SERVER['SERVER_NAME'] = 'www.foo.bar';
+        \PHPMailer::$Result = true;
+        $this->assertTrue($this->buildPlugin()->sendMail($bodyValue));
+        $this->assertEquals('sellsy-form@foo.bar', \PHPMailer::$From);
+        $this->assertEquals(array('notification@email'), \PHPMailer::$Addresses);
+        $this->assertEquals($bodyValue, \PHPMailer::$Msg);
+    }
+
+    public function testSendMailEmpty()
+    {
+        $this->buildOptionsMock()
+            ->expects($this->any())
+            ->method('offsetGet')
+            ->willReturnCallback(
+                function ($name) {
+                    $map = array(
+                        Settings::SUBMIT_NOTIFICATION => 'notification@email',
+                        Settings::FORM_NAME => 'form name',
+                    );
+
+                    if (isset($map[$name])) {
+                        return $map[$name];
+                    }
+
+                    return '';
+                }
+            );
+
+
+        $this->buildOptionsMock()
+            ->expects($this->any())
+            ->method('offsetExists')
+            ->willReturn(true);
+
+        $bodyValue = 'fooBar';
+        $_SERVER['SERVER_NAME'] = 'www.foo.bar';
+        \PHPMailer::$Result = true;
+        $this->assertTrue($this->buildPlugin()->sendMail($bodyValue));
+        $this->assertEquals('sellsy-form@foo.bar', \PHPMailer::$From);
+        $this->assertEquals(array('notification@email'), \PHPMailer::$Addresses);
+        $this->assertEquals($bodyValue, \PHPMailer::$Msg);
+    }
+
+    public function testSendMailError()
+    {
+        $this->buildOptionsMock()
+            ->expects($this->any())
+            ->method('offsetGet')
+            ->willReturnCallback(
+                function ($name) {
+                    $map = array(
+                        Settings::SUBMIT_NOTIFICATION => 'notification@email',
+                        Settings::FORM_NAME => 'form name',
+                    );
+
+                    if (isset($map[$name])) {
+                        return $map[$name];
+                    }
+
+                    return '';
+                }
+            );
+
+        $bodyValue = 'fooBar';
+        $_SERVER['SERVER_NAME'] = 'www.foo.bar';
+        \PHPMailer::$Result = false;
+        $this->assertFalse($this->buildPlugin()->sendMail($bodyValue));
+        $this->assertEquals('sellsy-form@foo.bar', \PHPMailer::$From);
+        $this->assertEquals(array('notification@email'), \PHPMailer::$Addresses);
+        $this->assertEquals($bodyValue, \PHPMailer::$Msg);
+    }
+
     public function testCheckCUrlExtensions()
     {
-
+        $this->assertEquals(in_array('curl', get_loaded_extensions()), $this->buildPlugin()->checkCUrlExtensions());
     }
 }

@@ -50,11 +50,7 @@ class Plugin
      */
     public function checkCUrlExtensions()
     {
-        if (!in_array('curl', get_loaded_extensions())) {
-            return false;
-        }
-
-        return true;
+        return (bool) in_array('curl', get_loaded_extensions());
     }
 
     /**

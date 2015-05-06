@@ -25,3 +25,10 @@
 
 !defined('SELLSY_WP_WEB_URL')
     && define('SELLSY_WP_WEB_URL', 'https://www.sellsy.com/');
+
+
+!defined('ABSPATH')
+    && define('ABSPATH', __DIR__);
+
+!defined('WPINC')
+    && define('WPINC', '/tests/Support');
