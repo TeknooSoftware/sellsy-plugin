@@ -35,7 +35,20 @@ function mockMethodTrace($methodName, $methodArgsValues)
     global $methodMocks;
     $methodCalled[] = $methodName;
     $methodArgs[] = $methodArgsValues;
-    $argsHash = md5(serialize($methodArgsValues));
+
+    $serializable = true;
+    foreach ($methodArgsValues as $arg) {
+        if ($arg instanceof \Closure) {
+            $serializable = false;
+        }
+    }
+
+    if (true === $serializable) {
+        $argsHash = md5(serialize($methodArgsValues));
+    } else {
+        $argsHash = '*';
+    }
+
     if (isset($methodMocks[$methodName][$argsHash])) {
         if (is_callable($methodMocks[$methodName][$argsHash])) {
             return call_user_func_array($methodMocks[$methodName][$argsHash], $methodArgsValues);

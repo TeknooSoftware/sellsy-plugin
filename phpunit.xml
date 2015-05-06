@@ -18,6 +18,7 @@
     <filter>
         <whitelist>
             <directory>src</directory>
+            <file>wp_sellsy.php</file>
             <exclude>
                 <directory>tests</directory>
                 <directory>docs</directory>

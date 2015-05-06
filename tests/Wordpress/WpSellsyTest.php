@@ -14,12 +14,28 @@ class WpSellsyTest extends \PHPUnit_Framework_TestCase
         include dirname(dirname(__DIR__)).'/wp_sellsy.php';
 
         $this->assertEquals(
-            array(),
+            array (
+                'get_option',
+                'get_option',
+                'get_option',
+                'get_option',
+                'add_action',
+                'add_action',
+                'add_action',
+                'add_action',
+                'add_action',
+                'add_action',
+                'register_deactivation_hook',
+                'add_action',
+                'add_action',
+                'add_action',
+                'add_action',
+                'add_action',
+            ),
             $methodCalled
         );
 
-        $this->assertEquals(
-            array(),
+        $this->assertNotEmpty(
             $methodArgs
         );
     }

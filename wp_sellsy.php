@@ -66,8 +66,6 @@ if (class_exists('UniAlteri\Sellsy\Wordpress\Plugin')) {
 	add_action('widgets_init', function() {
 		if (class_exists('\UniAlteri\Sellsy\Wordpress\Widget')) {
 			register_widget('\UniAlteri\Sellsy\Wordpress\Widget');
-		} else {
-			wp_die('Error, class \UniAlteri\Sellsy\Wordpress\Widget not found');
 		}
 	});
 
