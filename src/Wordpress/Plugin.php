@@ -10,8 +10,7 @@ use UniAlteri\Sellsy\Wordpress\Type\Prospect;
 
 /**
  * Class Plugin
- * Class to manage plugin's features
- * @package UniAlteri\Sellsy\Wordpress
+ * Class to manage plugin's features.
  */
 class Plugin
 {
@@ -32,7 +31,7 @@ class Plugin
 
     /**
      * @param ClientInterface $sellsyClient
-     * @param OptionsBag $options
+     * @param OptionsBag      $options
      */
     public function __construct($sellsyClient, $options)
     {
@@ -45,7 +44,8 @@ class Plugin
     }
 
     /**
-     * Check if the Curl extensions is available in the plateform
+     * Check if the Curl extensions is available in the plateform.
+     *
      * @return true
      */
     public function checkCUrlExtensions()
@@ -54,7 +54,8 @@ class Plugin
     }
 
     /**
-     * To load translation for this modules
+     * To load translation for this modules.
+     *
      * @return $this
      */
     public function loadTranslation()
@@ -69,7 +70,8 @@ class Plugin
     }
 
     /**
-     * To uninstall this plugin
+     * To uninstall this plugin.
+     *
      * @return $this
      */
     public function disablePlugin()
@@ -80,7 +82,8 @@ class Plugin
     }
 
     /**
-     * Return the option's manager of this plugin
+     * Return the option's manager of this plugin.
+     *
      * @return OptionsBag
      */
     public function getOptionsBag()
@@ -89,7 +92,8 @@ class Plugin
     }
 
     /**
-     * Get the Sellsy client to use the API
+     * Get the Sellsy client to use the API.
+     *
      * @return Client
      */
     public function getSellsyClient()
@@ -98,7 +102,8 @@ class Plugin
     }
 
     /**
-     * To configure Sellsy with registered credentials
+     * To configure Sellsy with registered credentials.
+     *
      * @return $this
      */
     protected function configureSellsy()
@@ -114,7 +119,8 @@ class Plugin
     }
 
     /**
-     * To check if Sellsy credentials are goods
+     * To check if Sellsy credentials are goods.
+     *
      * @return bool
      */
     public function checkSellsyCredentials()
@@ -134,11 +140,13 @@ class Plugin
     }
 
     /**
-     * Return the list of fields
+     * Return the list of fields.
+     *
      * @param string $for
+     *
      * @return CustomField[]
      */
-    public function listCustomFields($for='prospect')
+    public function listCustomFields($for = 'prospect')
     {
         if (isset($this->customFieldsByType[$for])) {
             //To avoid multiple request
@@ -160,8 +168,8 @@ class Plugin
                 ->getList(
                     array(
                         'search' => array(
-                            'useOn' => (array)$for
-                        )
+                            'useOn' => (array) $for,
+                        ),
                     )
                 );
 
@@ -196,13 +204,15 @@ class Plugin
     /**
      * Return all required custom field : Sellsy can not add to an entity some custom fields
      * if there are some missing required fields...
+     *
      * @param string $for
+     *
      * @return CustomField[]
      */
-    public function listRequiredCustomFields($for='prospect')
+    public function listRequiredCustomFields($for = 'prospect')
     {
         $final = array();
-        foreach ($this->listCustomFields($for) as $code=>$field) {
+        foreach ($this->listCustomFields($for) as $code => $field) {
             if ($field->isRequiredField() && $field->isCustomField()) {
                 $final[$field->getId()] = $field;
             }
@@ -243,7 +253,8 @@ class Plugin
     }
 
     /**
-     * Return the list of defined sources
+     * Return the list of defined sources.
+     *
      * @return string[]
      */
     public function getSourcesList()
@@ -257,8 +268,10 @@ class Plugin
     }
 
     /**
-     * Check if all sources are defined
+     * Check if all sources are defined.
+     *
      * @param array $sourcesLabelsList
+     *
      * @return array
      */
     public function checkOppListSources($sourcesLabelsList)
@@ -272,8 +285,10 @@ class Plugin
     }
 
     /**
-     * Check if a opportunity source exist in the sellsy account
+     * Check if a opportunity source exist in the sellsy account.
+     *
      * @param string $label
+     *
      * @return bool
      */
     public function checkOppSource($label)
@@ -293,7 +308,7 @@ class Plugin
     }
 
     /**
-     * Method to create a opportunitiy source via the wordpress admin
+     * Method to create a opportunitiy source via the wordpress admin.
      */
     public function createOppSource()
     {
@@ -306,6 +321,7 @@ class Plugin
         //Check Nonce/XSRF to avoid attacks
         if (!\wp_verify_nonce($nonce, 'slswp_ajax_nonce')) {
             \wp_die(__('Forbidden access', 'wpsellsy'));
+
             return;
         }
 
@@ -321,11 +337,13 @@ class Plugin
                 if (!empty($result->response)) {
                     //Successful
                     \wp_die('true');
+
                     return;
                 }
             } catch (\Exception $e) {
                 //Failure
                 \wp_die('false');
+
                 return;
             }
         }
@@ -335,9 +353,10 @@ class Plugin
     }
 
     /**
-     * Method to find missing required custom fields to populate the new record with default value to avoid error
-     * @param string $for entity type in Sellsy
-     * @param array $customValues already populated values
+     * Method to find missing required custom fields to populate the new record with default value to avoid error.
+     *
+     * @param string $for          entity type in Sellsy
+     * @param array  $customValues already populated values
      */
     protected function addMissingRequiredField($for, &$customValues)
     {
@@ -356,9 +375,11 @@ class Plugin
     }
 
     /**
-     * Create prospect
-     * @param array $formValues
-     * @param string $body output body used for email notification
+     * Create prospect.
+     *
+     * @param array  $formValues
+     * @param string $body       output body used for email notification
+     *
      * @return int|array
      */
     public function createProspect(array &$formValues, &$body)
@@ -375,7 +396,7 @@ class Plugin
 
         $customValues = array();
         //Browse all form's fields
-        foreach ($formValues as $key=>$fieldValue) {
+        foreach ($formValues as $key => $fieldValue) {
             $originalValue = $fieldValue;
             try {
                 //Check field validity
@@ -420,7 +441,7 @@ class Plugin
                         array(
                             'linkedtype' => 'prospect',
                             'linkedid' => $prospectId,
-                            'values' => $customValues
+                            'values' => $customValues,
                         )
                     );
                 }
@@ -437,7 +458,8 @@ class Plugin
     }
 
     /**
-     * Get next value to use for the opportunity
+     * Get next value to use for the opportunity.
+     *
      * @return int
      */
     public function getOpportunityCurrentIdent()
@@ -446,14 +468,15 @@ class Plugin
     }
 
     /**
-     * Get the default funnel id configured in Sellsy to register new opportunity
+     * Get the default funnel id configured in Sellsy to register new opportunity.
+     *
      * @return int|null
      */
     public function getFunnelId()
     {
         $funnelsList = $this->sellsyClient->opportunities()->getFunnels()->response;
         $pipelineId = null;
-        foreach ($funnelsList as $key=>$funnel) {
+        foreach ($funnelsList as $key => $funnel) {
             if (is_object($funnel) && 'default' === $funnel->name) {
                 $pipelineId = $funnel->id;
                 break;
@@ -467,8 +490,10 @@ class Plugin
     }
 
     /**
-     * Get the default step id for the passed funnel)
+     * Get the default step id for the passed funnel).
+     *
      * @param int $funnelId
+     *
      * @return null|int
      */
     public function getStepId($funnelId)
@@ -487,8 +512,10 @@ class Plugin
     }
 
     /**
-     * Get the source id from it's name (can be configured in admin)
+     * Get the source id from it's name (can be configured in admin).
+     *
      * @param string $sourceName
+     *
      * @return int|null
      */
     public function getSourceId($sourceName)
@@ -496,7 +523,7 @@ class Plugin
         $sourceId = null;
         $sourcesList = $this->sellsyClient->opportunities()->getSources()->response;
         foreach ($sourcesList as $source) {
-            if (!empty($source->label) && $sourceName == $source->label){
+            if (!empty($source->label) && $sourceName == $source->label) {
                 $sourceId = $source->id;
                 break;
             }
@@ -506,13 +533,15 @@ class Plugin
     }
 
     /**
-     * Method to create an opportunity when a prospect is created
-     * @param int $prospectId
+     * Method to create an opportunity when a prospect is created.
+     *
+     * @param int    $prospectId
      * @param string $sourceName
      * @param string $note
+     *
      * @return int|null
      */
-    public function createOpportunity($prospectId, $sourceName, $note='')
+    public function createOpportunity($prospectId, $sourceName, $note = '')
     {
         //Retrieve needed id to create the opportunity
         $lastOpportunityId = $this->getOpportunityCurrentIdent();
@@ -533,15 +562,17 @@ class Plugin
                     'name' => __('Contact from', 'wpsellsy').' '.$sourceName,
                     'funnelid' => $funnelId,
                     'stepid' => $stepId,
-                    'brief' => $note
-                )
+                    'brief' => $note,
+                ),
             )
         )->response;
     }
 
     /**
-     * Send a mail to contact
+     * Send a mail to contact.
+     *
      * @param string $body
+     *
      * @return bool
      */
     public function sendMail($body)
@@ -563,7 +594,7 @@ class Plugin
             $mail->Subject = __('Formulaire site web: Demande d\'informations', 'wpsellsy');
         }
         $mail->MsgHTML($body);
-        $mail->CharSet="UTF-8";
+        $mail->CharSet = 'UTF-8';
 
         //Send email
         if ($mail->Send()) {

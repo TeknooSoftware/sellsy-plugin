@@ -7,19 +7,20 @@ use UniAlteri\Sellsy\Wordpress\Plugin;
 
 /**
  * Class Settings
- * Class to build setting form in WP to allow admin to manage this plugin
- * @package UniAlteri\Sellsy\Admin
+ * Class to build setting form in WP to allow admin to manage this plugin.
  */
 class Settings
 {
     /**
-     * List of fields in settings forms
+     * List of fields in settings forms.
+     *
      * @var array
      */
     protected $settings = array();
 
     /**
-     * Section list in admin panel
+     * Section list in admin panel.
+     *
      * @var array
      */
     protected $sections = array();
@@ -35,7 +36,7 @@ class Settings
     protected $sellsyPlugin;
 
     /**
-     * Available settings
+     * Available settings.
      */
     const CONSUMER_TOKEN = 'consumerToken';
     const CONSUMER_SECRET = 'consumerSecret';
@@ -58,8 +59,9 @@ class Settings
     const FORM_CUSTOM_FOOTER = 'customFooter';
 
     /**
-     * Initialize this object
-     * @param Plugin $sellsyPlugin
+     * Initialize this object.
+     *
+     * @param Plugin     $sellsyPlugin
      * @param OptionsBag $options
      */
     public function __construct(Plugin $sellsyPlugin, OptionsBag $options)
@@ -77,7 +79,8 @@ class Settings
     }
 
     /**
-     * Return the list of available settings in the wordpress admin
+     * Return the list of available settings in the wordpress admin.
+     *
      * @return array
      */
     public function loadSettings()
@@ -87,7 +90,7 @@ class Settings
 
         //Extract usable ordered list of selected fields
         $selectedFieldsList = array_map(
-            function($field){
+            function ($field) {
                 return $field->getName();
             },
             $this->sellsyPlugin->listSelectedFields()
@@ -98,7 +101,7 @@ class Settings
 
         //Reorder them
         $availableOrderedFieldsList = array();
-        foreach ($selectedFieldsList as $fieldName=>$name) {
+        foreach ($selectedFieldsList as $fieldName => $name) {
             if (isset($availableFields[$fieldName])) {
                 $availableOrderedFieldsList[$fieldName] = $availableFields[$fieldName];
                 unset($availableFields[$fieldName]);
@@ -116,7 +119,7 @@ class Settings
                 'std' => '',
                 'type' => 'text',
                 'section' => 'sellsy_connexion',
-                'originalKey' => 'WPIconsumer_token' //To be compliant with official Sellsy plugin
+                'originalKey' => 'WPIconsumer_token', //To be compliant with official Sellsy plugin
             ),
             self::CONSUMER_SECRET => array(
                 'title' => __('Consumer Secret', 'wpsellsy'),
@@ -124,7 +127,7 @@ class Settings
                 'std' => '',
                 'type' => 'text',
                 'section' => 'sellsy_connexion',
-                'originalKey' => 'WPIconsumer_secret' //To be compliant with official Sellsy plugin
+                'originalKey' => 'WPIconsumer_secret', //To be compliant with official Sellsy plugin
             ),
             self::ACCESS_TOKEN => array(
                 'title' => __('User Token', 'wpsellsy'),
@@ -132,7 +135,7 @@ class Settings
                 'std' => '',
                 'type' => 'text',
                 'section' => 'sellsy_connexion',
-                'originalKey' => 'WPIutilisateur_token' //To be compliant with official Sellsy plugin
+                'originalKey' => 'WPIutilisateur_token', //To be compliant with official Sellsy plugin
             ),
             self::ACCESS_SECRET => array(
                 'title' => __('User Secret', 'wpsellsy'),
@@ -140,7 +143,7 @@ class Settings
                 'std' => '',
                 'type' => 'text',
                 'section' => 'sellsy_connexion',
-                'originalKey' => 'WPIutilisateur_secret' //To be compliant with official Sellsy plugin
+                'originalKey' => 'WPIutilisateur_secret', //To be compliant with official Sellsy plugin
             ),
             /* Section Options du plugin */
             self::OPPORTUNITY_CREATION => array(
@@ -151,17 +154,17 @@ class Settings
                 'section' => 'sellsy_options',
                 'choices' => array(
                     'prospectOnly' => __('Only a lead', 'wpsellsy'),
-                    'prospectOpportunity' => __('A lead with its opportunity', 'wpsellsy')
+                    'prospectOpportunity' => __('A lead with its opportunity', 'wpsellsy'),
                 ),
-                'originalKey' => 'WPIcreer_prospopp' //To be compliant with official Sellsy plugin
+                'originalKey' => 'WPIcreer_prospopp', //To be compliant with official Sellsy plugin
             ),
             self::OPPORTUNITY_SOURCE => array(
                 'title' => __('Opportunity source names', 'wpsellsy'),
-                'desc' => __('You must define this parameter if you must create an opportunity. The source must exist on your <a href="https://www.sellsy.com/?_f=prospection_prefs&action=sources" target="_blank">Sellsy.com</a> account. Several sources can be defined, splited by a comma.' , 'wpsellsy'),
+                'desc' => __('You must define this parameter if you must create an opportunity. The source must exist on your <a href="https://www.sellsy.com/?_f=prospection_prefs&action=sources" target="_blank">Sellsy.com</a> account. Several sources can be defined, splited by a comma.', 'wpsellsy'),
                 'std' => '',
                 'type' => 'text',
                 'section' => 'sellsy_options',
-                'originalKey' => 'WPInom_opp_source' //To be compliant with official Sellsy plugin
+                'originalKey' => 'WPInom_opp_source', //To be compliant with official Sellsy plugin
             ),
             self::FORM_NAME => array(
                 'title' => __('Form name', 'wpsellsy'),
@@ -169,7 +172,7 @@ class Settings
                 'std' => '',
                 'type' => 'text',
                 'section' => 'sellsy_display',
-                'originalKey' => 'WPInom_form' //To be compliant with official Sellsy plugin
+                'originalKey' => 'WPInom_form', //To be compliant with official Sellsy plugin
             ),
             self::DISPLAY_FORM_NAME => array(
                 'title' => __('Display the form name', 'wpsellsy'),
@@ -179,9 +182,9 @@ class Settings
                 'section' => 'sellsy_display',
                 'choices' => array(
                     'displayTitle' => __('Oui', 'wpsellsy'),
-                    'none' => __('Non', 'wpsellsy')
+                    'none' => __('Non', 'wpsellsy'),
                 ),
-                'originalKey' => 'WPIaff_form' //To be compliant with official Sellsy plugin
+                'originalKey' => 'WPIaff_form', //To be compliant with official Sellsy plugin
             ),
             self::SPLIT_COLUMNS => array(
                 'title' => __('Split fields in several columns', 'wpsellsy'),
@@ -189,7 +192,7 @@ class Settings
                 'type' => 'text',
                 'std' => '1',
                 'section' => 'sellsy_display',
-                'originalKey' => 'WPIaff_form' //To be compliant with official Sellsy plugin
+                'originalKey' => 'WPIaff_form', //To be compliant with official Sellsy plugin
             ),
             self::COLUMNS_CLASS => array(
                 'title' => __('Column HTML classess', 'wpsellsy'),
@@ -197,7 +200,7 @@ class Settings
                 'type' => 'text',
                 'std' => '',
                 'section' => 'sellsy_display',
-                'originalKey' => 'WPIaff_form' //To be compliant with official Sellsy plugin
+                'originalKey' => 'WPIaff_form', //To be compliant with official Sellsy plugin
             ),
             self::FORM_CUSTOM_HEADER => array(
                 'title' => __('HTML form header', 'wpsellsy'),
@@ -205,7 +208,7 @@ class Settings
                 'type' => 'textarea',
                 'std' => '',
                 'section' => 'sellsy_display',
-                'originalKey' => null //To be compliant with official Sellsy plugin
+                'originalKey' => null, //To be compliant with official Sellsy plugin
             ),
             self::FORM_CUSTOM_FOOTER => array(
                 'title' => __('HTML form footer', 'wpsellsy'),
@@ -213,23 +216,23 @@ class Settings
                 'type' => 'textarea',
                 'std' => '',
                 'section' => 'sellsy_display',
-                'originalKey' => null //To be compliant with official Sellsy plugin
+                'originalKey' => null, //To be compliant with official Sellsy plugin
             ),
             self::MESSAGE_SENT => array(
                 'title' => __('Confirmation message', 'wpsellsy'),
                 'desc' => __('To define the message to display when the lead has been created', 'wpsellsy'),
                 'type' => 'textarea',
-                'std' => __( 'Thanks, your message has been sent.', 'wpsellsy' ),
+                'std' => __('Thanks, your message has been sent.', 'wpsellsy'),
                 'section' => 'sellsy_display',
-                'originalKey' => null //To be compliant with official Sellsy plugin
+                'originalKey' => null, //To be compliant with official Sellsy plugin
             ),
             self::MESSAGE_ERROR => array(
                 'title' => __('Error message', 'wpsellsy'),
                 'desc' => __('To define the message to display when an error has been encounted', 'wpsellsy'),
                 'type' => 'textarea',
-                'std' => __( 'Your message has not been sent, please check these following fields :', 'wpsellsy' ),
+                'std' => __('Your message has not been sent, please check these following fields :', 'wpsellsy'),
                 'section' => 'sellsy_display',
-                'originalKey' => null //To be compliant with official Sellsy plugin
+                'originalKey' => null, //To be compliant with official Sellsy plugin
             ),
             self::SUBMIT_NOTIFICATION => array(
                 'title' => __('Send a notification by email', 'wpsellsy'),
@@ -237,7 +240,7 @@ class Settings
                 'std' => '',
                 'type' => 'text',
                 'section' => 'sellsy_notification',
-                'originalKey' => 'WPIenvoyer_copie' //To be compliant with official Sellsy plugin
+                'originalKey' => 'WPIenvoyer_copie', //To be compliant with official Sellsy plugin
             ),
             self::FROM_NOTIFICATION => array(
                 'title' => __('Email sender', 'wpsellsy'),
@@ -245,7 +248,7 @@ class Settings
                 'std' => '',
                 'type' => 'text',
                 'section' => 'sellsy_notification',
-                'originalKey' => null //Not present in official plugin
+                'originalKey' => null, //Not present in official plugin
             ),
             /* Section Activer validation Client */
             self::ENABLE_HTML_CHECK => array(
@@ -256,9 +259,9 @@ class Settings
                 'section' => 'sellsy_frontValid',
                 'choices' => array(
                     'enableJsValidation' => __('Oui', 'wpsellsy'),
-                    'disableJsValidation' => __('Non', 'wpsellsy')
+                    'disableJsValidation' => __('Non', 'wpsellsy'),
                 ),
-                'originalKey' => 'WPIjsValid' //To be compliant with official Sellsy plugin
+                'originalKey' => 'WPIjsValid', //To be compliant with official Sellsy plugin
             ),
             /* Section Champs */
             self::FIELDS_SELECTED => array(
@@ -268,7 +271,7 @@ class Settings
                 'std' => '',
                 'section' => 'sellsy_Champs',
                 'choices' => $availableOrderedFieldsList,
-                'originalKey' => null //Not present in official plugin
+                'originalKey' => null, //Not present in official plugin
             ),
             self::MANDATORIES_FIELDS => array(
                 'title' => __('Mandatories Fields', 'wpsellsy'),
@@ -277,29 +280,31 @@ class Settings
                 'std' => '',
                 'section' => 'sellsy_Champs',
                 'choices' => $selectedFieldsList,
-                'originalKey' => null //Not present in official plugin
+                'originalKey' => null, //Not present in official plugin
             ),
         );
     }
 
     /**
-     * Return the list of available sections in the wordpress admin
+     * Return the list of available sections in the wordpress admin.
+     *
      * @return array
      */
     public function loadSections()
     {
         return array(
-            'sellsy_connexion'	=> __('Connection to Sellsy Account', 'wpsellsy'),
+            'sellsy_connexion' => __('Connection to Sellsy Account', 'wpsellsy'),
             'sellsy_options' => __('Plugin options', 'wpsellsy'),
             'sellsy_display' => __('Display options', 'wpsellsy'),
             'sellsy_notification' => __('Notification', 'wpsellsy'),
             'sellsy_frontValid' => __('Frontside validation', 'wpsellsy'),
-            'sellsy_Champs' => __('Fields selection', 'wpsellsy')
+            'sellsy_Champs' => __('Fields selection', 'wpsellsy'),
         );
     }
 
     /**
-     * Return sections configured by this object
+     * Return sections configured by this object.
+     *
      * @return array
      */
     public function getSections()
@@ -308,7 +313,8 @@ class Settings
     }
 
     /**
-     * Return settings configured by this object
+     * Return settings configured by this object.
+     *
      * @return array
      */
     public function getSettings()
@@ -317,14 +323,16 @@ class Settings
     }
 
     /**
-     * Initialize options of this plugin with default value
+     * Initialize options of this plugin with default value.
+     *
      * @param $forceDefault
+     *
      * @return $this;
      */
-    public function initialize($forceDefault=false)
+    public function initialize($forceDefault = false)
     {
         //Set default value in options bag
-        foreach ($this->settings as $id=>&$params) {
+        foreach ($this->settings as $id => &$params) {
             if (true === $forceDefault && isset($params['std'])) { //by pass fields without default value
                 $this->options[$id] = $params['std'];
             } elseif (isset($params['originalKey'])) {
@@ -344,9 +352,11 @@ class Settings
     }
 
     /**
-     * Method to build form in wordpress admin to manage this plugin
+     * Method to build form in wordpress admin to manage this plugin.
+     *
      * @param callable $displaySectionCallback
      * @param callable $displayFieldsCallback
+     *
      * @return $this
      */
     public function buildForms($displaySectionCallback, $displayFieldsCallback)
@@ -355,11 +365,11 @@ class Settings
             return $this;
         }
 
-        foreach ($this->sections as $slug=>$title) {
+        foreach ($this->sections as $slug => $title) {
             \add_settings_section($slug, $title, $displaySectionCallback, 'slswp-admPage');
         }
 
-        foreach ($this->settings as $id=>$setting) {
+        foreach ($this->settings as $id => $setting) {
             $setting['id'] = $id;
             $this->createInput($setting, $displayFieldsCallback);
         }
@@ -368,9 +378,11 @@ class Settings
     }
 
     /**
-     * Create input from a setting in the form
-     * @param array $setting
+     * Create input from a setting in the form.
+     *
+     * @param array    $setting
      * @param callable $displayCallback
+     *
      * @return $this
      */
     public function createInput(&$setting, $displayCallback)
@@ -383,7 +395,7 @@ class Settings
             'type' => 'text',
             'section' => 'sellsy_connexion',
             'choices' => array(),
-            'class'	=> ''
+            'class' => '',
         );
 
         $setting = wp_parse_args($setting, $defaultsSettings);
@@ -395,7 +407,7 @@ class Settings
             'std' => $setting['std'],
             'choices' => $setting['choices'],
             'label_for' => $setting['id'],
-            'class' => $setting['class']
+            'class' => $setting['class'],
         );
 
         add_settings_field(

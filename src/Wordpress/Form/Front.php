@@ -7,8 +7,7 @@ use UniAlteri\Sellsy\Wordpress\Plugin;
 
 /**
  * Class Front
- * Class to configure Wordpress front to use this plugin
- * @package UniAlteri\Sellsy\Form
+ * Class to configure Wordpress front to use this plugin.
  */
 class Front
 {
@@ -23,13 +22,14 @@ class Front
     protected $options;
 
     /**
-     * TO count usage of shortcode in a single request
+     * TO count usage of shortcode in a single request.
+     *
      * @var int
      */
     protected static $formCounter = 0;
 
     /**
-     * @param Plugin $sellsyPlugin
+     * @param Plugin     $sellsyPlugin
      * @param OptionsBag $options
      */
     public function __construct($sellsyPlugin, $options)
@@ -39,7 +39,7 @@ class Front
     }
 
     /**
-     * To declare needed css in front
+     * To declare needed css in front.
      */
     public function addCSS()
     {
@@ -57,13 +57,14 @@ class Front
     }
 
     /**
-     * @param array $selectedFields
-     * @param array $attr of the short code
-     * @param string $formId to ignore request if this request is not destinate to this form
-     * @param array $postValues
+     * @param array  $selectedFields
+     * @param array  $attr           of the short code
+     * @param string $formId         to ignore request if this request is not destinate to this form
+     * @param array  $postValues
+     *
      * @return null|int id of the prospect if it was created
      */
-    public function validateForm(array &$selectedFields, $attr=array(), $formId, $postValues=array())
+    public function validateForm(array &$selectedFields, $attr = array(), $formId, $postValues = array())
     {
         if (empty($postValues)) {
             $postValues = $_POST;
@@ -76,7 +77,7 @@ class Front
 
             if (!isset($postValues['formId']) || $postValues['formId'] != $formId) {
                 //Not good form
-                return null;
+                return;
             }
 
             $postValues = array_intersect_key($postValues, $selectedFields);
@@ -99,12 +100,14 @@ class Front
             }
         }
 
-        return null;
+        return;
     }
 
     /**
-     * Return the source to use to create opportunity
+     * Return the source to use to create opportunity.
+     *
      * @param array $attr
+     *
      * @return string
      */
     protected function extractSource($attr)
@@ -121,12 +124,15 @@ class Front
 
         //Else use the default source list
         reset($sourcesList);
+
         return current($sourcesList);
     }
 
     /**
-     * Return the form id via attribute. If there are no form id, compute it
+     * Return the form id via attribute. If there are no form id, compute it.
+     *
      * @param array $attr
+     *
      * @return string;
      */
     protected function getFormId($attr)
@@ -144,8 +150,9 @@ class Front
     }
 
     /**
-     * To compute shortcode insert in a page
-     * @param string $attr
+     * To compute shortcode insert in a page.
+     *
+     * @param string     $attr
      * @param null|mixed $content
      */
     public function shortcode($attr, $content = null)
@@ -155,7 +162,6 @@ class Front
         //Get fields to display
         $formFieldsList = $this->sellsyPlugin->listSelectedFields();
         $result = $this->validateForm($formFieldsList, $attr, $formId);
-
 
         if (is_readable(SELLSY_WP_PATH_INC.'/front-page.php')) {
             $options = $this->options;

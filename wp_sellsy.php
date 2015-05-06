@@ -1,74 +1,69 @@
 <?php
-/**
-Plugin Name: WP Sellsy
-Plugin URI: http://teknoo.it/wp-sellsy
-Description: Sellsy WP plugin allows you to create and display a contact form connected with your Sellsy account. When the form is submitted, a prospect and optionally an opportunity will be created on your Sellsy account. Forms can also use custom fields configured for your prospects. To activate the plugin, you must insert below your tokens to Sellsy API, available from Settings and API access. To display the form on a page or in a post insert code [wpsellsy].
-Version: 0.9.1
-Author: <a href="mailto:r.deloge@uni-alteri.com">Richard DELOGE, Uni Alteri</a>
-Author URI: http://agence.net.ua
-*/
 
+/**
+ Author URI: http://agence.net.ua
+ */
 require_once 'define.php';
 
 $composerLoader = require_once 'vendor/autoload.php';
 
 if (class_exists('UniAlteri\Sellsy\Wordpress\Plugin')) {
-	//Initialize the Sellsy API Client
-	$sellsyClientGenerator = new \UniAlteri\Sellsy\Client\ClientGenerator();
+    //Initialize the Sellsy API Client
+    $sellsyClientGenerator = new \UniAlteri\Sellsy\Client\ClientGenerator();
 
-	//Initialize the options bag/manager of this plugin
-	$options = new \UniAlteri\Sellsy\Wordpress\OptionsBag();
+    //Initialize the options bag/manager of this plugin
+    $options = new \UniAlteri\Sellsy\Wordpress\OptionsBag();
 
-	//Initialize this plugin
-	$wpSellsyPlugin = new \UniAlteri\Sellsy\Wordpress\Plugin($sellsyClientGenerator->getClient(), $options);
+    //Initialize this plugin
+    $wpSellsyPlugin = new \UniAlteri\Sellsy\Wordpress\Plugin($sellsyClientGenerator->getClient(), $options);
 
-	//Initialize views
-	$wpSellsyFront = new \UniAlteri\Sellsy\Wordpress\Form\Front($wpSellsyPlugin, $options);
-	$wpSellsyAdmin = new \UniAlteri\Sellsy\Wordpress\Form\Admin($wpSellsyPlugin, $options);
+    //Initialize views
+    $wpSellsyFront = new \UniAlteri\Sellsy\Wordpress\Form\Front($wpSellsyPlugin, $options);
+    $wpSellsyAdmin = new \UniAlteri\Sellsy\Wordpress\Form\Admin($wpSellsyPlugin, $options);
 
-	//Configure wordpress to load options
-	add_action(
-		'init',
-		function() use ($options) {
-			$options->registerHooks();
-		}
-	);
+    //Configure wordpress to load options
+    add_action(
+        'init',
+        function () use ($options) {
+            $options->registerHooks();
+        }
+    );
 
-	//Configure wordpress to require it to check if CUrl is available in this platform
-	add_action('admin_init', array($wpSellsyPlugin, 'checkCUrlExtensions'), 2);
+    //Configure wordpress to require it to check if CUrl is available in this platform
+    add_action('admin_init', array($wpSellsyPlugin, 'checkCUrlExtensions'), 2);
 
-	//Configure wordpress to customize views to use this plugin
-	add_action('wp_enqueue_scripts', array($wpSellsyFront, 'addCSS'));
-	add_action('admin_enqueue_scripts', array($wpSellsyAdmin, 'addCSS'));
-	add_action('admin_enqueue_scripts', array($wpSellsyAdmin, 'addJS'));
+    //Configure wordpress to customize views to use this plugin
+    add_action('wp_enqueue_scripts', array($wpSellsyFront, 'addCSS'));
+    add_action('admin_enqueue_scripts', array($wpSellsyAdmin, 'addCSS'));
+    add_action('admin_enqueue_scripts', array($wpSellsyAdmin, 'addJS'));
 
-	//Configure wordpress to allow this plugin to add a menu to manage its
-	add_action('admin_menu', array($wpSellsyAdmin, 'addMenu'));
+    //Configure wordpress to allow this plugin to add a menu to manage its
+    add_action('admin_menu', array($wpSellsyAdmin, 'addMenu'));
 
-	//Configure wordpress to manage disable/uninstall of this plugin
-	register_deactivation_hook(SELLSY_WP_PATH_FILE, array($wpSellsyPlugin, 'disablePlugin'));
-	add_action('admin_init', function() use ($options, $wpSellsyAdmin, $wpSellsyPlugin) {
-			$settings = new \UniAlteri\Sellsy\Wordpress\Form\Settings($wpSellsyPlugin, $options);
-			$settings->buildForms(function () {}, array($wpSellsyAdmin, 'displaySettings'));
-		},
-		5
-	);
+    //Configure wordpress to manage disable/uninstall of this plugin
+    register_deactivation_hook(SELLSY_WP_PATH_FILE, array($wpSellsyPlugin, 'disablePlugin'));
+    add_action('admin_init', function () use ($options, $wpSellsyAdmin, $wpSellsyPlugin) {
+            $settings = new \UniAlteri\Sellsy\Wordpress\Form\Settings($wpSellsyPlugin, $options);
+            $settings->buildForms(function () {}, array($wpSellsyAdmin, 'displaySettings'));
+        },
+        5
+    );
 
-	//Configure wordpress to allow this module to define a new shortcode
-	add_action('init', function() use ($wpSellsyFront) {
-		add_shortcode('wpsellsy', array($wpSellsyFront, 'shortcode'));
-	});
+    //Configure wordpress to allow this module to define a new shortcode
+    add_action('init', function () use ($wpSellsyFront) {
+        add_shortcode('wpsellsy', array($wpSellsyFront, 'shortcode'));
+    });
 
-	//Configure wordpress to load translations needed by this module
-	add_action('init', array($wpSellsyPlugin, 'loadTranslation'));
+    //Configure wordpress to load translations needed by this module
+    add_action('init', array($wpSellsyPlugin, 'loadTranslation'));
 
-	//Configure wordpress to allow this module to load a widget
-	add_action('widgets_init', function() {
-		if (class_exists('\UniAlteri\Sellsy\Wordpress\Widget')) {
-			register_widget('\UniAlteri\Sellsy\Wordpress\Widget');
-		}
-	});
+    //Configure wordpress to allow this module to load a widget
+    add_action('widgets_init', function () {
+        if (class_exists('\UniAlteri\Sellsy\Wordpress\Widget')) {
+            register_widget('\UniAlteri\Sellsy\Wordpress\Widget');
+        }
+    });
 
-	//Configure wordpress to manage some ajax requests
-	add_action('wp_ajax_sls_createOppSource', array($wpSellsyPlugin, 'createOppSource'));
+    //Configure wordpress to manage some ajax requests
+    add_action('wp_ajax_sls_createOppSource', array($wpSellsyPlugin, 'createOppSource'));
 }

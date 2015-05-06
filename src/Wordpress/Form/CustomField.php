@@ -50,17 +50,17 @@ class CustomField
     protected $isRequiredField = false;
 
     /**
-     * @param int $id
+     * @param int    $id
      * @param string $type
      * @param string $name
      * @param string $code
      * @param string $description
      * @param string $defaultValue
-     * @param array $options
-     * @param bool $isCustomField
-     * @param bool $isRequiredField
+     * @param array  $options
+     * @param bool   $isCustomField
+     * @param bool   $isRequiredField
      */
-    public function __construct($id, $type, $name, $code, $description, $defaultValue, $options, $isCustomField, $isRequiredField=false)
+    public function __construct($id, $type, $name, $code, $description, $defaultValue, $options, $isCustomField, $isRequiredField = false)
     {
         $this->id = $id;
         $this->type = $type;
@@ -84,7 +84,7 @@ class CustomField
 
                 $optionsVals[$option->rank] = array(
                     'id' => $option->id,
-                    'value' => $option->value
+                    'value' => $option->value,
                 );
             }
         }

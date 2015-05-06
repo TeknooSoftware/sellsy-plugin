@@ -5,18 +5,17 @@ namespace UniAlteri\Sellsy\Wordpress;
 use UniAlteri\Sellsy\Wordpress\Form\Settings;
 
 /**
- * Class OptionsBag
- * @package UniAlteri\Sellsy
+ * Class OptionsBag.
  */
 class OptionsBag implements \ArrayAccess
 {
     /**
-     * Name in wordpress of custom setting for this plugin
+     * Name in wordpress of custom setting for this plugin.
      */
     const WORDPRESS_SETTINGS_NAME = 'wpsellsy_options';
 
     /**
-     * Name in wordpress for the filter to validate plugin configuration
+     * Name in wordpress for the filter to validate plugin configuration.
      */
     const WORDPRESS_VALIDATE_FILTER = 'wpsellsy_validate_configuration';
 
@@ -26,7 +25,7 @@ class OptionsBag implements \ArrayAccess
     protected $options = null;
 
     /**
-     * To registers hooks to validate
+     * To registers hooks to validate.
      */
     public function registerHooks()
     {
@@ -41,7 +40,8 @@ class OptionsBag implements \ArrayAccess
     }
 
     /**
-     * Reload options from wordpress database and erase/lost change
+     * Reload options from wordpress database and erase/lost change.
+     *
      * @return $this
      */
     public function reload()
@@ -59,7 +59,8 @@ class OptionsBag implements \ArrayAccess
     }
 
     /**
-     * Save options into wordpress database
+     * Save options into wordpress database.
+     *
      * @return $this
      */
     public function save()
@@ -70,7 +71,8 @@ class OptionsBag implements \ArrayAccess
     }
 
     /**
-     * Return options of this plugins under array
+     * Return options of this plugins under array.
+     *
      * @return array
      */
     public function toArray()
@@ -79,8 +81,9 @@ class OptionsBag implements \ArrayAccess
     }
 
     /**
-     * To check if some option are defined for this plugin
-     * @return boolean
+     * To check if some option are defined for this plugin.
+     *
+     * @return bool
      */
     public function isDefined()
     {
@@ -88,10 +91,13 @@ class OptionsBag implements \ArrayAccess
     }
 
     /**
-     * To check if an option exist
+     * To check if an option exist.
+     *
      * @link http://php.net/manual/en/arrayaccess.offsetexists.php
+     *
      * @param string $offset name of the option
-     * @return boolean true on success or false on failure.
+     *
+     * @return bool true on success or false on failure.
      */
     public function offsetExists($offset)
     {
@@ -107,9 +113,12 @@ class OptionsBag implements \ArrayAccess
     }
 
     /**
-     * To return an option
+     * To return an option.
+     *
      * @link http://php.net/manual/en/arrayaccess.offsetget.php
+     *
      * @param string $offset name of the option
+     *
      * @return mixed Can return all value types.
      */
     public function offsetGet($offset)
@@ -126,15 +135,16 @@ class OptionsBag implements \ArrayAccess
             return $this->options[$offset];
         }
 
-        return null;
+        return;
     }
 
     /**
-     * To define an option
+     * To define an option.
+     *
      * @link http://php.net/manual/en/arrayaccess.offsetset.php
+     *
      * @param string $offset name of the option
-     * @param mixed $value
-     * @return void
+     * @param mixed  $value
      */
     public function offsetSet($offset, $value)
     {
@@ -150,10 +160,11 @@ class OptionsBag implements \ArrayAccess
     }
 
     /**
-     * To unset an option
+     * To unset an option.
+     *
      * @link http://php.net/manual/en/arrayaccess.offsetunset.php
+     *
      * @param string $offset name of the option
-     * @return void
      */
     public function offsetUnset($offset)
     {
@@ -171,14 +182,16 @@ class OptionsBag implements \ArrayAccess
     }
 
     /**
-     * Callback called to validate input fields with business logic (to avoid bad plugin configuration)
+     * Callback called to validate input fields with business logic (to avoid bad plugin configuration).
+     *
      * @param array $input
+     *
      * @return mixed
      */
     public function validate($input)
     {
-        foreach ($input AS $key => &$val) {
-            switch ($key){
+        foreach ($input as $key => &$val) {
+            switch ($key) {
                 case Settings::CONSUMER_TOKEN:
                     if (strlen($val) != 40) {
                         \add_settings_error(
@@ -187,7 +200,6 @@ class OptionsBag implements \ArrayAccess
                             __('The Consumer Token is missing or invalid, please check it.', 'wpsellsy'),
                             'error'
                         );
-
                     } else {
                         $val = \sanitize_text_field($val);
                     }
@@ -201,7 +213,6 @@ class OptionsBag implements \ArrayAccess
                             __('The Consumer Secret is missing or invalid, please check it.', 'wpsellsy'),
                             'error'
                         );
-
                     } else {
                         $val = \sanitize_text_field($val);
                     }
@@ -215,7 +226,6 @@ class OptionsBag implements \ArrayAccess
                             __('The User Token is missing or invalid, please check it', 'wpsellsy'),
                             'error'
                         );
-
                     } else {
                         $val = \sanitize_text_field($val);
                     }
@@ -229,7 +239,6 @@ class OptionsBag implements \ArrayAccess
                             __('The User Secret is missing or invalid, please check it.', 'wpsellsy'),
                             'error'
                         );
-
                     } else {
                         $val = \sanitize_text_field($val);
                     }
@@ -243,7 +252,6 @@ class OptionsBag implements \ArrayAccess
                             __('Your email adress is missing or invalid, please check it to receive notifications. Prospects will be created anyway.', 'wpsellsy'),
                             'error'
                         );
-
                     } else {
                         $val = \sanitize_text_field($val);
                     }
@@ -272,20 +280,21 @@ class OptionsBag implements \ArrayAccess
                     }
                     break;
             }
-
         }
 
         return $input;
     }
 
     /**
-     * Callback called to sanitize options
+     * Callback called to sanitize options.
+     *
      * @param mixed $input
+     *
      * @return mixed
      */
     public function sanitize($input)
     {
-        foreach($input AS $key => &$value) {
+        foreach ($input as $key => &$value) {
             if (is_array($value)) {
                 foreach ($value as &$sv) {
                     $sv = strip_tags(stripslashes($sv));

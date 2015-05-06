@@ -4,13 +4,13 @@ namespace UniAlteri\Sellsy\Wordpress;
 
 /**
  * Class Widget
- * Widget to display in front website
- * @package UniAlteri\Sellsy
+ * Widget to display in front website.
  */
 class Widget extends \WP_Widget
 {
     /**
-     * PHP5 constructor.     *
+     * PHP5 constructor.     *.
+     *
      * @param string $id_base         Optional Base ID for the widget, lowercase and unique. If left empty,
      *                                a portion of the widget's class name will be used Has to be unique.
      * @param string $name            Name for the widget displayed on the configuration page.
@@ -19,16 +19,16 @@ class Widget extends \WP_Widget
      * @param array  $control_options Optional. Widget control options. See {@see wp_register_widget_control()}
      *                                for information on accepted arguments. Default empty array.
      */
-    public function __construct($id_base='sellsy_widget', $name='', $widget_options = array(), $control_options = array())
+    public function __construct($id_base = 'sellsy_widget', $name = '', $widget_options = array(), $control_options = array())
     {
         if (empty($name)) {
             $name = __('WP Sellsy', 'wpsellsy');
         }
-        
+
         if (empty($widget_options)) {
             $widget_options = array(
                 'classname' => 'sellsy_widget_single',
-                'description' => __('Affiche le widget WP Sellsy', 'wpsellsy')
+                'description' => __('Affiche le widget WP Sellsy', 'wpsellsy'),
             );
         }
 
@@ -39,6 +39,7 @@ class Widget extends \WP_Widget
      * Echo the widget content.
      *
      * Subclasses should over-ride this function to generate their widget code.
+     *
      * @param array $args     Display arguments including before_title, after_title,
      *                        before_widget, and after_widget.
      * @param array $instance The settings for the particular instance of the widget.
@@ -89,9 +90,11 @@ class Widget extends \WP_Widget
      * This function should check that $new_instance is set correctly. The newly-calculated
      * value of `$instance` should be returned. If false is returned, the instance won't be
      * saved/updated.
+     *
      * @param array $newInstance New settings for this instance as input by the user via
-     *                            {@see WP_Widget::form()}.
+     *                           {@see WP_Widget::form()}.
      * @param array $oldInstance Old settings for this instance.
+     *
      * @return array Settings to save or bool false to cancel saving.
      */
     public function update($newInstance, $oldInstance)
@@ -109,7 +112,9 @@ class Widget extends \WP_Widget
 
     /**
      * Output the settings update form.
+     *
      * @param array $instance Current settings.
+     *
      * @return string Default return is 'noform'.
      */
     public function form($instance)

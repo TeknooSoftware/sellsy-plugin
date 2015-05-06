@@ -13,15 +13,17 @@ interface TypeInterface
 
     /**
      * @param string $fieldName
-     * @param mixed $value
-     * @param array $finalSource
+     * @param mixed  $value
+     * @param array  $finalSource
      */
     public function populateParams($fieldName, &$value, &$finalSource);
 
     /**
      * @param string $fieldName
-     * @param mixed $value
-     * @return boolean
+     * @param mixed  $value
+     *
+     * @return bool
+     *
      * @throws \Exception
      */
     public function validateField($fieldName, &$value);

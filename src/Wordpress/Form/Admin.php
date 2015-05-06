@@ -7,10 +7,9 @@ use UniAlteri\Sellsy\Wordpress\Plugin;
 
 /**
  * Class Admin
- * Class to configure Wordpress admin to configure this plugin
- * @package UniAlteri\Sellsy\Admin
+ * Class to configure Wordpress admin to configure this plugin.
  */
-class Admin 
+class Admin
 {
     /**
      * @var Plugin
@@ -23,7 +22,7 @@ class Admin
     protected $options;
 
     /**
-     * @param Plugin $sellsyPlugin
+     * @param Plugin     $sellsyPlugin
      * @param OptionsBag $options
      */
     public function __construct($sellsyPlugin, $options)
@@ -33,7 +32,7 @@ class Admin
     }
 
     /**
-     * Method to add sellsy javascript for Wordpress admin
+     * Method to add sellsy javascript for Wordpress admin.
      */
     public function addJS()
     {
@@ -67,14 +66,15 @@ class Admin
                 'ajax_var',
                 array(
                     'url' => \admin_url('admin-ajax.php'),
-                    'nonce' => \wp_create_nonce('slswp_ajax_nonce')
+                    'nonce' => \wp_create_nonce('slswp_ajax_nonce'),
                 )
             );
         }
     }
 
     /**
-     * Method to add sellsy css stylesheet for Wordpress admin
+     * Method to add sellsy css stylesheet for Wordpress admin.
+     *
      * @param string $hook
      */
     public function addCSS($hook)
@@ -117,7 +117,7 @@ class Admin
     }
 
     /**
-     * Method to add in the wordpress menu an entry to access to the plugin configuration page
+     * Method to add in the wordpress menu an entry to access to the plugin configuration page.
      */
     public function addMenu()
     {
@@ -134,7 +134,7 @@ class Admin
     }
 
     /**
-     * Display the admin page to manage Sellsy
+     * Display the admin page to manage Sellsy.
      */
     public function page()
     {
@@ -144,7 +144,8 @@ class Admin
     }
 
     /**
-     * Method to generate and display the admin page to configure this plugin
+     * Method to generate and display the admin page to configure this plugin.
+     *
      * @param array $setting
      */
     public function displaySettings($setting = array())
@@ -157,7 +158,7 @@ class Admin
 
             $class = null;
             if (isset($setting['class'])) {
-                $class = ' ' . $setting['class'];
+                $class = ' '.$setting['class'];
             }
 
             $type = null;
@@ -188,8 +189,8 @@ class Admin
                 $options[$id] = 0;
             }
 
-            if (is_readable(SELLSY_WP_PATH_INC . '/admin-setting.php')) {
-                include SELLSY_WP_PATH_INC . '/admin-setting.php';
+            if (is_readable(SELLSY_WP_PATH_INC.'/admin-setting.php')) {
+                include SELLSY_WP_PATH_INC.'/admin-setting.php';
             }
         }
     }

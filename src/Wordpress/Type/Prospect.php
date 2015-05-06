@@ -7,7 +7,7 @@ use UniAlteri\Sellsy\Wordpress\Form\CustomField;
 class Prospect implements TypeInterface
 {
     /**
-     * Correspondence between fields in form and sellsy api
+     * Correspondence between fields in form and sellsy api.
      */
     protected $fieldsCorrespondence = array(
         'thirdName' => array('third.name','contact.name'),
@@ -36,167 +36,167 @@ class Prospect implements TypeInterface
         'addressPart2' => 'address.part2',
         'addressZip' => 'address.zip',
         'addressTown' => 'address.town',
-        'addressCountrycode' => 'address.countrycode'
+        'addressCountrycode' => 'address.countrycode',
     );
 
     /**
-     * Correspondence between fields and field value
+     * Correspondence between fields and field value.
      */
     protected $fieldsName = array();
 
     /**
-     * Initialize
+     * Initialize.
      */
     public function __construct()
     {
         $this->fieldsName = array(
             'thirdName' => array(
                 'type' => 'text',
-                'name' => __('Last name or Company name','wpsellsy'),
+                'name' => __('Last name or Company name', 'wpsellsy'),
                 'code' => 'thirdName',
-                'description' => __('Last name or Company name','wpsellsy'),
+                'description' => __('Last name or Company name', 'wpsellsy'),
                 'defaultValue' => '',
-                'prefsList' => null
+                'prefsList' => null,
             ),
             'thirdEmail' => array(
                 'type' => 'text',
-                'name' => __('Company email','wpsellsy'),
+                'name' => __('Company email', 'wpsellsy'),
                 'code' => 'thirdEmail',
-                'description' => __('Company email','wpsellsy'),
+                'description' => __('Company email', 'wpsellsy'),
                 'defaultValue' => '',
-                'prefsList' => null
+                'prefsList' => null,
             ),
             'thirdTel' => array(
                 'type' => 'text',
-                'name' => __('Company phone','wpsellsy'),
+                'name' => __('Company phone', 'wpsellsy'),
                 'code' => 'thirdTel',
-                'description' => __('Company phone','wpsellsy'),
+                'description' => __('Company phone', 'wpsellsy'),
                 'defaultValue' => '',
-                'prefsList' => null
+                'prefsList' => null,
             ),
             'thirdMobile' => array(
                 'type' => 'text',
-                'name' => __('Company mobile','wpsellsy'),
+                'name' => __('Company mobile', 'wpsellsy'),
                 'code' => 'thirdMobile',
-                'description' => __('Company mobile','wpsellsy'),
+                'description' => __('Company mobile', 'wpsellsy'),
                 'defaultValue' => '',
-                'prefsList' => null
+                'prefsList' => null,
             ),
             'thirdWeb' => array(
                 'type' => 'text',
-                'name' => __('Website','wpsellsy'),
+                'name' => __('Website', 'wpsellsy'),
                 'code' => 'thirdWeb',
-                'description' => __('Site web','wpsellsy'),
+                'description' => __('Site web', 'wpsellsy'),
                 'defaultValue' => '',
-                'prefsList' => null
+                'prefsList' => null,
             ),
             'contactCivil' => array(
                 'type' => 'radio',
-                'name' => __('Civility','wpsellsy'),
+                'name' => __('Civility', 'wpsellsy'),
                 'code' => 'contactCivil',
-                'description' => __('Civility','wpsellsy'),
+                'description' => __('Civility', 'wpsellsy'),
                 'defaultValue' => '',
                 'prefsList' => (object) array(
                     (object) array(
-                        'id' => __('woman','wpsellsy'),
-                        'value' => __('Mrs','wpsellsy'),
-                        'rank' => 0
+                        'id' => __('woman', 'wpsellsy'),
+                        'value' => __('Mrs', 'wpsellsy'),
+                        'rank' => 0,
                     ),
                     (object) array(
-                        'id' => __('man','wpsellsy'),
-                        'value' => __('Mr','wpsellsy'),
-                        'rank' => 1
-                    )
-                )
+                        'id' => __('man', 'wpsellsy'),
+                        'value' => __('Mr', 'wpsellsy'),
+                        'rank' => 1,
+                    ),
+                ),
             ),
             'contactName' => array(
                 'type' => 'text',
-                'name' => __('Last name','wpsellsy'),
+                'name' => __('Last name', 'wpsellsy'),
                 'code' => 'contactName',
-                'description' => __('Last name','wpsellsy'),
+                'description' => __('Last name', 'wpsellsy'),
                 'defaultValue' => '',
-                'prefsList' => null
+                'prefsList' => null,
             ),
             'contactForename' => array(
                 'type' => 'text',
-                'name' => __('First name','wpsellsy'),
+                'name' => __('First name', 'wpsellsy'),
                 'code' => 'contactForename',
-                'description' => __('First name','wpsellsy'),
+                'description' => __('First name', 'wpsellsy'),
                 'defaultValue' => '',
-                'prefsList' => null
+                'prefsList' => null,
             ),
             'contactEmail' => array(
                 'type' => 'text',
-                'name' => __('Email','wpsellsy'),
+                'name' => __('Email', 'wpsellsy'),
                 'code' => 'contactEmail',
-                'description' => __('Email','wpsellsy'),
+                'description' => __('Email', 'wpsellsy'),
                 'defaultValue' => '',
-                'prefsList' => null
+                'prefsList' => null,
             ),
             'contactTel' => array(
                 'type' => 'text',
-                'name' => __('Phone','wpsellsy'),
+                'name' => __('Phone', 'wpsellsy'),
                 'code' => 'contactTel',
-                'description' => __('Phone','wpsellsy'),
+                'description' => __('Phone', 'wpsellsy'),
                 'defaultValue' => '',
-                'prefsList' => null
+                'prefsList' => null,
             ),
             'contactMobile' => array(
                 'type' => 'text',
-                'name' => __('Mobile','wpsellsy'),
+                'name' => __('Mobile', 'wpsellsy'),
                 'code' => 'contactMobile',
-                'description' => __('Mobile','wpsellsy'),
+                'description' => __('Mobile', 'wpsellsy'),
                 'defaultValue' => '',
-                'prefsList' => null
+                'prefsList' => null,
             ),
             'addressName' => array(
                 'type' => 'text',
-                'name' => __('Address 1','wpsellsy'),
+                'name' => __('Address 1', 'wpsellsy'),
                 'code' => 'addressName',
-                'description' => __('Adress 1','wpsellsy'),
+                'description' => __('Adress 1', 'wpsellsy'),
                 'defaultValue' => '',
-                'prefsList' => null
+                'prefsList' => null,
             ),
             'addressPart1' => array(
                 'type' => 'text',
-                'name' => __('Adress 2','wpsellsy'),
+                'name' => __('Adress 2', 'wpsellsy'),
                 'code' => 'addressPart1',
-                'description' => __('Adress 2','wpsellsy'),
+                'description' => __('Adress 2', 'wpsellsy'),
                 'defaultValue' => '',
-                'prefsList' => null
+                'prefsList' => null,
             ),
             'addressPart2' => array(
                 'type' => 'text',
-                'name' => __('Adress 3','wpsellsy'),
+                'name' => __('Adress 3', 'wpsellsy'),
                 'code' => 'addressPart2',
-                'description' => __('Adress 3','wpsellsy'),
+                'description' => __('Adress 3', 'wpsellsy'),
                 'defaultValue' => '',
-                'prefsList' => null
+                'prefsList' => null,
             ),
             'addressZip' => array(
                 'type' => 'text',
-                'name' => __('Zipcode','wpsellsy'),
+                'name' => __('Zipcode', 'wpsellsy'),
                 'code' => 'addressZip',
-                'description' => __('Zipcode','wpsellsy'),
+                'description' => __('Zipcode', 'wpsellsy'),
                 'defaultValue' => '',
-                'prefsList' => null
+                'prefsList' => null,
             ),
             'addressTown' => array(
                 'type' => 'text',
-                'name' => __('City','wpsellsy'),
+                'name' => __('City', 'wpsellsy'),
                 'code' => 'addressTown',
-                'description' => __('City','wpsellsy'),
+                'description' => __('City', 'wpsellsy'),
                 'defaultValue' => '',
-                'prefsList' => null
+                'prefsList' => null,
             ),
             'addressCountrycode' => array(
                 'type' => 'text',
-                'name' => __('Country','wpsellsy'),
+                'name' => __('Country', 'wpsellsy'),
                 'code' => 'addressCountrycode',
-                'description' => __('Country','wpsellsy'),
+                'description' => __('Country', 'wpsellsy'),
                 'defaultValue' => '',
-                'prefsList' => null
-            )
+                'prefsList' => null,
+            ),
         );
     }
 
@@ -207,7 +207,7 @@ class Prospect implements TypeInterface
     {
         //Add default prospect fields as fields
         $final = array();
-        foreach ($this->fieldsName as $fieldName=>$fieldParams) {
+        foreach ($this->fieldsName as $fieldName => $fieldParams) {
             $final[$fieldName] = new CustomField(
                 $fieldName,
                 $fieldParams['type'],
@@ -224,10 +224,11 @@ class Prospect implements TypeInterface
     }
 
     /**
-     * Method to populate the array passed to the api to create a new prospect
+     * Method to populate the array passed to the api to create a new prospect.
+     *
      * @param string $fieldName
-     * @param mixed $value
-     * @param array $finalSource
+     * @param mixed  $value
+     * @param array  $finalSource
      */
     public function populateParams($fieldName, &$value, &$finalSource)
     {
@@ -245,11 +246,14 @@ class Prospect implements TypeInterface
     }
 
     /**
-     * Method to validate each fiilms
+     * Method to validate each fiilms.
+     *
      * @param string $fieldName
-     * @param mixed $value
-     * @param array $mandatoriesFields
-     * @return boolean
+     * @param mixed  $value
+     * @param array  $mandatoriesFields
+     *
+     * @return bool
+     *
      * @throws \Exception
      */
     public function validateField($fieldName, &$value, $mandatoriesFields = array())
