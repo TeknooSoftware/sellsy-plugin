@@ -179,6 +179,7 @@ class WidgetTest extends \PHPUnit_Framework_TestCase
             </label>
     <input class="widefat" id="text" name="text" type="text" value="foobartext" />
 </p>
+
 EOF;
 
         $this->assertEquals($exceptedOutput, $output);
