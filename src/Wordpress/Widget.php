@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Sellsy Wordpress plugin.
  *
@@ -25,7 +26,7 @@ namespace UniAlteri\Sellsy\Wordpress;
 
 /**
  * Class Widget
- * Wordpress Widget to display in the public front an HTML form to generate leads in Sellsy
+ * Wordpress Widget to display in the public front an HTML form to generate leads in Sellsy.
  *
  * @copyright   Copyright (c) 2009-2015 Uni Alteri (http://agence.net.ua)
  *

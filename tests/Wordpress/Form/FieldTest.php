@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Sellsy Wordpress plugin.
  *
@@ -82,20 +83,20 @@ class FieldTest extends \PHPUnit_Framework_TestCase
                 'id' => 1,
                 'value' => 'val',
                 'isDefault' => 'N',
-                'rank' => 1
+                'rank' => 1,
             ),
             (object) array(
                 'id' => 2,
                 'value' => 'defaultOptionValue',
                 'isDefault' => 'Y',
-                'rank' => 2
+                'rank' => 2,
             ),
             (object) array(
                 'id' => 3,
                 'value' => 'val',
                 'isDefault' => 'N',
-                'rank' => 3
-            )
+                'rank' => 3,
+            ),
         );
         $customFieldObject = new Field(123, 'typeValue', 'nameValue', 'codeValue', 'descValue', 'defaultValue', $options, false, 'boolean');
         $this->assertEquals('defaultOptionValue', $customFieldObject->getDefaultValue());
@@ -108,36 +109,36 @@ class FieldTest extends \PHPUnit_Framework_TestCase
                 'id' => 1,
                 'value' => 'val',
                 'isDefault' => 'N',
-                'rank' => 1
+                'rank' => 1,
             ),
             (object) array(
                 'id' => 2,
                 'value' => 'defaultOptionValue',
                 'isDefault' => 'Y',
-                'rank' => 3
+                'rank' => 3,
             ),
             (object) array(
                 'id' => 3,
                 'value' => 'val',
                 'isDefault' => 'N',
-                'rank' => 2
-            )
+                'rank' => 2,
+            ),
         );
         $customFieldObject = new Field(123, 'typeValue', 'nameValue', 'codeValue', 'descValue', 'defaultValue', $options, false, 'boolean');
         $this->assertEquals(
             array(
                 1 => array(
                     'id' => 1,
-                    'value' => 'val'
+                    'value' => 'val',
                 ),
                 2 => array(
                     'id' => 3,
-                    'value' => 'val'
+                    'value' => 'val',
                 ),
                 3 => array(
                     'id' => 2,
-                    'value' => 'defaultOptionValue'
-                )
+                    'value' => 'defaultOptionValue',
+                ),
             ),
             $customFieldObject->getOptions()
         );

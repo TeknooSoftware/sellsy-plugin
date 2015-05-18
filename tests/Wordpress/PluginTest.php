@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Sellsy Wordpress plugin.
  *
@@ -41,7 +42,7 @@ class PluginTest extends \PHPUnit_Framework_TestCase
     protected $sellsyClientMock;
 
     /**
-     * return OptionsBag|\PHPUnit_Framework_MockObject_MockObject
+     * return OptionsBag|\PHPUnit_Framework_MockObject_MockObject.
      */
     protected function buildOptionsMock()
     {
@@ -59,7 +60,7 @@ class PluginTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * return OptionsBag|\PHPUnit_Framework_MockObject_MockObject
+     * return OptionsBag|\PHPUnit_Framework_MockObject_MockObject.
      */
     protected function buildClientMock()
     {
@@ -106,8 +107,9 @@ class PluginTest extends \PHPUnit_Framework_TestCase
                         Settings::ACCESS_TOKEN => 'a',
                         Settings::ACCESS_SECRET => 'b',
                         Settings::CONSUMER_TOKEN => 'c',
-                        Settings::CONSUMER_SECRET => 'd'
+                        Settings::CONSUMER_SECRET => 'd',
                     );
+
                     return $map[$name];
                 }
             );
@@ -222,7 +224,7 @@ class PluginTest extends \PHPUnit_Framework_TestCase
         $fieldsList = $plugin->listFields();
         $fieldsList2 = $plugin->listFields();
         $this->assertEquals(
-            array (
+            array(
                 'thirdName',
                 'thirdEmail',
                 'thirdTel',
@@ -245,7 +247,7 @@ class PluginTest extends \PHPUnit_Framework_TestCase
         );
 
         $this->assertSame($fieldsList, $fieldsList2);
-        foreach ($fieldsList as $code=>$field) {
+        foreach ($fieldsList as $code => $field) {
             $this->assertInstanceOf('UniAlteri\Sellsy\Wordpress\Form\Field', $field);
             $this->assertEquals($code, $field->getCode());
         }
@@ -266,7 +268,7 @@ class PluginTest extends \PHPUnit_Framework_TestCase
                         'description' => 'desc',
                         'defaultValue' => 'def',
                         'prefsList' => null,
-                        'isRequired' => 'Y'
+                        'isRequired' => 'Y',
                     ),
                     array(
                         'id' => 2,
@@ -276,10 +278,10 @@ class PluginTest extends \PHPUnit_Framework_TestCase
                         'description' => 'desc',
                         'defaultValue' => 'def',
                         'prefsList' => null,
-                        'isRequired' => 'Y'
-                    )
-                )
-            )
+                        'isRequired' => 'Y',
+                    ),
+                ),
+            ),
         );
 
         $customFieldMock = $this->getMock('UniAlteri\Sellsy\Client\Collection\Collection', array('getList'), array(), '', false);
@@ -289,8 +291,8 @@ class PluginTest extends \PHPUnit_Framework_TestCase
                 $this->equalTo(
                     array(
                         'search' => array(
-                            'useOn' => (array) 'prospect'
-                        )
+                            'useOn' => (array) 'prospect',
+                        ),
                     )
                 )
             )
@@ -311,7 +313,7 @@ class PluginTest extends \PHPUnit_Framework_TestCase
         $fieldsList = $plugin->listFields();
         $fieldsList2 = $plugin->listFields();
         $this->assertEquals(
-            array (
+            array(
                 'thirdName',
                 'thirdEmail',
                 'thirdTel',
@@ -330,13 +332,13 @@ class PluginTest extends \PHPUnit_Framework_TestCase
                 'addressTown',
                 'addressCountrycode',
                 'field1',
-                'field2'
+                'field2',
             ),
             array_keys($fieldsList)
         );
 
         $this->assertSame($fieldsList, $fieldsList2);
-        foreach ($fieldsList as $code=>$field) {
+        foreach ($fieldsList as $code => $field) {
             $this->assertInstanceOf('UniAlteri\Sellsy\Wordpress\Form\Field', $field);
             $this->assertEquals($code, $field->getCode());
         }
@@ -357,7 +359,7 @@ class PluginTest extends \PHPUnit_Framework_TestCase
                         'description' => 'desc',
                         'defaultValue' => 'def',
                         'prefsList' => null,
-                        'isRequired' => 'Y'
+                        'isRequired' => 'Y',
                     ),
                     array(
                         'id' => 2,
@@ -367,10 +369,10 @@ class PluginTest extends \PHPUnit_Framework_TestCase
                         'description' => 'desc',
                         'defaultValue' => 'def',
                         'prefsList' => null,
-                        'isRequired' => 'Y'
-                    )
-                )
-            )
+                        'isRequired' => 'Y',
+                    ),
+                ),
+            ),
         );
 
         $customFieldMock = $this->getMock('UniAlteri\Sellsy\Client\Collection\Collection', array('getList'), array(), '', false);
@@ -380,8 +382,8 @@ class PluginTest extends \PHPUnit_Framework_TestCase
                 $this->equalTo(
                     array(
                         'search' => array(
-                            'useOn' => (array) 'prospect'
-                        )
+                            'useOn' => (array) 'prospect',
+                        ),
                     )
                 )
             )
@@ -401,14 +403,14 @@ class PluginTest extends \PHPUnit_Framework_TestCase
 
         $fieldsList = $plugin->listRequiredCustomsFields();
         $this->assertEquals(
-            array (
+            array(
                 '1',
-                '2'
+                '2',
             ),
             array_keys($fieldsList)
         );
 
-        foreach ($fieldsList as $code=>$field) {
+        foreach ($fieldsList as $code => $field) {
             $this->assertInstanceOf('UniAlteri\Sellsy\Wordpress\Form\Field', $field);
         }
 
@@ -446,14 +448,14 @@ class PluginTest extends \PHPUnit_Framework_TestCase
                 function ($name) {
                     $map = array(
                         Settings::OPPORTUNITY_CREATION => 'prospectOnly',
-                        Settings::FIELDS_SELECTED => array()
+                        Settings::FIELDS_SELECTED => array(),
                     );
 
                     if (isset($map[$name])) {
                         return $map[$name];
                     }
 
-                    return null;
+                    return;
                 }
             );
 
@@ -486,15 +488,14 @@ class PluginTest extends \PHPUnit_Framework_TestCase
                 function ($name) {
                     $map = array(
                         Settings::OPPORTUNITY_CREATION => 'prospectOpportunity',
-                        Settings::FIELDS_SELECTED => array()
+                        Settings::FIELDS_SELECTED => array(),
                     );
-
 
                     if (isset($map[$name])) {
                         return $map[$name];
                     }
 
-                    return null;
+                    return;
                 }
             );
 
@@ -531,7 +532,7 @@ class PluginTest extends \PHPUnit_Framework_TestCase
                         'description' => 'desc',
                         'defaultValue' => 'def',
                         'prefsList' => null,
-                        'isRequired' => 'Y'
+                        'isRequired' => 'Y',
                     ),
                     array(
                         'id' => 2,
@@ -541,10 +542,10 @@ class PluginTest extends \PHPUnit_Framework_TestCase
                         'description' => 'desc',
                         'defaultValue' => 'def',
                         'prefsList' => null,
-                        'isRequired' => 'Y'
-                    )
-                )
-            )
+                        'isRequired' => 'Y',
+                    ),
+                ),
+            ),
         );
 
         $customFieldMock = $this->getMock('UniAlteri\Sellsy\Client\Collection\Collection', array('getList'), array(), '', false);
@@ -554,8 +555,8 @@ class PluginTest extends \PHPUnit_Framework_TestCase
                 $this->equalTo(
                     array(
                         'search' => array(
-                            'useOn' => (array) 'prospect'
-                        )
+                            'useOn' => (array) 'prospect',
+                        ),
                     )
                 )
             )
@@ -573,28 +574,28 @@ class PluginTest extends \PHPUnit_Framework_TestCase
                 function ($name) {
                     $map = array(
                         Settings::OPPORTUNITY_CREATION => 'prospectOnly',
-                        Settings::FIELDS_SELECTED => array('contactCivil', 'field1')
+                        Settings::FIELDS_SELECTED => array('contactCivil', 'field1'),
                     );
 
                     if (isset($map[$name])) {
                         return $map[$name];
                     }
 
-                    return null;
+                    return;
                 }
             );
 
         $fieldsList = $this->buildPlugin()->listSelectedFields();
 
         $this->assertEquals(
-            array (
+            array(
                 'contactCivil',
-                'field1'
+                'field1',
             ),
             array_keys($fieldsList)
         );
 
-        foreach ($fieldsList as $code=>$field) {
+        foreach ($fieldsList as $code => $field) {
             $this->assertInstanceOf('UniAlteri\Sellsy\Wordpress\Form\Field', $field);
             $this->assertEquals($code, $field->getCode());
         }
@@ -630,7 +631,7 @@ class PluginTest extends \PHPUnit_Framework_TestCase
                         'description' => 'desc',
                         'defaultValue' => 'def',
                         'prefsList' => null,
-                        'isRequired' => 'Y'
+                        'isRequired' => 'Y',
                     ),
                     array(
                         'id' => 2,
@@ -640,10 +641,10 @@ class PluginTest extends \PHPUnit_Framework_TestCase
                         'description' => 'desc',
                         'defaultValue' => 'def',
                         'prefsList' => null,
-                        'isRequired' => 'Y'
-                    )
-                )
-            )
+                        'isRequired' => 'Y',
+                    ),
+                ),
+            ),
         );
 
         $customFieldMock = $this->getMock('UniAlteri\Sellsy\Client\Collection\Collection', array('getList'), array(), '', false);
@@ -653,8 +654,8 @@ class PluginTest extends \PHPUnit_Framework_TestCase
                 $this->equalTo(
                     array(
                         'search' => array(
-                            'useOn' => (array) 'prospect'
-                        )
+                            'useOn' => (array) 'prospect',
+                        ),
                     )
                 )
             )
@@ -672,29 +673,28 @@ class PluginTest extends \PHPUnit_Framework_TestCase
                 function ($name) {
                     $map = array(
                         Settings::OPPORTUNITY_CREATION => 'prospectOpportunity',
-                        Settings::FIELDS_SELECTED => array('contactCivil', 'field1')
+                        Settings::FIELDS_SELECTED => array('contactCivil', 'field1'),
                     );
-
 
                     if (isset($map[$name])) {
                         return $map[$name];
                     }
 
-                    return null;
+                    return;
                 }
             );
 
         $fieldsList = $this->buildPlugin()->listSelectedFields();
 
         $this->assertEquals(
-            array (
+            array(
                 'contactCivil',
-                'field1'
+                'field1',
             ),
             array_keys($fieldsList)
         );
 
-        foreach ($fieldsList as $code=>$field) {
+        foreach ($fieldsList as $code => $field) {
             $this->assertInstanceOf('UniAlteri\Sellsy\Wordpress\Form\Field', $field);
             $this->assertEquals($code, $field->getCode());
         }
@@ -708,14 +708,14 @@ class PluginTest extends \PHPUnit_Framework_TestCase
             ->willReturnCallback(
                 function ($name) {
                     $map = array(
-                        Settings::OPPORTUNITY_SOURCE => ''
+                        Settings::OPPORTUNITY_SOURCE => '',
                     );
 
                     if (isset($map[$name])) {
                         return $map[$name];
                     }
 
-                    return null;
+                    return;
                 }
             );
 
@@ -730,18 +730,18 @@ class PluginTest extends \PHPUnit_Framework_TestCase
             ->willReturnCallback(
                 function ($name) {
                     $map = array(
-                        Settings::OPPORTUNITY_SOURCE => 'source1,source2'
+                        Settings::OPPORTUNITY_SOURCE => 'source1,source2',
                     );
 
                     if (isset($map[$name])) {
                         return $map[$name];
                     }
 
-                    return null;
+                    return;
                 }
             );
 
-        $this->assertEquals(array('source1','source2'), $this->buildPlugin()->getSourcesList());
+        $this->assertEquals(array('source1', 'source2'), $this->buildPlugin()->getSourcesList());
     }
 
     public function testCheckOppListSources()
@@ -750,13 +750,13 @@ class PluginTest extends \PHPUnit_Framework_TestCase
             'response' => array(
                 array(
                     'id' => 1,
-                    'label' => 'label1'
+                    'label' => 'label1',
                 ),
                 array(
                     'id' => 2,
-                    'label' => 'label2'
-                )
-            )
+                    'label' => 'label2',
+                ),
+            ),
         );
 
         $opportunitiesMock = $this->getMock('UniAlteri\Sellsy\Client\Collection\Collection', array('getSources'), array(), '', false);
@@ -773,13 +773,13 @@ class PluginTest extends \PHPUnit_Framework_TestCase
             array(
                 'label1' => true,
                 'label3' => false,
-                'label2' => true
+                'label2' => true,
             ),
             $this->buildPlugin()->checkOppListSources(
                 array(
                     'label1',
                     'label3',
-                    'label2'
+                    'label2',
                 )
             )
         );
@@ -806,13 +806,13 @@ class PluginTest extends \PHPUnit_Framework_TestCase
             'response' => array(
                 array(
                     'id' => 1,
-                    'label' => 'label1'
+                    'label' => 'label1',
                 ),
                 array(
                     'id' => 2,
-                    'label' => 'label2'
-                )
-            )
+                    'label' => 'label2',
+                ),
+            ),
         );
 
         $opportunitiesMock = $this->getMock('UniAlteri\Sellsy\Client\Collection\Collection', array('getSources'), array(), '', false);
@@ -834,13 +834,13 @@ class PluginTest extends \PHPUnit_Framework_TestCase
             'response' => array(
                 array(
                     'id' => 1,
-                    'label' => 'label1'
+                    'label' => 'label1',
                 ),
                 array(
                     'id' => 2,
-                    'label' => 'label2'
-                )
-            )
+                    'label' => 'label2',
+                ),
+            ),
         );
 
         $opportunitiesMock = $this->getMock('UniAlteri\Sellsy\Client\Collection\Collection', array('getSources'), array(), '', false);
@@ -889,7 +889,7 @@ class PluginTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(
             array(
                 array('nonceValue', 'slswp_ajax_nonce'),
-                array('false')
+                array('false'),
             ),
             $methodArgs
         );
@@ -900,7 +900,7 @@ class PluginTest extends \PHPUnit_Framework_TestCase
         $_POST = array(
             'nonce' => 'nonceValue',
             'action' => 'sls_createOppSource',
-            'param' => 'fooBar'
+            'param' => 'fooBar',
         );
 
         $plugin = $this->buildPlugin();
@@ -917,7 +917,7 @@ class PluginTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(
             array(
                 array('nonceValue', 'slswp_ajax_nonce'),
-                array('false')
+                array('false'),
             ),
             $methodArgs
         );
@@ -929,11 +929,11 @@ class PluginTest extends \PHPUnit_Framework_TestCase
             'nonce' => 'nonceValue',
             'action' => 'sls_createOppSource',
             'param' => 'creerSource',
-            'source' => 'source1'
+            'source' => 'source1',
         );
 
         $sourceListMock = array(
-            'response' => false
+            'response' => false,
         );
 
         $opportunitiesMock = $this->getMock('UniAlteri\Sellsy\Client\Collection\Collection', array('createSource'), array(), '', false);
@@ -965,7 +965,7 @@ class PluginTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(
             array(
                 array('nonceValue', 'slswp_ajax_nonce'),
-                array('false')
+                array('false'),
             ),
             $methodArgs
         );
@@ -977,11 +977,11 @@ class PluginTest extends \PHPUnit_Framework_TestCase
             'nonce' => 'nonceValue',
             'action' => 'sls_createOppSource',
             'param' => 'creerSource',
-            'source' => 'source1'
+            'source' => 'source1',
         );
 
         $sourceListMock = array(
-            'response' => true
+            'response' => true,
         );
 
         $opportunitiesMock = $this->getMock('UniAlteri\Sellsy\Client\Collection\Collection', array('createSource'), array(), '', false);
@@ -1013,7 +1013,7 @@ class PluginTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(
             array(
                 array('nonceValue', 'slswp_ajax_nonce'),
-                array('true')
+                array('true'),
             ),
             $methodArgs
         );
@@ -1025,11 +1025,11 @@ class PluginTest extends \PHPUnit_Framework_TestCase
             'nonce' => 'nonceValue',
             'action' => 'sls_createOppSource',
             'param' => 'creerSource',
-            'source' => 'source1'
+            'source' => 'source1',
         );
 
         $sourceListMock = array(
-            'response' => true
+            'response' => true,
         );
 
         $opportunitiesMock = $this->getMock('UniAlteri\Sellsy\Client\Collection\Collection', array('createSource'), array(), '', false);
@@ -1056,7 +1056,7 @@ class PluginTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(
             array(
                 array('nonceValue', 'slswp_ajax_nonce'),
-                array('false')
+                array('false'),
             ),
             $methodArgs
         );
@@ -1075,7 +1075,7 @@ class PluginTest extends \PHPUnit_Framework_TestCase
                         'description' => 'desc',
                         'defaultValue' => 'def',
                         'prefsList' => null,
-                        'isRequired' => 'Y'
+                        'isRequired' => 'Y',
                     ),
                     array(
                         'id' => 2,
@@ -1085,10 +1085,10 @@ class PluginTest extends \PHPUnit_Framework_TestCase
                         'description' => 'desc',
                         'defaultValue' => 'def',
                         'prefsList' => null,
-                        'isRequired' => 'Y'
-                    )
-                )
-            )
+                        'isRequired' => 'Y',
+                    ),
+                ),
+            ),
         );
 
         $prospectMock = $this->getMock('UniAlteri\Sellsy\Client\Collection\Collection', array('create'), array(), '', false);
@@ -1098,18 +1098,18 @@ class PluginTest extends \PHPUnit_Framework_TestCase
                 $this->equalTo(
                     array(
                         'third' => array(
-                            'name' => 'fooBar'
+                            'name' => 'fooBar',
                         ),
                         'contact' => array(
                             'name' => 'fooBar',
                         ),
                         'address' => array(
-                            'part1' => 'street address'
-                        )
+                            'part1' => 'street address',
+                        ),
                     )
                 )
             )
-            ->willReturn(json_decode(json_encode(array('response'=>345))));
+            ->willReturn(json_decode(json_encode(array('response' => 345))));
 
         $customFieldMock = $this->getMock('UniAlteri\Sellsy\Client\Collection\Collection', array('getList', 'recordValues'), array(), '', false);
         $customFieldMock->expects($this->once())
@@ -1118,8 +1118,8 @@ class PluginTest extends \PHPUnit_Framework_TestCase
                 $this->equalTo(
                     array(
                         'search' => array(
-                            'useOn' => (array) 'prospect'
-                        )
+                            'useOn' => (array) 'prospect',
+                        ),
                     )
                 )
             )
@@ -1157,7 +1157,7 @@ class PluginTest extends \PHPUnit_Framework_TestCase
 
         $formValues = array(
             'contactName' => 'fooBar',
-            'addressPart1' => 'street address'
+            'addressPart1' => 'street address',
         );
 
         prepareMock('sanitize_text_field', '*', function ($args) { return $args;});
@@ -1176,8 +1176,8 @@ class PluginTest extends \PHPUnit_Framework_TestCase
                 $this->equalTo(
                     array(
                         'search' => array(
-                            'useOn' => (array) 'prospect'
-                        )
+                            'useOn' => (array) 'prospect',
+                        ),
                     )
                 )
             )
@@ -1213,12 +1213,12 @@ class PluginTest extends \PHPUnit_Framework_TestCase
             );
 
         $formValues = array(
-            'contactEmail' => 'fooBar'
+            'contactEmail' => 'fooBar',
         );
 
         prepareMock('sanitize_text_field', '*', function ($args) { return $args;});
 
-        $this->assertEquals(array('contactEmail'=>''), $plugin->createProspect($formValues, $bodyOutput));
+        $this->assertEquals(array('contactEmail' => ''), $plugin->createProspect($formValues, $bodyOutput));
     }
 
     public function testCreateProspectException()
@@ -1234,7 +1234,7 @@ class PluginTest extends \PHPUnit_Framework_TestCase
                         'description' => 'desc',
                         'defaultValue' => 'def',
                         'prefsList' => null,
-                        'isRequired' => 'Y'
+                        'isRequired' => 'Y',
                     ),
                     array(
                         'id' => 2,
@@ -1244,10 +1244,10 @@ class PluginTest extends \PHPUnit_Framework_TestCase
                         'description' => 'desc',
                         'defaultValue' => 'def',
                         'prefsList' => null,
-                        'isRequired' => 'Y'
-                    )
-                )
-            )
+                        'isRequired' => 'Y',
+                    ),
+                ),
+            ),
         );
 
         $prospectMock = $this->getMock('UniAlteri\Sellsy\Client\Collection\Collection', array('create'), array(), '', false);
@@ -1257,14 +1257,14 @@ class PluginTest extends \PHPUnit_Framework_TestCase
                 $this->equalTo(
                     array(
                         'third' => array(
-                            'name' => 'fooBar'
+                            'name' => 'fooBar',
                         ),
                         'contact' => array(
                             'name' => 'fooBar',
                         ),
                         'address' => array(
-                            'part1' => 'street address'
-                        )
+                            'part1' => 'street address',
+                        ),
                     )
                 )
             )
@@ -1277,8 +1277,8 @@ class PluginTest extends \PHPUnit_Framework_TestCase
                 $this->equalTo(
                     array(
                         'search' => array(
-                            'useOn' => (array) 'prospect'
-                        )
+                            'useOn' => (array) 'prospect',
+                        ),
                     )
                 )
             )
@@ -1316,7 +1316,7 @@ class PluginTest extends \PHPUnit_Framework_TestCase
 
         $formValues = array(
             'contactName' => 'fooBar',
-            'addressPart1' => 'street address'
+            'addressPart1' => 'street address',
         );
 
         prepareMock('sanitize_text_field', '*', function ($args) { return $args;});
@@ -1337,7 +1337,7 @@ class PluginTest extends \PHPUnit_Framework_TestCase
                         'description' => 'desc',
                         'defaultValue' => 'def',
                         'prefsList' => null,
-                        'isRequired' => 'Y'
+                        'isRequired' => 'Y',
                     ),
                     array(
                         'id' => 2,
@@ -1347,10 +1347,10 @@ class PluginTest extends \PHPUnit_Framework_TestCase
                         'description' => 'desc',
                         'defaultValue' => 'def',
                         'prefsList' => null,
-                        'isRequired' => 'Y'
-                    )
-                )
-            )
+                        'isRequired' => 'Y',
+                    ),
+                ),
+            ),
         );
 
         $prospectMock = $this->getMock('UniAlteri\Sellsy\Client\Collection\Collection', array('create'), array(), '', false);
@@ -1360,14 +1360,14 @@ class PluginTest extends \PHPUnit_Framework_TestCase
                 $this->equalTo(
                     array(
                         'third' => array(
-                            'name' => 'fooBar'
+                            'name' => 'fooBar',
                         ),
                         'contact' => array(
                             'name' => 'fooBar',
                         ),
                         'address' => array(
-                            'part1' => 'street address'
-                        )
+                            'part1' => 'street address',
+                        ),
                     )
                 )
             )
@@ -1380,8 +1380,8 @@ class PluginTest extends \PHPUnit_Framework_TestCase
                 $this->equalTo(
                     array(
                         'search' => array(
-                            'useOn' => (array) 'prospect'
-                        )
+                            'useOn' => (array) 'prospect',
+                        ),
                     )
                 )
             )
@@ -1419,7 +1419,7 @@ class PluginTest extends \PHPUnit_Framework_TestCase
 
         $formValues = array(
             'contactName' => 'fooBar',
-            'addressPart1' => 'street address'
+            'addressPart1' => 'street address',
         );
 
         prepareMock('sanitize_text_field', '*', function ($args) { return $args;});
@@ -1440,7 +1440,7 @@ class PluginTest extends \PHPUnit_Framework_TestCase
                         'description' => 'desc',
                         'defaultValue' => 'def',
                         'prefsList' => null,
-                        'isRequired' => 'Y'
+                        'isRequired' => 'Y',
                     ),
                     array(
                         'id' => 2,
@@ -1450,7 +1450,7 @@ class PluginTest extends \PHPUnit_Framework_TestCase
                         'description' => 'desc',
                         'defaultValue' => 'def',
                         'prefsList' => null,
-                        'isRequired' => 'Y'
+                        'isRequired' => 'Y',
                     ),
                     array(
                         'id' => 3,
@@ -1460,10 +1460,10 @@ class PluginTest extends \PHPUnit_Framework_TestCase
                         'description' => 'desc',
                         'defaultValue' => 'N',
                         'prefsList' => null,
-                        'isRequired' => 'Y'
-                    )
-                )
-            )
+                        'isRequired' => 'Y',
+                    ),
+                ),
+            ),
         );
 
         $prospectMock = $this->getMock('UniAlteri\Sellsy\Client\Collection\Collection', array('create'), array(), '', false);
@@ -1473,18 +1473,18 @@ class PluginTest extends \PHPUnit_Framework_TestCase
                 $this->equalTo(
                     array(
                         'third' => array(
-                            'name' => 'fooBar'
+                            'name' => 'fooBar',
                         ),
                         'contact' => array(
                             'name' => 'fooBar',
                         ),
                         'address' => array(
-                            'part1' => 'street address'
-                        )
+                            'part1' => 'street address',
+                        ),
                     )
                 )
             )
-            ->willReturn(json_decode(json_encode(array('response'=>345))));
+            ->willReturn(json_decode(json_encode(array('response' => 345))));
 
         $customFieldMock = $this->getMock('UniAlteri\Sellsy\Client\Collection\Collection', array('getList', 'recordValues'), array(), '', false);
         $customFieldMock->expects($this->once())
@@ -1493,8 +1493,8 @@ class PluginTest extends \PHPUnit_Framework_TestCase
                 $this->equalTo(
                     array(
                         'search' => array(
-                            'useOn' => (array) 'prospect'
-                        )
+                            'useOn' => (array) 'prospect',
+                        ),
                     )
                 )
             )
@@ -1511,17 +1511,17 @@ class PluginTest extends \PHPUnit_Framework_TestCase
                             'values' => array(
                                 array(
                                     'cfid' => 3,
-                                    'value' => 'N'
+                                    'value' => 'N',
                                 ),
                                 array(
                                     'cfid' => 1,
-                                    'value' => 'def'
+                                    'value' => 'def',
                                 ),
                                 array(
                                     'cfid' => 2,
-                                    'value' => 'def'
-                                )
-                            )
+                                    'value' => 'def',
+                                ),
+                            ),
                         ),
                         $args
                     );
@@ -1558,7 +1558,7 @@ class PluginTest extends \PHPUnit_Framework_TestCase
         $formValues = array(
             'contactName' => 'fooBar',
             'addressPart1' => 'street address',
-            'field3' => 'foo'
+            'field3' => 'foo',
         );
 
         prepareMock('sanitize_text_field', '*', function ($args) { return $args;});
@@ -1569,7 +1569,7 @@ class PluginTest extends \PHPUnit_Framework_TestCase
     public function testGetOpportunityCurrentIdent()
     {
         $listCustomFieldMock = array(
-            'response' => 123
+            'response' => 123,
         );
 
         $customFieldMock = $this->getMock('UniAlteri\Sellsy\Client\Collection\Collection', array('getCurrentIdent'), array(), '', false);
@@ -1590,17 +1590,17 @@ class PluginTest extends \PHPUnit_Framework_TestCase
             'response' => array(
                 array(
                     'id' => 456,
-                    'name' => 'Bar'
+                    'name' => 'Bar',
                 ),
                 array(
                     'id' => 876,
-                    'name' => 'foo'
+                    'name' => 'foo',
                 ),
                 array(
                     'name' => 'default',
-                    'id' => 123
-                )
-            )
+                    'id' => 123,
+                ),
+            ),
         );
 
         $customFieldMock = $this->getMock('UniAlteri\Sellsy\Client\Collection\Collection', array('getFunnels'), array(), '', false);
@@ -1621,8 +1621,8 @@ class PluginTest extends \PHPUnit_Framework_TestCase
             'response' => array(
                 'bar' => 456,
                 'foo' => 876,
-                'defaultFunnel' => 123
-            )
+                'defaultFunnel' => 123,
+            ),
         );
 
         $customFieldMock = $this->getMock('UniAlteri\Sellsy\Client\Collection\Collection', array('getFunnels'), array(), '', false);
@@ -1635,7 +1635,6 @@ class PluginTest extends \PHPUnit_Framework_TestCase
             ->willReturn($customFieldMock);
 
         $this->assertEquals(123, $this->buildPlugin()->getFunnelId());
-
     }
 
     public function testGetStepIdNull()
@@ -1651,7 +1650,7 @@ class PluginTest extends \PHPUnit_Framework_TestCase
             ->with(
                 $this->equalTo(
                     array(
-                        'funnelid' => 123
+                        'funnelid' => 123,
                     )
                 )
             )
@@ -1661,12 +1660,12 @@ class PluginTest extends \PHPUnit_Framework_TestCase
                         array(
                             'response' => array(
                                 array(
-                                    'id' => 456
+                                    'id' => 456,
                                 ),
                                 array(
-                                    'id' => 678
-                                )
-                            )
+                                    'id' => 678,
+                                ),
+                            ),
                         )
                     )
                 )
@@ -1692,21 +1691,21 @@ class PluginTest extends \PHPUnit_Framework_TestCase
                             'response' => array(
                                 array(
                                     'label' => '',
-                                    'id' => 456
+                                    'id' => 456,
                                 ),
                                 array(
                                     'label' => 'source1',
-                                    'id' => 678
+                                    'id' => 678,
                                 ),
                                 array(
                                     'label' => 'source2',
-                                    'id' => 345
+                                    'id' => 345,
                                 ),
                                 array(
                                     'label' => 'source3',
-                                    'id' => 897
-                                )
-                            )
+                                    'id' => 897,
+                                ),
+                            ),
                         )
                     )
                 )
@@ -1734,7 +1733,7 @@ class PluginTest extends \PHPUnit_Framework_TestCase
                 json_decode(
                     json_encode(
                         array(
-                            'response' => 123
+                            'response' => 123,
                         )
                     )
                 )
@@ -1749,8 +1748,8 @@ class PluginTest extends \PHPUnit_Framework_TestCase
                             'response' => array(
                                 'bar' => 456,
                                 'foo' => 876,
-                                'defaultFunnel' => 12356
-                            )
+                                'defaultFunnel' => 12356,
+                            ),
                         )
                     )
                 )
@@ -1761,7 +1760,7 @@ class PluginTest extends \PHPUnit_Framework_TestCase
             ->with(
                 $this->equalTo(
                     array(
-                        'funnelid' => 12356
+                        'funnelid' => 12356,
                     )
                 )
             )
@@ -1771,12 +1770,12 @@ class PluginTest extends \PHPUnit_Framework_TestCase
                         array(
                             'response' => array(
                                 array(
-                                    'id' => 456
+                                    'id' => 456,
                                 ),
                                 array(
-                                    'id' => 678
-                                )
-                            )
+                                    'id' => 678,
+                                ),
+                            ),
                         )
                     )
                 )
@@ -1791,21 +1790,21 @@ class PluginTest extends \PHPUnit_Framework_TestCase
                             'response' => array(
                                 array(
                                     'label' => '',
-                                    'id' => 456
+                                    'id' => 456,
                                 ),
                                 array(
                                     'label' => 'source1',
-                                    'id' => 678
+                                    'id' => 678,
                                 ),
                                 array(
                                     'label' => 'source2',
-                                    'id' => 345
+                                    'id' => 345,
                                 ),
                                 array(
                                     'label' => 'source3',
-                                    'id' => 897
-                                )
-                            )
+                                    'id' => 897,
+                                ),
+                            ),
                         )
                     )
                 )
@@ -1827,8 +1826,8 @@ class PluginTest extends \PHPUnit_Framework_TestCase
                                 'name' => __('Contact from', 'wpsellsy').' source2',
                                 'funnelid' => 12356,
                                 'stepid' => 456,
-                                'brief' => 'Note'
-                            )
+                                'brief' => 'Note',
+                            ),
                         ),
                         $args
                     );
@@ -1904,7 +1903,6 @@ class PluginTest extends \PHPUnit_Framework_TestCase
                     return '';
                 }
             );
-
 
         $this->buildOptionsMock()
             ->expects($this->any())

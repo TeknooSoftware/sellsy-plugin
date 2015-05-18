@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Sellsy Wordpress plugin.
  *

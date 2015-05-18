@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Sellsy Wordpress plugin.
  *
@@ -58,7 +59,7 @@ class SettingsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * return OptionsBag|\PHPUnit_Framework_MockObject_MockObject
+     * return OptionsBag|\PHPUnit_Framework_MockObject_MockObject.
      */
     protected function buildOptionsMock()
     {
@@ -104,13 +105,13 @@ class SettingsTest extends \PHPUnit_Framework_TestCase
 
         $fieldsList = array(
             'field3' => $field3,
-            'field1' => $field1
+            'field1' => $field1,
         );
 
         $fieldsCustomList = array(
             'field1' => $field1,
             'field2' => $field2,
-            'field3' => $field3
+            'field3' => $field3,
         );
 
         $this->buildPluginMock()
@@ -135,7 +136,7 @@ class SettingsTest extends \PHPUnit_Framework_TestCase
                 }
             );
 
-        prepareMock('__', '*', function($text, $tag) {return $text; });
+        prepareMock('__', '*', function ($text, $tag) {return $text; });
 
         return $this->buildObject();
     }
@@ -156,12 +157,12 @@ class SettingsTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(
             array(
-                'sellsy_connexion'	=> 'Connection to Sellsy Account',
+                'sellsy_connexion' => 'Connection to Sellsy Account',
                 'sellsy_options' => 'Plugin options',
                 'sellsy_display' => 'Display options',
                 'sellsy_notification' => 'Notification',
                 'sellsy_frontValid' => 'Frontside validation',
-                'sellsy_Champs' => 'Fields selection'
+                'sellsy_Champs' => 'Fields selection',
             ),
             $object->getSections()
         );
@@ -216,13 +217,13 @@ class SettingsTest extends \PHPUnit_Framework_TestCase
                     'section' => 'sellsy_options',
                     'choices' => array(
                         'prospectOnly' => 'Only a lead',
-                        'prospectOpportunity' => 'A lead with its opportunity'
+                        'prospectOpportunity' => 'A lead with its opportunity',
                     ),
                     'originalKey' => 'WPIcreer_prospopp', //To be compliant with official Sellsy plugin
                 ),
                 Settings::OPPORTUNITY_SOURCE => array(
                     'title' => 'Opportunity source names',
-                    'desc' => 'You must define this parameter if you must create an opportunity. The source must exist on your <a href="https://www.sellsy.com/?_f=prospection_prefs&action=sources" target="_blank">Sellsy.com</a> account. Several sources can be defined, splited by a comma.' ,
+                    'desc' => 'You must define this parameter if you must create an opportunity. The source must exist on your <a href="https://www.sellsy.com/?_f=prospection_prefs&action=sources" target="_blank">Sellsy.com</a> account. Several sources can be defined, splited by a comma.',
                     'std' => '',
                     'type' => 'text',
                     'section' => 'sellsy_options',
@@ -244,7 +245,7 @@ class SettingsTest extends \PHPUnit_Framework_TestCase
                     'section' => 'sellsy_display',
                     'choices' => array(
                         'displayTitle' => 'Oui',
-                        'none' => 'Non'
+                        'none' => 'Non',
                     ),
                     'originalKey' => 'WPIaff_form', //To be compliant with official Sellsy plugin
                 ),
@@ -284,7 +285,7 @@ class SettingsTest extends \PHPUnit_Framework_TestCase
                     'title' => 'Confirmation message',
                     'desc' => 'To define the message to display when the lead has been created',
                     'type' => 'textarea',
-                    'std' =>  'Thanks, your message has been sent.',
+                    'std' => 'Thanks, your message has been sent.',
                     'section' => 'sellsy_display',
                     'originalKey' => null, //To be compliant with official Sellsy plugin
                 ),
@@ -292,7 +293,7 @@ class SettingsTest extends \PHPUnit_Framework_TestCase
                     'title' => 'Error message',
                     'desc' => 'To define the message to display when an error has been encounted',
                     'type' => 'textarea',
-                    'std' =>  'Your message has not been sent, please check these following fields :',
+                    'std' => 'Your message has not been sent, please check these following fields :',
                     'section' => 'sellsy_display',
                     'originalKey' => null, //To be compliant with official Sellsy plugin
                 ),
@@ -321,7 +322,7 @@ class SettingsTest extends \PHPUnit_Framework_TestCase
                     'section' => 'sellsy_frontValid',
                     'choices' => array(
                         'enableJsValidation' => 'Oui',
-                        'disableJsValidation' => 'Non'
+                        'disableJsValidation' => 'Non',
                     ),
                     'originalKey' => 'WPIjsValid', //To be compliant with official Sellsy plugin
                 ),
@@ -332,7 +333,7 @@ class SettingsTest extends \PHPUnit_Framework_TestCase
                     'type' => 'multiselect',
                     'std' => '',
                     'section' => 'sellsy_Champs',
-                    'choices' => array('field1'=>$field1, 'field2'=>$field2, 'field3'=>$field3),
+                    'choices' => array('field1' => $field1, 'field2' => $field2, 'field3' => $field3),
                     'originalKey' => null, //Not present in official plugin
                 ),
                 Settings::MANDATORIES_FIELDS => array(
@@ -341,9 +342,9 @@ class SettingsTest extends \PHPUnit_Framework_TestCase
                     'type' => 'multiselect',
                     'std' => '',
                     'section' => 'sellsy_Champs',
-                    'choices' => array('field3'=>'field3', 'field1'=>'field1'),
-                    'originalKey' => null //Not present in official plugin
-                )
+                    'choices' => array('field3' => 'field3', 'field1' => 'field1'),
+                    'originalKey' => null, //Not present in official plugin
+                ),
             ),
             $result
         );

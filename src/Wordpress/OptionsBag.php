@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Sellsy Wordpress plugin.
  *
@@ -49,13 +50,14 @@ class OptionsBag implements \ArrayAccess
     const WORDPRESS_VALIDATE_FILTER = 'wpsellsy_validate_configuration';
 
     /**
-     * List of settings defined by the administrator for this plugin
+     * List of settings defined by the administrator for this plugin.
+     *
      * @var array
      */
     protected $options = null;
 
     /**
-     * To registers Wordpress hooks to validate settings' values
+     * To registers Wordpress hooks to validate settings' values.
      */
     public function registerHooks()
     {
@@ -165,7 +167,7 @@ class OptionsBag implements \ArrayAccess
             return $this->options[$offset];
         }
 
-        return null;
+        return;
     }
 
     /**

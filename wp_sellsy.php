@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Sellsy Wordpress plugin.
  *
@@ -22,7 +23,7 @@
  */
 
 /**
- * Wordpress plugin file, called to initialize it
+ * Wordpress plugin file, called to initialize it.
  */
 require_once 'define.php';
 

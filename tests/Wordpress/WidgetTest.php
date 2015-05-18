@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Sellsy Wordpress plugin.
  *
@@ -29,11 +30,11 @@ class WidgetTest extends \PHPUnit_Framework_TestCase
 {
     public function testConstruct()
     {
-        $widget = new Widget('idBase', 'name', array('foo'=>'bar'), array('bar'=>'foo'));
+        $widget = new Widget('idBase', 'name', array('foo' => 'bar'), array('bar' => 'foo'));
         $this->assertEquals('idBase', $widget->getIdBase());
         $this->assertEquals('name', $widget->getName());
-        $this->assertEquals(array('foo'=>'bar'), $widget->getWidgetOptions());
-        $this->assertEquals(array('bar'=>'foo'), $widget->getControlOptions());
+        $this->assertEquals(array('foo' => 'bar'), $widget->getWidgetOptions());
+        $this->assertEquals(array('bar' => 'foo'), $widget->getControlOptions());
     }
 
     public function testWidgetEmpty()
@@ -66,7 +67,7 @@ class WidgetTest extends \PHPUnit_Framework_TestCase
         prepareMock(
             'apply_filters',
             array('widget_title', 'titleValue'),
-            function($title, $value) {
+            function ($title, $value) {
                 return strtoupper($value);
             }
         );
@@ -85,11 +86,11 @@ class WidgetTest extends \PHPUnit_Framework_TestCase
                 'before_widget' => 'beforeValue',
                 'before_title' => 'beforeTitleValue',
                 'after_title' => 'afterTitleValue',
-                'after_widget' => 'afterValue'
+                'after_widget' => 'afterValue',
             ),
             array(
                 'title' => 'titleValue',
-                'text' => 'fooBar'
+                'text' => 'fooBar',
             )
         );
         $output = ob_get_contents();
@@ -100,7 +101,7 @@ class WidgetTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(
             array(
                 array('widget_title', 'titleValue'),
-                array('[wpsellsy]')
+                array('[wpsellsy]'),
             ),
             $methodArgs
         );
@@ -112,12 +113,12 @@ class WidgetTest extends \PHPUnit_Framework_TestCase
         $oldInstance = array(
             'title' => 'fooBarTitle',
             'text' => 'fooBarText',
-            'otherValue' => 'fooBar'
+            'otherValue' => 'fooBar',
         );
         $newInstance = array(
             'title' => 'newTitle',
             'text' => 'newText',
-            'otherValue' => 'barFoo'
+            'otherValue' => 'barFoo',
         );
 
         $newInstance = $widget->update($newInstance, $oldInstance);
@@ -125,7 +126,7 @@ class WidgetTest extends \PHPUnit_Framework_TestCase
             array(
                 'title' => 'fooBarTitle',
                 'text' => 'fooBarText',
-                'otherValue' => 'fooBar'
+                'otherValue' => 'fooBar',
             ),
             $oldInstance
         );
@@ -133,7 +134,7 @@ class WidgetTest extends \PHPUnit_Framework_TestCase
             array(
                 'title' => 'fooBarTitle',
                 'text' => 'fooBarText',
-                'otherValue' => 'barFoo'
+                'otherValue' => 'barFoo',
             ),
             $newInstance
         );
@@ -159,7 +160,7 @@ class WidgetTest extends \PHPUnit_Framework_TestCase
         $instance = array(
             'title' => 'fooBarTitle',
             'text' => 'fooBarText',
-            'otherValue' => 'fooBar'
+            'otherValue' => 'fooBar',
         );
 
         ob_start();

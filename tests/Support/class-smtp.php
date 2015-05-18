@@ -1,5 +1,6 @@
 <?php
-/**
+
+/*
  * Sellsy Wordpress plugin.
  *
  * LICENSE

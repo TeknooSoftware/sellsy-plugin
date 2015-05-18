@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Sellsy Wordpress plugin.
  *
@@ -27,7 +28,7 @@ namespace UniAlteri\Sellsy\Wordpress\Form;
  * Class Field
  * Class to manage mandatories fields defined for each sellsy's type and
  * customs fields defined in the user's sellsy account, fetched via the API
- * to be manipulate in this plugin
+ * to be manipulate in this plugin.
  *
  * @copyright   Copyright (c) 2009-2015 Uni Alteri (http://agence.net.ua)
  *
@@ -40,43 +41,50 @@ namespace UniAlteri\Sellsy\Wordpress\Form;
 class Field
 {
     /**
-     * Id of this custom field in Sellsy
+     * Id of this custom field in Sellsy.
+     *
      * @var int
      */
     protected $id;
 
     /**
-     * Type of this custom field (see the Sellsy's documentation)
+     * Type of this custom field (see the Sellsy's documentation).
+     *
      * @var string
      */
     protected $type;
 
     /**
-     * Name of this custom field in Sellsy
+     * Name of this custom field in Sellsy.
+     *
      * @var string
      */
     protected $name;
 
     /**
-     * Code of this custom field in Sellsy (see the Sellsy's documentation)
+     * Code of this custom field in Sellsy (see the Sellsy's documentation).
+     *
      * @var string
      */
     protected $code;
 
     /**
-     * Description defined for this custom field in the Sellsy API
+     * Description defined for this custom field in the Sellsy API.
+     *
      * @var string
      */
     protected $description;
 
     /**
-     * Default value defined for this custom field in the Sellsy API
+     * Default value defined for this custom field in the Sellsy API.
+     *
      * @var string
      */
     protected $defaultValue;
 
     /**
-     * Options defined for this custom field in the Sellsy API
+     * Options defined for this custom field in the Sellsy API.
+     *
      * @var array
      */
     protected $options;
@@ -89,12 +97,14 @@ class Field
     /**
      * If this custom field is defined as mandatory in the Sellsy account.
      * If it's the case but the field is empty, the default value is used.
+     *
      * @var bool
      */
     protected $isRequiredField = false;
 
     /**
-     * Constructor to initialize this custom field and parse the Sellsy API's answer
+     * Constructor to initialize this custom field and parse the Sellsy API's answer.
+     *
      * @param int    $id
      * @param string $type
      * @param string $name
@@ -139,7 +149,8 @@ class Field
     }
 
     /**
-     * Get the Id of this custom field in Sellsy
+     * Get the Id of this custom field in Sellsy.
+     *
      * @return int
      */
     public function getId()
@@ -148,7 +159,8 @@ class Field
     }
 
     /**
-     * Get the type of this custom field (see the Sellsy's documentation)
+     * Get the type of this custom field (see the Sellsy's documentation).
+     *
      * @return string
      */
     public function getType()
@@ -157,7 +169,8 @@ class Field
     }
 
     /**
-     * Get the name of this custom field in Sellsy
+     * Get the name of this custom field in Sellsy.
+     *
      * @return string
      */
     public function getName()
@@ -166,7 +179,8 @@ class Field
     }
 
     /**
-     * Get the code of this custom field in Sellsy (see the Sellsy's documentation)
+     * Get the code of this custom field in Sellsy (see the Sellsy's documentation).
+     *
      * @return string
      */
     public function getCode()
@@ -175,7 +189,8 @@ class Field
     }
 
     /**
-     * Get the description defined for this custom field in the Sellsy API
+     * Get the description defined for this custom field in the Sellsy API.
+     *
      * @return string
      */
     public function getDescription()
@@ -184,7 +199,8 @@ class Field
     }
 
     /**
-     * Get the default value defined for this custom field in the Sellsy API
+     * Get the default value defined for this custom field in the Sellsy API.
+     *
      * @return string
      */
     public function getDefaultValue()
@@ -193,7 +209,8 @@ class Field
     }
 
     /**
-     * Get options defined for this custom field in the Sellsy API
+     * Get options defined for this custom field in the Sellsy API.
+     *
      * @return array
      */
     public function getOptions()
@@ -203,7 +220,8 @@ class Field
 
     /**
      * To know is it's a mandatory option of the sellsy's type or if it's a custom field
-     * defined in the Sellsy account for this sellsy's type
+     * defined in the Sellsy account for this sellsy's type.
+     *
      * @return bool
      */
     public function isCustomField()
@@ -212,7 +230,8 @@ class Field
     }
 
     /**
-     * To know if this field is mandatory to create a new entity in Sellsy
+     * To know if this field is mandatory to create a new entity in Sellsy.
+     *
      * @return bool
      */
     public function isRequiredField()
@@ -221,7 +240,8 @@ class Field
     }
 
     /**
-     * To convert this field to a string
+     * To convert this field to a string.
+     *
      * @return string
      */
     public function __toString()

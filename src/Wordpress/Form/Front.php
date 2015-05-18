@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Sellsy Wordpress plugin.
  *
@@ -29,7 +30,7 @@ use UniAlteri\Sellsy\Wordpress\Plugin;
 /**
  * Class Front
  * Class to prepare Wordpress front end's routines to use this plugin in the public area to display
- * HTML forms and create leads
+ * HTML forms and create leads.
  *
  * @copyright   Copyright (c) 2009-2015 Uni Alteri (http://agence.net.ua)
  *
@@ -42,13 +43,15 @@ use UniAlteri\Sellsy\Wordpress\Plugin;
 class Front
 {
     /**
-     * Object to manipulate to configure the plugin
+     * Object to manipulate to configure the plugin.
+     *
      * @var Plugin
      */
     protected $sellsyPlugin;
 
     /**
-     * Object to access and store all dynamics parameters neededby this plugin
+     * Object to access and store all dynamics parameters neededby this plugin.
+     *
      * @var OptionsBag
      */
     protected $options;
@@ -61,7 +64,8 @@ class Front
     protected static $formCounter = 0;
 
     /**
-     * Constructor
+     * Constructor.
+     *
      * @param Plugin     $sellsyPlugin
      * @param OptionsBag $options
      */
@@ -72,7 +76,7 @@ class Front
     }
 
     /**
-     * To add new css stylesheet in front when this plugin is used
+     * To add new css stylesheet in front when this plugin is used.
      */
     public function addCSS()
     {
@@ -91,7 +95,8 @@ class Front
 
     /**
      * Method called by the plugin to validate values submitted via a Sellsy's form by a visitor
-     * If values are corrects a prospect is created
+     * If values are corrects a prospect is created.
+     *
      * @param array  $selectedFields
      * @param array  $attr           of the short code
      * @param string $formId         to ignore request if this request is not destinate to this form

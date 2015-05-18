@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Sellsy Wordpress plugin.
  *
@@ -61,7 +62,7 @@ class ProspectTest extends \PHPUnit_Framework_TestCase
         );
 
         $this->assertEquals($keys, array_keys($fields));
-        foreach ($fields as $name=>$field) {
+        foreach ($fields as $name => $field) {
             $this->assertInstanceOf('UniAlteri\Sellsy\Wordpress\Form\Field', $field);
             $this->assertEquals($name, $field->getCode());
         }
@@ -80,7 +81,7 @@ class ProspectTest extends \PHPUnit_Framework_TestCase
         $finalSource = array();
         $value = 'test';
         $this->buildObject()->populateParams('thirdFax', $value, $finalSource);
-        $this->assertEquals(array('third'=>array('fax'=>'test'),'contact'=>array('fax'=>'test')), $finalSource);
+        $this->assertEquals(array('third' => array('fax' => 'test'), 'contact' => array('fax' => 'test')), $finalSource);
     }
 
     public function testValidateFieldThirdNameNonMandatory()
@@ -353,7 +354,7 @@ class ProspectTest extends \PHPUnit_Framework_TestCase
     public function testValidateField()
     {
         $value = 'value\"test';
-        prepareMock('sanitize_text_field', '*', function($text) {return $text; });
+        prepareMock('sanitize_text_field', '*', function ($text) {return $text; });
         $this->buildObject()->validateField('addressCountrycode', $value, array('addressCountrycode' => true));
         $this->assertEquals(
             'value"test',
@@ -364,7 +365,7 @@ class ProspectTest extends \PHPUnit_Framework_TestCase
     public function testValidateFieldNonMandatory()
     {
         $value = 'value\"test';
-        prepareMock('sanitize_text_field', '*', function($text) {return $text; });
+        prepareMock('sanitize_text_field', '*', function ($text) {return $text; });
         $this->buildObject()->validateField('addressCountrycode', $value, array());
         $this->assertEquals(
             'value"test',
@@ -375,7 +376,7 @@ class ProspectTest extends \PHPUnit_Framework_TestCase
     public function testValidateFieldContactCivil()
     {
         $value = 'valUe\"test';
-        prepareMock('sanitize_text_field', '*', function($text) {return $text; });
+        prepareMock('sanitize_text_field', '*', function ($text) {return $text; });
         $this->buildObject()->validateField('contactCivil', $value, array('contactCivil' => true));
         $this->assertEquals(
             'value"test',
@@ -386,7 +387,7 @@ class ProspectTest extends \PHPUnit_Framework_TestCase
     public function testValidateFieldContactCivilWoman()
     {
         $value = 'madame';
-        prepareMock('sanitize_text_field', '*', function($text) {return $text; });
+        prepareMock('sanitize_text_field', '*', function ($text) {return $text; });
         $this->buildObject()->validateField('contactCivil', $value, array('contactCivil' => true));
         $this->assertEquals(
             'woman',
@@ -397,7 +398,7 @@ class ProspectTest extends \PHPUnit_Framework_TestCase
     public function testValidateFieldContactCivilMan()
     {
         $value = 'monsieur';
-        prepareMock('sanitize_text_field', '*', function($text) {return $text; });
+        prepareMock('sanitize_text_field', '*', function ($text) {return $text; });
         $this->buildObject()->validateField('contactCivil', $value, array('contactCivil' => true));
         $this->assertEquals(
             'man',

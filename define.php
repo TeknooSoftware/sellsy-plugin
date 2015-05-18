@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Sellsy Wordpress plugin.
  *
@@ -22,7 +23,7 @@
  */
 
 /**
- * Needed constants by this plugin
+ * Needed constants by this plugin.
  */
 !defined('SELLSY_WP_VERSION')
     && define('SELLSY_WP_VERSION', '1.0');
@@ -50,7 +51,6 @@
 
 !defined('SELLSY_WP_WEB_URL')
     && define('SELLSY_WP_WEB_URL', 'https://www.sellsy.com/');
-
 
 !defined('ABSPATH')
     && define('ABSPATH', __DIR__);

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Sellsy Wordpress plugin.
  *
@@ -20,7 +21,6 @@
  *
  * @version     0.8.0
  */
-
 defined('RUN_CLI_MODE')
     || define('RUN_CLI_MODE', true);
 
@@ -33,8 +33,8 @@ date_default_timezone_set('UTC');
 
 error_reporting(E_ALL | E_STRICT);
 
-require_once ('Support/wordpress.php');
-require_once ('Support/class-phpmailer.php');
-require_once ('Support/WP_Widget.php');
+require_once 'Support/wordpress.php';
+require_once 'Support/class-phpmailer.php';
+require_once 'Support/WP_Widget.php';
 
-require_once (__DIR__.'/../define.php');
+require_once __DIR__.'/../define.php';

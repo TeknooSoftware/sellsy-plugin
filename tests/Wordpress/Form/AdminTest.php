@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Sellsy Wordpress plugin.
  *
@@ -58,7 +59,7 @@ class AdminTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * return OptionsBag|\PHPUnit_Framework_MockObject_MockObject
+     * return OptionsBag|\PHPUnit_Framework_MockObject_MockObject.
      */
     protected function buildOptionsMock()
     {
@@ -98,12 +99,12 @@ class AdminTest extends \PHPUnit_Framework_TestCase
         $admin->addJS();
 
         $exceptedMethods = array(
-            'is_admin'
+            'is_admin',
         );
         $this->assertEquals($exceptedMethods, $methodCalled);
 
         $exceptedArgs = array(
-            array()
+            array(),
         );
         $this->assertEquals($exceptedArgs, $methodArgs);
     }
@@ -144,7 +145,7 @@ class AdminTest extends \PHPUnit_Framework_TestCase
             ),
             array(
                 'jqueryui',
-                NULL,
+                null,
                 array(
                     'jquery',
                 ),
@@ -157,7 +158,7 @@ class AdminTest extends \PHPUnit_Framework_TestCase
             ),
             array(
                 'uimultiselect',
-                NULL,
+                null,
                 array(
                     'jquery',
                     'jqueryui',
@@ -171,7 +172,7 @@ class AdminTest extends \PHPUnit_Framework_TestCase
             ),
             array(
                 'wpsellsyjscsource',
-                NULL,
+                null,
                 array(
                     0 => 'jquery',
                     1 => 'uimultiselect',
@@ -189,8 +190,8 @@ class AdminTest extends \PHPUnit_Framework_TestCase
                 'wpsellsyjscsource',
                 'ajax_var',
                 array(
-                    'url' => NULL,
-                    'nonce' => NULL,
+                    'url' => null,
+                    'nonce' => null,
                 ),
             ),
         );
@@ -212,12 +213,12 @@ class AdminTest extends \PHPUnit_Framework_TestCase
         $admin->addCSS('hook');
 
         $exceptedMethods = array(
-            'is_admin'
+            'is_admin',
         );
         $this->assertEquals($exceptedMethods, $methodCalled);
 
         $exceptedArgs = array(
-            array()
+            array(),
         );
         $this->assertEquals($exceptedArgs, $methodArgs);
     }
@@ -237,12 +238,12 @@ class AdminTest extends \PHPUnit_Framework_TestCase
         $admin->addCSS('hook');
 
         $exceptedMethods = array(
-            'is_admin'
+            'is_admin',
         );
         $this->assertEquals($exceptedMethods, $methodCalled);
 
         $exceptedArgs = array(
-            array()
+            array(),
         );
         $this->assertEquals($exceptedArgs, $methodArgs);
     }
@@ -271,7 +272,7 @@ class AdminTest extends \PHPUnit_Framework_TestCase
             'wp_enqueue_style',
             'plugins_url',
             'wp_register_style',
-            'wp_enqueue_style'
+            'wp_enqueue_style',
         );
         $this->assertEquals($exceptedMethods, $methodCalled);
 
@@ -283,7 +284,7 @@ class AdminTest extends \PHPUnit_Framework_TestCase
             ),
             array(
                 'wpsellsystylesadmin',
-                NULL,
+                null,
                 array(),
                 '1.0',
                 'screen',
@@ -297,7 +298,7 @@ class AdminTest extends \PHPUnit_Framework_TestCase
             ),
             array(
                 'jqueryuicss',
-                NULL,
+                null,
                 array(),
                 '1.0',
                 'screen',
@@ -311,7 +312,7 @@ class AdminTest extends \PHPUnit_Framework_TestCase
             ),
             array(
                 'multiselect',
-                NULL,
+                null,
                 array(
                     'jqueryuicss',
                 ),
@@ -320,7 +321,7 @@ class AdminTest extends \PHPUnit_Framework_TestCase
             ),
             array(
                 'multiselect',
-            )
+            ),
         );
         $this->assertEquals($exceptedArgs, $methodArgs);
     }
@@ -340,12 +341,12 @@ class AdminTest extends \PHPUnit_Framework_TestCase
         $admin->addMenu();
 
         $exceptedMethods = array(
-            'is_admin'
+            'is_admin',
         );
         $this->assertEquals($exceptedMethods, $methodCalled);
 
         $exceptedArgs = array(
-            array()
+            array(),
         );
         $this->assertEquals($exceptedArgs, $methodArgs);
     }
@@ -369,7 +370,7 @@ class AdminTest extends \PHPUnit_Framework_TestCase
         $exceptedMethods = array(
             'is_admin',
             'plugins_url',
-            'add_menu_page'
+            'add_menu_page',
         );
         $this->assertEquals($exceptedMethods, $methodCalled);
 
@@ -377,7 +378,7 @@ class AdminTest extends \PHPUnit_Framework_TestCase
             array(),
             array(
                 '/img/sellsy_15.png',
-                SELLSY_WP_PATH_FILE
+                SELLSY_WP_PATH_FILE,
             ),
             array(
                 'WP Sellsy',
@@ -385,8 +386,8 @@ class AdminTest extends \PHPUnit_Framework_TestCase
                 'manage_options',
                 'slswp-admPage',
                 array($admin, 'page'),
-                'fooBar'
-            )
+                'fooBar',
+            ),
         );
         $this->assertEquals($exceptedArgs, $methodArgs);
     }
@@ -411,12 +412,12 @@ class AdminTest extends \PHPUnit_Framework_TestCase
         $this->assertEmpty($content);
 
         $exceptedMethods = array(
-            'is_admin'
+            'is_admin',
         );
         $this->assertEquals($exceptedMethods, $methodCalled);
 
         $exceptedArgs = array(
-            array()
+            array(),
         );
         $this->assertEquals($exceptedArgs, $methodArgs);
     }
@@ -443,13 +444,13 @@ class AdminTest extends \PHPUnit_Framework_TestCase
 
         $exceptedMethods = array(
             'is_admin',
-            'current_user_can'
+            'current_user_can',
         );
         $this->assertEquals($exceptedMethods, $methodCalled);
 
         $exceptedArgs = array(
             array(),
-            array('manage_options')
+            array('manage_options'),
         );
         $this->assertEquals($exceptedArgs, $methodArgs);
     }
@@ -483,7 +484,7 @@ class AdminTest extends \PHPUnit_Framework_TestCase
 
         $exceptedArgs = array(
             array(),
-            array('manage_options')
+            array('manage_options'),
         );
         array_splice($methodArgs, 2);
         $this->assertEquals($exceptedArgs, $methodArgs);
@@ -509,12 +510,12 @@ class AdminTest extends \PHPUnit_Framework_TestCase
         $this->assertEmpty($content);
 
         $exceptedMethods = array(
-            'is_admin'
+            'is_admin',
         );
         $this->assertEquals($exceptedMethods, $methodCalled);
 
         $exceptedArgs = array(
-            array()
+            array(),
         );
         $this->assertEquals($exceptedArgs, $methodArgs);
     }
@@ -538,7 +539,7 @@ class AdminTest extends \PHPUnit_Framework_TestCase
                 'class' => 'classVal',
                 'type' => 'typeVal',
                 'std' => 'stdVal',
-                'desc' => 'descVal'
+                'desc' => 'descVal',
             )
         );
         $content = ob_get_contents();
@@ -547,13 +548,13 @@ class AdminTest extends \PHPUnit_Framework_TestCase
         $this->assertNotEmpty($content);
 
         $exceptedMethods = array(
-            'is_admin'
+            'is_admin',
         );
         array_splice($methodCalled, 1);
         $this->assertEquals($exceptedMethods, $methodCalled);
 
         $exceptedArgs = array(
-            array()
+            array(),
         );
         array_splice($methodArgs, 1);
         $this->assertEquals($exceptedArgs, $methodArgs);
@@ -579,7 +580,7 @@ class AdminTest extends \PHPUnit_Framework_TestCase
                 'type' => 'checkbox',
                 'std' => 'stdVal',
                 'desc' => 'descVal',
-                'choices' => array('val1', 'val2')
+                'choices' => array('val1', 'val2'),
             )
         );
         $content = ob_get_contents();
@@ -588,13 +589,13 @@ class AdminTest extends \PHPUnit_Framework_TestCase
         $this->assertNotEmpty($content);
 
         $exceptedMethods = array(
-            'is_admin'
+            'is_admin',
         );
         array_splice($methodCalled, 1);
         $this->assertEquals($exceptedMethods, $methodCalled);
 
         $exceptedArgs = array(
-            array()
+            array(),
         );
         array_splice($methodArgs, 1);
         $this->assertEquals($exceptedArgs, $methodArgs);

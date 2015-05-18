@@ -4,14 +4,14 @@ switch ($type) {
     case 'select':
         echo '<select class="select'.$class.'" name="'.\UniAlteri\Sellsy\Wordpress\OptionsBag::WORDPRESS_SETTINGS_NAME.'['.$id.']">';
 
-        foreach ($choices as $value=>$label) {
+        foreach ($choices as $value => $label) {
             echo '<option value="'.esc_attr($value).'"'.selected($options[$id], $value, false).'>'.$label.'</option>';
         }
 
         echo '</select>';
 
         if (!empty($desc)) {
-            echo '<br><span class="description">' . $desc . '</span>';
+            echo '<br><span class="description">'.$desc.'</span>';
         }
 
         break;
@@ -19,7 +19,7 @@ switch ($type) {
     case 'multiselect':
         echo '<select class="select'.$class.' multiselect" name="'.\UniAlteri\Sellsy\Wordpress\OptionsBag::WORDPRESS_SETTINGS_NAME.'['.$id.'][]" multiple="multiple">';
 
-        foreach ($choices as $value=>$label) {
+        foreach ($choices as $value => $label) {
             $isSelected = '';
             if (!empty($options[$id]) && in_array($value, (array) $options[$id])) {
                 $isSelected = ' selected="selected"';
@@ -35,7 +35,7 @@ switch ($type) {
         echo '</select>';
 
         if (!empty($desc)) {
-            echo '<br><span class="description">' . $desc . '</span>';
+            echo '<br><span class="description">'.$desc.'</span>';
         }
 
         break;

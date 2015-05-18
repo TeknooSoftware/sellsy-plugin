@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Sellsy Wordpress plugin.
  *
@@ -28,7 +29,7 @@ use UniAlteri\Sellsy\Wordpress\Plugin;
 
 /**
  * Class Settings
- * Class to manage the form setting in the Wordpress administration panel about this plugin
+ * Class to manage the form setting in the Wordpress administration panel about this plugin.
  *
  * @copyright   Copyright (c) 2009-2015 Uni Alteri (http://agence.net.ua)
  *
@@ -55,13 +56,15 @@ class Settings
     protected $sections = array();
 
     /**
-     * Object to access and store all dynamics parameters neededby this plugin
+     * Object to access and store all dynamics parameters neededby this plugin.
+     *
      * @var OptionsBag
      */
     protected $options;
 
     /**
-     * Object to manipulate to configure the plugin
+     * Object to manipulate to configure the plugin.
+     *
      * @var Plugin
      */
     protected $sellsyPlugin;
@@ -90,7 +93,7 @@ class Settings
     const FORM_CUSTOM_FOOTER = 'customFooter';
 
     /**
-     * IConstructor
+     * IConstructor.
      *
      * @param Plugin     $sellsyPlugin
      * @param OptionsBag $options

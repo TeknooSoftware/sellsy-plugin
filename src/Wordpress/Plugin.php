@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Sellsy Wordpress plugin.
  *
@@ -44,25 +45,29 @@ use UniAlteri\Sellsy\Wordpress\Type\Prospect;
 class Plugin
 {
     /**
-     * Object to access and store all dynamics parameters neededby this plugin
+     * Object to access and store all dynamics parameters neededby this plugin.
+     *
      * @var OptionsBag
      */
     protected $options;
 
     /**
-     * Client to communicate with the Sellsy API
+     * Client to communicate with the Sellsy API.
+     *
      * @var ClientInterface
      */
     protected $sellsyClient;
 
     /**
-     * List of fields (standard and custom) defined by sellsy's types
+     * List of fields (standard and custom) defined by sellsy's types.
+     *
      * @var array
      */
     protected $fieldsByTypes = array();
 
     /**
-     * Constructor
+     * Constructor.
+     *
      * @param ClientInterface $sellsyClient
      * @param OptionsBag      $options
      */
@@ -255,7 +260,8 @@ class Plugin
     }
 
     /**
-     * Get the list of type's fields selected by the administrator to display in HTML form
+     * Get the list of type's fields selected by the administrator to display in HTML form.
+     *
      * @return Field[]
      */
     public function listSelectedFields()
@@ -369,7 +375,7 @@ class Plugin
                 $result = $this->sellsyClient->opportunities()
                     ->createSource(
                         array(
-                            'source' => array('label' => $source)
+                            'source' => array('label' => $source),
                         )
                     );
 
@@ -411,7 +417,7 @@ class Plugin
         foreach ($requiredFields as $field) {
             $customValues[] = array(
                 'cfid' => $field->getId(),
-                'value' => $field->getDefaultValue()
+                'value' => $field->getDefaultValue(),
             );
         }
     }
@@ -546,7 +552,7 @@ class Plugin
             $stepsList = $this->sellsyClient->opportunities()
                 ->getStepsForFunnel(
                     array(
-                        'funnelid' => $funnelId
+                        'funnelid' => $funnelId,
                     )
                 )->response;
 

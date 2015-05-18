@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Sellsy Wordpress plugin.
  *
@@ -26,7 +27,7 @@ namespace UniAlteri\Sellsy\Wordpress\Type;
 use UniAlteri\Sellsy\Wordpress\Form\Field;
 
 /**
- * Interface TypeInterface
+ * Interface TypeInterface.
  *
  * @copyright   Copyright (c) 2009-2015 Uni Alteri (http://agence.net.ua)
  *
@@ -39,7 +40,8 @@ use UniAlteri\Sellsy\Wordpress\Form\Field;
 interface TypeInterface
 {
     /**
-     * Get the list of standards fields defined for this type by Sellsy
+     * Get the list of standards fields defined for this type by Sellsy.
+     *
      * @return Field[]
      */
     public function getStandardFields();
@@ -47,6 +49,7 @@ interface TypeInterface
     /**
      * To populate this type from an array of values with the correspondence
      * table defined for this type.
+     *
      * @param string $fieldName
      * @param mixed  $value
      * @param array  $finalSource
@@ -54,7 +57,8 @@ interface TypeInterface
     public function populateParams($fieldName, &$value, &$finalSource);
 
     /**
-     * To check the validity of a value for a destination field
+     * To check the validity of a value for a destination field.
+     *
      * @param string $fieldName
      * @param mixed  $value
      *

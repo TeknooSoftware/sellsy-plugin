@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Sellsy Wordpress plugin.
  *
@@ -41,19 +42,22 @@ use UniAlteri\Sellsy\Wordpress\Plugin;
 class Admin
 {
     /**
-     * Object to manipulate to configure the plugin
+     * Object to manipulate to configure the plugin.
+     *
      * @var Plugin
      */
     protected $sellsyPlugin;
 
     /**
-     * Object to access and store all dynamics parameters neededby this plugin
+     * Object to access and store all dynamics parameters neededby this plugin.
+     *
      * @var OptionsBag
      */
     protected $options;
 
     /**
-     * Constructor to initialize this object
+     * Constructor to initialize this object.
+     *
      * @param Plugin     $sellsyPlugin
      * @param OptionsBag $options
      */
@@ -64,7 +68,7 @@ class Admin
     }
 
     /**
-     * Method to load sellsy javascripts in the Wordpress administration panel
+     * Method to load sellsy javascripts in the Wordpress administration panel.
      */
     public function addJS()
     {
@@ -169,7 +173,7 @@ class Admin
 
     /**
      * Action called by the Wordpress administration to prepare and render
-     * the panel to configure this plugin
+     * the panel to configure this plugin.
      */
     public function page()
     {
@@ -180,7 +184,7 @@ class Admin
 
     /**
      * Method to generate HTML form'elements to manage setting in the configuratio panel
-     * of this plugin
+     * of this plugin.
      *
      * @param array $setting
      */

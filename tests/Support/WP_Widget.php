@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Sellsy Wordpress plugin.
  *
@@ -20,7 +21,6 @@
  *
  * @version     0.8.0
  */
-
 class WP_Widget
 {
     /**
@@ -44,7 +44,8 @@ class WP_Widget
     protected $controlOptions = null;
 
     /**
-     * PHP5 constructor.     *
+     * PHP5 constructor.     *.
+     *
      * @param string $id_base         Optional Base ID for the widget, lowercase and unique. If left empty,
      *                                a portion of the widget's class name will be used Has to be unique.
      * @param string $name            Name for the widget displayed on the configuration page.
@@ -53,7 +54,7 @@ class WP_Widget
      * @param array  $control_options Optional. Widget control options. See {@see wp_register_widget_control()}
      *                                for information on accepted arguments. Default empty array.
      */
-    public function __construct($id_base='sellsy_widget', $name='', $widget_options = array(), $control_options = array())
+    public function __construct($id_base = 'sellsy_widget', $name = '', $widget_options = array(), $control_options = array())
     {
         $this->idBase = $id_base;
         $this->name = $name;
@@ -100,9 +101,9 @@ class WP_Widget
      * for fields to be saved by {@see WP_Widget::update()}.
      *
      * @since 2.8.0
-     * @access public
      *
      * @param string $field_name Field name.
+     *
      * @return string ID attribute for `$field_name`.
      */
     public function get_field_id($field_name)
@@ -111,11 +112,12 @@ class WP_Widget
     }
 
     /**
-     * Constructs name attributes for use in form() fields
+     * Constructs name attributes for use in form() fields.
      *
      * This function should be used in form() methods to create name attributes for fields to be saved by update()
      *
      * @param string $field_name Field name
+     *
      * @return string Name attribute for $field_name
      */
     public function get_field_name($field_name)

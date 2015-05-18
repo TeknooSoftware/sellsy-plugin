@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Sellsy Wordpress plugin.
  *
@@ -59,7 +60,7 @@ class FrontTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * return OptionsBag|\PHPUnit_Framework_MockObject_MockObject
+     * return OptionsBag|\PHPUnit_Framework_MockObject_MockObject.
      */
     protected function buildOptionsMock()
     {
@@ -99,12 +100,12 @@ class FrontTest extends \PHPUnit_Framework_TestCase
         $front->addCSS();
 
         $exceptedMethods = array(
-            'is_admin'
+            'is_admin',
         );
         $this->assertEquals($exceptedMethods, $methodCalled);
 
         $exceptedArgs = array(
-            array()
+            array(),
         );
         $this->assertEquals($exceptedArgs, $methodArgs);
     }
@@ -128,7 +129,7 @@ class FrontTest extends \PHPUnit_Framework_TestCase
             'is_admin',
             'plugins_url',
             'wp_register_style',
-            'wp_enqueue_style'
+            'wp_enqueue_style',
         );
         $this->assertEquals($exceptedMethods, $methodCalled);
 
@@ -140,9 +141,9 @@ class FrontTest extends \PHPUnit_Framework_TestCase
                 'fooBar',
                 array(),
                 '1.0',
-                'screen'
+                'screen',
             ),
-            array('wpsellsystyles')
+            array('wpsellsystyles'),
         );
         $this->assertEquals($exceptedArgs, $methodArgs);
     }
@@ -163,12 +164,12 @@ class FrontTest extends \PHPUnit_Framework_TestCase
         $front->validateForm($fields, array(), 123);
 
         $exceptedMethods = array(
-            'is_admin'
+            'is_admin',
         );
         $this->assertEquals($exceptedMethods, $methodCalled);
 
         $exceptedArgs = array(
-            array()
+            array(),
         );
         $this->assertEquals($exceptedArgs, $methodArgs);
     }
@@ -194,12 +195,12 @@ class FrontTest extends \PHPUnit_Framework_TestCase
         );
 
         $exceptedMethods = array(
-            'is_admin'
+            'is_admin',
         );
         $this->assertEquals($exceptedMethods, $methodCalled);
 
         $exceptedArgs = array(
-            array()
+            array(),
         );
         $this->assertEquals($exceptedArgs, $methodArgs);
     }
@@ -225,12 +226,12 @@ class FrontTest extends \PHPUnit_Framework_TestCase
         );
 
         $exceptedMethods = array(
-            'is_admin'
+            'is_admin',
         );
         $this->assertEquals($exceptedMethods, $methodCalled);
 
         $exceptedArgs = array(
-            array()
+            array(),
         );
         $this->assertEquals($exceptedArgs, $methodArgs);
     }
@@ -254,19 +255,19 @@ class FrontTest extends \PHPUnit_Framework_TestCase
             123,
             array(
                 'send_wp_sellsy' => 321,
-                'slswp_nonce_verify_page' => 123
+                'slswp_nonce_verify_page' => 123,
             )
         );
 
         $exceptedMethods = array(
             'is_admin',
-            'wp_verify_nonce'
+            'wp_verify_nonce',
         );
         $this->assertEquals($exceptedMethods, $methodCalled);
 
         $exceptedArgs = array(
             array(),
-            array(123, 'slswp_nonce_field')
+            array(123, 'slswp_nonce_field'),
         );
         $this->assertEquals($exceptedArgs, $methodArgs);
     }
@@ -292,19 +293,19 @@ class FrontTest extends \PHPUnit_Framework_TestCase
             array(
                 'send_wp_sellsy' => 321,
                 'slswp_nonce_verify_page' => 123,
-                'formId'=>333
+                'formId' => 333,
             )
         );
 
         $exceptedMethods = array(
             'is_admin',
-            'wp_verify_nonce'
+            'wp_verify_nonce',
         );
         $this->assertEquals($exceptedMethods, $methodCalled);
 
         $exceptedArgs = array(
             array(),
-            array(123, 'slswp_nonce_field')
+            array(123, 'slswp_nonce_field'),
         );
         $this->assertEquals($exceptedArgs, $methodArgs);
     }
@@ -329,7 +330,7 @@ class FrontTest extends \PHPUnit_Framework_TestCase
                 $this->equalTo(
                     array(
                         'field1' => 'foo',
-                        'field2' => 'bar'
+                        'field2' => 'bar',
                     )
                 )
             )
@@ -345,23 +346,23 @@ class FrontTest extends \PHPUnit_Framework_TestCase
                 array(
                     'send_wp_sellsy' => 321,
                     'slswp_nonce_verify_page' => 123,
-                    'formId'=>123,
+                    'formId' => 123,
                     'field1' => 'foo',
                     'field3' => 'hello',
-                    'field2' => 'bar'
+                    'field2' => 'bar',
                 )
             )
         );
 
         $exceptedMethods = array(
             'is_admin',
-            'wp_verify_nonce'
+            'wp_verify_nonce',
         );
         $this->assertEquals($exceptedMethods, $methodCalled);
 
         $exceptedArgs = array(
             array(),
-            array(123, 'slswp_nonce_field')
+            array(123, 'slswp_nonce_field'),
         );
         $this->assertEquals($exceptedArgs, $methodArgs);
     }
@@ -386,7 +387,7 @@ class FrontTest extends \PHPUnit_Framework_TestCase
                 $this->equalTo(
                     array(
                         'field1' => 'foo',
-                        'field2' => 'bar'
+                        'field2' => 'bar',
                     )
                 )
             )
@@ -401,23 +402,23 @@ class FrontTest extends \PHPUnit_Framework_TestCase
                 array(
                     'send_wp_sellsy' => 321,
                     'slswp_nonce_verify_page' => 123,
-                    'formId'=>123,
+                    'formId' => 123,
                     'field1' => 'foo',
                     'field3' => 'hello',
-                    'field2' => 'bar'
+                    'field2' => 'bar',
                 )
             )
         );
 
         $exceptedMethods = array(
             'is_admin',
-            'wp_verify_nonce'
+            'wp_verify_nonce',
         );
         $this->assertEquals($exceptedMethods, $methodCalled);
 
         $exceptedArgs = array(
             array(),
-            array(123, 'slswp_nonce_field')
+            array(123, 'slswp_nonce_field'),
         );
         $this->assertEquals($exceptedArgs, $methodArgs);
     }
@@ -442,7 +443,7 @@ class FrontTest extends \PHPUnit_Framework_TestCase
                 $this->equalTo(
                     array(
                         'field1' => 'foo',
-                        'field2' => 'bar'
+                        'field2' => 'bar',
                     )
                 )
             )
@@ -473,27 +474,26 @@ class FrontTest extends \PHPUnit_Framework_TestCase
                 array(
                     'send_wp_sellsy' => 321,
                     'slswp_nonce_verify_page' => 123,
-                    'formId'=>123,
+                    'formId' => 123,
                     'field1' => 'foo',
                     'field3' => 'hello',
-                    'field2' => 'bar'
+                    'field2' => 'bar',
                 )
             )
         );
 
         $exceptedMethods = array(
             'is_admin',
-            'wp_verify_nonce'
+            'wp_verify_nonce',
         );
         $this->assertEquals($exceptedMethods, $methodCalled);
 
         $exceptedArgs = array(
             array(),
-            array(123, 'slswp_nonce_field')
+            array(123, 'slswp_nonce_field'),
         );
         $this->assertEquals($exceptedArgs, $methodArgs);
     }
-
 
     public function testValidateFormOpportunityNoSource()
     {
@@ -515,7 +515,7 @@ class FrontTest extends \PHPUnit_Framework_TestCase
                 $this->equalTo(
                     array(
                         'field1' => 'foo',
-                        'field2' => 'bar'
+                        'field2' => 'bar',
                     )
                 )
             )
@@ -546,23 +546,23 @@ class FrontTest extends \PHPUnit_Framework_TestCase
                 array(
                     'send_wp_sellsy' => 321,
                     'slswp_nonce_verify_page' => 123,
-                    'formId'=>123,
+                    'formId' => 123,
                     'field1' => 'foo',
                     'field3' => 'hello',
-                    'field2' => 'bar'
+                    'field2' => 'bar',
                 )
             )
         );
 
         $exceptedMethods = array(
             'is_admin',
-            'wp_verify_nonce'
+            'wp_verify_nonce',
         );
         $this->assertEquals($exceptedMethods, $methodCalled);
 
         $exceptedArgs = array(
             array(),
-            array(123, 'slswp_nonce_field')
+            array(123, 'slswp_nonce_field'),
         );
         $this->assertEquals($exceptedArgs, $methodArgs);
     }
@@ -587,7 +587,7 @@ class FrontTest extends \PHPUnit_Framework_TestCase
                 $this->equalTo(
                     array(
                         'field1' => 'foo',
-                        'field2' => 'bar'
+                        'field2' => 'bar',
                     )
                 )
             )
@@ -618,23 +618,23 @@ class FrontTest extends \PHPUnit_Framework_TestCase
                 array(
                     'send_wp_sellsy' => 321,
                     'slswp_nonce_verify_page' => 123,
-                    'formId'=>123,
+                    'formId' => 123,
                     'field1' => 'foo',
                     'field3' => 'hello',
-                    'field2' => 'bar'
+                    'field2' => 'bar',
                 )
             )
         );
 
         $exceptedMethods = array(
             'is_admin',
-            'wp_verify_nonce'
+            'wp_verify_nonce',
         );
         $this->assertEquals($exceptedMethods, $methodCalled);
 
         $exceptedArgs = array(
             array(),
-            array(123, 'slswp_nonce_field')
+            array(123, 'slswp_nonce_field'),
         );
         $this->assertEquals($exceptedArgs, $methodArgs);
     }
@@ -659,7 +659,7 @@ class FrontTest extends \PHPUnit_Framework_TestCase
                 $this->equalTo(
                     array(
                         'field1' => 'foo',
-                        'field2' => 'bar'
+                        'field2' => 'bar',
                     )
                 )
             )
@@ -697,23 +697,23 @@ class FrontTest extends \PHPUnit_Framework_TestCase
                 array(
                     'send_wp_sellsy' => 321,
                     'slswp_nonce_verify_page' => 123,
-                    'formId'=>123,
+                    'formId' => 123,
                     'field1' => 'foo',
                     'field3' => 'hello',
-                    'field2' => 'bar'
+                    'field2' => 'bar',
                 )
             )
         );
 
         $exceptedMethods = array(
             'is_admin',
-            'wp_verify_nonce'
+            'wp_verify_nonce',
         );
         $this->assertEquals($exceptedMethods, $methodCalled);
 
         $exceptedArgs = array(
             array(),
-            array(123, 'slswp_nonce_field')
+            array(123, 'slswp_nonce_field'),
         );
         $this->assertEquals($exceptedArgs, $methodArgs);
     }
@@ -740,13 +740,14 @@ class FrontTest extends \PHPUnit_Framework_TestCase
                 $this->equalTo(
                     array(
                         'field1' => 'foo',
-                        'field2' => 'bar'
+                        'field2' => 'bar',
                     )
                 )
             )
             ->willReturnCallback(
                 function ($values, &$body) use ($bodyExcepted) {
                     $body = $bodyExcepted;
+
                     return 123;
                 }
             );
@@ -794,23 +795,23 @@ class FrontTest extends \PHPUnit_Framework_TestCase
                 array(
                     'send_wp_sellsy' => 321,
                     'slswp_nonce_verify_page' => 123,
-                    'formId'=>123,
+                    'formId' => 123,
                     'field1' => 'foo',
                     'field3' => 'hello',
-                    'field2' => 'bar'
+                    'field2' => 'bar',
                 )
             )
         );
 
         $exceptedMethods = array(
             'is_admin',
-            'wp_verify_nonce'
+            'wp_verify_nonce',
         );
         $this->assertEquals($exceptedMethods, $methodCalled);
 
         $exceptedArgs = array(
             array(),
-            array(123, 'slswp_nonce_field')
+            array(123, 'slswp_nonce_field'),
         );
         $this->assertEquals($exceptedArgs, $methodArgs);
     }
@@ -902,7 +903,7 @@ class FrontTest extends \PHPUnit_Framework_TestCase
             ->method('createProspect')
             ->willReturn(123);
 
-        $_POST = array('formId'=>'formName','send_wp_sellsy'=>'123','slswp_nonce_verify_page'=>123);
+        $_POST = array('formId' => 'formName','send_wp_sellsy' => '123','slswp_nonce_verify_page' => 123);
         $front->shortcode(array('formId' => 'formName'));
     }
 
@@ -931,9 +932,9 @@ class FrontTest extends \PHPUnit_Framework_TestCase
         $this->buildPluginMock()
             ->expects($this->once())
             ->method('createProspect')
-            ->willReturn(array('foo'=>'bar'));
+            ->willReturn(array('foo' => 'bar'));
 
-        $_POST = array('formId'=>'formName','send_wp_sellsy'=>'123','slswp_nonce_verify_page'=>123);
+        $_POST = array('formId' => 'formName','send_wp_sellsy' => '123','slswp_nonce_verify_page' => 123);
         $front->shortcode(array('formId' => 'formName'));
     }
 }

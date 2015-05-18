@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Sellsy Wordpress plugin.
  *
@@ -20,8 +21,7 @@
  *
  * @version     0.8.0
  */
-
-class PHPMailer
+class phpmailer
 {
     /**
      * @var string
@@ -49,7 +49,7 @@ class PHPMailer
     public static $Result = true;
 
     /**
-     * To reset
+     * To reset.
      */
     public function __construct()
     {
