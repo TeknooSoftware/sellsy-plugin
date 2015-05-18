@@ -5,7 +5,6 @@ use \UniAlteri\Sellsy\Wordpress\Form\Settings;
 
 if (\is_admin() && \current_user_can('manage_options')):
     if (!empty($_GET['settings-updated'])) {
-		//todo migrate
         if ($this->sellsyPlugin->checkSellsyCredentials()) {
 			add_settings_error(OptionsBag::WORDPRESS_SETTINGS_NAME, 'sellSyUpdated', __('Connexion à l\'API Sellsy réussie. Paramètres Sellsy mis à jour.', 'wpsellsy'), 'updated');
 
@@ -15,7 +14,7 @@ if (\is_admin() && \current_user_can('manage_options')):
                     add_settings_error(OptionsBag::WORDPRESS_SETTINGS_NAME, Settings::OPPORTUNITY_SOURCE, __('Vous devez définir au moins une source sinon les opportunités ne seront pas générées.', 'wpsellsy') , 'error');
                 } else {
                     foreach ($this->sellsyPlugin->checkOppListSources($sourcesList) as $source=>$exist) {
-                        if (false == $exist) {
+                        if (false === $exist) {
                             add_settings_error(OptionsBag::WORDPRESS_SETTINGS_NAME, Settings::OPPORTUNITY_SOURCE, __('La source saisie n\'existe pas pour votre compte sur ', 'wpsellsy') . '<a href="' . SELLSY_WP_WEB_URL . '" target="_blank">Sellsy.com</a>.<br>' . __('Cliquez ici pour créer la source sur votre compte :', 'wpsellsy') . '<a id="creer_source" href="#" data-label="'.$source.'">' . __('Créer la source ', 'wpsellsy') . $source . '</a><img id="imgloader" src="' . SELLSY_WP_URL . '/img/loader.gif" alt="" /><br>' . __('Si vous ne créez pas la source, les opportunités ne seront pas générées.', 'wpsellsy') , 'error');
                         }
                     }

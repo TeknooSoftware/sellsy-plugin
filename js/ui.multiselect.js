@@ -18,10 +18,7 @@
  * Optional:
  * localization (http://plugins.jquery.com/project/localisation)
  * scrollTo (http://plugins.jquery.com/project/ScrollTo)
- * 
- * Todo:
- *  Make batch actions faster
- *  Implement dynamic insertion through remote calls
+ *
  */
 
 
@@ -191,7 +188,6 @@ $.widget("ui.multiselect", {
 			var items = this.availableList.find('li'), comparator = this.options.nodeComparator;
 			var succ = null, i = item.data('idx'), direction = comparator(item, $(items[i]));
 
-			// TODO: test needed for dynamic list populating
 			if ( direction ) {
 				while (i>=0 && i<items.length) {
 					direction > 0 ? i++ : i--;
