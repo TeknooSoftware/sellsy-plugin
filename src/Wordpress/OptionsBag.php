@@ -165,7 +165,7 @@ class OptionsBag implements \ArrayAccess
             return $this->options[$offset];
         }
 
-        return false;
+        return null;
     }
 
     /**

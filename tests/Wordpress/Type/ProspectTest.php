@@ -62,7 +62,7 @@ class ProspectTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals($keys, array_keys($fields));
         foreach ($fields as $name=>$field) {
-            $this->assertInstanceOf('UniAlteri\Sellsy\Wordpress\Form\CustomField', $field);
+            $this->assertInstanceOf('UniAlteri\Sellsy\Wordpress\Form\Field', $field);
             $this->assertEquals($name, $field->getCode());
         }
     }

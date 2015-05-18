@@ -205,7 +205,7 @@ class PluginTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->buildPlugin()->checkSellsyCredentials());
     }
 
-    public function testListCustomFieldsError()
+    public function testlistFieldsError()
     {
         $this->buildClientMock()
             ->expects($this->once())
@@ -219,8 +219,8 @@ class PluginTest extends \PHPUnit_Framework_TestCase
         $methodCalled = array();
         $methodArgs = array();
 
-        $fieldsList = $plugin->listCustomFields();
-        $fieldsList2 = $plugin->listCustomFields();
+        $fieldsList = $plugin->listFields();
+        $fieldsList2 = $plugin->listFields();
         $this->assertEquals(
             array (
                 'thirdName',
@@ -246,14 +246,14 @@ class PluginTest extends \PHPUnit_Framework_TestCase
 
         $this->assertSame($fieldsList, $fieldsList2);
         foreach ($fieldsList as $code=>$field) {
-            $this->assertInstanceOf('UniAlteri\Sellsy\Wordpress\Form\CustomField', $field);
+            $this->assertInstanceOf('UniAlteri\Sellsy\Wordpress\Form\Field', $field);
             $this->assertEquals($code, $field->getCode());
         }
 
         $this->assertEquals(array('add_settings_error'), array_values(array_diff($methodCalled, array('__'))));
     }
 
-    public function testListCustomFields()
+    public function testlistFields()
     {
         $listCustomFieldMock = array(
             'response' => array(
@@ -308,8 +308,8 @@ class PluginTest extends \PHPUnit_Framework_TestCase
         $methodCalled = array();
         $methodArgs = array();
 
-        $fieldsList = $plugin->listCustomFields();
-        $fieldsList2 = $plugin->listCustomFields();
+        $fieldsList = $plugin->listFields();
+        $fieldsList2 = $plugin->listFields();
         $this->assertEquals(
             array (
                 'thirdName',
@@ -337,7 +337,7 @@ class PluginTest extends \PHPUnit_Framework_TestCase
 
         $this->assertSame($fieldsList, $fieldsList2);
         foreach ($fieldsList as $code=>$field) {
-            $this->assertInstanceOf('UniAlteri\Sellsy\Wordpress\Form\CustomField', $field);
+            $this->assertInstanceOf('UniAlteri\Sellsy\Wordpress\Form\Field', $field);
             $this->assertEquals($code, $field->getCode());
         }
 
@@ -399,7 +399,7 @@ class PluginTest extends \PHPUnit_Framework_TestCase
         $methodCalled = array();
         $methodArgs = array();
 
-        $fieldsList = $plugin->listRequiredCustomFields();
+        $fieldsList = $plugin->listRequiredCustomsFields();
         $this->assertEquals(
             array (
                 '1',
@@ -409,7 +409,7 @@ class PluginTest extends \PHPUnit_Framework_TestCase
         );
 
         foreach ($fieldsList as $code=>$field) {
-            $this->assertInstanceOf('UniAlteri\Sellsy\Wordpress\Form\CustomField', $field);
+            $this->assertInstanceOf('UniAlteri\Sellsy\Wordpress\Form\Field', $field);
         }
 
         $this->assertEquals(array(), array_values(array_diff($methodCalled, array('__'))));
@@ -595,7 +595,7 @@ class PluginTest extends \PHPUnit_Framework_TestCase
         );
 
         foreach ($fieldsList as $code=>$field) {
-            $this->assertInstanceOf('UniAlteri\Sellsy\Wordpress\Form\CustomField', $field);
+            $this->assertInstanceOf('UniAlteri\Sellsy\Wordpress\Form\Field', $field);
             $this->assertEquals($code, $field->getCode());
         }
     }
@@ -695,7 +695,7 @@ class PluginTest extends \PHPUnit_Framework_TestCase
         );
 
         foreach ($fieldsList as $code=>$field) {
-            $this->assertInstanceOf('UniAlteri\Sellsy\Wordpress\Form\CustomField', $field);
+            $this->assertInstanceOf('UniAlteri\Sellsy\Wordpress\Form\Field', $field);
             $this->assertEquals($code, $field->getCode());
         }
     }

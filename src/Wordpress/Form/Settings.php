@@ -128,7 +128,7 @@ class Settings
         );
 
         //Get available fields
-        $availableFields = $this->sellsyPlugin->listCustomFields($element);
+        $availableFields = $this->sellsyPlugin->listFields($element);
 
         //Reorder them
         $availableOrderedFieldsList = array();

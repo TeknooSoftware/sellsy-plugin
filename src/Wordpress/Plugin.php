@@ -56,12 +56,13 @@ class Plugin
     protected $sellsyClient;
 
     /**
-     * List 
+     * List of fields (standard and custom) defined by sellsy's types
      * @var array
      */
     protected $fieldsByTypes = array();
 
     /**
+     * Constructor
      * @param ClientInterface $sellsyClient
      * @param OptionsBag      $options
      */
@@ -241,11 +242,11 @@ class Plugin
      *
      * @return Field[]
      */
-    public function listRequiredFields($for = 'prospect')
+    public function listRequiredCustomsFields($for = 'prospect')
     {
         $final = array();
         foreach ($this->listFields($for) as $code => $field) {
-            if ($field->isRequiredField() && $field->isField()) {
+            if ($field->isRequiredField() && $field->isCustomField()) {
                 $final[$field->getId()] = $field;
             }
         }
@@ -254,6 +255,7 @@ class Plugin
     }
 
     /**
+     * Get the list of type's fields selected by the administrator to display in HTML form
      * @return Field[]
      */
     public function listSelectedFields()
@@ -340,7 +342,7 @@ class Plugin
     }
 
     /**
-     * Method to create a opportunitiy source via the wordpress admin.
+     * Method to create a opportunity source via the Wordpress admin.
      */
     public function createOppSource()
     {
@@ -364,7 +366,12 @@ class Plugin
             //Create the source via the client
             try {
                 $source = $_POST['source'];
-                $result = $this->sellsyClient->opportunities()->createSource(array('source' => array('label' => $source)));
+                $result = $this->sellsyClient->opportunities()
+                    ->createSource(
+                        array(
+                            'source' => array('label' => $source)
+                        )
+                    );
 
                 if (!empty($result->response)) {
                     //Successful
@@ -385,7 +392,7 @@ class Plugin
     }
 
     /**
-     * Method to find missing required custom fields to populate the new record with default value to avoid error.
+     * Method to find missing required customs fields to populate the new record with default value to avoid error.
      *
      * @param string $for          entity type in Sellsy
      * @param array  $customValues already populated values
@@ -393,7 +400,7 @@ class Plugin
     protected function addMissingRequiredField($for, &$customValues)
     {
         //Exclude already populated custom type
-        $requiredFields = $this->listRequiredFields($for);
+        $requiredFields = $this->listRequiredCustomsFields($for);
         foreach ($customValues as &$value) {
             if (isset($requiredFields[$value['cfid']])) {
                 unset($requiredFields[$value['cfid']]);
@@ -402,12 +409,16 @@ class Plugin
 
         //Add missing fields
         foreach ($requiredFields as $field) {
-            $customValues[] = array('cfid' => $field->getId(), 'value' => $field->getDefaultValue());
+            $customValues[] = array(
+                'cfid' => $field->getId(),
+                'value' => $field->getDefaultValue()
+            );
         }
     }
 
     /**
-     * Create prospect.
+     * Create a new prospect with value passed by $formValues. This method accept also a string by reference whom will
+     * be populated with prospect's validated values.
      *
      * @param array  $formValues
      * @param string $body       output body used for email notification
@@ -444,7 +455,7 @@ class Plugin
                         }
                     }
 
-                    if ($field->isField()) {
+                    if ($field->isCustomField()) {
                         //Is custom field, keep to save them after
                         $customValues[] = array('cfid' => $field->getId(), 'value' => $fieldValue);
                     }
@@ -532,7 +543,12 @@ class Plugin
     {
         $stepId = null;
         if (!empty($funnelId)) {
-            $stepsList = $this->sellsyClient->opportunities()->getStepsForFunnel(array('funnelid' => $funnelId))->response;
+            $stepsList = $this->sellsyClient->opportunities()
+                ->getStepsForFunnel(
+                    array(
+                        'funnelid' => $funnelId
+                    )
+                )->response;
 
             foreach ($stepsList as $step) {
                 $stepId = $step->id;
@@ -553,7 +569,11 @@ class Plugin
     public function getSourceId($sourceName)
     {
         $sourceId = null;
-        $sourcesList = $this->sellsyClient->opportunities()->getSources()->response;
+        $sourcesList = $this->sellsyClient
+            ->opportunities()
+            ->getSources()
+            ->response;
+
         foreach ($sourcesList as $source) {
             if (!empty($source->label) && $sourceName == $source->label) {
                 $sourceId = $source->id;

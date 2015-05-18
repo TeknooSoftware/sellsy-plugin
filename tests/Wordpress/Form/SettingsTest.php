@@ -93,13 +93,13 @@ class SettingsTest extends \PHPUnit_Framework_TestCase
             ->method('isDefined')
             ->willReturn(false);
 
-        $field1 = $this->getMock('UniAlteri\Sellsy\Wordpress\Form\CustomField', array(), array(), '', false);
+        $field1 = $this->getMock('UniAlteri\Sellsy\Wordpress\Form\Field', array(), array(), '', false);
         $field1->expects($this->any())->method('getName')->willReturn('field1');
 
-        $field2 = $this->getMock('UniAlteri\Sellsy\Wordpress\Form\CustomField', array(), array(), '', false);
+        $field2 = $this->getMock('UniAlteri\Sellsy\Wordpress\Form\Field', array(), array(), '', false);
         $field2->expects($this->any())->method('getName')->willReturn('field2');
 
-        $field3 = $this->getMock('UniAlteri\Sellsy\Wordpress\Form\CustomField', array(), array(), '', false);
+        $field3 = $this->getMock('UniAlteri\Sellsy\Wordpress\Form\Field', array(), array(), '', false);
         $field3->expects($this->any())->method('getName')->willReturn('field3');
 
         $fieldsList = array(
@@ -120,7 +120,7 @@ class SettingsTest extends \PHPUnit_Framework_TestCase
 
         $this->buildPluginMock()
             ->expects($this->any())
-            ->method('listCustomFields')
+            ->method('listFields')
             ->with($this->equalTo('prospect'))
             ->willReturn($fieldsCustomList);
 

@@ -24,7 +24,7 @@ switch ($type) {
             if (!empty($options[$id]) && in_array($value, (array) $options[$id])) {
                 $isSelected = ' selected="selected"';
             }
-            if ($label instanceof \UniAlteri\Sellsy\Wordpress\Form\CustomField) {
+            if ($label instanceof \UniAlteri\Sellsy\Wordpress\Form\Field) {
                 $label = $label->getName();
                 echo '<option value="'.esc_attr($value).'"'.$isSelected.'>'.$label.'</option>';
             } else {

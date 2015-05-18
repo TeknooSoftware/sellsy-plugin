@@ -51,7 +51,7 @@ if (!is_admin()):
 						<div class="<?php echo $columnsClass; ?>">
 					<?php endif;
 
-                    if (!$field instanceof \UniAlteri\Sellsy\Wordpress\Form\CustomField){
+                    if (!$field instanceof \UniAlteri\Sellsy\Wordpress\Form\Field){
                         continue;
                     }
 

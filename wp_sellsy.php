@@ -22,7 +22,7 @@
  */
 
 /**
- Author URI: http://agence.net.ua
+ * Wordpress plugin file, called to initialize it
  */
 require_once 'define.php';
 

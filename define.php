@@ -21,6 +21,9 @@
  * @version     0.8.0
  */
 
+/**
+ * Needed constants by this plugin
+ */
 !defined('SELLSY_WP_VERSION')
     && define('SELLSY_WP_VERSION', '1.0');
 
