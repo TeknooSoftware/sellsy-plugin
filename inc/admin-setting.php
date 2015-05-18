@@ -44,7 +44,7 @@ switch ($type) {
         $i = 0;
         foreach ($choices as $value => $label) {
             echo '<input class="radio'.$class.'" type="radio" name="'.\UniAlteri\Sellsy\Wordpress\OptionsBag::WORDPRESS_SETTINGS_NAME.'['.$id.']" id="'.$id.$i.'" value="'.esc_attr($value).'" '.checked($options[$id], $value, false).'> <label for="'.$id.$i.'">'.$label.'</label>';
-            if ( $i < count( $options) - 1) {
+            if ($i < count($options) - 1) {
                 echo '<br />';
             }
             $i++;
