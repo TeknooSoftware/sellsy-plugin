@@ -1,33 +1,65 @@
 <?php
+/**
+ * Sellsy Wordpress plugin.
+ *
+ * LICENSE
+ *
+ * This source file is subject to the MIT license and the version 3 of the GPL3
+ * license that are bundled with this package in the folder licences
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to contact@uni-alteri.com so we can send you a copy immediately.
+ *
+ * @copyright   Copyright (c) 2009-2015 Uni Alteri (http://agence.net.ua)
+ *
+ * @link        http://teknoo.it/sellsy-plugin Project website
+ *
+ * @license     http://teknoo.it/sellsy-plugin/license/mit         MIT License
+ * @license     http://teknoo.it/sellsy-plugin/license/gpl-3.0     GPL v3 License
+ * @author      Richard Déloge <r.deloge@uni-alteri.com>
+ *
+ * @version     0.8.0
+ */
 
 namespace UniAlteri\Sellsy\Wordpress;
 
 use UniAlteri\Sellsy\Client\Client;
 use UniAlteri\Sellsy\Client\ClientInterface;
-use UniAlteri\Sellsy\Wordpress\Form\CustomField;
+use UniAlteri\Sellsy\Wordpress\Form\Field;
 use UniAlteri\Sellsy\Wordpress\Form\Settings;
 use UniAlteri\Sellsy\Wordpress\Type\Prospect;
 
 /**
  * Class Plugin
  * Class to manage plugin's features.
+ *
+ * @copyright   Copyright (c) 2009-2015 Uni Alteri (http://agence.net.ua)
+ *
+ * @link        http://teknoo.it/sellsy-plugin Project website
+ *
+ * @license     http://teknoo.it/sellsy-plugin/license/mit         MIT License
+ * @license     http://teknoo.it/sellsy-plugin/license/gpl-3.0     GPL v3 License
+ * @author      Richard Déloge <r.deloge@uni-alteri.com>
  */
 class Plugin
 {
     /**
+     * Object to access and store all dynamics parameters neededby this plugin
      * @var OptionsBag
      */
     protected $options;
 
     /**
+     * Client to communicate with the Sellsy API
      * @var ClientInterface
      */
     protected $sellsyClient;
 
     /**
+     * List 
      * @var array
      */
-    protected $customFieldsByType = array();
+    protected $fieldsByTypes = array();
 
     /**
      * @param ClientInterface $sellsyClient
@@ -144,13 +176,13 @@ class Plugin
      *
      * @param string $for
      *
-     * @return CustomField[]
+     * @return Field[]
      */
-    public function listCustomFields($for = 'prospect')
+    public function listFields($for = 'prospect')
     {
-        if (isset($this->customFieldsByType[$for])) {
+        if (isset($this->fieldsByTypes[$for])) {
             //To avoid multiple request
-            return $this->customFieldsByType[$for];
+            return $this->fieldsByTypes[$for];
         }
 
         $final = array();
@@ -174,7 +206,7 @@ class Plugin
                 );
 
             foreach ($customFields->response->result as $customFields) {
-                $final[$customFields->code] = new CustomField(
+                $final[$customFields->code] = new Field(
                     $customFields->id,
                     $customFields->type,
                     $customFields->name,
@@ -196,7 +228,7 @@ class Plugin
         }
 
         //Backup in local cache to avoid multiple api request for this execution
-        $this->customFieldsByType[$for] = $final;
+        $this->fieldsByTypes[$for] = $final;
 
         return $final;
     }
@@ -207,13 +239,13 @@ class Plugin
      *
      * @param string $for
      *
-     * @return CustomField[]
+     * @return Field[]
      */
-    public function listRequiredCustomFields($for = 'prospect')
+    public function listRequiredFields($for = 'prospect')
     {
         $final = array();
-        foreach ($this->listCustomFields($for) as $code => $field) {
-            if ($field->isRequiredField() && $field->isCustomField()) {
+        foreach ($this->listFields($for) as $code => $field) {
+            if ($field->isRequiredField() && $field->isField()) {
                 $final[$field->getId()] = $field;
             }
         }
@@ -222,7 +254,7 @@ class Plugin
     }
 
     /**
-     * @return CustomField[]
+     * @return Field[]
      */
     public function listSelectedFields()
     {
@@ -241,7 +273,7 @@ class Plugin
             return array();
         }
 
-        $availableFields = $this->listCustomFields($element);
+        $availableFields = $this->listFields($element);
         $final = array();
         foreach ($selectedFields as $name) {
             if (isset($availableFields[$name])) {
@@ -361,7 +393,7 @@ class Plugin
     protected function addMissingRequiredField($for, &$customValues)
     {
         //Exclude already populated custom type
-        $requiredFields = $this->listRequiredCustomFields($for);
+        $requiredFields = $this->listRequiredFields($for);
         foreach ($customValues as &$value) {
             if (isset($requiredFields[$value['cfid']])) {
                 unset($requiredFields[$value['cfid']]);
@@ -412,7 +444,7 @@ class Plugin
                         }
                     }
 
-                    if ($field->isCustomField()) {
+                    if ($field->isField()) {
                         //Is custom field, keep to save them after
                         $customValues[] = array('cfid' => $field->getId(), 'value' => $fieldValue);
                     }

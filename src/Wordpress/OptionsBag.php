@@ -1,4 +1,25 @@
 <?php
+/**
+ * Sellsy Wordpress plugin.
+ *
+ * LICENSE
+ *
+ * This source file is subject to the MIT license and the version 3 of the GPL3
+ * license that are bundled with this package in the folder licences
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to contact@uni-alteri.com so we can send you a copy immediately.
+ *
+ * @copyright   Copyright (c) 2009-2015 Uni Alteri (http://agence.net.ua)
+ *
+ * @link        http://teknoo.it/sellsy-plugin Project website
+ *
+ * @license     http://teknoo.it/sellsy-plugin/license/mit         MIT License
+ * @license     http://teknoo.it/sellsy-plugin/license/gpl-3.0     GPL v3 License
+ * @author      Richard Déloge <r.deloge@uni-alteri.com>
+ *
+ * @version     0.8.0
+ */
 
 namespace UniAlteri\Sellsy\Wordpress;
 
@@ -6,6 +27,14 @@ use UniAlteri\Sellsy\Wordpress\Form\Settings;
 
 /**
  * Class OptionsBag.
+ *
+ * @copyright   Copyright (c) 2009-2015 Uni Alteri (http://agence.net.ua)
+ *
+ * @link        http://teknoo.it/sellsy-plugin Project website
+ *
+ * @license     http://teknoo.it/sellsy-plugin/license/mit         MIT License
+ * @license     http://teknoo.it/sellsy-plugin/license/gpl-3.0     GPL v3 License
+ * @author      Richard Déloge <r.deloge@uni-alteri.com>
  */
 class OptionsBag implements \ArrayAccess
 {
@@ -20,12 +49,13 @@ class OptionsBag implements \ArrayAccess
     const WORDPRESS_VALIDATE_FILTER = 'wpsellsy_validate_configuration';
 
     /**
+     * List of settings defined by the administrator for this plugin
      * @var array
      */
     protected $options = null;
 
     /**
-     * To registers hooks to validate.
+     * To registers Wordpress hooks to validate settings' values
      */
     public function registerHooks()
     {
@@ -39,8 +69,8 @@ class OptionsBag implements \ArrayAccess
         \add_filter(self::WORDPRESS_VALIDATE_FILTER, array($this, 'validate'), 10, 1);
     }
 
-    /**
-     * Reload options from wordpress database and erase/lost change.
+    /**:
+     * Reload settings/options from Wordpress database and erase/lost change.
      *
      * @return $this
      */
@@ -59,7 +89,7 @@ class OptionsBag implements \ArrayAccess
     }
 
     /**
-     * Save options into wordpress database.
+     * Save settings/options into Wordpress database.
      *
      * @return $this
      */
@@ -71,7 +101,7 @@ class OptionsBag implements \ArrayAccess
     }
 
     /**
-     * Return options of this plugins under array.
+     * Return all settings/options of this plugins under array from the Wordpress database.
      *
      * @return array
      */
@@ -81,7 +111,7 @@ class OptionsBag implements \ArrayAccess
     }
 
     /**
-     * To check if some option are defined for this plugin.
+     * To check if some settings/options are defined for this plugin in the Wordpress database.
      *
      * @return bool
      */
@@ -91,7 +121,7 @@ class OptionsBag implements \ArrayAccess
     }
 
     /**
-     * To check if an option exist.
+     * To check if a setting/option exist.
      *
      * @link http://php.net/manual/en/arrayaccess.offsetexists.php
      *
@@ -113,7 +143,7 @@ class OptionsBag implements \ArrayAccess
     }
 
     /**
-     * To return an option.
+     * To return a setting/option.
      *
      * @link http://php.net/manual/en/arrayaccess.offsetget.php
      *
@@ -135,11 +165,11 @@ class OptionsBag implements \ArrayAccess
             return $this->options[$offset];
         }
 
-        return;
+        return false;
     }
 
     /**
-     * To define an option.
+     * To define a setting/option.
      *
      * @link http://php.net/manual/en/arrayaccess.offsetset.php
      *
@@ -160,7 +190,7 @@ class OptionsBag implements \ArrayAccess
     }
 
     /**
-     * To unset an option.
+     * To unset a setting/option.
      *
      * @link http://php.net/manual/en/arrayaccess.offsetunset.php
      *
@@ -286,7 +316,7 @@ class OptionsBag implements \ArrayAccess
     }
 
     /**
-     * Callback called to sanitize options.
+     * Callback called to sanitize settings/options.
      *
      * @param mixed $input
      *

@@ -1,4 +1,25 @@
 <?php
+/**
+ * Sellsy Wordpress plugin.
+ *
+ * LICENSE
+ *
+ * This source file is subject to the MIT license and the version 3 of the GPL3
+ * license that are bundled with this package in the folder licences
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to contact@uni-alteri.com so we can send you a copy immediately.
+ *
+ * @copyright   Copyright (c) 2009-2015 Uni Alteri (http://agence.net.ua)
+ *
+ * @link        http://teknoo.it/sellsy-plugin Project website
+ *
+ * @license     http://teknoo.it/sellsy-plugin/license/mit         MIT License
+ * @license     http://teknoo.it/sellsy-plugin/license/gpl-3.0     GPL v3 License
+ * @author      Richard Déloge <r.deloge@uni-alteri.com>
+ *
+ * @version     0.8.0
+ */
 
 namespace UniAlteri\Sellsy\Wordpress\Form;
 
@@ -7,21 +28,32 @@ use UniAlteri\Sellsy\Wordpress\Plugin;
 
 /**
  * Class Admin
- * Class to configure Wordpress admin to configure this plugin.
+ * Class to prepare the Wordpress administration panel to allow users to configure this plugin.
+ *
+ * @copyright   Copyright (c) 2009-2015 Uni Alteri (http://agence.net.ua)
+ *
+ * @link        http://teknoo.it/sellsy-plugin Project website
+ *
+ * @license     http://teknoo.it/sellsy-plugin/license/mit         MIT License
+ * @license     http://teknoo.it/sellsy-plugin/license/gpl-3.0     GPL v3 License
+ * @author      Richard Déloge <r.deloge@uni-alteri.com>
  */
 class Admin
 {
     /**
+     * Object to manipulate to configure the plugin
      * @var Plugin
      */
     protected $sellsyPlugin;
 
     /**
+     * Object to access and store all dynamics parameters neededby this plugin
      * @var OptionsBag
      */
     protected $options;
 
     /**
+     * Constructor to initialize this object
      * @param Plugin     $sellsyPlugin
      * @param OptionsBag $options
      */
@@ -32,7 +64,7 @@ class Admin
     }
 
     /**
-     * Method to add sellsy javascript for Wordpress admin.
+     * Method to load sellsy javascripts in the Wordpress administration panel
      */
     public function addJS()
     {
@@ -61,6 +93,7 @@ class Admin
                 1
             );
 
+            //Needed to perform ajax update and dynamic tests on the sellsy api
             \wp_localize_script(
                 'wpsellsyjscsource',
                 'ajax_var',
@@ -73,7 +106,7 @@ class Admin
     }
 
     /**
-     * Method to add sellsy css stylesheet for Wordpress admin.
+     * Method to add sellsy css stylesheet in the Wordpress administration panel.
      *
      * @param string $hook
      */
@@ -117,7 +150,8 @@ class Admin
     }
 
     /**
-     * Method to add in the wordpress menu an entry to access to the plugin configuration page.
+     * Method to add in the wordpress administration menu an entry
+     * to access to the plugin configuration panel.
      */
     public function addMenu()
     {
@@ -134,7 +168,8 @@ class Admin
     }
 
     /**
-     * Display the admin page to manage Sellsy.
+     * Action called by the Wordpress administration to prepare and render
+     * the panel to configure this plugin
      */
     public function page()
     {
@@ -144,7 +179,8 @@ class Admin
     }
 
     /**
-     * Method to generate and display the admin page to configure this plugin.
+     * Method to generate HTML form'elements to manage setting in the configuratio panel
+     * of this plugin
      *
      * @param array $setting
      */

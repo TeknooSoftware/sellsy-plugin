@@ -1,9 +1,41 @@
 <?php
+/**
+ * Sellsy Wordpress plugin.
+ *
+ * LICENSE
+ *
+ * This source file is subject to the MIT license and the version 3 of the GPL3
+ * license that are bundled with this package in the folder licences
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to contact@uni-alteri.com so we can send you a copy immediately.
+ *
+ * @copyright   Copyright (c) 2009-2015 Uni Alteri (http://agence.net.ua)
+ *
+ * @link        http://teknoo.it/sellsy-plugin Project website
+ *
+ * @license     http://teknoo.it/sellsy-plugin/license/mit         MIT License
+ * @license     http://teknoo.it/sellsy-plugin/license/gpl-3.0     GPL v3 License
+ * @author      Richard Déloge <r.deloge@uni-alteri.com>
+ *
+ * @version     0.8.0
+ */
 
 namespace UniAlteri\Sellsy\Wordpress\Type;
 
-use UniAlteri\Sellsy\Wordpress\Form\CustomField;
+use UniAlteri\Sellsy\Wordpress\Form\Field;
 
+/**
+ * Class Prospect
+ *
+ * @copyright   Copyright (c) 2009-2015 Uni Alteri (http://agence.net.ua)
+ *
+ * @link        http://teknoo.it/sellsy-plugin Project website
+ *
+ * @license     http://teknoo.it/sellsy-plugin/license/mit         MIT License
+ * @license     http://teknoo.it/sellsy-plugin/license/gpl-3.0     GPL v3 License
+ * @author      Richard Déloge <r.deloge@uni-alteri.com>
+ */
 class Prospect implements TypeInterface
 {
     /**
@@ -45,7 +77,7 @@ class Prospect implements TypeInterface
     protected $fieldsName = array();
 
     /**
-     * Initialize.
+     * Constructor, To define the list of standard fields available in Sellsy.
      */
     public function __construct()
     {
@@ -201,14 +233,15 @@ class Prospect implements TypeInterface
     }
 
     /**
-     * @return CustomField[]
+     * Get the list of standards fields defined for this type by Sellsy
+     * @return Field[]
      */
     public function getStandardFields()
     {
         //Add default prospect fields as fields
         $final = array();
         foreach ($this->fieldsName as $fieldName => $fieldParams) {
-            $final[$fieldName] = new CustomField(
+            $final[$fieldName] = new Field(
                 $fieldName,
                 $fieldParams['type'],
                 $fieldParams['name'],
@@ -224,7 +257,8 @@ class Prospect implements TypeInterface
     }
 
     /**
-     * Method to populate the array passed to the api to create a new prospect.
+     * To populate this type from an array of values with the correspondence
+     * table defined for this type.
      *
      * @param string $fieldName
      * @param mixed  $value
@@ -232,7 +266,7 @@ class Prospect implements TypeInterface
      */
     public function populateParams($fieldName, &$value, &$finalSource)
     {
-        //If there are a correspondance
+        //If there are a correspondence
         if (isset($this->fieldsCorrespondence[$fieldName])) {
             foreach ((array) $this->fieldsCorrespondence[$fieldName] as $apiPath) {
                 //Populate for each path defined for this field the final source
@@ -246,7 +280,7 @@ class Prospect implements TypeInterface
     }
 
     /**
-     * Method to validate each fiilms.
+     * To check the validity of a value for a destination field
      *
      * @param string $fieldName
      * @param mixed  $value
