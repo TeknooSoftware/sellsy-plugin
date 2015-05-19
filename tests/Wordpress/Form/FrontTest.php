@@ -904,7 +904,11 @@ class FrontTest extends \PHPUnit_Framework_TestCase
             ->willReturn(123);
 
         $_POST = array('formId' => 'formName','send_wp_sellsy' => '123','slswp_nonce_verify_page' => 123);
+        ob_start();
         $front->shortcode(array('formId' => 'formName'));
+        $output = ob_get_contents();
+        ob_end_clean();
+        $this->assertNotEmpty($output);
     }
 
     public function testShortcodeNOk()
@@ -935,6 +939,10 @@ class FrontTest extends \PHPUnit_Framework_TestCase
             ->willReturn(array('foo' => 'bar'));
 
         $_POST = array('formId' => 'formName','send_wp_sellsy' => '123','slswp_nonce_verify_page' => 123);
+        ob_start();
         $front->shortcode(array('formId' => 'formName'));
+        $output = ob_get_contents();
+        ob_end_clean();
+        $this->assertNotEmpty($output);
     }
 }

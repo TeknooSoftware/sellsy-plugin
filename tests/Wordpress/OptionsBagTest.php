@@ -347,8 +347,6 @@ class OptionsBagTest extends \PHPUnit_Framework_TestCase
             )
         );
 
-        var_export($methodArgs);
-
         $this->assertEquals(
             array(
                 0 => 'sanitize_text_field',
