@@ -36,9 +36,9 @@ if (\is_admin() && \current_user_can('manage_options')):
     ?>
     <div class="wrap">
         <div id="icon-sellsy" class="icon32"><br /></div>
-        <h2><?php _e('WP Sellsy Prospection '.SELLSY_WP_VERSION, 'wpsellsy'); ?></h2>
+        <h2><?php _e('Wordpress Sellsy '.SELLSY_WP_VERSION, 'wpsellsy'); ?></h2>
         <div class="adminInfo">
-            <?php _e('Le plugin WP prospection Sellsy vous permet d\'afficher un formulaire de contact connecté à votre compte Sellsy. Quand le formulaire sera soumis, un prospect et (optionnellement) une opportunité seront créés sur votre compte Sellsy. Pour activer le plugin, vous devez insérer ci-dessous vos tokens d\'API Sellsy, disponibles depuis', 'wpsellsy').'<a href="'.SELLSY_WP_API_URL.'" target="_blank">'._e('Réglages puis Accès API.', 'wpsellsy').'</a>'._e('Pour afficher le formulaire sur une page ou dans un post insérez le code [wpsellsy].', 'wpsellsy')._e(' Vous pouvez aussi utiliser le ', 'wpsellsy').'<a href="'.admin_url().'widgets.php">Widget</a> '._e('si vous souhaitez insérer votre formulaire dans la sidebar de votre site.', 'wpsellsy'); ?>
+            <?php _e('The Wordpress plugin Sellsy allow you to display a contact form connected to your Sellsy account. When the form will be submited, a prospect and optionally an opportunity will be created on your Sellsy account. To enable this plugin, you must define your API token. There are available from', 'wpsellsy').' <a href="'.SELLSY_WP_API_URL.'" target="_blank">'._e('"Settings" then "Api Access".', 'wpsellsy').'</a>'._e('To display the form in a page or a post, you can use the short tag [wpsellsy].', 'wpsellsy')._e(' You can also use ', 'wpsellsy').'<a href="'.admin_url().'widgets.php">Widget</a> '._e('if you want display te form in the sidebar.', 'wpsellsy'); ?>
         </div>
         <?php settings_errors(OptionsBag::WORDPRESS_SETTINGS_NAME); ?>
         <form id="wp-sellsy-admform" action="options.php" method="POST">
