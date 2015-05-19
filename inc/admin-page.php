@@ -6,22 +6,31 @@ use \UniAlteri\Sellsy\Wordpress\Form\Settings;
 if (\is_admin() && \current_user_can('manage_options')):
     if (!empty($_GET['settings-updated'])) {
         if ($this->sellsyPlugin->checkSellsyCredentials()) {
-            add_settings_error(OptionsBag::WORDPRESS_SETTINGS_NAME, 'sellSyUpdated', __('Connexion à l\'API Sellsy réussie. Paramètres Sellsy mis à jour.', 'wpsellsy'), 'updated');
+            add_settings_error(OptionsBag::WORDPRESS_SETTINGS_NAME, 'sellSyUpdated', __('successful Connection to the Sellsy API. Sellsy settings updated.', 'wpsellsy'), 'updated');
 
             if (false !== strpos($this->options[Settings::OPPORTUNITY_CREATION], 'Opportunity')) {
                 $sourcesList = $this->sellsyPlugin->getSourcesList();
                 if (empty($sourcesList)) {
-                    add_settings_error(OptionsBag::WORDPRESS_SETTINGS_NAME, Settings::OPPORTUNITY_SOURCE, __('Vous devez définir au moins une source sinon les opportunités ne seront pas générées.', 'wpsellsy'), 'error');
+                    add_settings_error(OptionsBag::WORDPRESS_SETTINGS_NAME, Settings::OPPORTUNITY_SOURCE, __('You must define at least one source, otherwise opportunities will be not generated.', 'wpsellsy'), 'error');
                 } else {
                     foreach ($this->sellsyPlugin->checkOppListSources($sourcesList) as $source => $exist) {
                         if (false === $exist) {
-                            add_settings_error(OptionsBag::WORDPRESS_SETTINGS_NAME, Settings::OPPORTUNITY_SOURCE, __('La source saisie n\'existe pas pour votre compte sur ', 'wpsellsy').'<a href="'.SELLSY_WP_WEB_URL.'" target="_blank">Sellsy.com</a>.<br>'.__('Cliquez ici pour créer la source sur votre compte :', 'wpsellsy').'<a id="creer_source" href="#" data-label="'.$source.'">'.__('Créer la source ', 'wpsellsy').$source.'</a><img id="imgloader" src="'.SELLSY_WP_URL.'/img/loader.gif" alt="" /><br>'.__('Si vous ne créez pas la source, les opportunités ne seront pas générées.', 'wpsellsy'), 'error');
+                            add_settings_error(
+                                OptionsBag::WORDPRESS_SETTINGS_NAME, Settings::OPPORTUNITY_SOURCE,
+                                __('The opportunity source does not exist on your account ', 'wpsellsy')
+                                    .'<a href="'.SELLSY_WP_WEB_URL.'" target="_blank">Sellsy.com</a>.<br>'
+                                    .__('Click here to create it :', 'wpsellsy')
+                                    .'<a id="creer_source" href="#" data-label="'.$source.'">'
+                                    .__('Create the source ', 'wpsellsy').$source
+                                    .'</a><img id="imgloader" src="'.SELLSY_WP_URL
+                                    .'/img/loader.gif" alt="" /><br>'
+                                    .__('You must create the source to allow plugin to create opportunities.', 'wpsellsy'), 'error');
                         }
                     }
                 }
             }
         } else {
-            add_settings_error(OptionsBag::WORDPRESS_SETTINGS_NAME, 'sellSyTokens', __('Erreur: Connexion à l\'API Sellsy impossible. Les tokens saisis sont incorrects.', 'wpsellsy'), 'error');
+            add_settings_error(OptionsBag::WORDPRESS_SETTINGS_NAME, 'sellSyTokens', __('Error: Connection failure to the Sellsy API. Tokens are incorrect.', 'wpsellsy'), 'error');
         }
     }
     ?>
@@ -47,5 +56,5 @@ if (\is_admin() && \current_user_can('manage_options')):
         </form>
     </div>
 <?php else:
-    wp_die(__('Vous n\'avez pas les droits suffisants pour accéder à cette page.', 'wpsellsy'));
+    wp_die(__('You have not rights to display this page.', 'wpsellsy'));
 endif;

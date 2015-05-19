@@ -228,7 +228,7 @@ class Plugin
             add_settings_error(
                 OptionsBag::WORDPRESS_SETTINGS_NAME,
                 'sellSyTokens',
-                __('Erreur: Connexion à l\'API Sellsy impossible. Les tokens saisis sont incorrects.', 'wpsellsy'),
+                __('Error: Connection failure to the Sellsy API. Tokens are incorrect.', 'wpsellsy'),
                 'error'
             );
         }
@@ -649,7 +649,7 @@ class Plugin
         if (!empty($this->options[Settings::FORM_NAME])) {
             $mail->Subject = $this->options[Settings::FORM_NAME];
         } else {
-            $mail->Subject = __('Formulaire site web: Demande d\'informations', 'wpsellsy');
+            $mail->Subject = __('Website form: Informations request', 'wpsellsy');
         }
         $mail->MsgHTML($body);
         $mail->CharSet = 'UTF-8';

@@ -22,6 +22,16 @@
  * @version     0.8.0
  */
 
+/*
+Plugin Name: Sellsy Wordpress plugin.
+Plugin URI: http://teknoo.it/sellsy-plugin
+Description: The Wordpress plugin Sellsy allow you to display a contact form connected to your Sellsy account. When the form will be submited, a prospect and optionally an opportunity will be created on your Sellsy account.
+Version: 0.8.0
+Author: Richard Déloge, Uni Alteri
+Author URI: http://agence.net;ua
+License: GPLv3 or later, MTT License
+ */
+
 /**
  * Wordpress plugin file, called to initialize it.
  */

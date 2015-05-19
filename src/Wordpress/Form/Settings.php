@@ -215,8 +215,8 @@ class Settings
                 'std' => '',
                 'section' => 'sellsy_display',
                 'choices' => array(
-                    'displayTitle' => __('Oui', 'wpsellsy'),
-                    'none' => __('Non', 'wpsellsy'),
+                    'displayTitle' => __('Yes', 'wpsellsy'),
+                    'none' => __('No', 'wpsellsy'),
                 ),
                 'originalKey' => 'WPIaff_form', //To be compliant with official Sellsy plugin
             ),
@@ -292,8 +292,8 @@ class Settings
                 'std' => '',
                 'section' => 'sellsy_frontValid',
                 'choices' => array(
-                    'enableJsValidation' => __('Oui', 'wpsellsy'),
-                    'disableJsValidation' => __('Non', 'wpsellsy'),
+                    'enableJsValidation' => __('Yes', 'wpsellsy'),
+                    'disableJsValidation' => __('No', 'wpsellsy'),
                 ),
                 'originalKey' => 'WPIjsValid', //To be compliant with official Sellsy plugin
             ),

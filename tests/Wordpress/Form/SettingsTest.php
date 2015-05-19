@@ -244,8 +244,8 @@ class SettingsTest extends \PHPUnit_Framework_TestCase
                     'std' => '',
                     'section' => 'sellsy_display',
                     'choices' => array(
-                        'displayTitle' => 'Oui',
-                        'none' => 'Non',
+                        'displayTitle' => 'Yes',
+                        'none' => 'No',
                     ),
                     'originalKey' => 'WPIaff_form', //To be compliant with official Sellsy plugin
                 ),
@@ -321,8 +321,8 @@ class SettingsTest extends \PHPUnit_Framework_TestCase
                     'std' => '',
                     'section' => 'sellsy_frontValid',
                     'choices' => array(
-                        'enableJsValidation' => 'Oui',
-                        'disableJsValidation' => 'Non',
+                        'enableJsValidation' => 'Yes',
+                        'disableJsValidation' => 'No',
                     ),
                     'originalKey' => 'WPIjsValid', //To be compliant with official Sellsy plugin
                 ),
