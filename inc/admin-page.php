@@ -6,7 +6,7 @@ use \UniAlteri\Sellsy\Wordpress\Form\Settings;
 if (\is_admin() && \current_user_can('manage_options')):
     if (!empty($_GET['settings-updated'])) {
         if ($this->sellsyPlugin->checkSellsyCredentials()) {
-            add_settings_error(OptionsBag::WORDPRESS_SETTINGS_NAME, 'sellSyUpdated', __('successful Connection to the Sellsy API. Sellsy settings updated.', 'wpsellsy'), 'updated');
+            add_settings_error(OptionsBag::WORDPRESS_SETTINGS_NAME, 'sellSyUpdated', __('Successful connection to the Sellsy API. Sellsy settings updated.', 'wpsellsy'), 'updated');
 
             if (false !== strpos($this->options[Settings::OPPORTUNITY_CREATION], 'Opportunity')) {
                 $sourcesList = $this->sellsyPlugin->getSourcesList();

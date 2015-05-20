@@ -129,7 +129,7 @@ if (!is_admin()):
                 }
                 ?>
 				<div class="submit">
-					<input type="submit" class="btn btn-default" name="send_wp_sellsy" value="<?php _e('Valider', 'wpsellsy') ?>" />
+					<input type="submit" class="btn btn-default" name="send_wp_sellsy" value="<?php _e('Submit', 'wpsellsy') ?>" />
 				</div>
 			</div>
 			<?php echo $options[Settings::FORM_CUSTOM_FOOTER]; ?>
