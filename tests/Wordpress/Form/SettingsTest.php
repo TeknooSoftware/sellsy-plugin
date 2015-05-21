@@ -258,7 +258,7 @@ class SettingsTest extends \PHPUnit_Framework_TestCase
                     'originalKey' => 'WPIaff_form', //To be compliant with official Sellsy plugin
                 ),
                 Settings::COLUMNS_CLASS => array(
-                    'title' => 'Column HTML classess',
+                    'title' => 'Column HTML classes',
                     'desc' => 'To define the class to use in your HTML column.',
                     'type' => 'text',
                     'std' => '',
@@ -316,7 +316,7 @@ class SettingsTest extends \PHPUnit_Framework_TestCase
                 /* Section Activer validation Client */
                 Settings::ENABLE_HTML_CHECK => array(
                     'title' => 'Enable HTML5 validation',
-                    'desc' => 'Enable frontside validation build on HTML5 capacity (required, email).',
+                    'desc' => 'Enable frontside validation build on HTML5 capacity.',
                     'type' => 'radio',
                     'std' => '',
                     'section' => 'sellsy_frontValid',

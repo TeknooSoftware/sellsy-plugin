@@ -229,7 +229,7 @@ class Settings
                 'originalKey' => 'WPIaff_form', //To be compliant with official Sellsy plugin
             ),
             self::COLUMNS_CLASS => array(
-                'title' => __('Column HTML classess', 'wpsellsy'),
+                'title' => __('Column HTML classes', 'wpsellsy'),
                 'desc' => __('To define the class to use in your HTML column.', 'wpsellsy'),
                 'type' => 'text',
                 'std' => '',
@@ -262,7 +262,7 @@ class Settings
             ),
             self::MESSAGE_ERROR => array(
                 'title' => __('Error message', 'wpsellsy'),
-                'desc' => __('To define the message to display when an error has been encounted', 'wpsellsy'),
+                'desc' => __('To define the message to display when an error has been encountered', 'wpsellsy'),
                 'type' => 'textarea',
                 'std' => __('Your message has not been sent, please check these following fields :', 'wpsellsy'),
                 'section' => 'sellsy_display',
@@ -287,7 +287,7 @@ class Settings
             /* Section Activer validation Client */
             self::ENABLE_HTML_CHECK => array(
                 'title' => __('Enable HTML5 validation', 'wpsellsy'),
-                'desc' => __('Enable frontside validation build on HTML5 capacity (required, email).', 'wpsellsy'),
+                'desc' => __('Enable frontside validation build on HTML5 capacity.', 'wpsellsy'),
                 'type' => 'radio',
                 'std' => '',
                 'section' => 'sellsy_frontValid',
@@ -424,7 +424,7 @@ class Settings
         $defaultsSettings = array(
             'id' => 'champ_defaut',
             'title' => 'Champ par défaut',
-            'desc' => __('Description par défaut', 'wpsellsy'),
+            'desc' => __('Default description', 'wpsellsy'),
             'std' => '',
             'type' => 'text',
             'section' => 'sellsy_connexion',
