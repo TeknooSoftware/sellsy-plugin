@@ -1,5 +1,5 @@
 {
-    "name": "unialteri/wp-sellsy",
+    "name": "unialteri/sellsy-wordpress",
     "type": "library",
     "description": "Wordpress plugin to generate contact form with Sellsy and send it leads captured",
     "keywords": ["sellsy", "wordpress", "module", "lead"],
