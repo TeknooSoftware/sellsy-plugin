@@ -10,7 +10,7 @@
         bootstrap="tests/bootstrap.php"
         colors="true">
     <testsuites>
-        <testsuite name="UniAltery/wp-sellsy Test Suite">
+        <testsuite name="UniAltery/sellsy-plugin Test Suite">
             <directory>tests/Wordpress</directory>
         </testsuite>
     </testsuites>

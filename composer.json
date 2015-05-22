@@ -1,10 +1,10 @@
 {
-    "name": "unialteri/sellsy-wordpress",
+    "name": "unialteri/sellsy-plugin",
     "type": "library",
     "description": "Wordpress plugin to generate contact form with Sellsy and send it leads captured",
     "keywords": ["sellsy", "wordpress", "module", "lead"],
     "time": "2015-02-01",
-    "homepage": "http://teknoo.it/wp-sellsy",
+    "homepage": "http://teknoo.it/sellsy-plugin",
     "license": ["MIT","GPL-3.0+"],
     "authors": [
         {
@@ -14,8 +14,8 @@
         }
     ],
     "support": {
-        "issues": "https://github.com/UniAlteri/wp-sellsy/issues",
-        "source": "https://github.com/UniAlteri/wp-sellsy"
+        "issues": "https://github.com/UniAlteri/sellsy-plugin/issues",
+        "source": "https://github.com/UniAlteri/sellsy-plugin"
     },
     "require":{
         "php": ">=5.4.0",
