@@ -291,7 +291,7 @@ class SettingsTest extends \PHPUnit_Framework_TestCase
                 ),
                 Settings::MESSAGE_ERROR => array(
                     'title' => 'Error message',
-                    'desc' => 'To define the message to display when an error has been encounted',
+                    'desc' => 'To define the message to display when an error has been encountered',
                     'type' => 'textarea',
                     'std' => 'Your message has not been sent, please check these following fields :',
                     'section' => 'sellsy_display',
