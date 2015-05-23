@@ -109,6 +109,7 @@ class Widget extends \WP_Widget
             $afterWidget = $args['after_widget'];
         }
 
+        echo SELLSY_WP_PATH_INC.'/widget.php';
         if (!empty($out) && is_readable(SELLSY_WP_PATH_INC.'/widget.php')) {
             include SELLSY_WP_PATH_INC.'/widget.php';
         }
