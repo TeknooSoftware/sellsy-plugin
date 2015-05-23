@@ -96,7 +96,8 @@ class WidgetTest extends \PHPUnit_Framework_TestCase
         $output = ob_get_contents();
         ob_end_clean();
 
-        $excepted = 'beforeValuebeforeTitleValueTITLEVALUEafterTitleValue<div>'.PHP_EOL.'    fooBar</div>'.PHP_EOL.'afterValue';
+        $excepted = 'beforeValuebeforeTitleValueTITLEVALUEafterTitleValue<div>    fooBar</div>afterValue';
+        $output = trim(str_replace(array('\r', '\n', PHP_EOL), '', $output));
         $this->assertEquals($excepted, $output);
         $this->assertEquals(array('apply_filters', 'do_shortcode'), $methodCalled);
         $this->assertEquals(
