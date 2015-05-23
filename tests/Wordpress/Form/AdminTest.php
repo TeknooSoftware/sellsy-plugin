@@ -141,7 +141,7 @@ class AdminTest extends \PHPUnit_Framework_TestCase
             array(),
             array(
                 '/js/jquery-ui.min.js',
-                '/home/richard/Prog/uni_alteri/wordpress/sellsy-plugin/sellsy-plugin.php',
+                SELLSY_WP_PATH.'/sellsy-plugin.php',
             ),
             array(
                 'jqueryui',
@@ -154,7 +154,7 @@ class AdminTest extends \PHPUnit_Framework_TestCase
             ),
             array(
                 '/js/ui.multiselect.js',
-                '/home/richard/Prog/uni_alteri/wordpress/sellsy-plugin/sellsy-plugin.php',
+                SELLSY_WP_PATH.'/sellsy-plugin.php',
             ),
             array(
                 'uimultiselect',
@@ -168,7 +168,7 @@ class AdminTest extends \PHPUnit_Framework_TestCase
             ),
             array(
                 '/js/wp_sellsy.js',
-                '/home/richard/Prog/uni_alteri/wordpress/sellsy-plugin/sellsy-plugin.php',
+                SELLSY_WP_PATH.'/sellsy-plugin.php',
             ),
             array(
                 'wpsellsyjscsource',
@@ -280,7 +280,7 @@ class AdminTest extends \PHPUnit_Framework_TestCase
             array(),
             array(
                 '/css/wp_sellsy_admin.css',
-                '/home/richard/Prog/uni_alteri/wordpress/sellsy-plugin/sellsy-plugin.php',
+                SELLSY_WP_PATH.'/sellsy-plugin.php',
             ),
             array(
                 'wpsellsystylesadmin',
@@ -294,7 +294,7 @@ class AdminTest extends \PHPUnit_Framework_TestCase
             ),
             array(
                 '/css/jquery-ui.min.css',
-                '/home/richard/Prog/uni_alteri/wordpress/sellsy-plugin/sellsy-plugin.php',
+                SELLSY_WP_PATH.'/sellsy-plugin.php',
             ),
             array(
                 'jqueryuicss',
@@ -308,7 +308,7 @@ class AdminTest extends \PHPUnit_Framework_TestCase
             ),
             array(
                 '/css/ui.multiselect.css',
-                '/home/richard/Prog/uni_alteri/wordpress/sellsy-plugin/sellsy-plugin.php',
+                SELLSY_WP_PATH.'/sellsy-plugin.php',
             ),
             array(
                 'multiselect',
