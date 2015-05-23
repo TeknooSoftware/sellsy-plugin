@@ -44,7 +44,7 @@ class WpSellsyTest extends \PHPUnit_Framework_TestCase
             }
         );
 
-        include dirname(dirname(__DIR__)).'/wp_sellsy.php';
+        include dirname(dirname(__DIR__)).'/sellsy-plugin.php';
 
         $this->assertTrue(in_array('get_option', $methodCalled));
         $this->assertTrue(in_array('register_setting', $methodCalled));

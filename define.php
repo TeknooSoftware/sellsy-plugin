@@ -32,7 +32,7 @@
     && define('SELLSY_WP_PATH', __DIR__);
 
 !defined('SELLSY_WP_PATH_FILE')
-    && define('SELLSY_WP_PATH_FILE', SELLSY_WP_PATH.'/wp_sellsy.php');
+    && define('SELLSY_WP_PATH_FILE', SELLSY_WP_PATH.'/sellsy-plugin.php');
 
 !defined('SELLSY_WP_PATH_INC')
     && define('SELLSY_WP_PATH_INC', __DIR__.'/inc');
