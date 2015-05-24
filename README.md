@@ -1,7 +1,7 @@
 Uni Alteri - Sellsy wordpress plugin
 ====================================
 
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/5a8aba69-f3a4-49fa-86c8-28db6651741e/big.png)](https://insight.sensiolabs.com/projects/5a8aba69-f3a4-49fa-86c8-28db6651741e)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/5a8aba69-f3a4-49fa-86c8-28db6651741e/big.png)](https://insight.sensiolabs.com/projects/5a8aba69-f3a4-49fa-86c8-28db6651741e) [![Build Status](https://travis-ci.org/UniAlteri/sellsy-plugin.svg?branch=master)](https://travis-ci.org/UniAlteri/sellsy-plugin)
 
 Welcome and thank you to having downloaded this wordpress plugin. It allows you to display a contact form connected 
 to your Sellsy account. When the form will be submited, a prospect and optionally an opportunity will 
