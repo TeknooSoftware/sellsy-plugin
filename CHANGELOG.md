@@ -1,6 +1,10 @@
 #Uni Alteri - Sellsy wordpress plugin - Change Log
 
-##[0.8.0.0-beta] - 2015-05-23
+##[0.8.1-beta] - 2015-05-24
+###Added
+- Add travis file to support IC outside Uni Alteri's server
+
+##[0.8.0-beta] - 2015-05-23
 - First public beta
 
 ###Changed
