@@ -9,9 +9,9 @@ be created on your [Sellsy account](http://sellsy.com/).
 
 Installation
 ------------
-To install this library with composer, run this command :
+To install this library with composer, run this command in your "wp-content/plugins" directory:
 
-    composer require unialteri/sellsy-plugin
+    composer create-project --stability="beta" --no-dev unialteri/sellsy-plugin sellsy-plugin
 
 Requirements
 ------------
