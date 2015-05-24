@@ -3,7 +3,6 @@
     "type": "library",
     "description": "Wordpress plugin to generate contact form with Sellsy and send it leads captured",
     "keywords": ["sellsy", "wordpress", "module", "lead"],
-    "time": "2015-02-01",
     "homepage": "http://teknoo.it/sellsy-plugin",
     "license": ["MIT","GPL-3.0+"],
     "authors": [
