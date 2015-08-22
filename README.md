@@ -26,7 +26,7 @@ This library requires :
 Credits
 -------
 Richard Déloge - <r.deloge@uni-alteri.com> - Lead developer.
-Uni Alteri - <http://agence.net.ua> - <http://teknoo.it>
+Uni Alteri - <http://uni-alteri.com> - <http://teknoo.it>
 
 License
 -------

@@ -11,7 +11,7 @@
  * obtain it through the world-wide-web, please send an email
  * to contact@uni-alteri.com so we can send you a copy immediately.
  *
- * @copyright   Copyright (c) 2009-2015 Uni Alteri (http://agence.net.ua)
+ * @copyright   Copyright (c) 2009-2015 Uni Alteri (http://uni-alteri.com)
  *
  * @link        http://teknoo.it/sellsy-plugin Project website
  *
@@ -31,7 +31,7 @@ use UniAlteri\Sellsy\Wordpress\Plugin;
  * Class Admin
  * Class to prepare the Wordpress administration panel to allow users to configure this plugin.
  *
- * @copyright   Copyright (c) 2009-2015 Uni Alteri (http://agence.net.ua)
+ * @copyright   Copyright (c) 2009-2015 Uni Alteri (http://uni-alteri.com)
  *
  * @link        http://teknoo.it/sellsy-plugin Project website
  *
