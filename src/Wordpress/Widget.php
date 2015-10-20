@@ -11,7 +11,8 @@
  * obtain it through the world-wide-web, please send an email
  * to contact@uni-alteri.com so we can send you a copy immediately.
  *
- * @copyright   Copyright (c) 2009-2015 Uni Alteri (http://uni-alteri.com)
+ * @copyright   Copyright (c) 2009-2016 Uni Alteri (http://uni-alteri.com)
+ * @copyright   Copyright (c) 2009-2016 Richard Déloge (r.deloge@uni-alteri.com)
  *
  * @link        http://teknoo.it/sellsy-plugin Project website
  *
@@ -28,7 +29,8 @@ namespace UniAlteri\Sellsy\Wordpress;
  * Class Widget
  * Wordpress Widget to display in the public front an HTML form to generate leads in Sellsy.
  *
- * @copyright   Copyright (c) 2009-2015 Uni Alteri (http://uni-alteri.com)
+ * @copyright   Copyright (c) 2009-2016 Uni Alteri (http://uni-alteri.com)
+ * @copyright   Copyright (c) 2009-2016 Richard Déloge (r.deloge@uni-alteri.com)
  *
  * @link        http://teknoo.it/sellsy-plugin Project website
  *

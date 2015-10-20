@@ -11,7 +11,8 @@
  * obtain it through the world-wide-web, please send an email
  * to contact@uni-alteri.com so we can send you a copy immediately.
  *
- * @copyright   Copyright (c) 2009-2015 Uni Alteri (http://uni-alteri.com)
+ * @copyright   Copyright (c) 2009-2016 Uni Alteri (http://uni-alteri.com)
+ * @copyright   Copyright (c) 2009-2016 Richard Déloge (r.deloge@uni-alteri.com)
  *
  * @link        http://teknoo.it/sellsy-plugin Project website
  *
@@ -32,7 +33,8 @@ use UniAlteri\Sellsy\Wordpress\Plugin;
  * Class to prepare Wordpress front end's routines to use this plugin in the public area to display
  * HTML forms and create leads.
  *
- * @copyright   Copyright (c) 2009-2015 Uni Alteri (http://uni-alteri.com)
+ * @copyright   Copyright (c) 2009-2016 Uni Alteri (http://uni-alteri.com)
+ * @copyright   Copyright (c) 2009-2016 Richard Déloge (r.deloge@uni-alteri.com)
  *
  * @link        http://teknoo.it/sellsy-plugin Project website
  *
