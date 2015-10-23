@@ -13,8 +13,8 @@
         }
     ],
     "support": {
-        "issues": "https://github.com/UniAlteri/sellsy-plugin/issues",
-        "source": "https://github.com/UniAlteri/sellsy-plugin"
+        "issues": "https://github.com/TeknooSoftware/sellsy-plugin/issues",
+        "source": "https://github.com/TeknooSoftware/sellsy-plugin"
     },
     "require":{
         "php": ">=5.4.0",

@@ -19,8 +19,8 @@ This library requires :
 
     * PHP 5.4+
     * Composer
-    * Uni Alteri Curl Request library
-    * Uni Alteri Sellsy Client library
+    * TeknooSoftware Curl Request library
+    * TeknooSoftware Sellsy Client library
     * cUrl extension
 
 Credits
