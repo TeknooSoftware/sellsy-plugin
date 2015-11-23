@@ -31,8 +31,8 @@ $methodArgs = array();
  * To allow tests to define some stub method to tests plugin's components.
  *
  * @param string $methodName
- * @param mixed $methodArgs
- * @param mixed $willReturn
+ * @param mixed  $methodArgs
+ * @param mixed  $willReturn
  */
 function prepareMock($methodName, $methodArgs, $willReturn)
 {
@@ -49,7 +49,7 @@ function prepareMock($methodName, $methodArgs, $willReturn)
  * To register a call to a wordpress's api method and a return a stub if there defined.
  *
  * @param string $methodName
- * @param array $methodArgsValues
+ * @param array  $methodArgsValues
  *
  * @return null|mixed
  */
@@ -126,7 +126,7 @@ function register_deactivation_hook($file, $function)
  *
  * @uses $shortcode_tags *
  *
- * @param string $tag Shortcode tag to be searched in post content.
+ * @param string   $tag  Shortcode tag to be searched in post content.
  * @param callable $func Hook to run when shortcode is found.
  *
  * @return mixed
@@ -151,7 +151,7 @@ function register_widget($widget_class)
 /**
  * Kill WordPress execution and display HTML message with error message. *.
  *
- * @param string  $message
+ * @param string           $message
  * @param string|int       $title
  * @param string|array|int $args
  *
@@ -190,7 +190,7 @@ function esc_attr($text)
 /**
  * Load a plugin's translated strings.
  *
- * @param string $domain          Unique identifier for retrieving translated strings
+ * @param string      $domain          Unique identifier for retrieving translated strings
  * @param string|bool $deprecated      Use the $plugin_rel_path parameter instead.
  * @param string|bool $plugin_rel_path Optional. Relative path to WP_PLUGIN_DIR where the .mo file resides.
  *
@@ -244,8 +244,8 @@ function wp_verify_nonce($nonce, $action = -1)
 /**
  * Register a setting and its sanitization callback.
  *
- * @param string $option_group A settings group name. Should correspond to a whitelisted option key name.
- * @param string $option_name The name of an option to sanitize and save.
+ * @param string          $option_group      A settings group name. Should correspond to a whitelisted option key name.
+ * @param string          $option_name       The name of an option to sanitize and save.
  * @param callable|string $sanitize_callback A callback function that sanitizes the option's value.
  *
  * @return mixed
@@ -273,8 +273,8 @@ function add_filter($tag, $function_to_add, $priority = 10, $accepted_args = 1)
 /**
  * Retrieve option value based on name of option.
  *
- * @param string $option Name of option to retrieve. Expected to not be SQL-escaped.
- * @param mixed $default Optional. Default value to return if the option does not exist.
+ * @param string $option  Name of option to retrieve. Expected to not be SQL-escaped.
+ * @param mixed  $default Optional. Default value to return if the option does not exist.
  *
  * @return mixed Value set for the option.
  */
@@ -287,7 +287,7 @@ function get_option($option, $default = false)
  * Update the value of an option that was already added.
  *
  * @param string $option Option name. Expected to not be SQL-escaped.
- * @param mixed $value Option value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+ * @param mixed  $value  Option value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
  *
  * @return bool False if value was not updated and true if value was updated.
  */
@@ -311,10 +311,10 @@ function sanitize_text_field($value)
 /**
  * Add a new section to a settings page.
  *
- * @param string $id Slug-name to identify the section. Used in the 'id' attribute of tags.
- * @param string $title Formatted title of the section. Shown as the heading for the section.
+ * @param string $id       Slug-name to identify the section. Used in the 'id' attribute of tags.
+ * @param string $title    Formatted title of the section. Shown as the heading for the section.
  * @param string $callback Function that echos out any content at the top of the section (between heading and fields).
- * @param string $page The slug-name of the settings page on which to show the section. Built-in pages include 'general', 'reading', 'writing', 'discussion', 'media', etc. Create your own using add_options_page();
+ * @param string $page     The slug-name of the settings page on which to show the section. Built-in pages include 'general', 'reading', 'writing', 'discussion', 'media', etc. Create your own using add_options_page();
  *
  * @return mixed
  */
@@ -341,7 +341,7 @@ function __($text, $domain = 'default')
  * Merge user defined arguments into defaults array.
  *
  * @param string|array $args     Value to merge with $defaults
- * @param array|string        $defaults Optional. Array that serves as the defaults. Default empty.
+ * @param array|string $defaults Optional. Array that serves as the defaults. Default empty.
  *
  * @return array Merged user defined values with defaults.
  */
@@ -353,12 +353,12 @@ function wp_parse_args($args, $defaults = '')
 /**
  * Add a new field to a section of a settings page *.
  *
- * @param string $id Slug-name to identify the field. Used in the 'id' attribute of tags.
- * @param string $title Formatted title of the field. Shown as the label for the field during output.
+ * @param string $id       Slug-name to identify the field. Used in the 'id' attribute of tags.
+ * @param string $title    Formatted title of the field. Shown as the label for the field during output.
  * @param string $callback Function that fills the field with the desired form inputs. The function should echo its output.
- * @param string $page The slug-name of the settings page on which to show the section (general, reading, writing, ...).
- * @param string $section The slug-name of the section of the settings page in which to show the box (default, ...).
- * @param array $args Additional arguments
+ * @param string $page     The slug-name of the settings page on which to show the section (general, reading, writing, ...).
+ * @param string $section  The slug-name of the section of the settings page in which to show the box (default, ...).
+ * @param array  $args     Additional arguments
  *
  * @return mixed
  */
@@ -388,11 +388,11 @@ function wp_enqueue_script($handle, $src = false, $deps = array(), $ver = false,
  * Retrieve a URL within the plugins or mu-plugins directory.
  * Defaults to the plugins directory URL if no arguments are supplied.
  *
- * @param  string $path   Optional. Extra path appended to the end of the URL, including
- *                        the relative directory if $plugin is supplied. Default empty.
- * @param  string $plugin Optional. A full path to a file inside a plugin or mu-plugin.
- *                        The URL will be relative to its directory. Default empty.
- *                        Typically this is done by passing `__FILE__` as the argument.
+ * @param string $path   Optional. Extra path appended to the end of the URL, including
+ *                       the relative directory if $plugin is supplied. Default empty.
+ * @param string $plugin Optional. A full path to a file inside a plugin or mu-plugin.
+ *                       The URL will be relative to its directory. Default empty.
+ *                       Typically this is done by passing `__FILE__` as the argument.
  *
  * @return string Plugins URL link with optional paths appended.
  */
@@ -407,7 +407,7 @@ function plugins_url($path = '', $plugin = '')
  * @param string $handle      Script handle the data will be attached to.
  * @param string $object_name Name for the JavaScript object. Passed directly, so it should be qualified JS variable.
  *                            Example: '/[a-zA-Z0-9_]+/'.
- * @param array $l10n         The data itself. The data can be either a single or multi-dimensional array.
+ * @param array  $l10n        The data itself. The data can be either a single or multi-dimensional array.
  *
  * @return bool True if the script was successfully localized, false otherwise.
  */
@@ -419,7 +419,7 @@ function wp_localize_script($handle, $object_name, $l10n)
 /**
  * Retrieve the url to the admin area for the current site.
  *
- * @param string $path Optional path relative to the admin url.
+ * @param string $path   Optional path relative to the admin url.
  * @param string $scheme The scheme to use. Default is 'admin', which obeys force_ssl_admin() and is_ssl(). 'http' or 'https' can be passed to force those schemes.
  *
  * @return string Admin url link with optional path appended.
@@ -444,8 +444,8 @@ function wp_create_nonce($action = -1)
 /**
  * Verifies that an email is valid.
  *
- * @param string $email Email address to verify.
- * @param bool $deprecated Deprecated.
+ * @param string $email      Email address to verify.
+ * @param bool   $deprecated Deprecated.
  *
  * @return string|bool Either false or the valid email address.
  */
@@ -499,13 +499,13 @@ function wp_enqueue_style($handle, $src = false, $deps = array(), $ver = false, 
 /**
  * Add a top level menu page.
  *
- * @param string $page_title The text to be displayed in the title tags of the page when the menu is selected
- * @param string $menu_title The text to be used for the menu
- * @param string $capability The capability required for this menu to be displayed to the user.
- * @param string $menu_slug The slug name to refer to this menu by (should be unique for this menu)
- * @param callback|string $function The function to be called to output the content for this page.
- * @param string $icon_url The url to the icon to be used for this menu.
- * @param int $position The position in the menu order this one should appear
+ * @param string          $page_title The text to be displayed in the title tags of the page when the menu is selected
+ * @param string          $menu_title The text to be used for the menu
+ * @param string          $capability The capability required for this menu to be displayed to the user.
+ * @param string          $menu_slug  The slug name to refer to this menu by (should be unique for this menu)
+ * @param callback|string $function   The function to be called to output the content for this page.
+ * @param string          $icon_url   The url to the icon to be used for this menu.
+ * @param int             $position   The position in the menu order this one should appear
  *
  * @return string The resulting page's hook_suffix
  */
@@ -542,9 +542,9 @@ function _e($text, $domain = 'default')
 /**
  * Display settings errors registered by {@see add_settings_error()}.
  *
- * @param string $setting Optional slug title of a specific setting who's errors you want.
- * @param bool $sanitize Whether to re-sanitize the setting value before returning errors.
- * @param bool $hide_on_update If set to true errors will not be shown if the settings page has already been submitted.
+ * @param string $setting        Optional slug title of a specific setting who's errors you want.
+ * @param bool   $sanitize       Whether to re-sanitize the setting value before returning errors.
+ * @param bool   $hide_on_update If set to true errors will not be shown if the settings page has already been submitted.
  *
  * @return mixed
  */

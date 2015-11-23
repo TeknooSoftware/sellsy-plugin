@@ -47,7 +47,7 @@ switch ($type) {
             if ($i < count($options) - 1) {
                 echo '<br />';
             }
-            $i++;
+            ++$i;
         }
 
         if (!empty($desc)) {

@@ -186,7 +186,7 @@ class Front
     protected function getFormId($attr)
     {
         //Increase counter
-        self::$formCounter++;
+        ++self::$formCounter;
 
         //Admin has already defined an id, use it
         if (isset($attr['formId'])) {
