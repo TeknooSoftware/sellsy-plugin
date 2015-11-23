@@ -1,5 +1,5 @@
 {
-    "name": "unialteri/sellsy-plugin",
+    "name": "teknoo/sellsy-plugin",
     "type": "library",
     "description": "Wordpress plugin to generate contact form with Sellsy and send it leads captured",
     "keywords": ["sellsy", "wordpress", "module", "lead"],
@@ -8,7 +8,7 @@
     "authors": [
         {
             "name": "Richard Déloge",
-            "email": "r.deloge@uni-alteri.com",
+            "email": "richarddeloge@gmail.com",
             "role": "Software architect, Developer"
         }
     ],
@@ -29,8 +29,8 @@
     "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
-            "UniAlteri\\Sellsy\\Wordpress\\": ["src/Wordpress/"],
-            "UniAlteri\\Tests\\Sellsy\\Wordpress\\": ["tests/Wordpress/"]
+            "Teknoo\\Sellsy\\Wordpress\\": ["src/Wordpress/"],
+            "Teknoo\\Tests\\Sellsy\\Wordpress\\": ["tests/Wordpress/"]
         }
     },
     "archive": {

@@ -1,7 +1,7 @@
 <?php
 
-use \UniAlteri\Sellsy\Wordpress\OptionsBag;
-use \UniAlteri\Sellsy\Wordpress\Form\Settings;
+use \Teknoo\Sellsy\Wordpress\OptionsBag;
+use \Teknoo\Sellsy\Wordpress\Form\Settings;
 
 if (\is_admin() && \current_user_can('manage_options')):
     if (!empty($_GET['settings-updated'])) {

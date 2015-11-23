@@ -11,24 +11,24 @@
  * obtain it through the world-wide-web, please send an email
  * to contact@uni-alteri.com so we can send you a copy immediately.
  *
- * @copyright   Copyright (c) 2009-2016 Uni Alteri (http://uni-alteri.com)
- * @copyright   Copyright (c) 2009-2016 Richard Déloge (r.deloge@uni-alteri.com)
+ *
+ * @copyright   Copyright (c) 2009-2016 Richard Déloge (richarddeloge@gmail.com)
  *
  * @link        http://teknoo.it/sellsy-plugin Project website
  *
  * @license     http://teknoo.it/sellsy-plugin/license/mit         MIT License
  * @license     http://teknoo.it/sellsy-plugin/license/gpl-3.0     GPL v3 License
- * @author      Richard Déloge <r.deloge@uni-alteri.com>
+ * @author      Richard Déloge <richarddeloge@gmail.com>
  *
  * @version     0.8.0
  */
 
-namespace UniAlteri\Tests\Sellsy\Wordpress;
+namespace Teknoo\Tests\Sellsy\Wordpress;
 
-use UniAlteri\Sellsy\Client\Client;
-use UniAlteri\Sellsy\Wordpress\Form\Settings;
-use UniAlteri\Sellsy\Wordpress\OptionsBag;
-use UniAlteri\Sellsy\Wordpress\Plugin;
+use Teknoo\Sellsy\Client\Client;
+use Teknoo\Sellsy\Wordpress\Form\Settings;
+use Teknoo\Sellsy\Wordpress\OptionsBag;
+use Teknoo\Sellsy\Wordpress\Plugin;
 
 class PluginTest extends \PHPUnit_Framework_TestCase
 {
@@ -49,7 +49,7 @@ class PluginTest extends \PHPUnit_Framework_TestCase
     {
         if (!$this->optionsMock instanceof \PHPUnit_Framework_MockObject_MockObject) {
             $this->optionsMock = $this->getMock(
-                'UniAlteri\Sellsy\Wordpress\OptionsBag',
+                'Teknoo\Sellsy\Wordpress\OptionsBag',
                 array(),
                 array(),
                 '',
@@ -67,7 +67,7 @@ class PluginTest extends \PHPUnit_Framework_TestCase
     {
         if (!$this->sellsyClientMock instanceof \PHPUnit_Framework_MockObject_MockObject) {
             $this->sellsyClientMock = $this->getMock(
-                'UniAlteri\Sellsy\Client\Client',
+                'Teknoo\Sellsy\Client\Client',
                 array(),
                 array(),
                 '',
@@ -249,7 +249,7 @@ class PluginTest extends \PHPUnit_Framework_TestCase
 
         $this->assertSame($fieldsList, $fieldsList2);
         foreach ($fieldsList as $code => $field) {
-            $this->assertInstanceOf('UniAlteri\Sellsy\Wordpress\Form\Field', $field);
+            $this->assertInstanceOf('Teknoo\Sellsy\Wordpress\Form\Field', $field);
             $this->assertEquals($code, $field->getCode());
         }
 
@@ -285,7 +285,7 @@ class PluginTest extends \PHPUnit_Framework_TestCase
             ),
         );
 
-        $customFieldMock = $this->getMock('UniAlteri\Sellsy\Client\Collection\Collection', array('getList'), array(), '', false);
+        $customFieldMock = $this->getMock('Teknoo\Sellsy\Client\Collection\Collection', array('getList'), array(), '', false);
         $customFieldMock->expects($this->once())
             ->method('getList')
             ->with(
@@ -340,7 +340,7 @@ class PluginTest extends \PHPUnit_Framework_TestCase
 
         $this->assertSame($fieldsList, $fieldsList2);
         foreach ($fieldsList as $code => $field) {
-            $this->assertInstanceOf('UniAlteri\Sellsy\Wordpress\Form\Field', $field);
+            $this->assertInstanceOf('Teknoo\Sellsy\Wordpress\Form\Field', $field);
             $this->assertEquals($code, $field->getCode());
         }
 
@@ -376,7 +376,7 @@ class PluginTest extends \PHPUnit_Framework_TestCase
             ),
         );
 
-        $customFieldMock = $this->getMock('UniAlteri\Sellsy\Client\Collection\Collection', array('getList'), array(), '', false);
+        $customFieldMock = $this->getMock('Teknoo\Sellsy\Client\Collection\Collection', array('getList'), array(), '', false);
         $customFieldMock->expects($this->once())
             ->method('getList')
             ->with(
@@ -412,7 +412,7 @@ class PluginTest extends \PHPUnit_Framework_TestCase
         );
 
         foreach ($fieldsList as $code => $field) {
-            $this->assertInstanceOf('UniAlteri\Sellsy\Wordpress\Form\Field', $field);
+            $this->assertInstanceOf('Teknoo\Sellsy\Wordpress\Form\Field', $field);
         }
 
         $this->assertEquals(array(), array_values(array_diff($methodCalled, array('__'))));
@@ -549,7 +549,7 @@ class PluginTest extends \PHPUnit_Framework_TestCase
             ),
         );
 
-        $customFieldMock = $this->getMock('UniAlteri\Sellsy\Client\Collection\Collection', array('getList'), array(), '', false);
+        $customFieldMock = $this->getMock('Teknoo\Sellsy\Client\Collection\Collection', array('getList'), array(), '', false);
         $customFieldMock->expects($this->once())
             ->method('getList')
             ->with(
@@ -597,7 +597,7 @@ class PluginTest extends \PHPUnit_Framework_TestCase
         );
 
         foreach ($fieldsList as $code => $field) {
-            $this->assertInstanceOf('UniAlteri\Sellsy\Wordpress\Form\Field', $field);
+            $this->assertInstanceOf('Teknoo\Sellsy\Wordpress\Form\Field', $field);
             $this->assertEquals($code, $field->getCode());
         }
     }
@@ -648,7 +648,7 @@ class PluginTest extends \PHPUnit_Framework_TestCase
             ),
         );
 
-        $customFieldMock = $this->getMock('UniAlteri\Sellsy\Client\Collection\Collection', array('getList'), array(), '', false);
+        $customFieldMock = $this->getMock('Teknoo\Sellsy\Client\Collection\Collection', array('getList'), array(), '', false);
         $customFieldMock->expects($this->once())
             ->method('getList')
             ->with(
@@ -696,7 +696,7 @@ class PluginTest extends \PHPUnit_Framework_TestCase
         );
 
         foreach ($fieldsList as $code => $field) {
-            $this->assertInstanceOf('UniAlteri\Sellsy\Wordpress\Form\Field', $field);
+            $this->assertInstanceOf('Teknoo\Sellsy\Wordpress\Form\Field', $field);
             $this->assertEquals($code, $field->getCode());
         }
     }
@@ -760,7 +760,7 @@ class PluginTest extends \PHPUnit_Framework_TestCase
             ),
         );
 
-        $opportunitiesMock = $this->getMock('UniAlteri\Sellsy\Client\Collection\Collection', array('getSources'), array(), '', false);
+        $opportunitiesMock = $this->getMock('Teknoo\Sellsy\Client\Collection\Collection', array('getSources'), array(), '', false);
         $opportunitiesMock->expects($this->any())
             ->method('getSources')
             ->willReturn(json_decode(json_encode($sourceListMock)));
@@ -788,7 +788,7 @@ class PluginTest extends \PHPUnit_Framework_TestCase
 
     public function testCheckOppSourceException()
     {
-        $opportunitiesMock = $this->getMock('UniAlteri\Sellsy\Client\Collection\Collection', array('getSources'), array(), '', false);
+        $opportunitiesMock = $this->getMock('Teknoo\Sellsy\Client\Collection\Collection', array('getSources'), array(), '', false);
         $opportunitiesMock->expects($this->once())
             ->method('getSources')
             ->willThrowException(new \Exception('error'));
@@ -816,7 +816,7 @@ class PluginTest extends \PHPUnit_Framework_TestCase
             ),
         );
 
-        $opportunitiesMock = $this->getMock('UniAlteri\Sellsy\Client\Collection\Collection', array('getSources'), array(), '', false);
+        $opportunitiesMock = $this->getMock('Teknoo\Sellsy\Client\Collection\Collection', array('getSources'), array(), '', false);
         $opportunitiesMock->expects($this->once())
             ->method('getSources')
             ->willReturn(json_decode(json_encode($sourceListMock)));
@@ -844,7 +844,7 @@ class PluginTest extends \PHPUnit_Framework_TestCase
             ),
         );
 
-        $opportunitiesMock = $this->getMock('UniAlteri\Sellsy\Client\Collection\Collection', array('getSources'), array(), '', false);
+        $opportunitiesMock = $this->getMock('Teknoo\Sellsy\Client\Collection\Collection', array('getSources'), array(), '', false);
         $opportunitiesMock->expects($this->once())
             ->method('getSources')
             ->willReturn(json_decode(json_encode($sourceListMock)));
@@ -937,7 +937,7 @@ class PluginTest extends \PHPUnit_Framework_TestCase
             'response' => false,
         );
 
-        $opportunitiesMock = $this->getMock('UniAlteri\Sellsy\Client\Collection\Collection', array('createSource'), array(), '', false);
+        $opportunitiesMock = $this->getMock('Teknoo\Sellsy\Client\Collection\Collection', array('createSource'), array(), '', false);
         $opportunitiesMock->expects($this->any())
             ->method('createSource')
             ->with(
@@ -985,7 +985,7 @@ class PluginTest extends \PHPUnit_Framework_TestCase
             'response' => true,
         );
 
-        $opportunitiesMock = $this->getMock('UniAlteri\Sellsy\Client\Collection\Collection', array('createSource'), array(), '', false);
+        $opportunitiesMock = $this->getMock('Teknoo\Sellsy\Client\Collection\Collection', array('createSource'), array(), '', false);
         $opportunitiesMock->expects($this->any())
             ->method('createSource')
             ->with(
@@ -1033,7 +1033,7 @@ class PluginTest extends \PHPUnit_Framework_TestCase
             'response' => true,
         );
 
-        $opportunitiesMock = $this->getMock('UniAlteri\Sellsy\Client\Collection\Collection', array('createSource'), array(), '', false);
+        $opportunitiesMock = $this->getMock('Teknoo\Sellsy\Client\Collection\Collection', array('createSource'), array(), '', false);
         $opportunitiesMock->expects($this->any())
             ->method('createSource')
             ->willThrowException(new \Exception('message'));
@@ -1092,7 +1092,7 @@ class PluginTest extends \PHPUnit_Framework_TestCase
             ),
         );
 
-        $prospectMock = $this->getMock('UniAlteri\Sellsy\Client\Collection\Collection', array('create'), array(), '', false);
+        $prospectMock = $this->getMock('Teknoo\Sellsy\Client\Collection\Collection', array('create'), array(), '', false);
         $prospectMock->expects($this->once())
             ->method('create')
             ->with(
@@ -1112,7 +1112,7 @@ class PluginTest extends \PHPUnit_Framework_TestCase
             )
             ->willReturn(json_decode(json_encode(array('response' => 345))));
 
-        $customFieldMock = $this->getMock('UniAlteri\Sellsy\Client\Collection\Collection', array('getList', 'recordValues'), array(), '', false);
+        $customFieldMock = $this->getMock('Teknoo\Sellsy\Client\Collection\Collection', array('getList', 'recordValues'), array(), '', false);
         $customFieldMock->expects($this->once())
             ->method('getList')
             ->with(
@@ -1170,7 +1170,7 @@ class PluginTest extends \PHPUnit_Framework_TestCase
     {
         $listCustomFieldMock = array('response' => array('result' => array()));
 
-        $customFieldMock = $this->getMock('UniAlteri\Sellsy\Client\Collection\Collection', array('getList', 'recordValues'), array(), '', false);
+        $customFieldMock = $this->getMock('Teknoo\Sellsy\Client\Collection\Collection', array('getList', 'recordValues'), array(), '', false);
         $customFieldMock->expects($this->once())
             ->method('getList')
             ->with(
@@ -1251,7 +1251,7 @@ class PluginTest extends \PHPUnit_Framework_TestCase
             ),
         );
 
-        $prospectMock = $this->getMock('UniAlteri\Sellsy\Client\Collection\Collection', array('create'), array(), '', false);
+        $prospectMock = $this->getMock('Teknoo\Sellsy\Client\Collection\Collection', array('create'), array(), '', false);
         $prospectMock->expects($this->once())
             ->method('create')
             ->with(
@@ -1271,7 +1271,7 @@ class PluginTest extends \PHPUnit_Framework_TestCase
             )
             ->willThrowException(new \Exception('message'));
 
-        $customFieldMock = $this->getMock('UniAlteri\Sellsy\Client\Collection\Collection', array('getList', 'recordValues'), array(), '', false);
+        $customFieldMock = $this->getMock('Teknoo\Sellsy\Client\Collection\Collection', array('getList', 'recordValues'), array(), '', false);
         $customFieldMock->expects($this->once())
             ->method('getList')
             ->with(
@@ -1354,7 +1354,7 @@ class PluginTest extends \PHPUnit_Framework_TestCase
             ),
         );
 
-        $prospectMock = $this->getMock('UniAlteri\Sellsy\Client\Collection\Collection', array('create'), array(), '', false);
+        $prospectMock = $this->getMock('Teknoo\Sellsy\Client\Collection\Collection', array('create'), array(), '', false);
         $prospectMock->expects($this->once())
             ->method('create')
             ->with(
@@ -1374,7 +1374,7 @@ class PluginTest extends \PHPUnit_Framework_TestCase
             )
             ->willThrowException(new \RuntimeException('message'));
 
-        $customFieldMock = $this->getMock('UniAlteri\Sellsy\Client\Collection\Collection', array('getList', 'recordValues'), array(), '', false);
+        $customFieldMock = $this->getMock('Teknoo\Sellsy\Client\Collection\Collection', array('getList', 'recordValues'), array(), '', false);
         $customFieldMock->expects($this->once())
             ->method('getList')
             ->with(
@@ -1467,7 +1467,7 @@ class PluginTest extends \PHPUnit_Framework_TestCase
             ),
         );
 
-        $prospectMock = $this->getMock('UniAlteri\Sellsy\Client\Collection\Collection', array('create'), array(), '', false);
+        $prospectMock = $this->getMock('Teknoo\Sellsy\Client\Collection\Collection', array('create'), array(), '', false);
         $prospectMock->expects($this->once())
             ->method('create')
             ->with(
@@ -1487,7 +1487,7 @@ class PluginTest extends \PHPUnit_Framework_TestCase
             )
             ->willReturn(json_decode(json_encode(array('response' => 345))));
 
-        $customFieldMock = $this->getMock('UniAlteri\Sellsy\Client\Collection\Collection', array('getList', 'recordValues'), array(), '', false);
+        $customFieldMock = $this->getMock('Teknoo\Sellsy\Client\Collection\Collection', array('getList', 'recordValues'), array(), '', false);
         $customFieldMock->expects($this->once())
             ->method('getList')
             ->with(
@@ -1573,7 +1573,7 @@ class PluginTest extends \PHPUnit_Framework_TestCase
             'response' => 123,
         );
 
-        $customFieldMock = $this->getMock('UniAlteri\Sellsy\Client\Collection\Collection', array('getCurrentIdent'), array(), '', false);
+        $customFieldMock = $this->getMock('Teknoo\Sellsy\Client\Collection\Collection', array('getCurrentIdent'), array(), '', false);
         $customFieldMock->expects($this->once())
             ->method('getCurrentIdent')->willReturn(json_decode(json_encode($listCustomFieldMock)));
 
@@ -1604,7 +1604,7 @@ class PluginTest extends \PHPUnit_Framework_TestCase
             ),
         );
 
-        $customFieldMock = $this->getMock('UniAlteri\Sellsy\Client\Collection\Collection', array('getFunnels'), array(), '', false);
+        $customFieldMock = $this->getMock('Teknoo\Sellsy\Client\Collection\Collection', array('getFunnels'), array(), '', false);
         $customFieldMock->expects($this->once())
             ->method('getFunnels')->willReturn(json_decode(json_encode($listCustomFieldMock)));
 
@@ -1626,7 +1626,7 @@ class PluginTest extends \PHPUnit_Framework_TestCase
             ),
         );
 
-        $customFieldMock = $this->getMock('UniAlteri\Sellsy\Client\Collection\Collection', array('getFunnels'), array(), '', false);
+        $customFieldMock = $this->getMock('Teknoo\Sellsy\Client\Collection\Collection', array('getFunnels'), array(), '', false);
         $customFieldMock->expects($this->once())
             ->method('getFunnels')->willReturn(json_decode(json_encode($listCustomFieldMock)));
 
@@ -1645,7 +1645,7 @@ class PluginTest extends \PHPUnit_Framework_TestCase
 
     public function testGetStepId()
     {
-        $opportunitiesMock = $this->getMock('UniAlteri\Sellsy\Client\Collection\Collection', array('getStepsForFunnel'), array(), '', false);
+        $opportunitiesMock = $this->getMock('Teknoo\Sellsy\Client\Collection\Collection', array('getStepsForFunnel'), array(), '', false);
         $opportunitiesMock->expects($this->once())
             ->method('getStepsForFunnel')
             ->with(
@@ -1682,7 +1682,7 @@ class PluginTest extends \PHPUnit_Framework_TestCase
 
     public function testGetSourceId()
     {
-        $opportunitiesMock = $this->getMock('UniAlteri\Sellsy\Client\Collection\Collection', array('getSources'), array(), '', false);
+        $opportunitiesMock = $this->getMock('Teknoo\Sellsy\Client\Collection\Collection', array('getSources'), array(), '', false);
         $opportunitiesMock->expects($this->once())
             ->method('getSources')
             ->willReturn(
@@ -1723,7 +1723,7 @@ class PluginTest extends \PHPUnit_Framework_TestCase
     public function testCreateOpportunity()
     {
         $opportunitiesMock = $this->getMock(
-            'UniAlteri\Sellsy\Client\Collection\Collection',
+            'Teknoo\Sellsy\Client\Collection\Collection',
             array('getCurrentIdent', 'getFunnels', 'getStepsForFunnel', 'getSources', 'create'),
             array(),
             '',

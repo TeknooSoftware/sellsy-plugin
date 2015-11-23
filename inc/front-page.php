@@ -1,6 +1,6 @@
 <?php
 
-use \UniAlteri\Sellsy\Wordpress\Form\Settings;
+use \Teknoo\Sellsy\Wordpress\Form\Settings;
 
 if (!is_admin()):
     if (isset($options[Settings::DISPLAY_FORM_NAME]) && 'displayTitle' == $options[Settings::DISPLAY_FORM_NAME] && !empty($options[Settings::FORM_NAME])) {
@@ -53,7 +53,7 @@ if (!is_admin()):
                     ?>">
 					<?php endif;
 
-                    if (!$field instanceof \UniAlteri\Sellsy\Wordpress\Form\Field) {
+                    if (!$field instanceof \Teknoo\Sellsy\Wordpress\Form\Field) {
                         continue;
                     }
 

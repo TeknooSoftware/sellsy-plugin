@@ -1,9 +1,9 @@
 === Sellsy Plugin ===
-Contributors: unialteri
+Contributors: teknoo
 Tags: sellsy,lead,contact,form
 Requires at least: 4.0
 License: MIT
-License URI: http://teknoo.it/sellsy-plugin/license/mit
+License URI: http://teknoo.software/sellsy-plugin/license/mit
 
 Form generator to acquire lead and save theme into Sellsy account
 

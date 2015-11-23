@@ -11,14 +11,14 @@
  * obtain it through the world-wide-web, please send an email
  * to contact@uni-alteri.com so we can send you a copy immediately.
  *
- * @copyright   Copyright (c) 2009-2016 Uni Alteri (http://uni-alteri.com)
- * @copyright   Copyright (c) 2009-2016 Richard Déloge (r.deloge@uni-alteri.com)
+ *
+ * @copyright   Copyright (c) 2009-2016 Richard Déloge (richarddeloge@gmail.com)
  *
  * @link        http://teknoo.it/sellsy-plugin Project website
  *
  * @license     http://teknoo.it/sellsy-plugin/license/mit         MIT License
  * @license     http://teknoo.it/sellsy-plugin/license/gpl-3.0     GPL v3 License
- * @author      Richard Déloge <r.deloge@uni-alteri.com>
+ * @author      Richard Déloge <richarddeloge@gmail.com>
  *
  * @version     0.8.0
  */
@@ -28,7 +28,7 @@ Plugin Name: Sellsy Wordpress plugin.
 Plugin URI: http://teknoo.it/sellsy-plugin
 Description: The Wordpress plugin Sellsy allow you to display a contact form connected to your Sellsy account. When the form will be submited, a prospect and optionally an opportunity will be created on your Sellsy account.
 Version: 0.8.0
-Author: Richard Déloge, Uni Alteri
+Author: Richard Déloge, Teknoo Software
 Author URI: http://agence.net;ua
 License: GPLv3 or later, MTT License
  */
@@ -40,19 +40,19 @@ require_once 'define.php';
 
 $composerLoader = require_once 'vendor/autoload.php';
 
-if (class_exists('UniAlteri\Sellsy\Wordpress\Plugin')) {
+if (class_exists('Teknoo\Sellsy\Wordpress\Plugin')) {
     //Initialize the Sellsy API Client
-    $sellsyClientGenerator = new \UniAlteri\Sellsy\Client\ClientGenerator();
+    $sellsyClientGenerator = new \Teknoo\Sellsy\Client\ClientGenerator();
 
     //Initialize the options bag/manager of this plugin
-    $options = new \UniAlteri\Sellsy\Wordpress\OptionsBag();
+    $options = new \Teknoo\Sellsy\Wordpress\OptionsBag();
 
     //Initialize this plugin
-    $wpSellsyPlugin = new \UniAlteri\Sellsy\Wordpress\Plugin($sellsyClientGenerator->getClient(), $options);
+    $wpSellsyPlugin = new \Teknoo\Sellsy\Wordpress\Plugin($sellsyClientGenerator->getClient(), $options);
 
     //Initialize views
-    $wpSellsyFront = new \UniAlteri\Sellsy\Wordpress\Form\Front($wpSellsyPlugin, $options);
-    $wpSellsyAdmin = new \UniAlteri\Sellsy\Wordpress\Form\Admin($wpSellsyPlugin, $options);
+    $wpSellsyFront = new \Teknoo\Sellsy\Wordpress\Form\Front($wpSellsyPlugin, $options);
+    $wpSellsyAdmin = new \Teknoo\Sellsy\Wordpress\Form\Admin($wpSellsyPlugin, $options);
 
     //Configure wordpress to load options
     add_action(
@@ -76,7 +76,7 @@ if (class_exists('UniAlteri\Sellsy\Wordpress\Plugin')) {
     //Configure wordpress to manage disable/uninstall of this plugin
     register_deactivation_hook(SELLSY_WP_PATH_FILE, array($wpSellsyPlugin, 'disablePlugin'));
     add_action('admin_init', function () use ($options, $wpSellsyAdmin, $wpSellsyPlugin) {
-            $settings = new \UniAlteri\Sellsy\Wordpress\Form\Settings($wpSellsyPlugin, $options);
+            $settings = new \Teknoo\Sellsy\Wordpress\Form\Settings($wpSellsyPlugin, $options);
             $settings->buildForms(function () {}, array($wpSellsyAdmin, 'displaySettings'));
         },
         5
@@ -92,8 +92,8 @@ if (class_exists('UniAlteri\Sellsy\Wordpress\Plugin')) {
 
     //Configure wordpress to allow this module to load a widget
     add_action('widgets_init', function () {
-        if (class_exists('\UniAlteri\Sellsy\Wordpress\Widget')) {
-            register_widget('\UniAlteri\Sellsy\Wordpress\Widget');
+        if (class_exists('\Teknoo\Sellsy\Wordpress\Widget')) {
+            register_widget('\Teknoo\Sellsy\Wordpress\Widget');
         }
     });
 

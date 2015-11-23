@@ -1,4 +1,4 @@
-#Uni Alteri - Sellsy wordpress plugin - Change Log
+#Teknoo Software - Sellsy wordpress plugin - Change Log
 
 ##[1.0.0] - 2015-08-23
 ###Fixed
